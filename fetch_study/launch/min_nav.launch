@@ -1,0 +1,27 @@
+<launch>
+  <arg name="x" default=".171" />
+  <arg name="y" default="-2.249" />
+  <arg name="z" default="0.0" />
+  <arg name="yaw" default="0.0" />
+
+  <arg name="initial_pose_x" value=".171"/>
+  <arg name="initial_pose_y" value="-2.249"/>
+  <arg name="initial_pose_z" value="0.0"/>
+  <arg name="initial_pose_a" value="0.0"/>
+
+
+  <include file="$(find fetch_navigation)/launch/fetch_nav.launch" >
+    <arg name="map_file" value="$(find fetch_maps)/maps/aims-ada.yaml" />
+    <arg name="map_keepout_file" value="$(find fetch_maps)/maps/aims-keepout.yaml" />
+    <arg name="use_keepout" value="false" />
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find fetch_gazebo)/robots/fetch.gazebo.xacro" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+    <param name="publish_frequency" value="100.0"/>
+  </node>
+
+  <!-- Drive around 
+  <node name="demo" pkg="fetch_study" type="demo_path.py" output="screen" /> -->
+
+</launch>
