@@ -9,8 +9,8 @@
   <arg name="initial_pose_z" value="0.0"/>
   <arg name="initial_pose_a" value="0.0"/>
 
-  <arg name="map_file" default="$(find fetch_maps)/maps/aims-ada.yaml" />
-  <arg name="map_keepout_file" default="$(find fetch_maps)/maps/aims_keepout.yaml" />
+  <arg name="map_file" default="$(find fetch_study)/maps/aims-ada.yaml" />
+  <arg name="map_keepout_file" default="$(find fetch_study)/maps/aims_keepout.yaml" />
   <arg name="use_keepout" default="false" />
   <arg name="launch_map_server" default="true" />
   <arg name="use_map_topic"  default="false" />
