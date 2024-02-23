@@ -257,9 +257,16 @@ if __name__ == "__main__":
     # Move the base to be in front of the table
     # Demonstrates the use of the navigation stack
     rospy.loginfo("Moving to table...")
-    move_base.goto(2.8, 1.629, 0.0) #, "map")
-    move_base.goto(.171, -2.249, 0.0)
-    move_base.goto(2.5, -0.067, 0.0)
+    # move_base.goto(2.8, 1.629, 0.0) #, "map")
+    # move_base.goto(.171, -2.249, 0.0)
+    # move_base.goto(2.5, -0.067, 0.0)
+
+    move_base.goto(4.000, -3.517, 0.000)
+
+    move_base.goto(4.268, -3.675, 0.000)
+
+    move_base.goto(4.230, -3.490, 0.000)
+
 
     # # Raise the torso using just a controller
     # rospy.loginfo("Raising torso...")
