@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Copyright (c) 2015, Fetch Robotics Inc.
 # All rights reserved.
@@ -262,9 +262,7 @@ if __name__ == "__main__":
     # move_base.goto(2.5, -0.067, 0.0)
 
     move_base.goto(4.000, -3.517, 0.000)
-
     move_base.goto(4.268, -3.675, 0.000)
-
     move_base.goto(4.230, -3.490, 0.000)
 
 
