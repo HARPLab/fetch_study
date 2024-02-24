@@ -250,9 +250,9 @@ if __name__ == "__main__":
 
     # Setup clients
     move_base = MoveBaseClient()
-    torso_action = FollowTrajectoryClient("torso_controller", ["torso_lift_joint"])
-    head_action = PointHeadClient()
-    grasping_client = GraspingClient()
+    # torso_action = FollowTrajectoryClient("torso_controller", ["torso_lift_joint"])
+    # head_action = PointHeadClient()
+    # grasping_client = GraspingClient()
 
     # Move the base to be in front of the table
     # Demonstrates the use of the navigation stack
