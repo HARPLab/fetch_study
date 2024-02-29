@@ -25,8 +25,8 @@ controller_frequency: 25.0
 controller_patience: 15.0
 
 TebLocalPlannerROS:
- odom_topic: odom
- map_frame: map
+ odom_topic: /odom
+ map_frame: /map
     
  # Trajectory
  teb_autosize: True
