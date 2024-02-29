@@ -38,8 +38,8 @@ TebLocalPlannerROS:
  feasibility_check_no_poses: 5
 
  #ViaPoints
-  global_plan_viapoint_sep: 0.2 #negative if none
-  via_points_ordered: True #adhere to order of via points
+ global_plan_viapoint_sep: 0.2 #negative if none
+ via_points_ordered: True #adhere to order of via points
 
  # GoalTolerance
  xy_goal_tolerance: 0.2
