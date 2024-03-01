@@ -269,15 +269,15 @@ if __name__ == "__main__":
         move_base.goto(4.230, -3.490, 0.000)
         rospy.loginfo("Point C")
     else:
-        move_base.goto(3.992, -3.960)
+        move_base.goto(3.992, -3.960, -1.561)
         rospy.loginfo("Point A")
-        move_base.goto(4.002, -5.012)
+        move_base.goto(4.002, -5.012, -1.561)
         rospy.loginfo("Point B")
-        move_base.goto(3.954, -6.087)
+        move_base.goto(3.954, -6.087, -1.561)
         rospy.loginfo("Point C")
-        move_base.goto(4.020, -7.061)
+        move_base.goto(4.020, -7.061, -1.561)
         rospy.loginfo("Point D")
-        move_base.goto(4.024, -7.573)
+        move_base.goto(4.024, -7.573, -1.561)
         rospy.loginfo("Point E")
 
 
