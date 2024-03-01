@@ -38,12 +38,12 @@ TebLocalPlannerROS:
  feasibility_check_no_poses: 5
 
  #ViaPoints
- global_plan_viapoint_sep: 0.2 #negative if none
+ global_plan_viapoint_sep: 0.1 #negative if none
  via_points_ordered: True #adhere to order of via points
 
  # GoalTolerance
- xy_goal_tolerance: 0.2
- yaw_goal_tolerance: 0.1
+ xy_goal_tolerance: 0.1
+ yaw_goal_tolerance: 0.05
  free_goal_vel: False
     
  # Obstacles
@@ -83,6 +83,7 @@ TebLocalPlannerROS:
  weight_obstacle: 50
  weight_dynamic_obstacle: 10 # not in use yet
  alternative_time_cost: False # not in use yet
+ weight_viapoint: 100
 
  # Homotopy Class Planner
  enable_homotopy_class_planning: True
