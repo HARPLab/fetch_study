@@ -273,6 +273,8 @@ if __name__ == "__main__":
         rospy.loginfo("Start")
         move_base.goto(3.992, -3.960, 0.0)
         rospy.loginfo("Point A")
+        move_base.goto(3.992, -4.5, 0.0)
+        rospy.loginfo("Point B2")
         move_base.goto(4.002, -5.012, 0.0)
         rospy.loginfo("Point B")
         move_base.goto(3.954, -6.087, 0.0)
