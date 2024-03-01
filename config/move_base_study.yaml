@@ -43,7 +43,7 @@ TebLocalPlannerROS:
 
  # GoalTolerance
  xy_goal_tolerance: 0.1
- yaw_goal_tolerance: 0.05
+ yaw_goal_tolerance: 100.0 #0.05 very large, ignore heading outside of simple nav
  free_goal_vel: False
     
  # Obstacles
