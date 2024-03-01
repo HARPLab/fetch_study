@@ -261,12 +261,26 @@ if __name__ == "__main__":
     # move_base.goto(.171, -2.249, 0.0)
     # move_base.goto(2.5, -0.067, 0.0)
 
-    move_base.goto(4.000, -3.517, 0.000)
-    rospy.loginfo("Point A")
-    move_base.goto(4.268, -3.675, 0.000)
-    rospy.loginfo("Point B")
-    move_base.goto(4.230, -3.490, 0.000)
-    rospy.loginfo("Point C")
+    if False:
+        move_base.goto(4.000, -3.517, 0.000)
+        rospy.loginfo("Point A")
+        move_base.goto(4.268, -3.675, 0.000)
+        rospy.loginfo("Point B")
+        move_base.goto(4.230, -3.490, 0.000)
+        rospy.loginfo("Point C")
+    else:
+        move_base.goto(3.992, -3.960)
+        rospy.loginfo("Point A")
+        move_base.goto(4.002, -5.012)
+        rospy.loginfo("Point B")
+        move_base.goto(3.954, -6.087)
+        rospy.loginfo("Point C")
+        move_base.goto(4.020, -7.061)
+        rospy.loginfo("Point D")
+        move_base.goto(4.024, -7.573)
+        rospy.loginfo("Point E")
+
+
 
     # # Raise the torso using just a controller
     # rospy.loginfo("Raising torso...")
