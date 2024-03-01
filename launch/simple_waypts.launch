@@ -1,0 +1,10 @@
+<launch>
+
+  <include file="$(find fetch_study)/launch/study_nav.launch" >
+    <arg name="map_file" value="$(find fetch_study)/maps/fetchredemo.yaml" />
+  </include>
+
+  <!-- Drive around -->
+  <node name="demo" pkg="fetch_study" type="follow_waypoints.py" output="screen" />
+
+</launch>
