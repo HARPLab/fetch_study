@@ -268,7 +268,7 @@ if __name__ == "__main__":
         rospy.loginfo("Point B")
         move_base.goto(4.230, -3.490, 0.000)
         rospy.loginfo("Point C")
-    else:
+    elif False:
         # move_base.goto(3.866, -2.754, 0.000)
         move_base.goto(3.992, -3.960, 0.0)
         rospy.loginfo("Start")
@@ -282,6 +282,16 @@ if __name__ == "__main__":
         rospy.loginfo("Point D")
         move_base.goto(4.024, -7.573, 0.0)
         rospy.loginfo("Point E")
+    else:
+        move_base.goto(4.007, -3.610,  -1.631)
+        rospy.loginfo("Start")
+        move_base.goto(4.007, -3.710,  -1.631)
+        rospy.loginfo("Point A")
+        move_base.goto(4.008, -3.973, -1.631)
+        rospy.loginfo("Point B")
+        move_base.goto(4.017, -6.278, -1.631)
+        rospy.loginfo("Point C")
+
 
 
 
