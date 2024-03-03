@@ -47,7 +47,7 @@ TebLocalPlannerROS:
  free_goal_vel: True # EDITED: Allow robot's speed at goal to be non-zero
     
  # Obstacles
- min_obstacle_dist: 0.29
+ min_obstacle_dist: 0.2
  include_costmap_obstacles: True
  costmap_obstacles_behind_robot_dist: 1.0
  obstacle_poses_affected: 30
