@@ -282,7 +282,7 @@ if __name__ == "__main__":
         rospy.loginfo("Point D")
         move_base.goto(4.024, -7.573, 0.0)
         rospy.loginfo("Point E")
-    else:
+    elif False:
         move_base.goto(4.007, -3.610,  -1.631)
         rospy.loginfo("Start")
         move_base.goto(4.007, -3.710,  -1.631)
@@ -291,7 +291,36 @@ if __name__ == "__main__":
         rospy.loginfo("Point B")
         move_base.goto(4.017, -6.278, -1.631)
         rospy.loginfo("Point C")
+    else:
 
+        ###### TRIANGLE
+        move_base.goto(3.950, -3.006, 0.000)
+        rospy.loginfo("Start")
+        move_base.goto(4.001, -3.986, 0.000)
+        rospy.loginfo("Point A")
+        move_base.goto(4.991, -3.491, 0.000)
+        rospy.loginfo("Point B")
+
+        move_base.goto(3.950, -3.006, 0.000)
+        rospy.loginfo("Start")
+        move_base.goto(4.001, -3.986, 0.000)
+        rospy.loginfo("Point A")
+        move_base.goto(4.991, -3.491, 0.000)
+        rospy.loginfo("Point B")
+
+        move_base.goto(3.950, -3.006, 0.000)
+        rospy.loginfo("Start")
+        move_base.goto(4.001, -3.986, 0.000)
+        rospy.loginfo("Point A")
+        move_base.goto(4.991, -3.491, 0.000)
+        rospy.loginfo("Point B")
+
+        move_base.goto(3.950, -3.006, 0.000)
+        rospy.loginfo("Start")
+        move_base.goto(4.001, -3.986, 0.000)
+        rospy.loginfo("Point A")
+        move_base.goto(4.991, -3.491, 0.000)
+        rospy.loginfo("Point B")
 
 
 
