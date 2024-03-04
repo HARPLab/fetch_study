@@ -5,6 +5,7 @@
   </include>
 
   <!-- Drive around -->
-  <node name="demo" pkg="fetch_study" type="follow_waypoints.py" output="screen" />
+  <!-- <node name="demo" pkg="fetch_study" type="follow_waypoints.py" output="screen" /> -->
+  <node name="follow_waypoints" pkg="fetch_study" type="waypoints_traj.py" output="screen" />
 
 </launch>
