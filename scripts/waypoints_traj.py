@@ -119,7 +119,7 @@ class GetPath(State):
         self.poseArray_publisher = rospy.Publisher(self.posearray_topic, PoseArray, queue_size=1)
 
         # Path for saving and retrieving the pose.csv file
-        output_folder_default = os.path.join(rospkg.RosPack().get_path('smb_navigation_scripts'), 'saved_path')
+        output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path')
         output_folder = rospy.get_param('~output_folder', output_folder_default)
         if not os.path.isdir(output_folder):
             os.makedirs(output_folder)
