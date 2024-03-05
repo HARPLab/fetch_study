@@ -20,10 +20,14 @@ import csv
 import time
 import os
 from geometry_msgs.msg import PoseStamped
+import dynamic_reconfigure.client
+
 
 # Waypoints container
-waypoints = []
+waypoints        = []
+auxilary_data    = []
 
+velocity_default = 1.0
 
 # change Pose to the correct frame
 def changePose(waypoint, target_frame):
@@ -59,6 +63,9 @@ class FollowPath(State):
         self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
+
+        self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
+
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
@@ -192,6 +199,8 @@ class GetPath(State):
             except rospy.ROSInterruptException:
                 return 'killed'
             rospy.loginfo('Received path READY start_journey')
+
+            ##### Import CSV document
             with open(self.input_file_path, 'r') as file:
                 reader = csv.reader(file, delimiter=',')
                 for row in reader:
@@ -205,6 +214,16 @@ class GetPath(State):
                     current_pose.pose.pose.orientation.z = float(row[5])
                     current_pose.pose.pose.orientation.w = float(row[6])
                     waypoints.append(current_pose)
+
+                    # Adjust the speed on the fly
+                    if len(row) > 7:
+                        velocity = float(row[7])
+                        auxilary_data.append(velocity)
+                    else:
+                        auxilary_data.append(velocity_default)
+
+                    # TODO also add stop-time-on-arrival
+
                 self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
             self.start_journey_bool = True
 
