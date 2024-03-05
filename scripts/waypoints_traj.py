@@ -64,7 +64,7 @@ class FollowPath(State):
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
 
-        self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
+        # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
