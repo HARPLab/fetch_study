@@ -182,7 +182,7 @@ class GetPath(State):
                         current_pose.pose.pose.position.y) + ',' + str(current_pose.pose.pose.position.z) + ',' + str(
                         current_pose.pose.pose.orientation.x) + ',' + str(
                         current_pose.pose.pose.orientation.y) + ',' + str(
-                        current_pose.pose.pose.orientation.z) + ',' + str(current_pose.pose.pose.orientation.w) + '\n')
+                        current_pose.pose.pose.orientation.z) + ',' + str(current_pose.pose.pose.orientation.w) + ',' + "1.0" + '\n')
                 rospy.loginfo('poses written to ' + self.output_file_path)
 
         ready_thread = threading.Thread(target=wait_for_path_ready)
