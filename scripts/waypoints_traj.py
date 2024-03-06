@@ -64,7 +64,9 @@ class FollowPath(State):
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
 
-        # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
+        print("Setting up dynamic speed server")
+        self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
+        self.update_client.wait_for_server()
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -80,6 +82,7 @@ class FollowPath(State):
             if not waypoints:
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
+
             # Otherwise publish next waypoint as goal
             goal = MoveBaseGoal()
             goal.target_pose.header.frame_id = self.frame_id
@@ -89,6 +92,7 @@ class FollowPath(State):
                           (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y))
             rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
             self.client.send_goal(goal)
+
             if not self.distance_tolerance > 0.0:
                 self.client.wait_for_result()
                 rospy.loginfo("Waiting for %f sec..." % self.duration)
