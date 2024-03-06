@@ -315,7 +315,7 @@ class PathComplete(State):
         output_file_path_report = os.path.join(output_folder, now_id + "mission_report.csv")
         with open(output_file_path_report, 'w') as file:
             file.write("X, Y, time_to_reach\n")
-            for report in self.mission_report:
+            for report in mission_report:
                 file.write(str(mission_report[0]) + ',' + str(mission_report[1]) + ',' + str(mission_report[2]) + '\n')
             
             rospy.loginfo('Mission report filed to ' + output_file_path_report)
