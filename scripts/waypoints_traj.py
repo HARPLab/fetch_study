@@ -19,6 +19,7 @@ import rospkg
 import csv
 import time
 import os
+import datetime
 from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
 
@@ -85,6 +86,9 @@ class FollowPath(State):
 
     def execute(self, userdata):
         global waypoints, mission_report
+
+        self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
+
         # Execute waypoints each in sequence
         for waypoint, aux_data in zip(waypoints, auxilary_data):
             tic = time.perf_counter()
