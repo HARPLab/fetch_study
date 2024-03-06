@@ -85,7 +85,7 @@ class FollowPath(State):
     def execute(self, userdata):
         global waypoints
         # Execute waypoints each in sequence
-        for waypoint, aux_data in waypoints, auxilary_data:
+        for waypoint, aux_data in zip(waypoints, auxilary_data):
             tic = time.perf_counter()
 
             # Break if preempted
