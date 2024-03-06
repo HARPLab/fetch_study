@@ -108,7 +108,9 @@ class FollowPath(State):
 
             if not self.distance_tolerance > 0.0:
                 self.client.wait_for_result()
-                rospy.loginfo("Waiting for %f sec..." % self.duration)
+                if self.duration > 0:
+                    rospy.loginfo("Waiting for %f sec..." % self.duration)
+    
                 time.sleep(self.duration)
             else:
                 # This is the loop which exist when the robot is near a certain GOAL point.
