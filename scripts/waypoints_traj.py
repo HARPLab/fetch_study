@@ -308,8 +308,8 @@ class PathComplete(State):
 
         now_id = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
         output_folder = rospy.get_param('~output_folder', output_folder_default)
-        
-        output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path')
+
+        output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path/reports')
         output_file_path_report = os.path.join(output_folder, now_id + "mission_report.csv")
         with open(output_file_path_report, 'w') as file:
             file.write("X, Y, time_to_reach\n")
