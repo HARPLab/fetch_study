@@ -26,6 +26,7 @@ import dynamic_reconfigure.client
 # Waypoints container
 waypoints        = []
 auxilary_data    = []
+mission_report   = []
 
 velocity_default = 1.0
 
@@ -127,6 +128,9 @@ class FollowPath(State):
             time_elapsed = toc - tic
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
+
+            report = [waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, time_elapsed]
+            self.mission_report.append(report)
 
         return 'success'
 
@@ -296,6 +300,16 @@ class PathComplete(State):
         rospy.loginfo('###############################')
         rospy.loginfo('##### REACHED FINISH GATE #####')
         rospy.loginfo('###############################')
+
+        now_id = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
+        output_file_path_report = os.path.join(output_folder, now_id + "mission_report.csv")
+        with open(output_file_path_report, 'w') as file:
+            file.write("X, Y, time_to_reach\n")
+            for report in self.mission_report:
+                file.write(str(mission_report[0]) + ',' + str(mission_report[1]) + ',' + str(mission_report[2]) + '\n')
+            
+            rospy.loginfo('Mission report filed to ' + output_file_path_report)
+
         return 'success'
 
 
