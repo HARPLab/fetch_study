@@ -84,7 +84,7 @@ class FollowPath(State):
 
 
     def execute(self, userdata):
-        global waypoints, mission_report, update_client
+        global waypoints, mission_report
         # Execute waypoints each in sequence
         for waypoint, aux_data in zip(waypoints, auxilary_data):
             tic = time.perf_counter()
@@ -94,7 +94,7 @@ class FollowPath(State):
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
 
-            update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
+            self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
 
             # Otherwise publish next waypoint as goal
@@ -102,8 +102,8 @@ class FollowPath(State):
             goal.target_pose.header.frame_id = self.frame_id
             goal.target_pose.pose.position = waypoint.pose.pose.position
             goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
-            rospy.loginfo('Executing move_base goal to position (x,y): %s, %s' %
-                          (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y))
+            rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
+                          (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
             # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
             self.client.send_goal(goal)
 
