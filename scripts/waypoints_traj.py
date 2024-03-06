@@ -122,7 +122,8 @@ class FollowPath(State):
                                                                                2))
 
             toc = time.perf_counter()
-            print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took {toc - tic:0.4f} seconds")
+            time_elapsed = toc - tic
+            print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
         return 'success'
 
