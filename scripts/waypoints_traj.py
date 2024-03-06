@@ -29,6 +29,9 @@ auxilary_data    = []
 
 velocity_default = 1.0
 
+# INDICES OF AUXILLARY DATA
+AUX_VELOCITY = 0
+
 # change Pose to the correct frame
 def changePose(waypoint, target_frame):
     if waypoint.header.frame_id == target_frame:
@@ -81,11 +84,14 @@ class FollowPath(State):
     def execute(self, userdata):
         global waypoints
         # Execute waypoints each in sequence
-        for waypoint in waypoints:
+        for waypoint, aux_data in waypoints, auxilary_data:
             # Break if preempted
             if not waypoints:
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
+
+            client.update_configuration({"max_vel_x":aux_data[AUX_VELOCITY]})
+            r.sleep()
 
             # Otherwise publish next waypoint as goal
             goal = MoveBaseGoal()
@@ -252,9 +258,11 @@ class GetPath(State):
                 waypoints.append(changePose(pose, self.goal_frame_id))
                 # publish waypoint queue as pose array so that you can see them in rviz, etc.
                 self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
+
             except rospy.ROSInterruptException:
                 rospy.logwarn("Shutting down")
                 return 'killed'
+
             except rospy.ROSException as e:
                 rospy.logwarn_throttle(5, "Ros exception: {}".format(e))
 
