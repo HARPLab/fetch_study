@@ -93,6 +93,8 @@ class FollowPath(State):
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
 
+            print(waypoint, aux_data)
+            exit()
             self.update_client.update_configuration({"max_vel_x":aux_data[AUX_VELOCITY]})
             # r.sleep()
 
