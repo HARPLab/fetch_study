@@ -64,15 +64,19 @@ class FollowPath(State):
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
 
-        print("Setting up dynamic speed server")
-        self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
-        self.update_client.wait_for_server()
-
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
         self.distance_tolerance = rospy.get_param('waypoint_distance_tolerance', 0.0)
+
+        print("Setting up dynamic speed server")
+        # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
+        # self.update_client.wait_for_server()
+        self.update_client = dynamic_reconfigure.client.Client("move_base/TrajectoryPlannerROS", timeout=4, config_callback=None)
+        print("Found it")
+
+
 
     def execute(self, userdata):
         global waypoints
