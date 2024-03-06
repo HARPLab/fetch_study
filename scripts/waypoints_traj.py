@@ -93,9 +93,7 @@ class FollowPath(State):
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
 
-            print(waypoint, aux_data)
-            exit()
-            self.update_client.update_configuration({"max_vel_x":aux_data[AUX_VELOCITY]})
+            self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
 
             # Otherwise publish next waypoint as goal
@@ -239,15 +237,18 @@ class GetPath(State):
                     current_pose.pose.pose.orientation.w = float(row[6])
                     waypoints.append(current_pose)
 
-                    auxilary_data.append(row_id)
-                    row_id += 1
-
                     # Adjust the speed on the fly
                     if len(row) > 7:
                         velocity = float(row[7])
-                        auxilary_data.append(velocity)
+                        aux_velocity = velocity
                     else:
-                        auxilary_data.append(velocity_default)
+                        aux_velocity = velocity_default
+
+                    aux_data = [row_id, aux_velocity]
+                    row_id += 1
+
+                    auxilary_data.append(aux_data)
+
 
                     # TODO also add stop-time-on-arrival
 
