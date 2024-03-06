@@ -30,7 +30,8 @@ auxilary_data    = []
 velocity_default = 1.0
 
 # INDICES OF AUXILLARY DATA
-AUX_VELOCITY = 0
+AUX_WAYPOINT_INDEX  = 0
+AUX_VELOCITY        = 1
 
 # change Pose to the correct frame
 def changePose(waypoint, target_frame):
@@ -85,6 +86,8 @@ class FollowPath(State):
         global waypoints
         # Execute waypoints each in sequence
         for waypoint, aux_data in waypoints, auxilary_data:
+            tic = time.perf_counter()
+
             # Break if preempted
             if not waypoints:
                 rospy.loginfo('The waypoint queue has been reset.')
@@ -117,6 +120,10 @@ class FollowPath(State):
                     distance = math.sqrt(
                         pow(waypoint.pose.pose.position.x - trans[0], 2) + pow(waypoint.pose.pose.position.y - trans[1],
                                                                                2))
+
+                toc = time.perf_counter()
+                print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took {toc - tic:0.4f} seconds")
+
         return 'success'
 
 
@@ -217,6 +224,7 @@ class GetPath(State):
             ##### Import CSV document
             with open(self.input_file_path, 'r') as file:
                 reader = csv.reader(file, delimiter=',')
+                row_id = 0
                 for row in reader:
                     print(row)
                     current_pose = PoseWithCovarianceStamped()
@@ -228,6 +236,9 @@ class GetPath(State):
                     current_pose.pose.pose.orientation.z = float(row[5])
                     current_pose.pose.pose.orientation.w = float(row[6])
                     waypoints.append(current_pose)
+
+                    auxilary_data.append(row_id)
+                    row_id += 1
 
                     # Adjust the speed on the fly
                     if len(row) > 7:
