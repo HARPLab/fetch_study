@@ -84,7 +84,7 @@ class FollowPath(State):
 
 
     def execute(self, userdata):
-        global waypoints
+        global waypoints, mission_report, update_client
         # Execute waypoints each in sequence
         for waypoint, aux_data in zip(waypoints, auxilary_data):
             tic = time.perf_counter()
@@ -94,7 +94,7 @@ class FollowPath(State):
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
 
-            self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
+            update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
 
             # Otherwise publish next waypoint as goal
@@ -130,7 +130,7 @@ class FollowPath(State):
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
             report = [waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, time_elapsed]
-            self.mission_report.append(report)
+            mission_report.append(report)
 
         return 'success'
 
