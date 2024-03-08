@@ -4,11 +4,6 @@ project(fetch_study)
 find_package(catkin REQUIRED)
 catkin_package()
 
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-  planner
-)
-
 install(
   DIRECTORY config
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
@@ -21,6 +16,7 @@ install(
 
 include_directories(
   include
+  planner
   ${catkin_INCLUDE_DIRS}
 )
 
