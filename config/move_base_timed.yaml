@@ -1,0 +1,52 @@
+# Planner selection
+base_global_planner: "navfn/NavfnROS"
+base_local_planner: "path_executer/PathFollower" # "move_base/base_local_planner: path_executer/PathFollower"
+
+# Recovery behaviors are defined in robot folders
+
+# Oscillation
+oscillation_timeout: 10.0
+oscillation_distance: 0.5
+
+# Global planner
+planner_frequency: 0.0
+planner_patience: 5.0
+NavfnROS:
+  allow_unknown: true  # TODO: investigate this
+  default_tolerance: 0.0
+  # do not restrict planner
+  planner_window_x: 0.0
+  planner_window_y: 0.0
+  # debug
+  visualize_potential: false
+
+# Node parameters for using the timed path follower as local planner with move base. 
+# For more information about the move base parameters in this file, please see
+#
+#  http://www.ros.org/wiki/move_base
+#
+
+shutdown_costmaps: false
+
+#disable recovery behaviors
+recovery_behavior_enabled: false
+
+#controller frequency should be at least 10 Hz to avoid instability
+controller_frequency: 20.0
+controller_patience: 5.0
+
+#disable oscillation checking
+oscillation_timeout: 0.0
+oscillation_distance: 0.0
+
+# # DID THIS ABOVE
+# # use path follower as the local planner
+# base_local_planner: path_executer/PathFollower
+
+#path follower params
+PathFollower:
+    allow_backwards: false #to allow backwards motion when trying to follow a trajectory. default: false
+    xy_goal_tolerance: 0.025 #euclidian goal distance threshold in m. default: 0.1
+    yaw_goal_tolerance: 0.2 #rotational goal distance threshold in rad. default: 0.2
+
+#controller gains and velocity bounds for the path follower can be adjusted using dynamic reconfigure (move_base/PathFollower prefix)
