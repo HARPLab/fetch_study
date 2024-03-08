@@ -6,7 +6,6 @@ catkin_package()
 
 install(
   DIRECTORY config
-  DIRECTORY planner
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
@@ -18,6 +17,10 @@ install(
 install(
   DIRECTORY launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(
+  include planner
 )
 
 install(
