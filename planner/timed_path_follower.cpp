@@ -198,7 +198,7 @@ namespace path_executer
 
     //get the current robot pose in the costmap
     // tf::Stamped<tf::Pose> robot_pose;
-    geometry_msgs::PoseStamped robot_pose;
+    geometry_msgs::PoseStamped robot_pose&;
     if(!costmap_ros_->getRobotPose(robot_pose))
     {
       cmd_vel = zero_vel;
