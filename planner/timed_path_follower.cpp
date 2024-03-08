@@ -206,9 +206,8 @@ namespace path_executer
       return false;
     }
 
-    tf2::Transform robot_pose;
-    robot_pose = robot_pose_stamped;
-
+    tf::Pose robot_pose;
+    tf::poseMsgToTF(robot_pose_stamped.pose, robot_pose);
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
