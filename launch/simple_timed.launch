@@ -6,7 +6,7 @@
   </include>
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">   
-    <rosparam file="$(find timed_path_follower)/config/local_planner_params.yaml" command="load" />
+    <rosparam file="$(find fetch_study)/config/move_base_timed.yaml" command="load" />
   </node>
 
   <!-- Drive around -->
