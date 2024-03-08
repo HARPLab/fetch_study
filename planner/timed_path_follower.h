@@ -85,8 +85,7 @@ public:
    * @param costmap_ros the (local) cost map that defines environment constraints
    *        for navigation
    */
-  void initialize(std::string name, tf::TransformListener* tf,
-                  costmap_2d::Costmap2DROS* costmap_ros);
+  void initialize(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros);
 
   /**
    * @brief compute the velocity commands to execute the timed plan
