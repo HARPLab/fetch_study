@@ -19,10 +19,6 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-generate_dynamic_reconfigure_options(
-   cfg/PathFollower.cfg
-)
-
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
