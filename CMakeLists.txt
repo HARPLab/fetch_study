@@ -25,6 +25,8 @@ install(
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+add_library(global_planner_lib src/planner/timed_path_follower.cpp)
+
 if(CATKIN_ENABLE_TESTING)
   find_package(catkin REQUIRED COMPONENTS roslaunch)
   roslaunch_add_file_check(launch/fetch_nav.launch)
