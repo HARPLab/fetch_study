@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(fetch_study)
 
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED roscpp) 
 catkin_package()
 
 install(
@@ -30,7 +30,7 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-
+add_executable(fetch_study planner/timed_path_follower.cpp) 
 target_link_libraries(fetch_study ${catkin_LIBRARIES})
 
 install(
