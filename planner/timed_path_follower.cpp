@@ -199,14 +199,12 @@ namespace path_executer
 
     //get the current robot pose in the costmap
     // tf::Stamped<tf::Pose> robot_pose;
-    geometry_msgs::PoseStamped& robot_pose;
-    if(!costmap_ros_->getRobotPose())
+    geometry_msgs::PoseStamped robot_pose;
+    if(!costmap_ros_->getRobotPose(robot_pose))
     {
       cmd_vel = zero_vel;
       ROS_ERROR("path_executer: cannot get robot pose");
       return false;
-    } else {
-      robot_pose = global_pose;
     }
 
     //if the robot pose and the path (and goal) are represented in different
