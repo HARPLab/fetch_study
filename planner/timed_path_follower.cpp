@@ -198,13 +198,17 @@ namespace path_executer
 
     //get the current robot pose in the costmap
     // tf::Stamped<tf::Pose> robot_pose;
-    geometry_msgs::PoseStamped robot_pose;
-    if(!getRobotPose(robot_pose, costmap_ros_))
+    tf2_geometry_msgs::PoseStamped robot_pose_stamped;
+    if(!getRobotPose(robot_pose_stamped, costmap_ros_))
     {
       cmd_vel = zero_vel;
       ROS_ERROR("path_executer: cannot get robot pose");
       return false;
     }
+
+    tf2::Transform robot_pose;
+    robot_pose = robot_pose_stamped;
+
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
@@ -249,6 +253,7 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     geometry_msgs::Quaternion quat;
+    tf2::Transform robot_pose;
     tf::quaternionTFToMsg(robot_pose.getRotation(), quat);
     double angular_goal_distance =
         angles::shortest_angular_distance(tf::getYaw(goal_.pose.orientation),
