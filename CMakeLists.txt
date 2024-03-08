@@ -26,7 +26,7 @@ include_directories(
 
 add_library(
   ${PROJECT_NAME}
-    planner/path_follower.cpp
+    planner/timed_path_follower.cpp
 )
 
 install(
