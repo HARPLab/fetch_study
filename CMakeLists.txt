@@ -10,12 +10,12 @@ find_package(catkin REQUIRED
   pluginlib
   roscpp
 )
- 
-catkin_package()
 
 generate_dynamic_reconfigure_options(
    cfg/PathFollower.cfg
 )
+
+catkin_package()
 
 install(
   DIRECTORY config
