@@ -19,7 +19,7 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-install(
+include_directories(
   include planner
 )
 
