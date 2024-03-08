@@ -19,12 +19,32 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
+generate_dynamic_reconfigure_options(
+   cfg/PathFollower.cfg
+)
+
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+  CATKIN_DEPENDS dynamic_reconfigure
+)
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+)
+
+add_library(
+  ${PROJECT_NAME}
+    planner/path_follower.cpp
+)
+
 install(
   DIRECTORY launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-add_executable(fetch_study planner/timed_path_follower.cpp)
+
 target_link_libraries(fetch_study ${catkin_LIBRARIES})
 
 install(
