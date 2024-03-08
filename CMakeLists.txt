@@ -19,12 +19,6 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS dynamic_reconfigure
-)
-
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
