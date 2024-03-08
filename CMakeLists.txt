@@ -1,7 +1,16 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(fetch_study)
 
-find_package(catkin REQUIRED roscpp) 
+find_package(catkin REQUIRED 
+  roscpp 
+  costmap_2d
+  dynamic_reconfigure
+  geometry_msgs
+  nav_core
+  pluginlib
+  roscpp
+)
+ 
 catkin_package()
 
 generate_dynamic_reconfigure_options(
