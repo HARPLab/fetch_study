@@ -211,7 +211,7 @@ namespace path_executer
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
-    if (robot_pose_stamped.frame_id_.compare(goal_.header.frame_id) != 0)
+    if (robot_pose_stamped.frame_id.compare(goal_.header.frame_id) != 0)
     {
       ROS_WARN_ONCE("path_executer: the specified fixed frame for the costmap (%s) "
                     "does not math the fixed frame of the path (%s). Therefore, I "
@@ -222,7 +222,7 @@ namespace path_executer
 
       try
       {
-        tfl_->waitForTransform(goal_.header.frame_id, robot_pose.frame_id_,
+        tfl_->canTransform(goal_.header.frame_id, robot_pose.frame_id,
                               robot_pose_stamped.stamp_, ros::Duration(0.2));
         tfl_->transformPose(goal_.header.frame_id, robot_pose, robot_pose);
       }
