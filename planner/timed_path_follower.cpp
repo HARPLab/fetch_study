@@ -34,7 +34,7 @@
  * Author: Marina Kollmitz
  ******************************************************************************/
 
-#include <timed_path_follower.h>
+#include <planner/timed_path_follower.h>
 
 //register this planner as a BaseLocalPlanner plugin
 PLUGINLIB_EXPORT_CLASS(path_executer::PathFollower, nav_core::BaseLocalPlanner)
