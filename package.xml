@@ -42,7 +42,7 @@
   <test_depend>roslaunch</test_depend>
 
   <export>
-    <nav_core plugin="${prefix}/path_follower_plugin.xml" />
+    <nav_core plugin="${prefix}/timed_path_follower_plugin.xml" />
   </export>
 
 </package>
