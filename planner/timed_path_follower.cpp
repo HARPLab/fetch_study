@@ -222,8 +222,8 @@ namespace path_executer
 
       try
       {
-        tfl_->canTransform(goal_.header.frame_id, robot_pose.frame_id,
-                              robot_pose_stamped.header.stamp_, ros::Duration(0.2));
+        tfl_->canTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
+                              robot_pose_stamped.header.stamp, ros::Duration(0.2));
         tfl_->transformPose(goal_.header.frame_id, robot_pose, robot_pose);
       }
 
