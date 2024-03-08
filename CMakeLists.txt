@@ -4,6 +4,10 @@ project(fetch_study)
 find_package(catkin REQUIRED roscpp) 
 catkin_package()
 
+generate_dynamic_reconfigure_options(
+   cfg/PathFollower.cfg
+)
+
 install(
   DIRECTORY config
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
