@@ -211,19 +211,19 @@ namespace path_executer
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
-    if (robot_pose.frame_id_.compare(goal_.header.frame_id) != 0)
+    if (robot_pose_stamped.frame_id_.compare(goal_.header.frame_id) != 0)
     {
       ROS_WARN_ONCE("path_executer: the specified fixed frame for the costmap (%s) "
                     "does not math the fixed frame of the path (%s). Therefore, I "
                     "have to transform the robot pose in each control loop. "
                     "This could cause a decreased control frequency. Consider "
                     "changing the (local) costmap's fixed frame",
-                    robot_pose.frame_id_.c_str(), goal_.header.frame_id.c_str());
+                    robot_pose_stamped.frame_id_.c_str(), goal_.header.frame_id.c_str());
 
       try
       {
         tfl_->waitForTransform(goal_.header.frame_id, robot_pose.frame_id_,
-                              robot_pose.stamp_, ros::Duration(0.2));
+                              robot_pose_stamped.stamp_, ros::Duration(0.2));
         tfl_->transformPose(goal_.header.frame_id, robot_pose, robot_pose);
       }
 
@@ -252,7 +252,6 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     geometry_msgs::Quaternion quat;
-    tf2::Transform robot_pose;
     tf::quaternionTFToMsg(robot_pose.getRotation(), quat);
     double angular_goal_distance =
         angles::shortest_angular_distance(tf::getYaw(goal_.pose.orientation),
