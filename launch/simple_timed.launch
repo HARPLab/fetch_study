@@ -1,16 +1,10 @@
 <launch>
 
-  <!-- <include file="$(find fetch_study)/launch/study_nav.launch" >-->
-  <include file="$(find fetch_study)/launch/fetch_nav.launch" >
+  <include file="$(find fetch_study)/launch/study_nav_timed.launch" >
     <arg name="map_file" value="$(find fetch_study)/maps/fetchredemo.yaml" />
   </include>
 
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">   
-    <rosparam file="$(find fetch_study)/config/move_base_timed.yaml" command="load" />
-  </node>
-
   <!-- Drive around -->
-  <!-- <node name="demo" pkg="fetch_study" type="follow_waypoints.py" output="screen" /> -->
   <node name="follow_waypoints" pkg="fetch_study" type="waypoints_traj.py" output="screen" />
 
 </launch>
