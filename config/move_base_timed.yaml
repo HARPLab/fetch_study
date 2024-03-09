@@ -1,4 +1,5 @@
 # Planner selection
+#use lattice planner as the global planner
 base_global_planner: "lattice_planner/TBPlanner"
 base_local_planner: "path_executer/PathFollower" # "move_base/base_local_planner: path_executer/PathFollower"
 
@@ -53,9 +54,6 @@ PathFollower:
 #controller gains and velocity bounds for the path follower can be adjusted using dynamic reconfigure (move_base/PathFollower prefix)
 
 
-#use lattice planner as the global planner
-base_global_planner: lattice_planner/TBPlanner
-
 #lattice planner params
 TBPlanner:
     #cost factors
@@ -64,7 +62,7 @@ TBPlanner:
     step_cost_factor: 80.0 #cost factor for path length. default: 80.0
     rotation_cost_factor: 0.0 #cost factor for the accumulated turns along a planned path
     environment_cost_factor: 1.0 #cost factor for constraints defined in the dynamic environment, according to the dynamic cost map
-    dynamic_layers_plugin: dynamic_social_costmap::SocialLayers #fully qualified plugin type for dynamic layers to be used by dynamic cost map, in this case SocialLayers plugin from human_aware_navigation stack (https://github.com/marinaKollmitz/human_aware_navigation). default: "undefined"
+    # dynamic_layers_plugin: dynamic_social_costmap::SocialLayers #fully qualified plugin type for dynamic layers to be used by dynamic cost map, in this case SocialLayers plugin from human_aware_navigation stack (https://github.com/marinaKollmitz/human_aware_navigation). default: "undefined"
 
     #planner preferences
     allow_unknown: false #whether the planner is allowed to expand into unknown map regions. default: false
@@ -80,11 +78,11 @@ TBPlanner:
     #flags for simplifying the path search - violate optimality but accelerate the search procedure
     easy_deceleration: false #flag for simplified planning of deceleration at the goal. default: false
     easy_turn_at_start: false #flag for simplified planning of turn in place at the start. default: false
-    easy_turn_at_goal: false #flag for simplified planning of turn in place at the goal. default: false
+    easy_turn_at_goal: true #flag for simplified planning of turn in place at the goal. default: false
 
     #motion constraints of the robot:
     min_vel_x: 0.0 #minimum forward velocity of the robot in meters per second (can be negative). default: 0.0
-    max_vel_x: 0.4 #maximum forward velocity of the robot in meters per second. default: 0.4
+    max_vel_x: 1.0 #maximum forward velocity of the robot in meters per second. default: 0.4
     acceleration_x: 0.8 #forward acceleration in meters per second^2. default: 0.8
     min_vel_phi: -0.8 #minimum angular velocity of the robot in radians per second (can be negative). default: -0.8
     max_vel_phi: 0.8 #maximum angular velocity of the robot in radians per second. default: 0.8
