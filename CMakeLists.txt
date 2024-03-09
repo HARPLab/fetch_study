@@ -28,13 +28,15 @@ include_directories(
 
 add_library(
   ${PROJECT_NAME}
-    src/timed_path_follower.cpp
+  src/timed_path_follower.cpp
 )
 
 add_dependencies(
   ${PROJECT_NAME} 
     ${PROJECT_NAME}_gencfg
 )
+
+include_directories(fetch_study/cmake/cfgbuild.cmake) 
 
 target_link_libraries(
   ${PROJECT_NAME} 
