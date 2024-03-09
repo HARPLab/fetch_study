@@ -1,6 +1,6 @@
 # Planner selection
 base_global_planner: "navfn/NavfnROS"
-base_local_planner: "path_executer/PathFollower" # "move_base/base_local_planner: path_executer/PathFollower"
+base_local_planner: "PathFollower" # "move_base/base_local_planner: path_executer/PathFollower"
 
 # Recovery behaviors are defined in robot folders
 
