@@ -54,7 +54,7 @@ namespace path_executer
 
   PathFollower::PathFollower(std::string name, tf2_ros::Buffer* tf,
                              costmap_2d::Costmap2DROS* costmap_ros)
-      : costmap_ros_(NULL), tf_(NULL), initialized_(false)
+      : costmap_ros_(NULL), tfl_(NULL), initialized_(false)
   {
       initialize(name, tf, costmap_ros);
   }
