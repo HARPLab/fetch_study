@@ -5,6 +5,6 @@
   </include>
 
   <!-- Drive around -->
-  <node name="follow_waypoints" pkg="fetch_study" type="waypoints_traj.py" output="screen" />
+  <node name="follow_waypoints" pkg="fetch_study" type="waypoints_timed.py" output="screen" />
 
 </launch>
