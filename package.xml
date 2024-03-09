@@ -41,7 +41,7 @@
   <exec_depend>dynamic_reconfigure</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
   <test_depend>roslaunch</test_depend>
-  <run_depend>nav_core</run_depend>
+  <exec_depend>nav_core</exec_depend>
 
   <export>
     <nav_core plugin="${prefix}/timed_path_follower_plugin.xml" />
