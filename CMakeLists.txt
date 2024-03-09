@@ -28,7 +28,7 @@ include_directories(
 
 add_library(
   ${PROJECT_NAME}
-    src/timed_path_follower.cpp
+    src/timed_path_planner/timed_path_follower.cpp
 )
 
 add_dependencies(
