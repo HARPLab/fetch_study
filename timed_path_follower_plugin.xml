@@ -1,5 +1,5 @@
 <library path="timed_path_follower">
-  <class name="path_executer/PathFollower" type="path_executer::PathFollower" base_class_type="nav_core::BaseLocalPlanner">
+  <class name="PathFollower" type="path_executer::PathFollower" base_class_type="nav_core::BaseLocalPlanner">
   <description>
   Simple path executer to execute the dynamically feasible path passed by the lattice global planner
   </description>
