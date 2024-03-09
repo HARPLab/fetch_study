@@ -26,9 +26,19 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_library(
+  ${PROJECT_NAME}
+    src/timed_path_follower.cpp
+)
+
 add_dependencies(
   ${PROJECT_NAME} 
     ${PROJECT_NAME}_gencfg
+)
+
+target_link_libraries(
+  ${PROJECT_NAME} 
+    ${catkin_LIBRARIES}
 )
 
 install(
@@ -46,11 +56,6 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
  
-add_library(
-  ${PROJECT_NAME}
-    src/timed_path_follower.cpp
-)
-
 target_link_libraries(fetch_study ${catkin_LIBRARIES})
 
 install(
