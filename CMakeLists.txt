@@ -36,11 +36,6 @@ add_dependencies(
     ${PROJECT_NAME}_gencfg
 )
 
-target_link_libraries(
-  ${PROJECT_NAME} 
-    ${catkin_LIBRARIES}
-)
-
 install(
   DIRECTORY config
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
@@ -56,6 +51,7 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
  
+add_executable(fetch_study src/timed_path_planner/timed_path_follower.cpp)
 target_link_libraries(fetch_study ${catkin_LIBRARIES})
 
 install(
