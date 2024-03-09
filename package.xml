@@ -42,6 +42,7 @@
   <exec_depend>geometry_msgs</exec_depend>
   <test_depend>roslaunch</test_depend>
   <exec_depend>nav_core</exec_depend>
+  <depend>nav_core</depend>
 
   <export>
     <nav_core plugin="${prefix}/timed_path_follower_plugin.xml" />

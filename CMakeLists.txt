@@ -46,7 +46,11 @@ install(
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
  
-add_executable(fetch_study src/timed_path_planner/timed_path_follower.cpp)
+add_library(
+  ${PROJECT_NAME}
+    src/timed_path_follower.cpp
+)
+
 target_link_libraries(fetch_study ${catkin_LIBRARIES})
 
 install(
