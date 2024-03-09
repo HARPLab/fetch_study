@@ -26,11 +26,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_library(
-  ${PROJECT_NAME}
-    src/timed_path_planner/timed_path_follower.cpp
-)
-
 add_dependencies(
   ${PROJECT_NAME} 
     ${PROJECT_NAME}_gencfg
