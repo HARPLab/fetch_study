@@ -393,6 +393,9 @@ namespace path_executer
       return waypoint_velocities;
     }
 
+    ROS_INFO("path_executer: timed plan of length");
+    ROS_INFO(timed_plan.size());
+
     //calculate necessary velocity commands for feed forward control
     for(int i=0; i<timed_plan.size() - 1; i++)
     {
