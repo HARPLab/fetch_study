@@ -15,7 +15,31 @@ generate_dynamic_reconfigure_options(
    cfg/PathFollower.cfg
 )
 
-catkin_package()
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+  CATKIN_DEPENDS dynamic_reconfigure
+)
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+)
+
+add_library(
+  ${PROJECT_NAME}
+    src/timed_path_follower.cpp
+)
+
+add_dependencies(
+  ${PROJECT_NAME} 
+    ${PROJECT_NAME}_gencfg
+)
+
+target_link_libraries(
+  ${PROJECT_NAME} 
+    ${catkin_LIBRARIES}
+)
 
 install(
   DIRECTORY config
@@ -25,17 +49,6 @@ install(
 install(
   DIRECTORY aux_libraries
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
-include_directories(
-  include
-  planner
-  ${catkin_INCLUDE_DIRS}
-)
-
-add_library(
-  ${PROJECT_NAME}
-    planner/timed_path_follower.cpp
 )
 
 install(
