@@ -394,7 +394,8 @@ namespace path_executer
     }
 
     ROS_INFO("path_executer: timed plan of length");
-    ROS_INFO("%d", timed_plan.size());
+    ROS_INFO(timed_plan.size().c_str());
+    // ROS_INFO("%d", timed_plan.size());
 
     //calculate necessary velocity commands for feed forward control
     for(int i=0; i<timed_plan.size() - 1; i++)
