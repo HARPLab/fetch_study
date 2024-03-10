@@ -44,9 +44,6 @@
 
   <export>
     <nav_core plugin="${prefix}/timed_path_follower_plugin.xml" />
-  </export>
-
-  <export>
     <lattice_planner plugin="${prefix}/static_costmap_plugin.xml" />
   </export>
 
