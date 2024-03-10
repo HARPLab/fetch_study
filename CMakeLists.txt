@@ -11,6 +11,8 @@ find_package(catkin REQUIRED
   roscpp
   lattice_planner
   pcl_conversions
+  tf2
+  tf2_ros
 )
 
 generate_dynamic_reconfigure_options(
