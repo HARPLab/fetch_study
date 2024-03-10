@@ -76,7 +76,8 @@ namespace path_executer
 
       //collect transform listener and the ros costmap from the nav stack
       buffer = tf_buffer;
-      tfl_ = tfl_(buffer);
+      tfl_(buffer);
+
       costmap_ros_ = costmap_ros;
 
       //initialize the dynamic reconfigure server and register the callback
