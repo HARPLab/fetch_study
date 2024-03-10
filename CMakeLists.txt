@@ -31,6 +31,7 @@ include_directories(
 add_library(
   ${PROJECT_NAME}
   src/timed_path_follower.cpp
+  src/static_costmap.cpp
 )
 
 add_dependencies(
