@@ -9,6 +9,7 @@ find_package(catkin REQUIRED
   nav_core
   pluginlib
   roscpp
+  lattice_planner
 )
 
 generate_dynamic_reconfigure_options(
