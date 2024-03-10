@@ -15,6 +15,9 @@ find_package(catkin REQUIRED
 
 generate_dynamic_reconfigure_options(
    cfg/PathFollower.cfg
+)
+
+generate_dynamic_reconfigure_options(
    cfg/SocialCostmap.cfg
 )
 
