@@ -21,7 +21,7 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <exec_depend>amcl</exec_depend>
-  <exec_depend>base_local_planner</exec_depend>
+  <depend>base_local_planner</depend>
   <exec_depend>clear_costmap_recovery</exec_depend>
   <exec_depend>costmap_2d</exec_depend>
   <exec_depend>base_local_planner</exec_depend>
