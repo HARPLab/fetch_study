@@ -62,7 +62,7 @@ TBPlanner:
     step_cost_factor: 80.0 #cost factor for path length. default: 80.0
     rotation_cost_factor: 0.0 #cost factor for the accumulated turns along a planned path
     environment_cost_factor: 1.0 #cost factor for constraints defined in the dynamic environment, according to the dynamic cost map
-    # dynamic_layers_plugin: dynamic_social_costmap::SocialLayers #fully qualified plugin type for dynamic layers to be used by dynamic cost map, in this case SocialLayers plugin from human_aware_navigation stack (https://github.com/marinaKollmitz/human_aware_navigation). default: "undefined"
+    dynamic_layers_plugin: "undefined" #dynamic_social_costmap::SocialLayers #fully qualified plugin type for dynamic layers to be used by dynamic cost map, in this case SocialLayers plugin from human_aware_navigation stack (https://github.com/marinaKollmitz/human_aware_navigation). default: "undefined"
 
     #planner preferences
     allow_unknown: false #whether the planner is allowed to expand into unknown map regions. default: false
