@@ -56,7 +56,7 @@ void StaticLayers::initialize(costmap_2d::Costmap2DROS* static_map,
   time_resolution_ = time_resolution;
 
   //initialize publishers and subscribers
-  people_sub_ = nh_.subscribe("/people_prediction", 1, &StaticLayers::peopleCallback, this);
+  // people_sub_ = nh_.subscribe("/people_prediction", 1, &StaticLayers::peopleCallback, this);
 
   //initialize dynamic reconfigure server
   ros::NodeHandle private_nh("dynamic_social_costmap");
