@@ -22,6 +22,7 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS dynamic_reconfigure
   CATKIN_DEPENDS lattice_planner
+  CATKIN_DEPENDS base_local_planner
 )
 
 include_directories(
