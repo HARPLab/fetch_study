@@ -62,7 +62,7 @@ namespace path_executer
   PathFollower::~PathFollower() {}
 
 
-  void PathFollower::initialize(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros)
+  void PathFollower::initialize(std::string name, tf2_ros::Buffer* tf_buffer, costmap_2d::Costmap2DROS* costmap_ros)
   {
     if(!initialized_)
     {
@@ -75,7 +75,8 @@ namespace path_executer
       replan_client_ = nh.serviceClient<std_srvs::Empty>("move_base/replan");
 
       //collect transform listener and the ros costmap from the nav stack
-      tfl_ = tf;
+      buffer = tf_buffer;
+      tfl_ = tfl(buffer);
       costmap_ros_ = costmap_ros;
 
       //initialize the dynamic reconfigure server and register the callback

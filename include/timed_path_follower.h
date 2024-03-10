@@ -187,7 +187,10 @@ private:
   //ros related stuff
   costmap_2d::Costmap2DROS* costmap_ros_; ///< cost map with navigation constraints
   ros::ServiceClient replan_client_; ///< service client to make a replanning request to the global planner
-  tf2_ros::Buffer* tfl_; ///< tf transform listener
+  // tf2_ros::Buffer* tfl_; ///< tf transform listener
+  tf2_ros::Buffer buffer;
+  tf2_ros::TransformListener tfl_(buffer);
+
   dynamic_reconfigure::Server<path_executer::PathExecuterConfig> *dsrv_; ///< dynamic reconfigure server
   ros::Publisher current_waypoint_pub_; ///< ros publisher to visualize the currently scheduled waypoint
 
