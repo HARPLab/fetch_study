@@ -48,7 +48,7 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Twist.h>
 #include <std_srvs/Empty.h>
-#include <timed_path_follower/PathExecuterConfig.h>
+#include <fetch_study/PathExecuterConfig.h>
 
 namespace path_executer
 {
