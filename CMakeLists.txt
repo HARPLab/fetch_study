@@ -42,11 +42,6 @@ add_dependencies(
 
 include_directories(fetch_study/cmake/cfgbuild.cmake) 
 
-target_link_libraries(
-  ${PROJECT_NAME} 
-    ${catkin_LIBRARIES}
-)
-
 install(
   DIRECTORY config
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
