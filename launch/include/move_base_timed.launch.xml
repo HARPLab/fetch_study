@@ -18,7 +18,6 @@
     <rosparam file="$(find fetch_navigation)/config/$(arg name)/costmap_local.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find fetch_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find fetch_navigation)/config/$(arg name)/costmap_global.yaml" command="load" ns="global_costmap" />
-    <param name="TBPlanner/dynamic_layers_plugin" value="dynamic_social_costmap::SocialLayers" />
     <rosparam file="$(find fetch_study)/config/move_base_timed.yaml" command="load" />
     <!-- <rosparam file="$(find fetch_study)/config/$(arg name)/move_base_timed.yaml" command="load" /> -->
     <!-- <rosparam file="$(find timed_path_follower)/config/local_planner_params.yaml" command="load" /> -->
