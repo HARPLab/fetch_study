@@ -13,6 +13,10 @@ find_package(catkin REQUIRED
   pcl_conversions
 )
 
+generate_dynamic_reconfigure_options(
+   cfg/SocialCostmap.cfg
+)
+
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
@@ -34,14 +38,6 @@ add_library(
 add_dependencies(
   ${PROJECT_NAME} 
     ${PROJECT_NAME}_gencfg
-)
-
-generate_dynamic_reconfigure_options(
-   cfg/PathFollower.cfg
-)
-
-generate_dynamic_reconfigure_options(
-   cfg/SocialCostmap.cfg
 )
 
 include_directories(fetch_study/cmake/cfgbuild.cmake) 
