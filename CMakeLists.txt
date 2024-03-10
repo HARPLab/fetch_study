@@ -10,6 +10,7 @@ find_package(catkin REQUIRED
   pluginlib
   roscpp
   lattice_planner
+  pcl_conversions
 )
 
 generate_dynamic_reconfigure_options(
