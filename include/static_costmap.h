@@ -45,9 +45,9 @@
 #include <lattice_planner/timed_costmap.h>
 #include <lattice_planner/dynamic_layers.h>
 
-#include <people_msgs/People.h>
-#include <people_msgs/PersonStamped.h>
-#include <people_msgs/PeoplePrediction.h>
+// #include <people_msgs/People.h>
+// #include <people_msgs/PersonStamped.h>
+// #include <people_msgs/PeoplePrediction.h>
 
 #include <dynamic_reconfigure/server.h>
 #include <dynamic_social_costmap/SocialCostmapConfig.h>
@@ -147,7 +147,7 @@ protected:
    *
    * @param people predicted trajectories of observed people
    */
-  void peopleCallback(const people_msgs::PeoplePredictionConstPtr people);
+  // void peopleCallback(const people_msgs::PeoplePredictionConstPtr people);
 
   /**
    * @brief calculate value of 2D Gaussian function
@@ -203,7 +203,7 @@ protected:
                           lattice_planner::TimedCostmap *costmap);
 
   std::vector<lattice_planner::TimedCostmap*> timed_costmap_; ///< the actual costmap layers
-  people_msgs::PeoplePrediction predicted_people_; ///< container for predicted human trajectories
+  // people_msgs::PeoplePrediction predicted_people_; ///< container for predicted human trajectories
   costmap_2d::Costmap2DROS* static_map_; ///< the underlying static map
 
   //gaussian parameters
