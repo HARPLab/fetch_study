@@ -155,7 +155,7 @@ namespace path_executer
     //calculate the waypoint coordinates at requested time from the motion equation
     double x = waypoint.pose.position.x;
     double y = waypoint.pose.position.y;
-    double theta = tf::getYaw(waypoint.pose.orientation);
+    double theta = tf2::getYaw(waypoint.pose.orientation);
 
     //calculate coordinates: motion is a circle
     if(waypoint_vel.angular.z != 0)
@@ -179,7 +179,7 @@ namespace path_executer
     waypoint.header.stamp = time;
     waypoint.pose.position.x = x;
     waypoint.pose.position.y = y;
-    tf::quaternionTFToMsg(tf::createQuaternionFromYaw(theta), waypoint.pose.orientation);
+    tf2::quaternionTFToMsg(tf2::createQuaternionFromYaw(theta), waypoint.pose.orientation);
 
     //publish the waypoint for visualization
     current_waypoint_pub_.publish(waypoint);
@@ -209,7 +209,7 @@ namespace path_executer
     }
 
     //get the current robot pose in the costmap
-    // tf::Stamped<tf::Pose> robot_pose;
+    // tf2::Stamped<tf2::Pose> robot_pose;
     geometry_msgs::PoseStamped robot_pose_stamped;
     if(!costmap_ros_->getRobotPose(robot_pose_stamped))
     {
@@ -218,8 +218,8 @@ namespace path_executer
       return false;
     }
 
-    tf::Pose robot_pose;
-    tf::poseMsgToTF(robot_pose_stamped.pose, robot_pose);
+    tf2::Pose robot_pose;
+    tf2::poseMsgToTF(robot_pose_stamped.pose, robot_pose);
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
@@ -240,7 +240,7 @@ namespace path_executer
         tfl_->transform(robot_pose, robot_pose, goal_.header.frame_id);
       }
 
-      catch(tf::TransformException ex)
+      catch(tf2::TransformException ex)
       {
         ROS_ERROR("path_executer: could not transform robot pose in goal frame, "
                   "tf anwered: %s", ex.what());
@@ -253,11 +253,11 @@ namespace path_executer
     geometry_msgs::Twist waypoint_vel;
 
     //check if we are already within the goal tolerance
-    tf::Pose goal;
-    tf::poseMsgToTF(goal_.pose, goal);
+    tf2::Pose goal;
+    tf2::poseMsgToTF(goal_.pose, goal);
 
     //calculate the transformation between the robot and the goal pose
-    tf::Transform robot_in_goal = goal.inverse() * robot_pose;
+    tf2::Transform robot_in_goal = goal.inverse() * robot_pose;
 
     //calculate the euclidian distance between the current robot pose and the goal
     double goal_distance =
@@ -265,10 +265,10 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     geometry_msgs::Quaternion quat;
-    tf::quaternionTFToMsg(robot_pose.getRotation(), quat);
+    tf2::quaternionTFToMsg(robot_pose.getRotation(), quat);
     double angular_goal_distance =
-        angles::shortest_angular_distance(tf::getYaw(goal_.pose.orientation),
-                                          tf::getYaw(quat));
+        angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
+                                          tf2::getYaw(quat));
 
     //check if robot is within the goal distance
     if(goal_distance < xy_goal_tolerance_ && fabs(angular_goal_distance) < yaw_goal_tolerance_)
@@ -284,15 +284,15 @@ namespace path_executer
     ros::Time now = ros::Time::now();
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     {
-      tf::Pose waypnt;
-      tf::poseMsgToTF(waypoint.pose, waypnt);
+      tf2::Pose waypnt;
+      tf2::poseMsgToTF(waypoint.pose, waypnt);
 
       //calculate transformation between the robot position and the desired position
-      tf::Pose robot_in_wpnt = waypnt.inverse() * robot_pose;
+      tf2::Pose robot_in_wpnt = waypnt.inverse() * robot_pose;
 
       double delta_x = robot_in_wpnt.getOrigin().getX();
       double delta_y = robot_in_wpnt.getOrigin().getY();
-      double phi = tf::getYaw(robot_in_wpnt.getRotation());
+      double phi = tf2::getYaw(robot_in_wpnt.getRotation());
 
       //It is not possible to set the velocities v_x, v_y and omega directly to
       //eliminate the pose error between the current position of the robot and
@@ -401,11 +401,11 @@ namespace path_executer
     for(int i=0; i<timed_plan.size() - 1; i++)
     {
       //calculate velocity command between two successive poses (first, second)
-      tf::Stamped<tf::Pose> first;
-      tf::poseStampedMsgToTF(timed_plan.at(i), first);
+      tf2::Stamped<tf2::Pose> first;
+      tf2::poseStampedMsgToTF(timed_plan.at(i), first);
 
-      tf::Stamped<tf::Pose> second;
-      tf::poseStampedMsgToTF(timed_plan.at(i+1), second);
+      tf2::Stamped<tf2::Pose> second;
+      tf2::poseStampedMsgToTF(timed_plan.at(i+1), second);
 
       //time difference between the poses
       double time_diff= (second.stamp_ - first.stamp_).toSec();
@@ -419,10 +419,10 @@ namespace path_executer
       }
 
       //calculate the transformation between both poses (difference between both)
-      tf::Pose diff = first.inverse() * second;
+      tf2::Pose diff = first.inverse() * second;
       double delta_x = diff.getOrigin().getX();
       double delta_y = diff.getOrigin().getY();
-      double delta_phi = tf::getYaw(diff.getRotation());
+      double delta_phi = tf2::getYaw(diff.getRotation());
 
       //recover the velocity between both poses from the equation of motion,
       //depending whether the motion between the poses is an arc, a straight line
