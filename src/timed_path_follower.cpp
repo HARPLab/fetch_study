@@ -263,7 +263,7 @@ namespace path_executer
         // This can actually take quite a bit
         // const std::string &target_frame, const std::string &source_frame, 
           // const ros::Time &time, const ros::Duration timeout)
-        geometry_msgs::PoseStamped robot_pose_stamped = tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
+        geometry_msgs::TransformStamped robot_pose_stamped = tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
                               robot_pose_stamped.header.stamp, ros::Duration(5.0));
 
        
