@@ -219,6 +219,7 @@ namespace path_executer
     //wait for the new plan
     if(replanning_requested_)
     {
+      print("replanning requested");
       cmd_vel = zero_vel;
       return true;
     }
@@ -268,9 +269,9 @@ namespace path_executer
         // transformPose(goal_.header.frame_id, robot_pose, robot_pose);
         // NOW
         // const A &in, B &out, const std::string &target_frame, ros::Duration timeout=ros::Duration(0.0)
-        ROS_INFO("Now I want to apply it");
+        // ROS_INFO("Now I want to apply it");
         tfl_->transform(robot_pose_stamped, robot_pose_stamped, goal_.header.frame_id);
-        ROS_INFO("Successfully transformed");
+        // ROS_INFO("Successfully transformed");
       }
 
       catch(tf2::TransformException ex)
