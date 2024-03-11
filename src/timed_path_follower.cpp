@@ -421,8 +421,12 @@ namespace path_executer
       tf2::fromMsg(first.pose, first_p);
       tf2::fromMsg(second.pose, second_p);
 
+      ROS_INFO("converted happily");
+
       //time difference between the poses
-      double time_diff= (second.header.stamp - first.header.stamp).toSec();
+      double time_diff = (second.header.stamp - first.header.stamp).toSec();
+      ROS_INFO("time_diff");
+
       if(fabs(time_diff) < ROUNDED_ZERO)
       {
         //if the time difference between both poses is very small, do not calculate
