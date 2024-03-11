@@ -35,9 +35,9 @@
   <exec_depend>slam_karto</exec_depend>
   <exec_depend>voxel_grid</exec_depend>
   <build_depend>dynamic_reconfigure</build_depend>
-  <build_depend>geometry_msgs</build_depend>
+  <build_depend>tf2_geometry_msgs</build_depend>
   <exec_depend>dynamic_reconfigure</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf2_geometry_msgs</exec_depend>
   <test_depend>roslaunch</test_depend>
   <depend>nav_core</depend>
   <depend>lattice_planner</depend>

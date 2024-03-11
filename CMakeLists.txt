@@ -5,7 +5,7 @@ find_package(catkin REQUIRED
   roscpp 
   costmap_2d
   dynamic_reconfigure
-  geometry_msgs
+  tf2_geometry_msgs
   nav_core
   pluginlib
   roscpp
