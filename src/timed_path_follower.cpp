@@ -187,7 +187,7 @@ namespace path_executer
     waypoint.pose.position.x = x;
     waypoint.pose.position.y = y;
     // https://answers.ros.org/question/364561/tfcreatequaternionfromyaw-equivalent-in-ros2/
-    waypoint.pose.orientation = tf2::toMsg(createQuaternionFromYaw(theta));
+    waypoint.pose.orientation = createQuaternionMsgFromYaw(theta);
 
     //publish the waypoint for visualization
     current_waypoint_pub_.publish(waypoint);
