@@ -245,7 +245,7 @@ namespace path_executer
         // Used to be waitForTransform, transformPose 
         tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
                               robot_pose_stamped.header.stamp, ros::Duration(0.2));
-        tfl_->doTransform(robot_pose, robot_pose, goal_.header.frame_id);
+        tfl_->transform(robot_pose, robot_pose, goal_.header.frame_id);
       }
 
       catch(tf2::TransformException ex)
