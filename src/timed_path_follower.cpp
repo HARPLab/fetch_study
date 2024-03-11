@@ -76,7 +76,7 @@ namespace path_executer
 
       //collect transform listener and the ros costmap from the nav stack
       buffer = tf_buffer;
-      tfl_(buffer);
+      // tfl_(buffer);
 
       costmap_ros_ = costmap_ros;
 
@@ -236,9 +236,9 @@ namespace path_executer
       try
       {
         // Used to be waitForTransform, transformPose 
-        tfl_->canTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
+        buffer->canTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
                               robot_pose_stamped.header.stamp, ros::Duration(0.2));
-        tfl_->transform(robot_pose, robot_pose, goal_.header.frame_id);
+        buffer->transform(robot_pose, robot_pose, goal_.header.frame_id);
       }
 
       catch(tf2::TransformException ex)
@@ -265,7 +265,7 @@ namespace path_executer
         hypot(robot_in_goal.getOrigin().getX(), robot_in_goal.getOrigin().getY());
 
     //calculate the angular distance between the current robot pose and the goal
-    geometry_msgs::Quaternion quat;
+    tf2::Quaternion quat;
     tf2::quaternionTFToMsg(robot_pose.getRotation(), quat);
     double angular_goal_distance =
         angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
@@ -402,10 +402,10 @@ namespace path_executer
     for(int i=0; i<timed_plan.size() - 1; i++)
     {
       //calculate velocity command between two successive poses (first, second)
-      tf2::Stamped<tf2::Pose> first;
+      tf2::Stamped<geometry_msgs::Pose> first;
       tf2::poseStampedMsgToTF(timed_plan.at(i), first);
 
-      tf2::Stamped<tf2::Pose> second;
+      tf2::Stamped<geometry_msgs::Pose> second;
       tf2::poseStampedMsgToTF(timed_plan.at(i+1), second);
 
       //time difference between the poses
