@@ -219,7 +219,7 @@ namespace path_executer
     //wait for the new plan
     if(replanning_requested_)
     {
-      print("replanning requested");
+      ROS_INFO("replanning requested");
       cmd_vel = zero_vel;
       return true;
     }
