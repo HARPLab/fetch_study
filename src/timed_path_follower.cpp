@@ -261,7 +261,7 @@ namespace path_executer
     geometry_msgs::Twist waypoint_vel;
 
     //check if we are already within the goal tolerance
-    tf2:Transform goal;
+    tf2::Transform goal;
     tf2::fromMsg(goal_.pose, goal);
 
     //calculate the transformation between the robot and the goal pose
@@ -292,11 +292,11 @@ namespace path_executer
     ros::Time now = ros::Time::now();
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     {
-      tf2:Transform waypnt;
+      tf2::Transform waypnt;
       tf2::fromMsg(waypoint.pose, waypnt);
 
       //calculate transformation between the robot position and the desired position
-      tf2:Transform robot_in_wpnt = waypnt.inverse() * robot_pose;
+      tf2::Transform robot_in_wpnt = waypnt.inverse() * robot_pose;
 
       double delta_x = robot_in_wpnt.getOrigin().getX();
       double delta_y = robot_in_wpnt.getOrigin().getY();
@@ -427,7 +427,7 @@ namespace path_executer
       }
 
       //calculate the transformation between both poses (difference between both)
-      tf2:Transform diff = first.inverse() * second;
+      tf2::Transform diff = first.inverse() * second;
       double delta_x = diff.getOrigin().getX();
       double delta_y = diff.getOrigin().getY();
       double delta_phi = tf2::getYaw(diff.getRotation());
