@@ -252,7 +252,7 @@ namespace path_executer
       try
       {
         ROS_INFO("Trying to look up a transform from buffer");
-        ROS_INFO("Values are: %f, %f, %f", goal_.header.frame_id, robot_pose_stamped.header.frame_id, robot_pose_stamped.header.stamp);
+        ROS_INFO("Values are: %f, %f, %s", goal_.header.frame_id, robot_pose_stamped.header.frame_id, robot_pose_stamped.header.stamp.c_str());
 
         // Used to be waitForTransform, transformPose 
         tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
