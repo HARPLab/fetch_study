@@ -410,10 +410,10 @@ namespace path_executer
     {
       //calculate velocity command between two successive poses (first, second)
       geometry_msgs::PoseStamped first;
-      tf2::fromMsg(timed_plan.at(i), first_p);
+      tf2::fromMsg(timed_plan.at(i), first);
 
       geometry_msgs::PoseStamped second;
-      tf2::fromMsg(timed_plan.at(i+1), second_p);
+      tf2::fromMsg(timed_plan.at(i+1), second);
 
       tf2::Transform first_p;
       tf2::Transform second_p;
