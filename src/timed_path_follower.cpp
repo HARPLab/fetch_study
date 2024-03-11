@@ -227,7 +227,7 @@ namespace path_executer
     }
 
     geometry_msgs::Pose robot_pose;
-    robot_pose = tf2::fromMsg(robot_pose_stamped);
+    tf2::fromMsg(robot_pose_stamped.pose, robot_pose);
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
@@ -262,7 +262,7 @@ namespace path_executer
 
     //check if we are already within the goal tolerance
     geometry_msgs::Pose goal;
-    tf2::poseMsgToTF(goal_.pose, goal);
+    tf2::fromMsg(goal_.pose, goal);
 
     //calculate the transformation between the robot and the goal pose
     tf2::Transform robot_in_goal = goal.inverse() * robot_pose;
@@ -293,7 +293,7 @@ namespace path_executer
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     {
       geometry_msgs::Pose waypnt;
-      tf2::poseMsgToTF(waypoint.pose, waypnt);
+      tf2::fromMsg(waypoint.pose, waypnt);
 
       //calculate transformation between the robot position and the desired position
       geometry_msgs::Pose robot_in_wpnt = waypnt.inverse() * robot_pose;
@@ -410,10 +410,10 @@ namespace path_executer
     {
       //calculate velocity command between two successive poses (first, second)
       tf2::Stamped<geometry_msgs::Pose> first;
-      tf2::poseStampedMsgToTF(timed_plan.at(i), first);
+      tf2::fromMsg(timed_plan.at(i), first);
 
       tf2::Stamped<geometry_msgs::Pose> second;
-      tf2::poseStampedMsgToTF(timed_plan.at(i+1), second);
+      tf2::fromMsg(timed_plan.at(i+1), second);
 
       //time difference between the poses
       double time_diff= (second.stamp_ - first.stamp_).toSec();
