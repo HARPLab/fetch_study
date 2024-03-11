@@ -306,7 +306,8 @@ namespace path_executer
 
     ROS_INFO("Read out goal");
 
-    tf2::Transform new_robot_pose = robot_transform.transform;
+    tf2::Stamped<tf2::Transform> new_robot_pose;
+    tf2::fromMsg(robot_transform, new_robot_pose);
 
     ROS_INFO("Read new robot pose");
 
