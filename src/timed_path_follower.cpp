@@ -429,8 +429,8 @@ namespace path_executer
       tf2::Transform first_p;
       tf2::Transform second_p;
 
-      tf2::convert(first, first_p);
-      tf2::convert(second, second_p);
+      first_p   = tf2::toMsg(first);
+      second_p  = tf2::convert(second);
 
       //calculate the transformation between both poses (difference between both)
       tf2::Transform diff = first_p.inverse() * second_p;
