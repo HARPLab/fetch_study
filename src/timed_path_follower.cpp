@@ -426,8 +426,14 @@ namespace path_executer
         continue;
       }
 
+      tf2::Transform first_p;
+      tf2::Transform second_p;
+
+      tf2::convert(first, first_p);
+      tf2::convert(second, second_p);
+
       //calculate the transformation between both poses (difference between both)
-      tf2::Transform diff = first.inverse() * second;
+      tf2::Transform diff = first_p.inverse() * second_p;
       double delta_x = diff.getOrigin().getX();
       double delta_y = diff.getOrigin().getY();
       double delta_phi = tf2::getYaw(diff.getRotation());
