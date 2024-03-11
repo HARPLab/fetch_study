@@ -265,7 +265,9 @@ namespace path_executer
     tf2::fromMsg(goal_.pose, goal);
 
     //calculate the transformation between the robot and the goal pose
-    tf2::Transform robot_in_goal = goal.inverse() * robot_pose;
+    tf2::Transform goal_transform; 
+    tf2::doTransform(goal, goal_transform);
+    tf2::Transform robot_in_goal = goal_transform.inverse() * robot_pose;
 
     //calculate the euclidian distance between the current robot pose and the goal
     double goal_distance =
