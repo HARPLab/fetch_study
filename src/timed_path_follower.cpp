@@ -409,11 +409,17 @@ namespace path_executer
     for(int i=0; i<timed_plan.size() - 1; i++)
     {
       //calculate velocity command between two successive poses (first, second)
-      tf2::PoseStamped first;
-      tf2::fromMsg(timed_plan.at(i), first);
+      geometry_msgs::PoseStamped first;
+      tf2::fromMsg(timed_plan.at(i), first_p);
 
-      tf2::PoseStamped second;
-      tf2::fromMsg(timed_plan.at(i+1), second);
+      geometry_msgs::PoseStamped second;
+      tf2::fromMsg(timed_plan.at(i+1), second_p);
+
+      tf2::Transform first_p;
+      tf2::Transform second_p;
+
+      tf2::fromMsg(first.pose, first_p);
+      tf2::fromMsg(second.pose, second_p);
 
       //time difference between the poses
       double time_diff= (second.stamp_ - first.stamp_).toSec();
@@ -428,7 +434,7 @@ namespace path_executer
 
 
       //calculate the transformation between both poses (difference between both)
-      tf2::Transform diff = first.inverse() * second;
+      tf2::Transform diff = first_p.inverse() * second_p;
       double delta_x = diff.getOrigin().getX();
       double delta_y = diff.getOrigin().getY();
       double delta_phi = tf2::getYaw(diff.getRotation());
