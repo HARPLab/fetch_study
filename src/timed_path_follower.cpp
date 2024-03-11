@@ -159,6 +159,8 @@ namespace path_executer
     // and the requested time
     ros::Duration diff = time - waypoint.header.stamp;
 
+
+
     //calculate the waypoint coordinates at requested time from the motion equation
     double x = waypoint.pose.position.x;
     double y = waypoint.pose.position.y;
@@ -193,12 +195,15 @@ namespace path_executer
     ROS_INFO("Publishing a waypoint!");
     geometry_msgs::PoseStamped waypoint_test;
     current_waypoint_pub_.publish(waypoint_test);
+    ROS_INFO("Published the wpt");
 
     return true;
   }
 
   bool PathFollower::computeVelocityCommands(geometry_msgs::Twist& cmd_vel)
   {
+    ROS_INFO("Following velocity commands");
+
     //make sure planner had been initialized
     if(!initialized_)
     {
@@ -231,6 +236,8 @@ namespace path_executer
     tf2::Transform robot_pose;
     tf2::fromMsg(robot_pose_stamped.pose, robot_pose);
 
+    ROS_INFO("Got the pose from the robot pose");
+
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
     if (robot_pose_stamped.header.frame_id.compare(goal_.header.frame_id) != 0)
@@ -244,6 +251,8 @@ namespace path_executer
 
       try
       {
+        ROS_INFO("Trying to look up a transform from buffer");
+
         // Used to be waitForTransform, transformPose 
         tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
                               robot_pose_stamped.header.stamp, ros::Duration(0.2));
@@ -273,6 +282,8 @@ namespace path_executer
     double goal_distance =
         hypot(robot_in_goal.getOrigin().getX(), robot_in_goal.getOrigin().getY());
 
+    ROS_INFO("Goal distance is %f", goal_distance);
+
     //calculate the angular distance between the current robot pose and the goal
     tf2::Quaternion quat;
     quat = robot_pose.getRotation();
@@ -292,8 +303,11 @@ namespace path_executer
     //The desired position is the robot the robot should be on right now,
     //according to the given plan
     ros::Time now = ros::Time::now();
+    ROS_INFO("Got my current time");
+
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     {
+      ROS_INFO("Found a waypoint");
       tf2::Transform waypnt;
       tf2::fromMsg(waypoint.pose, waypnt);
 
@@ -525,7 +539,7 @@ namespace path_executer
     global_plan_velocities = computeWaypointVelocities(global_plan);
     ROS_INFO("Computed all waypoint velocities!");
     goal_ = global_plan.back();
-    ROS_INFO("Set the plan to...");
+    ROS_INFO("I set the plan to...");
 
     return true;
   }
