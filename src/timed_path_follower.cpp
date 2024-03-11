@@ -226,7 +226,7 @@ namespace path_executer
       return false;
     }
 
-    tf2::Pose robot_pose;
+    tf2::Transform robot_pose;
     tf2::fromMsg(robot_pose_stamped.pose, robot_pose);
 
     //if the robot pose and the path (and goal) are represented in different
