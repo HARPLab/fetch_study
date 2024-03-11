@@ -62,7 +62,7 @@ namespace path_executer
   PathFollower::~PathFollower() {}
 
 
-  void PathFollower::initialize(std::string name, tf2_ros::Buffer* tf_buffer, costmap_2d::Costmap2DROS* costmap_ros)
+  void PathFollower::initialize(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros)
   {
     if(!initialized_)
     {
