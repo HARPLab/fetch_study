@@ -96,6 +96,13 @@ namespace path_executer
     }
   }
 
+  auto createQuaternionMsgFromYaw(double yaw)
+  {
+    tf2::Quaternion q;
+    q.setRPY(0, 0, yaw);
+    return tf2::toMsg(q);
+  }
+
   void PathFollower::reconfigureCallback
       (path_executer::PathExecuterConfig &config, uint32_t level)
   {
@@ -179,7 +186,8 @@ namespace path_executer
     waypoint.header.stamp = time;
     waypoint.pose.position.x = x;
     waypoint.pose.position.y = y;
-    tf2::quaternionTFToMsg(tf2::createQuaternionFromYaw(theta), waypoint.pose.orientation);
+    // https://answers.ros.org/question/364561/tfcreatequaternionfromyaw-equivalent-in-ros2/
+    waypoint.pose.orientation = tf2::ToMsg(createQuaternionFromYaw(theta));
 
     //publish the waypoint for visualization
     current_waypoint_pub_.publish(waypoint);
@@ -265,7 +273,7 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     tf2::Quaternion quat;
-    tf2::quaternionTFToMsg(robot_pose.getRotation(), quat);
+    quat = tf2::ToMsg(robot_pose.getRotation());
     double angular_goal_distance =
         angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
                                           tf2::getYaw(quat));
