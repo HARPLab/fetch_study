@@ -422,7 +422,7 @@ namespace path_executer
       tf2::fromMsg(second.pose, second_p);
 
       //time difference between the poses
-      double time_diff= (second.stamp - first.stamp).toSec();
+      double time_diff= (second.header.stamp - first.header.stamp).toSec();
       if(fabs(time_diff) < ROUNDED_ZERO)
       {
         //if the time difference between both poses is very small, do not calculate
