@@ -219,7 +219,7 @@ namespace path_executer
       return false;
     }
 
-    tf2::Pose robot_pose;
+    geometry_msgs::Pose robot_pose;
     tf2::poseMsgToTF(robot_pose_stamped.pose, robot_pose);
 
     //if the robot pose and the path (and goal) are represented in different
@@ -254,7 +254,7 @@ namespace path_executer
     geometry_msgs::Twist waypoint_vel;
 
     //check if we are already within the goal tolerance
-    tf2::Pose goal;
+    geometry_msgs::Pose goal;
     tf2::poseMsgToTF(goal_.pose, goal);
 
     //calculate the transformation between the robot and the goal pose
@@ -285,11 +285,11 @@ namespace path_executer
     ros::Time now = ros::Time::now();
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     {
-      tf2::Pose waypnt;
+      geometry_msgs::Pose waypnt;
       tf2::poseMsgToTF(waypoint.pose, waypnt);
 
       //calculate transformation between the robot position and the desired position
-      tf2::Pose robot_in_wpnt = waypnt.inverse() * robot_pose;
+      geometry_msgs::Pose robot_in_wpnt = waypnt.inverse() * robot_pose;
 
       double delta_x = robot_in_wpnt.getOrigin().getX();
       double delta_y = robot_in_wpnt.getOrigin().getY();
@@ -420,7 +420,7 @@ namespace path_executer
       }
 
       //calculate the transformation between both poses (difference between both)
-      tf2::Pose diff = first.inverse() * second;
+      geometry_msgs::Pose diff = first.inverse() * second;
       double delta_x = diff.getOrigin().getX();
       double delta_y = diff.getOrigin().getY();
       double delta_phi = tf2::getYaw(diff.getRotation());
