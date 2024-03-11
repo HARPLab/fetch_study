@@ -298,16 +298,16 @@ namespace path_executer
     geometry_msgs::PoseStamped waypoint;
     geometry_msgs::Twist waypoint_vel;
 
-    tf2::Transform new_robot_pose;
-    tf2::fromMsg(robot_pose_stamped, new_robot_pose);
-
-    ROS_INFO("Read new robot pose");
-
     //check if we are already within the goal tolerance
     tf2::Transform goal;
     tf2::fromMsg(goal_.pose, goal);
 
     ROS_INFO("Read out goal");
+
+    tf2::Transform new_robot_pose;
+    tf2::fromMsg(robot_pose_stamped, new_robot_pose);
+
+    ROS_INFO("Read new robot pose");
 
     //calculate the transformation between the robot and the goal pose
     tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
