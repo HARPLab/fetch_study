@@ -522,7 +522,10 @@ namespace path_executer
     //timed plan
     global_plan_waypoints_ = global_plan;
     global_plan_velocities = computeWaypointVelocities(global_plan);
+    ROS_INFO("Computed all waypoint velocities!");
     goal_ = global_plan.back();
+
+    ROS_INFO("Set the plan to...");
 
     return true;
   }
