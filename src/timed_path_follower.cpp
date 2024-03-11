@@ -269,13 +269,20 @@ namespace path_executer
        
         ROS_INFO("frame robot frame goal: %s, %s", robot_pose_stamped.header.frame_id.c_str(), goal_.header.frame_id.c_str());
 
+        // geometry_msgs::TransformStamped transform = tfl_->lookupTransform(target_frame, fixed_frame, ros::Time::now(), timeout); 
+        // tfl_->doTransform(in, out, transform); 
+
+        geometry_msgs::TransformStamped transform = tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id, robot_pose_stamped.header.stamp, ros::Duration(5.0)); 
+        tfl_->transform(robot_pose_stamped, robot_pose_stamped, transform); 
+
         // OG signature
         // const std::string &target_frame, const geometry_msgs::PoseStamped &stamped_in, geometry_msgs::PoseStamped &stamped_out
         // transformPose(goal_.header.frame_id, robot_pose, robot_pose);
         // NOW
         // const A &in, B &out, const std::string &target_frame, ros::Duration timeout=ros::Duration(0.0)
         // ROS_INFO("Now I want to apply it");
-        tfl_->transform(robot_pose_stamped, robot_pose_stamped, goal_.header.frame_id, ros::Duration(5.0));
+        // tfl_->transform(robot_pose_stamped, robot_pose_stamped, goal_.header.frame_id, ros::Duration(5.0));
+
         ROS_INFO("Successfully transformed");
       }
 
