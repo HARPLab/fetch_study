@@ -275,7 +275,7 @@ namespace path_executer
         // tfl_->doTransform(in, out, transform); 
 
         robot_transform = tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id, robot_pose_stamped.header.stamp, ros::Duration(5.0)); 
-        tfl_->transform(robot_pose_stamped, robot_pose_stamped, goal_.header.frame_id);
+        robot_pose_stamped = tfl_->transform(robot_pose_stamped, goal_.header.frame_id);
 
         // OG signature
         // const std::string &target_frame, const geometry_msgs::PoseStamped &stamped_in, geometry_msgs::PoseStamped &stamped_out
@@ -304,12 +304,15 @@ namespace path_executer
     tf2::Transform goal;
     tf2::fromMsg(goal_.pose, goal);
 
-    // ROS_INFO("Read out goal");
+    ROS_INFO("Read out goal");
+
+    // tf2::Stamped<tf2::Transform> new_robot_pose;
+    // tf2::fromMsg(robot_transform, new_robot_pose);
 
     tf2::Stamped<tf2::Transform> new_robot_pose;
-    tf2::fromMsg(robot_transform, new_robot_pose);
+    tf2::fromMsg(robot_pose_stamped, new_robot_pose);
 
-    // ROS_INFO("Read new robot pose");
+    ROS_INFO("Read new robot pose");
 
     //calculate the transformation between the robot and the goal pose
     tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
@@ -317,11 +320,8 @@ namespace path_executer
     ROS_INFO("Combo");
 
     //calculate the euclidian distance between the current robot pose and the goal
-    // double goal_distance =
-    //     hypot(robot_in_goal.getOrigin().getX(), robot_in_goal.getOrigin().getY());
-
     double goal_distance =
-        hypot(goal.getOrigin().getX() - robot_pose.getOrigin().getX(), goal.getOrigin().getY() - robot_pose.getOrigin().getY());
+        hypot(robot_in_goal.getOrigin().getX(), robot_in_goal.getOrigin().getY());
 
     ROS_INFO("Goal distance is %f", goal_distance);
 
