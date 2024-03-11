@@ -227,7 +227,7 @@ namespace path_executer
     }
 
     geometry_msgs::Pose robot_pose;
-    tf2::poseMsgToTF(robot_pose_stamped.pose, robot_pose);
+    robot_pose = tf2::fromMsg(robot_pose_stamped);
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
