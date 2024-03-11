@@ -75,11 +75,10 @@ namespace path_executer
       replan_client_ = nh.serviceClient<std_srvs::Empty>("move_base/replan");
 
       //collect transform listener and the ros costmap from the nav stack
-      buffer = tf_buffer;
-      // tfl_(buffer);
-
+      tfl_ = tf;
       costmap_ros_ = costmap_ros;
-
+      costmap_ = costmap_ros_->getCostmap();
+      
       //initialize the dynamic reconfigure server and register the callback
       dsrv_ = new dynamic_reconfigure::Server<path_executer::PathExecuterConfig>
           (private_nh);
