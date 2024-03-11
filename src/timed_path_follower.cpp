@@ -191,7 +191,8 @@ namespace path_executer
 
     //publish the waypoint for visualization
     ROS_INFO("Publishing a waypoint!");
-    current_waypoint_pub_.publish(waypoint);
+    geometry_msgs::PoseStamped waypoint_test;
+    current_waypoint_pub_.publish(waypoint_test);
 
     return true;
   }
@@ -426,7 +427,7 @@ namespace path_executer
 
       //time difference between the poses
       double time_diff = (second.header.stamp - first.header.stamp).toSec();
-      ROS_INFO("time_diff");
+      ROS_INFO("time_diff: %f", time_diff);
 
       if(fabs(time_diff) < ROUNDED_ZERO)
       {
@@ -524,7 +525,6 @@ namespace path_executer
     global_plan_velocities = computeWaypointVelocities(global_plan);
     ROS_INFO("Computed all waypoint velocities!");
     goal_ = global_plan.back();
-
     ROS_INFO("Set the plan to...");
 
     return true;
