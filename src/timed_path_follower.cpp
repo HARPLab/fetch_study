@@ -238,6 +238,7 @@ namespace path_executer
     tf2::fromMsg(robot_pose_stamped.pose, robot_pose);
 
     ROS_INFO("Got the pose from the robot pose");
+    ROS_INFO("%f, %f", robot_pose_stamped.x, robot_pose_stamped.y);
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
@@ -260,6 +261,8 @@ namespace path_executer
         // Used to be waitForTransform, transformPose 
         // Look up the mapping between the base_link and the map
         // This can actually take quite a bit
+        // const std::string &target_frame, const std::string &source_frame, 
+          // const ros::Time &time, const ros::Duration timeout)
         tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
                               robot_pose_stamped.header.stamp, ros::Duration(5.0));
 
