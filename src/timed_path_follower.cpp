@@ -296,6 +296,8 @@ namespace path_executer
     tf2::Transform goal;
     tf2::fromMsg(goal_.pose, goal);
 
+    ROS_INFO("Read out both the locations");
+
     //calculate the transformation between the robot and the goal pose
     tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
 
