@@ -267,7 +267,7 @@ namespace path_executer
         //                       robot_pose_stamped.header.stamp, ros::Duration(5.0));
 
        
-        ROS_INFO("frame robot frame goal: %s, %s", robot_pose_stamped.frame_id, goal_.frame_id);
+        ROS_INFO("frame robot frame goal: %s, %s", robot_pose_stamped.header.frame_id.c_str(), goal_.header.frame_id.c_str());
 
         // OG signature
         // const std::string &target_frame, const geometry_msgs::PoseStamped &stamped_in, geometry_msgs::PoseStamped &stamped_out
