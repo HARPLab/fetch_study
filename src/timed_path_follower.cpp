@@ -273,7 +273,7 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     tf2::Quaternion quat;
-    quat = tf2::toMsg(robot_pose.getRotation());
+    quat = robot_pose.getRotation();
     double angular_goal_distance =
         angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
                                           tf2::getYaw(quat));
