@@ -491,6 +491,7 @@ namespace path_executer
         }
         one_vel.linear.x = delta_x / time_diff;
       }
+      ROS_INFO("adding calculated waypoint velocity");
       //add the calculated waypoint velocity
       waypoint_velocities.push_back(one_vel);
     }
