@@ -286,12 +286,15 @@ namespace path_executer
     geometry_msgs::PoseStamped waypoint;
     geometry_msgs::Twist waypoint_vel;
 
+    tf2::Transform new_robot_pose;
+    tf2::fromMsg(robot_pose_stamped, new_robot_pose);
+
     //check if we are already within the goal tolerance
     tf2::Transform goal;
     tf2::fromMsg(goal_.pose, goal);
 
     //calculate the transformation between the robot and the goal pose
-    tf2::Transform robot_in_goal = goal.inverse() * robot_pose;
+    tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
 
     //calculate the euclidian distance between the current robot pose and the goal
     double goal_distance =
@@ -301,7 +304,7 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     tf2::Quaternion quat;
-    quat = robot_pose.getRotation();
+    quat = new_robot_pose.getRotation();
     double angular_goal_distance =
         angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
                                           tf2::getYaw(quat));
