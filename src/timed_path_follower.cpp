@@ -238,7 +238,7 @@ namespace path_executer
     tf2::fromMsg(robot_pose_stamped.pose, robot_pose);
 
     ROS_INFO("Got the pose from the robot pose");
-    ROS_INFO("%f, %f", robot_pose_stamped.x, robot_pose_stamped.y);
+    ROS_INFO("%f, %f", robot_pose_stamped.pose.x, robot_pose_stamped.pose.y);
 
     //if the robot pose and the path (and goal) are represented in different
     //coordinate systems, transform the robot pose
