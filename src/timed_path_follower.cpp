@@ -261,7 +261,7 @@ namespace path_executer
         // Look up the mapping between the base_link and the map
         // This can actually take quite a bit
         tfl_->lookupTransform(goal_.header.frame_id, robot_pose_stamped.header.frame_id,
-                              robot_pose_stamped.header.stamp, ros::Duration(2.0));
+                              robot_pose_stamped.header.stamp, ros::Duration(5.0));
 
        
         // OG signature
@@ -269,9 +269,9 @@ namespace path_executer
         // transformPose(goal_.header.frame_id, robot_pose, robot_pose);
         // NOW
         // const A &in, B &out, const std::string &target_frame, ros::Duration timeout=ros::Duration(0.0)
-        // ROS_INFO("Now I want to apply it");
+        ROS_INFO("Now I want to apply it");
         tfl_->transform(robot_pose_stamped, robot_pose_stamped, goal_.header.frame_id);
-        // ROS_INFO("Successfully transformed");
+        ROS_INFO("Successfully transformed");
       }
 
       catch(tf2::TransformException ex)
