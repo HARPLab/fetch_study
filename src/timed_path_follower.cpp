@@ -309,13 +309,13 @@ namespace path_executer
     // tf2::Stamped<tf2::Transform> new_robot_pose;
     // tf2::fromMsg(robot_transform, new_robot_pose);
 
-    tf2::Stamped<tf2::Transform> new_robot_pose;
-    tf2::fromMsg(robot_pose_stamped, new_robot_pose);
+    tf2::Stamped<tf2::Transform> robot_pose;
+    tf2::fromMsg(robot_pose_stamped, robot_pose);
 
     ROS_INFO("Read new robot pose");
 
     //calculate the transformation between the robot and the goal pose
-    tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
+    tf2::Transform robot_in_goal = goal.inverse() * robot_pose;
 
     ROS_INFO("Combo");
 
@@ -327,7 +327,7 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     tf2::Quaternion quat;
-    quat = new_robot_pose.getRotation();
+    quat = robot_pose.getRotation();
     double angular_goal_distance =
         angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
                                           tf2::getYaw(quat));
@@ -353,7 +353,7 @@ namespace path_executer
       tf2::fromMsg(waypoint.pose, waypnt);
 
       //calculate transformation between the robot position and the desired position
-      tf2::Transform robot_in_wpnt = waypnt.inverse() * robot_pose;
+      tf2::Transform robot_in_wpnt = waypnt.inverse() * new_robot_pose;
 
       double delta_x = robot_in_wpnt.getOrigin().getX();
       double delta_y = robot_in_wpnt.getOrigin().getY();
