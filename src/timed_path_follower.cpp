@@ -255,7 +255,7 @@ namespace path_executer
 
       try
       {
-        ROS_INFO("Trying to look up a transform from buffer");
+        // ROS_INFO("Trying to look up a transform from buffer");
         // ROS_INFO("Values are: %f, %f, %s", goal_.header.frame_id, robot_pose_stamped.header.frame_id, robot_pose_stamped.header.stamp.c_str());
 
         // ros::Time now = ros::Time::now();
@@ -285,7 +285,7 @@ namespace path_executer
         // ROS_INFO("Now I want to apply it");
         // tfl_->transform(robot_pose_stamped, robot_pose_stamped, goal_.header.frame_id, ros::Duration(5.0));
 
-        ROS_INFO("Successfully transformed");
+        // ROS_INFO("Successfully transformed"); ADA
       }
 
       catch(tf2::TransformException ex)
@@ -304,7 +304,7 @@ namespace path_executer
     tf2::Transform goal;
     tf2::fromMsg(goal_.pose, goal);
 
-    ROS_INFO("Read out goal");
+    // ROS_INFO("Read out goal"); ADA
 
     // tf2::Stamped<tf2::Transform> new_robot_pose;
     // tf2::fromMsg(robot_transform, new_robot_pose);
@@ -312,12 +312,12 @@ namespace path_executer
     tf2::Stamped<tf2::Transform> new_robot_pose;
     tf2::fromMsg(robot_pose_stamped, new_robot_pose);
 
-    ROS_INFO("Read new robot pose");
+    // ROS_INFO("Read new robot pose"); ADA
 
     //calculate the transformation between the robot and the goal pose
     tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
 
-    ROS_INFO("Combo");
+    // ROS_INFO("Combo"); ADA
 
     //calculate the euclidian distance between the current robot pose and the goal
     double goal_distance =
