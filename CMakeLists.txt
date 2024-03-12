@@ -21,6 +21,12 @@ generate_dynamic_reconfigure_options(
    cfg/PathFollower.cfg
 )
 
+## Add actions
+add_action_files(DIRECTORY action FILES StatusAction.action)
+
+## Generate messages
+generate_messages(DEPENDENCIES std_msgs actionlib_msgs)
+
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
@@ -28,12 +34,6 @@ catkin_package(
   CATKIN_DEPENDS lattice_planner
   CATKIN_DEPENDS base_local_planner
 )
-
-## Add actions
-add_action_files(DIRECTORY action FILES StatusAction.action)
-
-## Generate messages
-generate_messages(DEPENDENCIES std_msgs actionlib_msgs)
 
 include_directories(
   include
