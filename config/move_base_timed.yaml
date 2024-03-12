@@ -53,7 +53,6 @@ PathFollower:
 
 #controller gains and velocity bounds for the path follower can be adjusted using dynamic reconfigure (move_base/PathFollower prefix)
 
-
 #lattice planner params
 TBPlanner:
     #cost factors
