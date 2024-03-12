@@ -13,7 +13,7 @@ find_package(catkin REQUIRED
   pcl_conversions
   tf2
   tf2_ros
-  action_lib
+  actionlib
   message_generation
 )
 
