@@ -1,5 +1,5 @@
 #goal definition
-int32 order
+geometry_msgs/PoseStamped goal
 ---
 #result definition
 int32[] sequence
