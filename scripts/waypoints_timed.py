@@ -23,7 +23,7 @@ from datetime import timedelta, datetime
 from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
 
-import status_action.msg
+from status_action.msg import StatusAction, StatusActionGoal;
 
 
 # Waypoints container
@@ -67,9 +67,9 @@ class FollowPath(State):
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
         self.base_frame_id = rospy.get_param('~base_frame_id', 'base_footprint')
         self.duration = rospy.get_param('~wait_duration', 0.0)
-        
+
         # Get a move_base action client
-        self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+        self.client = actionlib.SimpleActionClient('move_base', StatusAction)
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
 
@@ -106,7 +106,7 @@ class FollowPath(State):
             # r.sleep()
 
             # Otherwise publish next waypoint as goal
-            goal = MoveBaseGoal()
+            goal = StatusActionGoal()
             goal.target_pose.header.frame_id = self.frame_id
             goal.target_pose.pose.position = waypoint.pose.pose.position
             goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
