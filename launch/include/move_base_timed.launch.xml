@@ -12,9 +12,9 @@
   <node pkg="move_base" type="move_base" name="move_base" respawn="true" output="screen">
     <rosparam file="$(find fetch_navigation)/config/costmap_common.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find fetch_navigation)/config/$(arg name)/costmap_common.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find fetch_navigation)/config/costmap_common.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find fetch_study)/config/costmap_common.yaml" command="load" ns="local_costmap" />
     <!-- <rosparam file="$(find fetch_navigation)/config/$(arg name)/costmap_common.yaml" command="load" ns="local_costmap" /> -->
-    <rosparam file="$(find fetch_study)/config/costmap_local.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find fetch_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find fetch_navigation)/config/$(arg name)/costmap_local.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find fetch_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find fetch_navigation)/config/$(arg name)/costmap_global.yaml" command="load" ns="global_costmap" />
