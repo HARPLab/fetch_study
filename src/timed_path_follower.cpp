@@ -192,10 +192,10 @@ namespace path_executer
     // waypoint.pose.orientation = createQuaternionMsgFromYaw(theta);
 
     //publish the waypoint for visualization
-    ROS_INFO("Publishing a waypoint!");
+    // ROS_INFO("Publishing a waypoint!");
     geometry_msgs::PoseStamped waypoint_test;
     current_waypoint_pub_.publish(waypoint_test);
-    ROS_INFO("Published the wpt");
+    // ROS_INFO("Published the wpt");
 
     return true;
   }
@@ -257,8 +257,6 @@ namespace path_executer
       {
         // ROS_INFO("Trying to look up a transform from buffer");
         // ROS_INFO("Values are: %f, %f, %s", goal_.header.frame_id, robot_pose_stamped.header.frame_id, robot_pose_stamped.header.stamp.c_str());
-
-        // ros::Time now = ros::Time::now();
 
         // Used to be waitForTransform, transformPose 
         // Look up the mapping between the base_link and the map
@@ -344,11 +342,10 @@ namespace path_executer
     //The desired position is the robot the robot should be on right now,
     //according to the given plan
     ros::Time now = ros::Time::now();
-    ROS_INFO("Got my current time");
 
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     {
-      ROS_INFO("Found a waypoint");
+      ROS_INFO("Found a waypoint based on where it ought to be rn");
       tf2::Transform waypnt;
       tf2::fromMsg(waypoint.pose, waypnt);
 
