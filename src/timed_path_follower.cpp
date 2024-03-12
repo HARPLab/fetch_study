@@ -309,13 +309,13 @@ namespace path_executer
     // tf2::Stamped<tf2::Transform> new_robot_pose;
     // tf2::fromMsg(robot_transform, new_robot_pose);
 
-    tf2::Stamped<tf2::Transform> robot_pose;
-    tf2::fromMsg(robot_pose_stamped, robot_pose);
+    tf2::Stamped<tf2::Transform> new_robot_pose;
+    tf2::fromMsg(robot_pose_stamped, new_robot_pose);
 
     ROS_INFO("Read new robot pose");
 
     //calculate the transformation between the robot and the goal pose
-    tf2::Transform robot_in_goal = goal.inverse() * robot_pose;
+    tf2::Transform robot_in_goal = goal.inverse() * new_robot_pose;
 
     ROS_INFO("Combo");
 
@@ -327,7 +327,7 @@ namespace path_executer
 
     //calculate the angular distance between the current robot pose and the goal
     tf2::Quaternion quat;
-    quat = robot_pose.getRotation();
+    quat = new_robot_pose.getRotation();
     double angular_goal_distance =
         angles::shortest_angular_distance(tf2::getYaw(goal_.pose.orientation),
                                           tf2::getYaw(quat));
