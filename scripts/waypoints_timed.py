@@ -154,7 +154,7 @@ class GetPath(State):
         # Parameters
         self.goal_frame_id = rospy.get_param('~goal_frame_id', 'map')
         # Subscribe to pose message to get new waypoints
-        self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose')
+        # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose')
         # Create publisher to publish waypoints as pose array so that you can see them in rviz, etc.
         self.posearray_topic = rospy.get_param('~posearray_topic', '/waypoints')
         self.poseArray_publisher = rospy.Publisher(self.posearray_topic, PoseArray, queue_size=1)
