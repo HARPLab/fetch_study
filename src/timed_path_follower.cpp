@@ -202,7 +202,7 @@ namespace path_executer
 
   bool PathFollower::computeVelocityCommands(geometry_msgs::Twist& cmd_vel)
   {
-    ROS_INFO("Following velocity commands");
+    // ROS_INFO("Following velocity commands");
 
     //make sure planner had been initialized
     if(!initialized_)
@@ -219,7 +219,7 @@ namespace path_executer
     //wait for the new plan
     if(replanning_requested_)
     {
-      ROS_INFO("replanning requested");
+      // ROS_INFO("replanning requested");
       cmd_vel = zero_vel;
       return true;
     }
