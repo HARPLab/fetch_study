@@ -13,6 +13,8 @@ find_package(catkin REQUIRED
   pcl_conversions
   tf2
   tf2_ros
+  action_lib
+  message_generation
 )
 
 generate_dynamic_reconfigure_options(
@@ -26,6 +28,12 @@ catkin_package(
   CATKIN_DEPENDS lattice_planner
   CATKIN_DEPENDS base_local_planner
 )
+
+## Add actions
+add_action_files(DIRECTORY action FILES StatusAction.action)
+
+## Generate messages
+generate_messages(DEPENDENCIES std_msgs actionlib_msgs)
 
 include_directories(
   include
