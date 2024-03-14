@@ -176,6 +176,9 @@ if __name__ == "__main__":
 
     robot_plan = setup_robot_plan()
 
+    ### Hardcoded amount of setup time
+    rospy.sleep(12.0)
+
     mission_report = run_robot_plan(robot_plan, move_base)
     file_mission_report(mission_report)
 
