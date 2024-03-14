@@ -46,6 +46,26 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from moveit_msgs.msg import PlaceLocation, MoveItErrorCodes
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
+import threading
+import rospy
+import actionlib
+from smach import State, StateMachine
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray, PointStamped, PoseStamped
+from std_msgs.msg import Empty, String
+from tf import TransformListener
+import tf
+import math
+import rospkg
+import csv
+import time
+import os
+from datetime import timedelta, datetime
+from geometry_msgs.msg import PoseStamped
+import dynamic_reconfigure.client
+
+
+
 # Move base using navigation stack
 class MoveBaseClient(object):
 
@@ -292,13 +312,7 @@ if __name__ == "__main__":
         rospy.loginfo("Point B")
         move_base.goto(4.017, -6.278, -1.631)
         rospy.loginfo("Point C")
-    else:
-
-
-
-
-
-
+    elif False:
         ###### TRIANGLE
         move_base.goto(4.007, -3.276, -1.586)
         rospy.loginfo("Start")
@@ -329,6 +343,26 @@ if __name__ == "__main__":
         rospy.loginfo("Point A")
         move_base.goto(4.726, -3.523, 2.324)
         rospy.loginfo("Point B")
+
+    else:
+
+        move_base.goto(3.886, -4.470, 0.021)
+        rospy.loginfo("hitting 0")
+        move_base.goto(4.488, -3.901, 0.896)
+        rospy.loginfo("hitting 1")
+        move_base.goto(4.826, -3.392, 0.720)
+        rospy.loginfo("hitting 2")
+        move_base.goto(4.532, -3.132, 2.407)
+        rospy.loginfo("hitting 3")
+        move_base.goto(4.171, -3.151, 3.130)
+        rospy.loginfo("hitting 4")
+        move_base.goto(3.786, -3.170, -3.114)
+        rospy.loginfo("hitting 5")
+        move_base.goto(3.860, -3.682, -1.309)
+        rospy.loginfo("hitting 6")
+        move_base.goto(3.814, -4.423, -1.612)
+        rospy.loginfo("hitting 7")
+
 
 
 
