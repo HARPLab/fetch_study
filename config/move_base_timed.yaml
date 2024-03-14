@@ -69,7 +69,7 @@ TBPlanner:
     yaw_goal_tolerance: 0.2 #the rotational goal tolerance in rad. default: 0.2
     time_resolution: 0.5 #time resolution of the discretized configuration space in seconds. default: 0.5
     collision_check_time_resolution: 0.1 #time increment to slice trajectories for collision checking in seconds. default: 0.1
-    time_steps_lookahead: 2 #maximum number of time steps for planning
+    time_steps_lookahead: 1 #maximum number of time steps for planning
     planning_timeout: 0.48 #timeout for the planning after which the best solution found so far is returned, in seconds. should be a little smaller than (1/planner_frequency). default: 0.48
     passive_navigation: false #flag for planning dynamically for the max number of time steps, not only until the goal is found. default: false
     publish_expanded: false #flag for publishing the expanded search tree for visualization. default: false
