@@ -186,6 +186,9 @@ if __name__ == "__main__":
     rospy.loginfo("Moving to table...")
  
     # import 
+    output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path')
+    output_folder = rospy.get_param('~output_folder', output_folder_default)
+    
     input_file_name = rospy.get_param('~input_filename', 'waypoints.csv')
     self.input_file_path = os.path.join(output_folder, input_file_name)
 
