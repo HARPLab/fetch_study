@@ -276,7 +276,7 @@ class GetPath(State):
         start_journey_thread = threading.Thread(target=wait_for_start_journey)
         start_journey_thread.start()
 
-        # topic = self.addpose_topic
+        topic = self.addpose_topic
         # rospy.loginfo("Waiting to recieve waypoints via Pose msg on topic %s" % topic)
         # rospy.loginfo("To start following waypoints: 'rostopic pub /path_ready std_msgs/Empty -1'")
         # rospy.loginfo("OR")
@@ -285,11 +285,12 @@ class GetPath(State):
         # Wait for published waypoints or saved path  loaded
         while not self.path_ready and not self.start_journey_bool:
             try:
-                pose = rospy.wait_for_message(topic, PoseWithCovarianceStamped, timeout=1)
-                rospy.loginfo("Received new waypoint")
-                waypoints.append(changePose(pose, self.goal_frame_id))
-                # publish waypoint queue as pose array so that you can see them in rviz, etc.
-                self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
+                pass
+            #     pose = rospy.wait_for_message(topic, PoseWithCovarianceStamped, timeout=1)
+            #     rospy.loginfo("Received new waypoint")
+            #     waypoints.append(changePose(pose, self.goal_frame_id))
+            #     # publish waypoint queue as pose array so that you can see them in rviz, etc.
+            #     self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
 
             except rospy.ROSInterruptException:
                 rospy.logwarn("Shutting down")
