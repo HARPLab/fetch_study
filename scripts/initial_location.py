@@ -87,6 +87,7 @@ class MoveBaseClient(object):
         # TODO wait for things to work
         self.client.send_goal(move_goal)
         self.client.wait_for_result()
+        print("Teached table")
 
 def yaw_from_quaternion(x, y, z, w):
     """
