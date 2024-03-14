@@ -153,7 +153,7 @@ def file_mission_report(self):
 
 if __name__ == "__main__":
     # Create a node
-    rospy.init_node("demo")
+    rospy.init_node("chained_waypoints")
 
     # Make sure sim time is working
     while not rospy.Time.now():
