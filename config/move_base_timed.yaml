@@ -67,7 +67,7 @@ TBPlanner:
     allow_unknown: false #whether the planner is allowed to expand into unknown map regions. default: false
     xy_goal_tolerance: 0.15 #the Euclidean goal tolerance distance in meters. default: 0.15
     yaw_goal_tolerance: 0.2 #the rotational goal tolerance in rad. default: 0.2
-    time_resolution: 0.5 #time resolution of the discretized configuration space in seconds. default: 0.5
+    time_resolution: 0.05 #time resolution of the discretized configuration space in seconds. default: 0.5
     collision_check_time_resolution: 0.1 #time increment to slice trajectories for collision checking in seconds. default: 0.1
     time_steps_lookahead: 15 #maximum number of time steps for planning
     planning_timeout: 0.48 #timeout for the planning after which the best solution found so far is returned, in seconds. should be a little smaller than (1/planner_frequency). default: 0.48
