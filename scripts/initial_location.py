@@ -73,13 +73,14 @@ class MoveBaseClient(object):
         self.client.wait_for_server()
 
     def goto(self, pose, frame="map"):
-        x, y, theta = pose
+        px, py, pz, qx, qy, qz, qw = pose
 
         move_goal = MoveBaseGoal()
-        move_goal.target_pose.pose.position.x = x
-        move_goal.target_pose.pose.position.y = y
-        move_goal.target_pose.pose.orientation.z = sin(theta/2.0)
-        move_goal.target_pose.pose.orientation.w = cos(theta/2.0)
+        move_goal.target_pose.pose.position.x = px
+        move_goal.target_pose.pose.position.y = py
+        move_goal.target_pose.pose.orientation.z = qz #sin(theta/2.0)
+        move_goal.target_pose.pose.orientation.w = qw   #cos(theta/2.0)
+
         move_goal.target_pose.header.frame_id = frame
         move_goal.target_pose.header.stamp = rospy.Time.now()
 
@@ -87,7 +88,7 @@ class MoveBaseClient(object):
         self.client.send_goal(move_goal)
         self.client.wait_for_result()
 
-def euler_from_quaternion(x, y, z, w):
+def yaw_from_quaternion(x, y, z, w):
     """
     Convert a quaternion into euler angles (roll, pitch, yaw)
     roll is rotation around x in radians (counterclockwise)
@@ -123,7 +124,6 @@ def get_initial_pose():
         for row in reader:
             print(row)
 
-
             px = float(row[0])
             py = float(row[1])
             pz = float(row[2])
@@ -132,8 +132,8 @@ def get_initial_pose():
             qz = float(row[5])
             qw = float(row[6])
 
-            angle_pos = euler_from_quaternion(qx, qy, qz, qw)
-            return (px, py, angle_pos)
+            return (px, py, pz, qx, qy, qz, qw)
+
 
 if __name__ == "__main__":
     # Create a node
