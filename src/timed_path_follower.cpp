@@ -267,7 +267,7 @@ namespace path_executer
         //                       robot_pose_stamped.header.stamp, ros::Duration(5.0));
 
        
-        ROS_INFO("frame robot frame goal: %s, %s", robot_pose_stamped.header.frame_id.c_str(), goal_.header.frame_id.c_str());
+        // ROS_INFO("frame robot frame goal: %s, %s", robot_pose_stamped.header.frame_id.c_str(), goal_.header.frame_id.c_str());
 
         // geometry_msgs::TransformStamped transform = tfl_->lookupTransform(target_frame, fixed_frame, ros::Time::now(), timeout); 
         // tfl_->doTransform(in, out, transform); 
@@ -303,9 +303,6 @@ namespace path_executer
     tf2::fromMsg(goal_.pose, goal);
 
     // ROS_INFO("Read out goal"); ADA
-
-    // tf2::Stamped<tf2::Transform> new_robot_pose;
-    // tf2::fromMsg(robot_transform, new_robot_pose);
 
     tf2::Stamped<tf2::Transform> new_robot_pose;
     tf2::fromMsg(robot_pose_stamped, new_robot_pose);
@@ -377,9 +374,10 @@ namespace path_executer
         rho = 0;
       }
 
+      float replanning_distance = 1.0;
       //if the distance between the robot and the desired waypoint is too big,
       //we should trigger replanning
-      if(rho > 0.25)
+      if(rho > replanning_distance)
       {
         ROS_INFO("distance to path is too big, triggering replanning");
         std_srvs::Empty srv;
