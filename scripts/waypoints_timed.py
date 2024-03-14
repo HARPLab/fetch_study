@@ -255,7 +255,7 @@ class GetPath(State):
                 reader = csv.reader(file, delimiter=',')
                 row_id = 0
                 for row in reader:
-                    print(row)
+                    # print(row)
                     current_pose = PoseWithCovarianceStamped()
                     current_pose.pose.pose.position.x = float(row[0])
                     current_pose.pose.pose.position.y = float(row[1])
