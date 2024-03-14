@@ -11,7 +11,7 @@ import actionlib
 from smach import State, StateMachine
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray, PointStamped
-from std_msgs.msg import Empty
+from std_msgs.msg import Empty, String
 from tf import TransformListener
 import tf
 import math
@@ -76,7 +76,7 @@ class FollowPath(State):
         self.listener = tf.TransformListener()
         self.distance_tolerance = rospy.get_param('waypoint_distance_tolerance', 0.0)
 
-        self.replanner = rospy.Publisher('move_base', std_msgs.msg.String, queue_size=10)
+        self.replanner = rospy.Publisher('move_base', String, queue_size=10)
 
         # print("Setting up dynamic speed server")
         # # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
@@ -122,7 +122,7 @@ class FollowPath(State):
                     rospy.loginfo("Waiting for %f sec..." % self.duration)
     
                 time.sleep(self.duration)
-                
+
             else:
                 # This is the loop which exist when the robot is near a certain GOAL point.
                 distance = 10
