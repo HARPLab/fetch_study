@@ -22,6 +22,7 @@ import os
 from datetime import timedelta, datetime
 from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
+import numpy as np
 
 
 # Waypoints container
@@ -85,7 +86,7 @@ class FollowPath(State):
 
 
     def distance_between_waypts(self, p1, p2):
-        dist = sqrt((p1.pose.pose.position.x - p2.pose.pose.position.x)**2 + (p1.pose.pose.position.y - p2.pose.pose.position.y)**2)
+        dist = np.sqrt((p1.pose.pose.position.x - p2.pose.pose.position.x)**2 + (p1.pose.pose.position.y - p2.pose.pose.position.y)**2)
 
         return dist
 
