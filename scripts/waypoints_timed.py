@@ -84,7 +84,7 @@ class FollowPath(State):
         # print("Found it")
 
 
-    def distance_between_waypts(p1, p2):
+    def distance_between_waypts(self, p1, p2):
         dist = sqrt((p1.pose.pose.position.x - p2.pose.pose.position.x)**2 + (p1.pose.pose.position.y - p2.pose.pose.position.y)**2)
 
         return dist
@@ -117,7 +117,7 @@ class FollowPath(State):
             self.client.send_goal(goal)
 
 
-            waypoint_gap_dist = distance_between_waypts(prev_waypoint, waypoint)
+            waypoint_gap_dist = self.distance_between_waypts(prev_waypoint, waypoint)
 
             if not self.distance_tolerance > 0.0:
                 print("dist tol")
@@ -138,7 +138,7 @@ class FollowPath(State):
                         pow(waypoint.pose.pose.position.x - trans[0], 2) + pow(waypoint.pose.pose.position.y - trans[1],
                                                                                2))
                     print("Robot "  + str(distance) + " from goal.")
-                    
+
                     if distance < (waypoint_gap_dist / 2.0):
                         print("Robot halfway")
 
