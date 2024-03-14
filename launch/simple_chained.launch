@@ -5,7 +5,7 @@
   </include>
 
   <!-- Drive around -->
-  <node name="follow_waypoints" pkg="fetch_study" type="waypoints_timed.py" output="screen" clear_params="true">
+  <node name="chained_waypoints" pkg="fetch_study" type="chained_path.py" output="screen" clear_params="true">
   </node>
 
 </launch>
