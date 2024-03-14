@@ -149,6 +149,6 @@ if __name__ == "__main__":
     # Move the base to be in front of the table
     # Demonstrates the use of the navigation stack
     rospy.loginfo("Moving to table...")
-        move_base.goto(pose)
-        rospy.loginfo("Ready to run the actual code!")
+    move_base.goto(pose)
+    rospy.loginfo("Ready to run the actual code!")
 
