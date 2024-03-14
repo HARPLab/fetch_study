@@ -188,17 +188,17 @@ if __name__ == "__main__":
     # import 
     output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
-    
+
     input_file_name = rospy.get_param('~input_filename', 'waypoints.csv')
-    self.input_file_path = os.path.join(output_folder, input_file_name)
+    input_file_path = os.path.join(output_folder, input_file_name)
 
     output_file_name = rospy.get_param('~output_filename', 'waypoints.csv')
-    self.output_file_path = os.path.join(output_folder, output_file_name)
+    output_file_path = os.path.join(output_folder, output_file_name)
 
     robot_plan = setup_robot_plan()
 
     ### Hardcoded amount of setup time
-    rospy.sleep(12.0)
+    # rospy.sleep(12.0)
 
     mission_report = run_robot_plan(robot_plan, move_base)
     file_mission_report(mission_report)
