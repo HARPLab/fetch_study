@@ -117,7 +117,7 @@ def get_initial_pose():
     input_file_path = os.path.join(output_folder, input_file_name)
 
     ##### Import CSV document
-    with open(self.input_file_path, 'r') as file:
+    with open(input_file_path, 'r') as file:
         reader = csv.reader(file, delimiter=',')
         row_id = 0
         for row in reader:
