@@ -84,14 +84,17 @@ class FollowPath(State):
         # print("Found it")
 
 
+    def distance_between_waypts(p1, p2):
+        dist = sqrt((p1.pose.pose.position.x - p2.pose.pose.position.x)**2 + (p1.pose.pose.position.y - p2.pose.pose.position.y)**2)
+
+        return dist
 
     def execute(self, userdata):
         global waypoints, mission_report
 
-        # TODO: any other setup wanted at the beginning?
-        # self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
-
         # Execute waypoints each in sequence
+        prev_waypoint = waypoints[0]
+
         for waypoint, aux_data in zip(waypoints, auxilary_data):
             tic = time.perf_counter()
 
@@ -114,6 +117,8 @@ class FollowPath(State):
             self.client.send_goal(goal)
 
 
+            waypoint_gap_dist = distance_between_waypts(prev_waypoint, waypoint)
+
             if not self.distance_tolerance > 0.0:
                 print("dist tol")
                 self.client.wait_for_result()
@@ -133,6 +138,9 @@ class FollowPath(State):
                         pow(waypoint.pose.pose.position.x - trans[0], 2) + pow(waypoint.pose.pose.position.y - trans[1],
                                                                                2))
                     print("Robot "  + str(distance) + " from goal.")
+                    
+                    if distance < (waypoint_gap_dist / 2.0):
+                        print("Robot halfway")
 
             toc = time.perf_counter()
             time_elapsed = toc - tic
@@ -141,6 +149,8 @@ class FollowPath(State):
 
             report = [waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, time_elapsed]
             mission_report.append(report)
+
+            prev_waypoint = waypoint
 
         return 'success'
 
@@ -158,6 +168,7 @@ class GetPath(State):
         State.__init__(self, outcomes=['success', 'killed'], input_keys=['waypoints'], output_keys=['waypoints'])
         # Parameters
         self.goal_frame_id = rospy.get_param('~goal_frame_id', 'map')
+
         # Subscribe to pose message to get new waypoints
         # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
         # Create publisher to publish waypoints as pose array so that you can see them in rviz, etc.
