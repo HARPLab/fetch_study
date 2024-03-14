@@ -110,7 +110,7 @@ def euler_from_quaternion(x, y, z, w):
     return roll_x, pitch_y, yaw_z # in radians
 
 def get_initial_pose():
-    output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path/reports')
+    output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
 
     input_file_name = rospy.get_param('~input_filename', 'waypoints.csv')
