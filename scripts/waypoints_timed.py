@@ -10,7 +10,7 @@ import rospy
 import actionlib
 from smach import State, StateMachine
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray, PointStamped
+from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray, PointStamped, PoseStamped
 from std_msgs.msg import Empty, String
 from tf import TransformListener
 import tf
@@ -75,6 +75,7 @@ class FollowPath(State):
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
         self.distance_tolerance = rospy.get_param('waypoint_distance_tolerance', 0.0)
+
 
         # print("Setting up dynamic speed server")
         # # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
