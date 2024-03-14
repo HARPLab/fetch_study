@@ -76,6 +76,8 @@ class FollowPath(State):
         self.listener = tf.TransformListener()
         self.distance_tolerance = rospy.get_param('waypoint_distance_tolerance', 0.0)
 
+        self.replanner = rospy.Publisher('move_base', std_msgs.msg.String, queue_size=10)
+
         # print("Setting up dynamic speed server")
         # # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
         # # self.update_client.wait_for_server()
@@ -112,12 +114,15 @@ class FollowPath(State):
             # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
             self.client.send_goal(goal)
 
+
             if not self.distance_tolerance > 0.0:
+                print("dist tol")
                 self.client.wait_for_result()
                 if self.duration > 0:
                     rospy.loginfo("Waiting for %f sec..." % self.duration)
     
                 time.sleep(self.duration)
+                
             else:
                 # This is the loop which exist when the robot is near a certain GOAL point.
                 distance = 10
@@ -128,6 +133,7 @@ class FollowPath(State):
                     distance = math.sqrt(
                         pow(waypoint.pose.pose.position.x - trans[0], 2) + pow(waypoint.pose.pose.position.y - trans[1],
                                                                                2))
+                    print("Robot "  + str(distance) + " from goal.")
 
             toc = time.perf_counter()
             time_elapsed = toc - tic
