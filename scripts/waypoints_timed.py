@@ -76,8 +76,6 @@ class FollowPath(State):
         self.listener = tf.TransformListener()
         self.distance_tolerance = rospy.get_param('waypoint_distance_tolerance', 0.0)
 
-        self.replanner = rospy.Publisher('move_base', String, queue_size=10)
-
         # print("Setting up dynamic speed server")
         # # self.update_client = dynamic_reconfigure.client.Client('follow_waypoints')
         # # self.update_client.wait_for_server()
