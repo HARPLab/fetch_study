@@ -159,7 +159,7 @@ class GetPath(State):
         # Parameters
         self.goal_frame_id = rospy.get_param('~goal_frame_id', 'map')
         # Subscribe to pose message to get new waypoints
-        # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose')
+        # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
         # Create publisher to publish waypoints as pose array so that you can see them in rviz, etc.
         self.posearray_topic = rospy.get_param('~posearray_topic', '/waypoints')
         self.poseArray_publisher = rospy.Publisher(self.posearray_topic, PoseArray, queue_size=1)
@@ -277,9 +277,9 @@ class GetPath(State):
         start_journey_thread.start()
 
         # topic = self.addpose_topic
-        rospy.loginfo("Waiting to recieve waypoints via Pose msg on topic %s" % topic)
-        rospy.loginfo("To start following waypoints: 'rostopic pub /path_ready std_msgs/Empty -1'")
-        rospy.loginfo("OR")
+        # rospy.loginfo("Waiting to recieve waypoints via Pose msg on topic %s" % topic)
+        # rospy.loginfo("To start following waypoints: 'rostopic pub /path_ready std_msgs/Empty -1'")
+        # rospy.loginfo("OR")
         rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
 
         # Wait for published waypoints or saved path  loaded
