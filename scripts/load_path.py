@@ -62,7 +62,7 @@ if __name__ == "__main__":
         output_folder = rospy.get_param('~output_folder', output_folder_default)
 
 
-        waypoints_path = output_folder_default + "waypoints.txt"
+        waypoints_path = output_folder_default + "waypoints.csv"
         waypoints_info = load_waypoints(waypoints_path)
 
         while not rospy.is_shutdown():
