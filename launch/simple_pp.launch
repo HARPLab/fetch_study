@@ -15,8 +15,6 @@
     <param name="posearray_topic" value="$(arg posearray_topic)"/>
   </node> -->
 
-
-<launch>
   <arg name="wheel_base" default="1.0" doc="wheelbase"/>
   <arg name="lookahead_distance" default="4.0" doc="lookahead distance"/>
   <arg name="w_max" default="1.0" doc="max rotational velocity"/>
