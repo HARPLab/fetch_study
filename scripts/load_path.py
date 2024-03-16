@@ -5,6 +5,7 @@ import rospy
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped, Point, Quaternion
 import os
+import rospkg
 
 
 def load_waypoints(waypoints_path):
