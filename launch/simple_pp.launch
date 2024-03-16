@@ -8,7 +8,7 @@
  <arg name="posearray_topic" default="/waypoints"/>
 
 <!-- Drive around -->
-  <arg name="wheel_base" default="0.6" doc="wheelbase"/>
+  <arg name="wheel_base" default="0.5" doc="wheelbase"/>
   <arg name="lookahead_distance" default="1.0" doc="lookahead distance"/>
   <arg name="w_max" default="1.0" doc="max rotational velocity"/>
   <arg name="position_tolerance" default="0.05" doc="position tolerance"/>
@@ -38,11 +38,19 @@
   </node>
 
   <!---Waypoint sending code -->
-  <node name="follow_waypoints" pkg="fetch_study" type="load_path.py" output="screen" clear_params="true">
+  <node name="load_path" pkg="fetch_study" type="load_path.py" output="screen" clear_params="true">
     <param name="goal_frame_id" value="map"/>
     <param name="addpose_topic" value="$(arg addpose_topic)"/>
     <param name="posearray_topic" value="$(arg posearray_topic)"/>
   </node>
+
+  <!---Waypoint logging code -->
+  <node name="log_waypoints" pkg="fetch_study" type="waypoints_log.py" output="screen" clear_params="true">
+    <param name="goal_frame_id" value="map"/>
+    <param name="addpose_topic" value="$(arg addpose_topic)"/>
+    <param name="posearray_topic" value="$(arg posearray_topic)"/>
+  </node>
+
 
 -->
 
