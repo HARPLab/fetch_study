@@ -107,15 +107,15 @@ class FollowPath(State):
             # self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
 
-            # Otherwise publish next waypoint as goal
-            goal = MoveBaseGoal()
-            goal.target_pose.header.frame_id = self.frame_id
-            goal.target_pose.pose.position = waypoint.pose.pose.position
-            goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
-            rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
-                          (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
-            # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
-            self.client.send_goal(goal)
+            # # Otherwise publish next waypoint as goal
+            # goal = MoveBaseGoal()
+            # goal.target_pose.header.frame_id = self.frame_id
+            # goal.target_pose.pose.position = waypoint.pose.pose.position
+            # goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
+            # rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
+            #               (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
+            # # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
+            # self.client.send_goal(goal)
 
 
             waypoint_gap_dist = self.distance_between_waypts(prev_waypoint, waypoint)
