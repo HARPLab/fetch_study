@@ -56,7 +56,7 @@ if __name__ == "__main__":
         waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
         rate = rospy.Rate(1)
 
-        waypoints_path = "./waypoints/waypoints.txt"
+        waypoints_path = "../waypoints/waypoints.txt"
         waypoints_info = load_waypoints(waypoints_path)
 
         while not rospy.is_shutdown():
