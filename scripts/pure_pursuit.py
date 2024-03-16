@@ -42,7 +42,7 @@ def read_points():
    CHANGE THIS PATH TO WHERE YOU HAVE SAVED YOUR CSV FILES
    """
    r = rospkg.RosPack()
-   package_path = r.get_path('pure_pursuit')
+   package_path = r.get_path('fetch_study')
    file_name = 'wp_file.csv' #'racecar_walker.csv'
    file_path = package_path + '/waypoints/' + file_name
    with open(file_path) as f:
