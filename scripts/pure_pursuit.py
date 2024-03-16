@@ -9,7 +9,6 @@ import numpy as np
 from numpy import linalg as la
 import matplotlib.pyplot as plt
 from matplotlib import patches
-from race.msg import drive_param
 from rospkg import RosPack
 from nav_msgs.msg import Odometry
 from visualization_msgs.msg import Marker
