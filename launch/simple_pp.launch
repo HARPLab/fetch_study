@@ -8,10 +8,10 @@
  <arg name="posearray_topic" default="/waypoints"/>
 
 <!-- Drive around -->
-  <arg name="wheel_base" default="1.0" doc="wheelbase"/>
-  <arg name="lookahead_distance" default="4.0" doc="lookahead distance"/>
+  <arg name="wheel_base" default="0.6" doc="wheelbase"/>
+  <arg name="lookahead_distance" default="1.0" doc="lookahead distance"/>
   <arg name="w_max" default="1.0" doc="max rotational velocity"/>
-  <arg name="position_tolerance" default="0.1" doc="position tolerance"/>
+  <arg name="position_tolerance" default="0.05" doc="position tolerance"/>
   <arg name="delta_vel" default="100.0" doc="steering angle velocity"/>
   <arg name="acc" default="100.0" doc="acceleration"/>
   <arg name="jerk" default="100.0" doc="jerk"/>
