@@ -1,0 +1,136 @@
+# Planner selection
+#use lattice planner as the global planner
+base_global_planner: "lattice_planner/TBPlanner"
+base_local_planner: "regulated_pure_pursuit_controller::RegulatedPurePursuitController" # "move_base/base_local_planner: path_executer/PathFollower"
+
+# Recovery behaviors are defined in robot folders
+
+# Oscillation
+oscillation_timeout: 10.0
+oscillation_distance: 0.5
+
+# Global planner
+planner_frequency: 0.0
+planner_patience: 5.0
+# NavfnROS:
+#   allow_unknown: true  # TODO: investigate this
+#   default_tolerance: 0.0
+#   # do not restrict planner
+#   planner_window_x: 0.0
+#   planner_window_y: 0.0
+#   # debug
+#   visualize_potential: false
+
+
+# Node parameters for using the timed path follower as local planner with move base. 
+# For more information about the move base parameters in this file, please see
+#
+#  http://www.ros.org/wiki/move_base
+#
+
+shutdown_costmaps: false
+
+#disable recovery behaviors
+recovery_behavior_enabled: false
+
+#controller frequency should be at least 10 Hz to avoid instability
+controller_frequency: 20.0
+controller_patience: 5.0
+
+#disable oscillation checking
+oscillation_timeout: 0.0
+oscillation_distance: 0.0
+
+# # DID THIS ABOVE
+# # use path follower as the local planner
+# base_local_planner: path_executer/PathFollower
+
+#path follower params
+PathFollower:
+    allow_backwards: false #to allow backwards motion when trying to follow a trajectory. default: false
+    xy_goal_tolerance: 0.025 #euclidian goal distance threshold in m. default: 0.1
+    yaw_goal_tolerance: 0.2 #rotational goal distance threshold in rad. default: 0.2
+
+#controller gains and velocity bounds for the path follower can be adjusted using dynamic reconfigure (move_base/PathFollower prefix)
+
+controller_server:
+  ros__parameters:
+    controller_frequency: 20.0
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
+    min_theta_velocity_threshold: 0.001
+    progress_checker_plugins: ["progress_checker"]
+    goal_checker_plugins: "goal_checker"
+    controller_plugins: ["FollowPath"]
+
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.5
+      movement_time_allowance: 10.0
+    goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.25
+      stateful: True
+    FollowPath:
+      plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
+      desired_linear_vel: 0.5
+      lookahead_dist: 0.6
+      min_lookahead_dist: 0.3
+      max_lookahead_dist: 0.9
+      lookahead_time: 1.5
+      rotate_to_heading_angular_vel: 1.8
+      transform_tolerance: 0.1
+      use_velocity_scaled_lookahead_dist: false
+      min_approach_linear_velocity: 0.05
+      approach_velocity_scaling_dist: 1.0
+      use_collision_detection: true
+      max_allowed_time_to_collision_up_to_carrot: 1.0
+      use_regulated_linear_velocity_scaling: true
+      use_cost_regulated_linear_velocity_scaling: false
+      regulated_linear_scaling_min_radius: 0.9
+      regulated_linear_scaling_min_speed: 0.25
+      use_fixed_curvature_lookahead: false
+      curvature_lookahead_dist: 1.0
+      use_rotate_to_heading: true
+      rotate_to_heading_min_angle: 0.785
+      max_angular_accel: 3.2
+      max_robot_pose_search_dist: 10.0
+      interpolate_curvature_after_goal: false
+      cost_scaling_dist: 0.3
+      cost_scaling_gain: 1.0
+      inflation_cost_scaling_factor: 3.0
+
+# #lattice planner params
+# TBPlanner:
+#     #cost factors
+#     lethal_cost: 253 # cost associated with forbidden areas (e.g. obstacles). default: costmap_2d::INSCRIBED_INFLATED_OBSTACLE( = 253)
+#     time_cost_factor: 200.0 #cost factor for path execution time. default: 200.0
+#     step_cost_factor: 80.0 #cost factor for path length. default: 80.0
+#     rotation_cost_factor: 0.0 #cost factor for the accumulated turns along a planned path
+#     environment_cost_factor: 1.0 #cost factor for constraints defined in the dynamic environment, according to the dynamic cost map
+#     dynamic_layers_plugin: "dynamic_social_costmap::StaticLayers" #fully qualified plugin type for dynamic layers to be used by dynamic cost map, in this case SocialLayers plugin from human_aware_navigation stack (https://github.com/marinaKollmitz/human_aware_navigation). default: "undefined"
+
+#     #planner preferences
+#     allow_unknown: false #whether the planner is allowed to expand into unknown map regions. default: false
+#     xy_goal_tolerance: 0.15 #the Euclidean goal tolerance distance in meters. default: 0.15
+#     yaw_goal_tolerance: 0.2 #the rotational goal tolerance in rad. default: 0.2
+#     time_resolution: 1.0 #time resolution of the discretized configuration space in seconds. default: 0.5
+#     collision_check_time_resolution: 0.1 #time increment to slice trajectories for collision checking in seconds. default: 0.1
+#     time_steps_lookahead: 1 #maximum number of time steps for planning
+#     planning_timeout: 0.48 #timeout for the planning after which the best solution found so far is returned, in seconds. should be a little smaller than (1/planner_frequency). default: 0.48
+#     passive_navigation: false #flag for planning dynamically for the max number of time steps, not only until the goal is found. default: false
+#     publish_expanded: false #flag for publishing the expanded search tree for visualization. default: false
+
+#     #flags for simplifying the path search - violate optimality but accelerate the search procedure
+#     easy_deceleration: false #flag for simplified planning of deceleration at the goal. default: false
+#     easy_turn_at_start: false #flag for simplified planning of turn in place at the start. default: false
+#     easy_turn_at_goal: false #flag for simplified planning of turn in place at the goal. default: false
+
+#     #motion constraints of the robot:
+#     min_vel_x: 0.0 #minimum forward velocity of the robot in meters per second (can be negative). default: 0.0
+#     max_vel_x: 1.0 #maximum forward velocity of the robot in meters per second. default: 0.4
+#     acceleration_x: 0.8 #forward acceleration in meters per second^2. default: 0.8
+#     min_vel_phi: -0.8 #minimum angular velocity of the robot in radians per second (can be negative). default: -0.8
+#     max_vel_phi: 0.8 #maximum angular velocity of the robot in radians per second. default: 0.8
+#     acceleration_phi: 1.6 #angular acceleration in radians per second^2. default: 0.8
