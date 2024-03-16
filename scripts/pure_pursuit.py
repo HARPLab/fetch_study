@@ -115,7 +115,7 @@ def pure_pursuit():
 
 	# Initialize the message, subscriber and publisher
 	msg = Twist()
-	rospy.Subscriber("/odom", Odometry, pose_callback) 
+	rospy.Subscriber("/odom", Odometry, pose_callback)
 	pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 
 	cx = waypoints[:, 0]; cy = waypoints[:, 1]

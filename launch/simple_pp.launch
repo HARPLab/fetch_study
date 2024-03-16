@@ -8,10 +8,11 @@
  <arg name="posearray_topic" default="/waypoints"/>
 
 <!-- Drive around -->
+  <!-- 
   <node name="follow_waypoints" pkg="fetch_study" type="waypoints_timed.py" output="screen" clear_params="true">
     <param name="goal_frame_id" value="map"/>
     <param name="addpose_topic" value="$(arg addpose_topic)"/>
     <param name="posearray_topic" value="$(arg posearray_topic)"/>
-  </node>
+  </node> -->
 
 </launch>
