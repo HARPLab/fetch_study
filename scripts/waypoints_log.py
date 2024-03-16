@@ -239,7 +239,7 @@ class GetPath(State):
         ready_thread = threading.Thread(target=wait_for_path_ready)
         ready_thread.start()
 
-        self.start_journey_bool = False
+        self.start_journey_bool = True #False
 
         # Start thread to listen start_jorney 
         # for loading the saved poses from saved_path/poses.csv
