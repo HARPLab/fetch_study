@@ -45,11 +45,11 @@
   </node>
 
   <!---Waypoint logging code -->
-  <node name="log_waypoints" pkg="fetch_study" type="waypoints_log.py" output="screen" clear_params="true">
+  <!---<node name="log_waypoints" pkg="fetch_study" type="waypoints_log.py" output="screen" clear_params="true">
     <param name="goal_frame_id" value="map"/>
     <param name="addpose_topic" value="$(arg addpose_topic)"/>
     <param name="posearray_topic" value="$(arg posearray_topic)"/>
-  </node>
+  </node> -->
 
 
 -->
