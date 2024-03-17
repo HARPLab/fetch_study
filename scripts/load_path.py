@@ -113,16 +113,15 @@ class PathManager():
     def broadcast_single_path(self, key, path_to_broadcast):
         pname, pstart, pgoal = key
 
-        at_goal = False
+        self.broadcast_on   = True
+        at_goal             = False
         try:
-            while not rospy.is_shutdown() and not at_goal:
+            while not rospy.is_shutdown() and not at_goal and broadcast_on:
                 now = rospy.Time.now()
             
-                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(1))
                 trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
-                
-                # self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
-                # trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
+ 
                 distance = np.sqrt(
                     pow(pgoal[0] - trans[0], 2) 
                         + pow(pgoal[1] - trans[1], 2))
