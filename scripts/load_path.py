@@ -110,9 +110,11 @@ class PathManager():
                 target_key = key
 
 
-        self.broadcast_single_path(waypoints_dict[key])
+        self.broadcast_single_path(key, waypoints_dict[key])
 
-    def broadcast_single_path(self, path_to_broadcast):
+    def broadcast_single_path(self, key, path_to_broadcast):
+        pname, pstart, pgoal = key
+
         at_goal = False
         try:
             while not rospy.is_shutdown() and not at_goal:
@@ -120,8 +122,8 @@ class PathManager():
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
                 trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                 distance = np.sqrt(
-                    pow(final_destination.pose.pose.position.x - trans[0], 2) 
-                        + pow(final_destination.pose.pose.position.y - trans[1], 2))
+                    pow(pgoal[0] - trans[0], 2) 
+                        + pow(pgoal[1] - trans[1], 2))
 
                 print("Robot "  + str(distance) + " from goal.")
                 
