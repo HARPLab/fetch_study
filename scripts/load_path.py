@@ -170,9 +170,6 @@ class PathManager():
         self.broadcast_on   = True
         at_goal             = False
 
-        # Then continue on the path
-        self.waypoint_pub.publish(path_to_broadcast)
-
         try:
             while not rospy.is_shutdown() and not at_goal and self.broadcast_on:
                 print("Broadcasting single path")
@@ -191,6 +188,11 @@ class PathManager():
                     at_goal = True
                     print("Reached goal!")
                     return True
+    
+                else:
+                    # Then continue on the path
+                    self.waypoint_pub.publish(path_to_broadcast)
+
 
                 self.rate.sleep()
 
