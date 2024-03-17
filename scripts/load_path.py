@@ -58,29 +58,33 @@ class PathManager():
 
         key, path = self.determine_next_path(self.waypoints_dict)
 
-        paths_left -= 1
-
         key_sequence    = [key]
         path_sequence   = [path]
 
-        for path in path_sequence:
+        try:
+            for path in path_sequence:
 
-            path_done = False
-            # Wait for published waypoints or saved path  loaded
-            while not path_done:
-                if self.start_journey_bool:
-                    try:
-                        path_done = self.broadcast_single_path(key, path)
+                path_done = False
+                # Wait for published waypoints or saved path  loaded
+                while not path_done:
+                    if self.start_journey_bool:
+                        try:
+                            path_done = self.broadcast_single_path(key, path)
+                            if path_done:
+                                paths_left -= 1
+                                print(str(paths_left) + " paths left")
 
-                    except rospy.ROSInterruptException:
-                        rospy.logwarn("Shutting down")
-                        return 'killed'
+                        except rospy.ROSInterruptException:
+                            rospy.logwarn("Shutting down")
+                            return 'killed'
 
-                    except rospy.ROSException as e:
-                        rospy.logwarn_throttle(5, "Ros exception: {}".format(e))
+                        except rospy.ROSException as e:
+                            rospy.logwarn_throttle(5, "Ros exception: {}".format(e))
 
-                self.rate.sleep()
+                    self.rate.sleep()
 
+        except rospy.ROSInterruptException:
+            rospy.logerr('Get KeyBoardInterrupt... Shutdown')
 
     def get_waypoints(self):
         print("Get waypoints")
@@ -89,7 +93,7 @@ class PathManager():
 
         path_dict = {}
 
-        for path_name in ['waypoints']:
+        for path_name in ['ab', 'ba']:
             waypoints_path = output_folder_default + path_name + ".csv"
         
             key, waypoints_info      = self.load_waypoints(path_name, waypoints_path)
