@@ -55,7 +55,7 @@ class PathManager():
         rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
 
 
-        paths_left = len(waypoints_dict.keys())
+        paths_left = len(self.waypoints_dict.keys())
 
         # Wait for published waypoints or saved path  loaded
         while not self.path_ready and not self.start_journey_bool and paths_left > 0:
