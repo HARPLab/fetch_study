@@ -54,10 +54,15 @@ class PathManager():
         start_journey_thread.start()
         rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
 
+
+        paths_left = len(waypoints_dict.keys())
+
         # Wait for published waypoints or saved path  loaded
-        while not self.path_ready and not self.start_journey_bool:
+        while not self.path_ready and not self.start_journey_bool and paths_left > 0:
             key, path = self.determine_next_path(self.waypoints_dict)
             self.broadcast_single_path(key, path)
+
+            paths_left -= 1
 
 
     def get_waypoints(self):
