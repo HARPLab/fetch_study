@@ -20,7 +20,7 @@ class PathManager():
         #### Set up the node
         rospy.init_node('waypoints_loader')
         self.waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
-        self.goal_frame_id   = rospy.get_param('~goal_frame_id', 'map')
+        self.global_frame_id = rospy.get_param('~goal_frame_id', 'map')
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
         self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
 
@@ -119,8 +119,8 @@ class PathManager():
             while not rospy.is_shutdown() and not at_goal:
                 now = rospy.Time.now()
             
-                self.listener.waitForTransform(self.base_frame_id, self.goal_frame_id, now, rospy.Duration(4))
-                trans, rot = self.listener.lookupTransform(self.base_frame_id, self.goal_frame_id, now)
+                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+                trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                 
                 # self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
                 # trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
