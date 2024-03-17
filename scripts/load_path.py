@@ -52,8 +52,8 @@ def load_waypoints(path_name, waypoints_path):
     if waypoints == []:
         rospy.signal_shutdown('No waypoint to draw... Shutdown')
 
-    start   = waypoints[0]
-    goal    = waypoints[-1]
+    start   = tuple(waypoints[0])
+    goal    = tuple(waypoints[-1])
 
     key             = (path_name, start, goal)
 
