@@ -47,7 +47,22 @@ def main():
     waypoints_path = rospy.get_param("load_waypoints/waypoints_path")
     waypoints_info = load_waypoints(waypoints_path)
 
-    while not rospy.is_shutdown():
+    distance_left = np.inf
+
+    final_destination = waypoints_info[-1]
+
+    while not rospy.is_shutdown() and distance_left > 0:
+        now = rospy.Time.now()
+        self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+        trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
+        distance = math.sqrt(
+            pow(final_destination.pose.pose.position.x - trans[0], 2) 
+                + pow(final_destination.pose.pose.position.y - trans[1], 2))
+
+        print("Robot "  + str(distance) + " from goal.")
+        distance_left = distance
+
+        # Keep publishing and spinning
         waypoint_pub.publish(waypoints_info)
         rate.sleep()
 
