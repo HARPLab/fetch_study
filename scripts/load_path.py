@@ -15,6 +15,7 @@ AT_GOAL_DISTANCE = .05
 
 class PathManager():
     waypoints_dict = {}
+    path_ready = False
 
     def __init__(self):
         #### Set up the node
@@ -30,6 +31,7 @@ class PathManager():
         self.listener   = tf.TransformListener()
 
         self.waypoints_dict = self.get_waypoints()
+        self.path_ready     = True
 
         print("Setting up points now")
 
@@ -47,8 +49,14 @@ class PathManager():
                 self.start_journey_bool = True
 
 
-            key, path = self.determine_next_path(self.waypoints_dict)
-            self.broadcast_single_path(key, path)
+            start_journey_thread = threading.Thread(target=wait_for_start_journey)
+            start_journey_thread.start()
+            rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
+
+            # Wait for published waypoints or saved path  loaded
+            while not self.path_ready and not self.start_journey_bool:
+                key, path = self.determine_next_path(self.waypoints_dict)
+                self.broadcast_single_path(key, path)
 
 
     def get_waypoints(self):
