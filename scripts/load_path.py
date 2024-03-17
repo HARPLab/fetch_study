@@ -113,6 +113,7 @@ class PathManager():
         self.broadcast_single_path(waypoints_dict[key])
 
     def broadcast_single_path(self, path_to_broadcast):
+        at_goal = False
         try:
             while not rospy.is_shutdown() and not at_goal:
                 now = rospy.Time.now()
