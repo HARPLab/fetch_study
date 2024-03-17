@@ -8,6 +8,7 @@ import os
 import rospkg
 from tf import TransformListener
 import tf
+import numpy as np
 
 AT_GOAL_DISTANCE = .05
 
@@ -98,7 +99,7 @@ class PathManager():
             pname, pstart, pgoal = key
 
             X_INDEX, Y_INDEX = 0, 1
-            distance = math.sqrt(
+            distance = np.sqrt(
                 pow(pstart[X_INDEX] - trans[0], 2) 
                     + pow(pstart[Y_INDEX] - trans[1], 2))
 
@@ -117,7 +118,7 @@ class PathManager():
                 now = rospy.Time.now()
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
                 trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
-                distance = math.sqrt(
+                distance = np.sqrt(
                     pow(final_destination.pose.pose.position.x - trans[0], 2) 
                         + pow(final_destination.pose.pose.position.y - trans[1], 2))
 
