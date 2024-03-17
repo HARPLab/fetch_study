@@ -9,8 +9,9 @@
 
 <!-- Drive around -->
   <arg name="wheel_base" default="0.5" doc="wheelbase"/>
-  <arg name="lookahead_distance" default="2.0" doc="lookahead distance"/>
+  <arg name="lookahead_distance" default="4.0" doc="lookahead distance"/>
   <arg name="w_max" default="1.0" doc="max rotational velocity"/>
+  <arg name="v_" default="1.0" doc="linear velocity max"/>
   <arg name="position_tolerance" default="0.05" doc="position tolerance"/>
   <arg name="delta_vel" default="100.0" doc="steering angle velocity"/>
   <arg name="acc" default="100.0" doc="acceleration"/>
@@ -25,6 +26,7 @@
   <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" >
     <param name="wheelbase" value="$(arg wheel_base)"/>
     <param name="lookahead_distance" value="$(arg lookahead_distance)"/>
+    <param name="v_" value="$(arg v_)"/>
     <param name="max_rotational_velocity" value="$(arg w_max)"/>
     <param name="position_tolerance" value="$(arg position_tolerance)"/>
     <param name="steering_angle_velocity" value="$(arg delta_vel)"/>
