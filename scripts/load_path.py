@@ -13,6 +13,8 @@ AT_GOAL_DISTANCE = .05
 
 
 class PathManager():
+    waypoints_dict = {}
+
     def __init__(self):
         #### Set up the node
         rospy.init_node('waypoints_loader')
@@ -22,13 +24,13 @@ class PathManager():
         rospy.loginfo('Starting a tf listener.')
         self.listener = tf.TransformListener()
 
-        self.waypoints_dict = self.import_waypoints()
+        self.waypoints_dict = self.get_waypoints()
 
         print("Setting up points now")
         self.broadcast_waypoints_manager(waypoints_dict)
 
 
-    def import_waypoints(self):
+    def get_waypoints(self):
         output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
         output_folder = rospy.get_param('~output_folder', output_folder_default)
 
