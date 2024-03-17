@@ -18,7 +18,7 @@ def import_waypoints():
     for path_name in ['waypoints']:
         waypoints_path = output_folder_default + path_name + ".csv"
     
-        waypoints_info      = load_waypoints(waypoints_path_location)
+        waypoints_info      = load_waypoints(waypoints_path)
         
         # KEY = (name, first, last)
         key             = (path_name, waypoints_info[0], waypoints_info[-1])
