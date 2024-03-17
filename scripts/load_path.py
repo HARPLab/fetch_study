@@ -21,7 +21,7 @@ def import_waypoints():
         waypoints_info      = load_waypoints(waypoints_path)
         
         # KEY = (name, first, last)
-        key             = (path_name, waypoints_info[0], waypoints_info[-1])
+        key             = (path_name, waypoints_info.poses[0], waypoints_info.poses[-1])
         path_dict[key]  = waypoints_info
 
     return path_dict
