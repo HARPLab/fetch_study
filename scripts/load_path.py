@@ -134,7 +134,7 @@ class PathManager():
 
 
                 # Then continue on the path
-                self.waypoint_pub.publish(waypoints_info)
+                self.waypoint_pub.publish(path_to_broadcast)
                 rate.sleep()
 
 
