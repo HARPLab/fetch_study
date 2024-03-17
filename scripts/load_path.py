@@ -13,15 +13,15 @@ def import_waypoints():
     output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
 
-    waypoints_path = output_folder_default + "waypoints.csv"
     path_dict = {}
 
-    for waypoints_path_location in path_list:
+    for path_name in ['waypoints']:
+        waypoints_path = output_folder_default + path_name + ".csv"
+    
         waypoints_info      = load_waypoints(waypoints_path_location)
-        waypoints_path_name = waypoints_path_location.strip(".csv")
-
+        
         # KEY = (name, first, last)
-        key             = (waypoints_path_name, waypoints_info[0], waypoints_info[-1])
+        key             = (path_name, waypoints_info[0], waypoints_info[-1])
         path_dict[key]  = waypoints_info
 
     return path_dict
