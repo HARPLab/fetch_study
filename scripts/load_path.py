@@ -18,10 +18,9 @@ def import_waypoints():
     for path_name in ['waypoints']:
         waypoints_path = output_folder_default + path_name + ".csv"
     
-        waypoints_info      = load_waypoints(waypoints_path)
+        key, waypoints_info      = load_waypoints(waypoints_path)
         
         # KEY = (name, first, last)
-        key             = (path_name, waypoints_info.poses[0], waypoints_info.poses[-1])
         path_dict[key]  = waypoints_info
 
     return path_dict
@@ -53,7 +52,12 @@ def load_waypoints(waypoints_path):
     if waypoints == []:
         rospy.signal_shutdown('No waypoint to draw... Shutdown')
 
-    return waypoints_info
+    start   = waypoints[0]
+    goal    = waypoints[-1]
+
+    key             = (path_name, start, goal)
+
+    return key, waypoints_info
 
 def broadcast_waypoints_manager(waypoints_dict):
     # Get a path that starts where we are
@@ -66,9 +70,10 @@ def broadcast_waypoints_manager(waypoints_dict):
     for key in waypoints_dict.keys():
         pname, pstart, pgoal = key
 
+        X_INDEX, Y_INDEX = 0, 1
         distance = math.sqrt(
-            pow(pstart.pose.pose.position.x - trans[0], 2) 
-                + pow(pstart.pose.pose.position.y - trans[1], 2))
+            pow(pstart[X_INDEX] - trans[0], 2) 
+                + pow(pstart[Y_INDEX] - trans[1], 2))
 
         print("Robot "  + str(distance) + " from path start.")
         # distance_left = distance
