@@ -175,6 +175,7 @@ class PathManager():
                 print("Broadcasting single path")
                 now = rospy.Time.now()
             
+                self.frame_id = 'map'
                 self.listener.waitForTransform(self.frame_id, self.base_frame_id, now, rospy.Duration(1))
                 trans, rot = self.listener.lookupTransform(self.frame_id, self.base_frame_id, now)
  
