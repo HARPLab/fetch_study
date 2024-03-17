@@ -32,7 +32,24 @@ class PathManager():
         self.waypoints_dict = self.get_waypoints()
 
         print("Setting up points now")
-        self.broadcast_waypoints_manager(self.waypoints_dict)
+        self.setup_broadcast_waypoints_manager(self.waypoints_dict)
+
+        while True:
+            self.start_journey_bool = False
+            # Start thread to listen start_jorney 
+            # for loading the saved poses from saved_path/poses.csv
+            def wait_for_start_journey():
+                """thread worker function"""
+                try:
+                    data_from_start_journey = rospy.wait_for_message('start_journey', Empty)
+                except rospy.ROSInterruptException:
+                    return 'killed'
+                rospy.loginfo('Received path READY start_journey')
+                self.start_journey_bool = True
+
+
+            key, path = self.determine_next_path()
+            self.broadcast_single_path(key, path)
 
 
     def get_waypoints(self):
@@ -85,7 +102,7 @@ class PathManager():
 
         return key, waypoints_info
 
-    def broadcast_waypoints_manager(self, waypoints_dict):
+    def determine_next_path(self, waypoints_dict):
         # Get a path that starts where we are
         # Move along that path
         
@@ -108,7 +125,8 @@ class PathManager():
             if distance < .1:
                 target_key = key
 
-        self.broadcast_single_path(key, waypoints_dict[key])
+        return key, waypoints_dict[key]
+
 
     def broadcast_single_path(self, key, path_to_broadcast):
         pname, pstart, pgoal = key
