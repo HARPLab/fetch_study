@@ -91,7 +91,7 @@ class PathManager():
         # Move along that path
         
         now = rospy.Time.now()
-        # self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+        self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
         trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
         
         target_key = None
@@ -119,7 +119,7 @@ class PathManager():
         try:
             while not rospy.is_shutdown() and not at_goal:
                 now = rospy.Time.now()
-                # self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
                 trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                 distance = np.sqrt(
                     pow(pgoal[0] - trans[0], 2) 
