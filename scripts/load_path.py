@@ -27,7 +27,7 @@ class PathManager():
         self.waypoints_dict = self.get_waypoints()
 
         print("Setting up points now")
-        self.broadcast_waypoints_manager(waypoints_dict)
+        self.broadcast_waypoints_manager(self.waypoints_dict)
 
 
     def get_waypoints(self):
