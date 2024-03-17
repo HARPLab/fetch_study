@@ -19,6 +19,10 @@ class PathManager():
         #### Set up the node
         rospy.init_node('waypoints_loader')
         self.waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
+        self.frame_id = rospy.get_param('~goal_frame_id', 'map')
+        self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
+        self.base_frame_id = rospy.get_param('~base_frame_id', 'base_footprint')
+
         rate = rospy.Rate(1)
 
         rospy.loginfo('Starting a tf listener.')
