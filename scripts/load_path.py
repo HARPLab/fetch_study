@@ -6,9 +6,10 @@ from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped, Point, Quaternion
 import os
 import rospkg
-from tf import TransformListener
 import tf
+from tf import TransformListener
 import numpy as np
+import threading
 
 AT_GOAL_DISTANCE = .05
 
