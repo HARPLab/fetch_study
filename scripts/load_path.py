@@ -88,7 +88,8 @@ class PathManager():
     def broadcast_waypoints_manager(self, waypoints_dict):
         # Get a path that starts where we are
         # Move along that path
-
+        
+        now = rospy.Time.now()
         self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
         trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
         
