@@ -175,8 +175,8 @@ class PathManager():
                 print("Broadcasting single path")
                 now = rospy.Time.now()
             
-                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(1))
-                trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
+                self.listener.waitForTransform(self.frame_id, self.base_frame_id, now, rospy.Duration(1))
+                trans, rot = self.listener.lookupTransform(self.frame_id, self.base_frame_id, now)
  
                 distance = np.sqrt(
                     pow(pgoal[0] - trans[0], 2) 
