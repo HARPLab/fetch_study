@@ -107,8 +107,8 @@ def broadcast_single_path(path_to_broadcast):
             rate.sleep()
 
 
-        except rospy.ROSInterruptException:
-            rospy.logerr('Get KeyBoardInterrupt... Shutdown')
+    except rospy.ROSInterruptException:
+        rospy.logerr('Get KeyBoardInterrupt... Shutdown')
 
     print("Successsfully completed path, moving onto the next")
 
