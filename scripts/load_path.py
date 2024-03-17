@@ -59,13 +59,16 @@ class PathManager():
 
         # Wait for published waypoints or saved path  loaded
         while not self.path_ready and not self.start_journey_bool and paths_left > 0:
+            print("Entering main loop")
             key, path = self.determine_next_path(self.waypoints_dict)
             self.broadcast_single_path(key, path)
 
             paths_left -= 1
+            self.rate.sleep()
 
 
     def get_waypoints(self):
+        print("Get waypoints")
         output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
         output_folder = rospy.get_param('~output_folder', output_folder_default)
 
@@ -118,6 +121,7 @@ class PathManager():
     def determine_next_path(self, waypoints_dict):
         # Get a path that starts where we are
         # Move along that path
+        print("Determining next path")
         
         now = rospy.Time.now()
         self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
@@ -148,6 +152,7 @@ class PathManager():
         at_goal             = False
         try:
             while not rospy.is_shutdown() and not at_goal and self.broadcast_on:
+                print("Broadcasting single path")
                 now = rospy.Time.now()
             
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(1))
@@ -172,6 +177,28 @@ class PathManager():
             rospy.logerr('Get KeyBoardInterrupt... Shutdown')
 
         print("Successsfully completed path, moving onto the next")
+
+    # change Pose to the correct frame
+    def changePose(waypoint, target_frame):
+        if waypoint.header.frame_id == target_frame:
+            # already in correct frame
+            return waypoint
+        if not hasattr(changePose, 'listener'):
+            changePose.listener = tf.TransformListener()
+        tmp = PoseStamped()
+        tmp.header.frame_id = waypoint.header.frame_id
+        tmp.pose = waypoint.pose.pose
+        try:
+            changePose.listener.waitForTransform(
+                target_frame, tmp.header.frame_id, rospy.Time(0), rospy.Duration(3))
+            pose = changePose.listener.transformPose(target_frame, tmp)
+            ret = PoseWithCovarianceStamped()
+            ret.header.frame_id = target_frame
+            ret.pose.pose = pose.pose
+            return ret
+        except:
+            rospy.loginfo("CAN'T TRANSFORM POSE TO {} FRAME".format(target_frame))
+            exit()
 
 
 
