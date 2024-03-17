@@ -37,28 +37,27 @@ class PathManager():
 
         print("Setting up points now")
 
-        while True:
-            self.start_journey_bool = False
-            # Start thread to listen start_jorney 
-            # for loading the saved poses from saved_path/poses.csv
-            def wait_for_start_journey():
-                """thread worker function"""
-                try:
-                    data_from_start_journey = rospy.wait_for_message('start_journey', Empty)
-                except rospy.ROSInterruptException:
-                    return 'killed'
-                rospy.loginfo('Received path READY start_journey')
-                self.start_journey_bool = True
+        self.start_journey_bool = False
+        # Start thread to listen start_jorney 
+        # for loading the saved poses from saved_path/poses.csv
+        def wait_for_start_journey():
+            """thread worker function"""
+            try:
+                data_from_start_journey = rospy.wait_for_message('start_journey', Empty)
+            except rospy.ROSInterruptException:
+                return 'killed'
+            rospy.loginfo('Received path READY start_journey')
+            self.start_journey_bool = True
 
 
-            start_journey_thread = threading.Thread(target=wait_for_start_journey)
-            start_journey_thread.start()
-            rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
+        start_journey_thread = threading.Thread(target=wait_for_start_journey)
+        start_journey_thread.start()
+        rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
 
-            # Wait for published waypoints or saved path  loaded
-            while not self.path_ready and not self.start_journey_bool:
-                key, path = self.determine_next_path(self.waypoints_dict)
-                self.broadcast_single_path(key, path)
+        # Wait for published waypoints or saved path  loaded
+        while not self.path_ready and not self.start_journey_bool:
+            key, path = self.determine_next_path(self.waypoints_dict)
+            self.broadcast_single_path(key, path)
 
 
     def get_waypoints(self):
