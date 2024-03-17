@@ -66,7 +66,7 @@ class PathManager():
 
                 path_done = False
                 # Wait for published waypoints or saved path  loaded
-                while not path_done:
+                while not path_done and not rospy.is_shutdown():
                     if self.start_journey_bool:
                         try:
                             path_done = self.broadcast_single_path(key, path)
@@ -169,6 +169,10 @@ class PathManager():
 
         self.broadcast_on   = True
         at_goal             = False
+
+        # Then continue on the path
+        self.waypoint_pub.publish(path_to_broadcast)
+
         try:
             while not rospy.is_shutdown() and not at_goal and self.broadcast_on:
                 print("Broadcasting single path")
@@ -188,13 +192,12 @@ class PathManager():
                     print("Reached goal!")
                     return True
 
-                # Then continue on the path
-                self.waypoint_pub.publish(path_to_broadcast)
                 self.rate.sleep()
 
 
         except rospy.ROSInterruptException:
             rospy.logerr('Get KeyBoardInterrupt... Shutdown')
+            self.broadcast_on = False
 
         print("Successsfully completed path, moving onto the next")
 
