@@ -20,7 +20,6 @@ class PathManager():
         rate = rospy.Rate(1)
 
         rospy.loginfo('Starting a tf listener.')
-        tf = TransformListener()
         self.listener = tf.TransformListener()
 
         self.waypoints_dict = self.import_waypoints()
