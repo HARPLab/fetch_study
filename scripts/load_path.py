@@ -54,17 +54,32 @@ class PathManager():
         start_journey_thread.start()
         rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/Empty -1'")
 
-
         paths_left = len(self.waypoints_dict.keys())
 
-        # Wait for published waypoints or saved path  loaded
-        while not self.path_ready and not self.start_journey_bool and paths_left > 0:
-            print("Entering main loop")
-            key, path = self.determine_next_path(self.waypoints_dict)
-            self.broadcast_single_path(key, path)
+        key, path = self.determine_next_path(self.waypoints_dict)
 
-            paths_left -= 1
-            self.rate.sleep()
+        paths_left -= 1
+
+        key_sequence    = [key]
+        path_sequence   = [path]
+
+        for path in path_sequence:
+
+            path_done = False
+            # Wait for published waypoints or saved path  loaded
+            while not path_done:
+                if self.start_journey_bool:
+                    try:
+                        path_done = self.broadcast_single_path(key, path)
+
+                    except rospy.ROSInterruptException:
+                        rospy.logwarn("Shutting down")
+                        return 'killed'
+
+                    except rospy.ROSException as e:
+                        rospy.logwarn_throttle(5, "Ros exception: {}".format(e))
+
+                self.rate.sleep()
 
 
     def get_waypoints(self):
@@ -167,6 +182,7 @@ class PathManager():
                 if distance < AT_GOAL_DISTANCE:
                     at_goal = True
                     print("Reached goal!")
+                    return True
 
                 # Then continue on the path
                 self.waypoint_pub.publish(path_to_broadcast)
