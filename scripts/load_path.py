@@ -116,7 +116,7 @@ class PathManager():
         self.broadcast_on   = True
         at_goal             = False
         try:
-            while not rospy.is_shutdown() and not at_goal and broadcast_on:
+            while not rospy.is_shutdown() and not at_goal and self.broadcast_on:
                 now = rospy.Time.now()
             
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(1))
