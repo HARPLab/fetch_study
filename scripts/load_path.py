@@ -24,7 +24,7 @@ class PathManager():
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
         self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
 
-        rate = rospy.Rate(1)
+        self.rate = rospy.Rate(10) # Rate is in hz
 
         rospy.loginfo('Starting a tf listener.')
         self.tf         = TransformListener()
@@ -135,7 +135,7 @@ class PathManager():
 
                 # Then continue on the path
                 self.waypoint_pub.publish(path_to_broadcast)
-                rate.sleep()
+                self.rate.sleep()
 
 
         except rospy.ROSInterruptException:
