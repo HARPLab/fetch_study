@@ -32,7 +32,6 @@ class PathManager():
         self.waypoints_dict = self.get_waypoints()
 
         print("Setting up points now")
-        # self.setup_broadcast_waypoints_manager(self.waypoints_dict)
 
         while True:
             self.start_journey_bool = False
@@ -48,7 +47,7 @@ class PathManager():
                 self.start_journey_bool = True
 
 
-            key, path = self.determine_next_path()
+            key, path = self.determine_next_path(self.waypoints_dict)
             self.broadcast_single_path(key, path)
 
 
