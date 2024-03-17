@@ -109,7 +109,6 @@ class PathManager():
             if distance < .1:
                 target_key = key
 
-
         self.broadcast_single_path(key, waypoints_dict[key])
 
     def broadcast_single_path(self, key, path_to_broadcast):
@@ -127,11 +126,9 @@ class PathManager():
 
                 print("Robot "  + str(distance) + " from goal.")
                 
-
                 if distance < AT_GOAL_DISTANCE:
                     at_goal = True
                     print("Reached goal!")
-
 
                 # Then continue on the path
                 self.waypoint_pub.publish(path_to_broadcast)
