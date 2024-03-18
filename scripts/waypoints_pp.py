@@ -180,6 +180,7 @@ class FollowRoute(State):
 
             megapoint, megaroute_name = megatarget
             goal                = goal_dict[megaroute_name]
+            start               = start_dict[megaroute_name]
             gx, gy              = goal[0], goal[1]
             sx, sy              = start[0], start[1]
             path_to_broadcast   = route_dict[megaroute_name]
@@ -202,7 +203,7 @@ class FollowRoute(State):
             #               (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
             # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
             self.client.send_goal(start_goal)
-            
+
 
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
