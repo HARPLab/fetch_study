@@ -167,9 +167,8 @@ class FollowRoute(State):
             tic = time.perf_counter()
 
             megapoint, megaroute_name = megatarget
-            print(goal_dict.values())
-            print(goal_dict[megaroute_name])
-            px, py              = goal_dict[megaroute_name]
+            goal                = goal_dict[megaroute_name]
+            px, py              = goal[0], goal[1]
             path_to_broadcast   = route_dict[megaroute_name]
             # TODO verify this is good for first and last paths
 
