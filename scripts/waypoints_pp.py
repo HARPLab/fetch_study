@@ -270,7 +270,25 @@ class FollowRoute(State):
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
-            # prev_waypoint = megapoint
+
+            end_goal = MoveBaseGoal()
+            end_goal.target_pose.header.frame_id = self.frame_id
+
+            end_goal.target_pose.pose.position     = Point(goal[0], goal[1], goal[2])
+            end_goal.target_pose.pose.orientation  = Quaternion(goal[3], goal[4], goal[5], goal[6])
+            
+            self.is_primed = False
+
+            def callback_done(state, result):
+                print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
+                self.is_primed = True
+                print("Is primed to move on to next megapoint")
+
+            self.client.send_goal(end_goal, done_cb=callback_done)
+
+            while not rospy.is_shutdown() and not self.is_primed:
+                time.sleep(self.duration)
+
 
         return 'success'
 
