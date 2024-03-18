@@ -200,14 +200,15 @@ class FollowRoute(State):
 
             # waypoint_gap_dist = self.distance_between_waypts(prev_megapoint, megapoint)
 
-            if not self.distance_tolerance > 0.0:
-                self.client.wait_for_result()
-                if self.duration > 0:
-                    rospy.loginfo("Waiting for %f sec..." % self.duration)
+            # if not self.distance_tolerance > 0.0:
+            #     # self.client.wait_for_result()
+            #     if self.duration > 0:
+            #         rospy.loginfo("Waiting for %f sec..." % self.duration)
     
-                time.sleep(self.duration)
+            #     time.sleep(self.duration)
 
-            else:
+            # else:
+            if True:
                 # This is the loop which exist when the robot is near a certain GOAL point.
                 distance = 10
                 while (distance > self.distance_tolerance):
