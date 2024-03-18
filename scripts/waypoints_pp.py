@@ -112,7 +112,7 @@ def import_waypoints(path_name, waypoints_path):
         
         waypoints_info.poses.append(pose)
     
-    rospy.loginfo('Fetched ' + str(len(waypoints)) + ' waypoints from ' + str(waypoints_path))
+    print('\nFetched ' + str(len(waypoints)) + ' waypoints from ' + str(waypoints_path))
 
     # if waypoints == []:
     #     rospy.signal_shutdown('No waypoint to draw... Shutdown')
