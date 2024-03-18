@@ -45,6 +45,8 @@ velocity_default = 1.0
 AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
 
+waypoint_pub        = None
+
 # change Pose to the correct frame
 def changePose(waypoint, target_frame):
     if waypoint.header.frame_id == target_frame:
@@ -200,7 +202,10 @@ class FollowRoute(State):
                     if counter % 10 == 0:
                         print("publishing path")
 
-                    waypoint_pub.publish(path_to_broadcast)
+                    try:
+                        waypoint_pub.publish(path_to_broadcast)
+                    except:
+                        self.waypoint_pub.publish(path_to_broadcast)
 
                 now = rospy.Time.now()
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
