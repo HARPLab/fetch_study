@@ -489,7 +489,7 @@ def main():
     sm = StateMachine(outcomes=['success'])
     with sm:
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
-                         transitions={'success': 'FOLLOW_PATH', 'killed': 'death'},
+                         transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub),
                          transitions={'success': 'PATH_COMPLETE'},
