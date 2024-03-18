@@ -130,7 +130,7 @@ class FollowRoute(State):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
-        self.base_frame_id = rospy.get_param('~base_frame_id', 'base_footprint')
+        self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
         self.duration = rospy.get_param('~wait_duration', 0.0)
         # Get a move_base action client
         self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
