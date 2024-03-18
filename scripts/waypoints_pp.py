@@ -228,7 +228,7 @@ class FollowRoute(State):
                 else: #### NEW MORE ELABORATE METHOD
                     if counter % 10 == 0:
                         # print("publishing path")
-                        print("pass")
+                        # print("pass")
                         pass
 
 
