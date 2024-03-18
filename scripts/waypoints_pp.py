@@ -71,7 +71,7 @@ def get_exp_sequence(exp_option):
     else:
         return ['ab', 'ba']
 
-def get_waypoints():
+def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
     output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
@@ -79,17 +79,16 @@ def get_waypoints():
     for path_name in ['ab', 'ba']:
         waypoints_path = output_folder_default + path_name + ".csv"
     
-        key, waypoints_info, start, goal      = load_waypoints(path_name, waypoints_path)
+        key, waypoints_info, start, goal      = import_waypoints(path_name, waypoints_path)
         
         # KEY = (name, first, last)
         route_dict[key]     = waypoints_info
         start_dict[key]     = start
         goal_dict[key]      = goal
 
-    return path_dict
 
 
-def load_waypoints(path_name, waypoints_path):
+def import_waypoints(path_name, waypoints_path):
     # Read the waypoints_file
     waypoints = []
     waypoints_file = open(waypoints_path)
@@ -306,7 +305,7 @@ class GetRoute(State):
         ready_thread = threading.Thread(target=wait_for_path_ready)
         ready_thread.start()
 
-        route_dict      = get_waypoints()
+        initialize_waypoints()
         print("Imported all waypoint options")
 
         self.start_journey_bool = False
