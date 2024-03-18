@@ -232,7 +232,7 @@ class FollowRoute(State):
                 step_time_elapsed = toc - tic
                 step_time_elapsed = str(step_time_elapsed)
 
-                report = [trans[0], trans[1], step_time_elapsed]
+                report = [trans[0], trans[1], step_time_elapsed, str(rospy.Time.now())]
                 mission_report.append(report)
 
                 time.sleep(self.duration)
@@ -453,7 +453,7 @@ class RouteComplete(State):
             file.write("X, Y, time_to_reach\n")
             for report in mission_report:
                 if ',' in report:
-                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + '\n')
+                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + '\n')
                 else:
                     file.write(str(report[0]) + ',' + str(report[1]) + ',' + report + ", " + "\n")
             
