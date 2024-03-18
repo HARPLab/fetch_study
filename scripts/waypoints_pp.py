@@ -230,7 +230,7 @@ class FollowRoute(State):
             counter = 0
 
             self.has_reached = False
-            while not has_reached and not rospy.is_shutdown():
+            while not self.has_reached and not rospy.is_shutdown():
                 counter += 1
 
                 if (distance <= self.distance_tolerance):
