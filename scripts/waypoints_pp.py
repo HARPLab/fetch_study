@@ -203,10 +203,6 @@ class FollowRoute(State):
                         print("publishing path")
 
                     self.waypoint_pub.publish(path_to_broadcast)
-                    print("~~~")
-                    print(path_to_broadcast)
-                    exit()
-
 
                 now = rospy.Time.now()
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
@@ -255,7 +251,7 @@ class GetRoute(State):
         # Subscribe to pose message to get new waypoints
         # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
         # Create publisher to publish waypoints as pose array so that you can see them in rviz, etc.
-        self.posearray_topic = rospy.get_param('~posearray_topic', '/waypoints')
+        self.posearray_topic = rospy.get_param('~posearray_topic', '/megapoints')
         self.poseArray_publisher = rospy.Publisher(self.posearray_topic, PoseArray, queue_size=1)
 
         # Path for saving and retrieving the pose.csv file
