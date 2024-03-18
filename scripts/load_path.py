@@ -14,6 +14,7 @@ from std_msgs.msg import Empty, String
 
 AT_GOAL_DISTANCE = .05
 
+smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
 
 class PathManager():
     waypoints_dict = {}
