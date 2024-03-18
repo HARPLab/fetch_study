@@ -78,7 +78,7 @@ def get_waypoints():
     for path_name in ['ab', 'ba']:
         waypoints_path = output_folder_default + path_name + ".csv"
     
-        key, waypoints_info      = self.load_waypoints(path_name, waypoints_path)
+        key, waypoints_info      = load_waypoints(path_name, waypoints_path)
         
         # KEY = (name, first, last)
         path_dict[key]  = waypoints_info
@@ -303,6 +303,9 @@ class GetRoute(State):
         ready_thread = threading.Thread(target=wait_for_path_ready)
         ready_thread.start()
 
+        route_dict      = get_waypoints()
+        print("Imported all waypoint options")
+
         self.start_journey_bool = False
 
         # Start thread to listen start_jorney 
@@ -316,7 +319,6 @@ class GetRoute(State):
                 return 'killed'
             rospy.loginfo('Received path READY start_journey')
 
-            route_dict      = get_waypoints()
             route_sequence  = get_exp_sequence(data_from_start_journey)
 
             first_there = False
