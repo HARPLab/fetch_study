@@ -291,7 +291,9 @@ class FollowRoute(State):
             pose.pose.position      = Point(end[0], end[1], end[2])
             pose.pose.orientation   = Quaternion(end[3], end[4], end[5], end[6])
             
-            self.waypoint_pub.publish([pose])
+            waypoints_info.append(pose)
+
+            self.waypoint_pub.publish(waypoints_info)
 
 
             end_goal = MoveBaseGoal()
