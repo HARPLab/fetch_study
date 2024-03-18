@@ -71,9 +71,10 @@ def changePose(waypoint, target_frame):
 
 def get_exp_sequence(exp_option):
     # exp_option = "data: "1""
-        
-    exp_option.replace("data: ", "")
-    exp_option.strip('"')
+    
+    exp_option = exp_option.data
+    # exp_option.replace("data: ", "")
+    # exp_option.strip('"')
 
     print("EXP_OPTION:~" + str(exp_option) + "~")
 
