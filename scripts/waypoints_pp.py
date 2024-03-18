@@ -188,9 +188,10 @@ class FollowRoute(State):
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
             
-            if False or "OLD SCHOOL JUST GOAL MODE":
+            if False and "OLD SCHOOL JUST GOAL MODE":
                 # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
                 # self.client.send_goal(goal)
+                print("Wrong slot, not publishing")
                 pass
             else: #### NEW MORE ELABORATE METHOD
                 print("publishing this path")
