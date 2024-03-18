@@ -176,6 +176,7 @@ class FollowRoute(State):
         # prev_waypoint = waypoints[0]
 
         for megatarget, aux_data in zip(megapoints, auxilary_data):
+            print("OVERALL TARGET UPDATE!")
             tic = time.perf_counter()
 
             megapoint, megaroute_name = megatarget
