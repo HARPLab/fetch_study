@@ -271,26 +271,28 @@ class FollowRoute(State):
             time_elapsed = toc - tic
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
-
+            self.is_primed = False
 
             end_goal = MoveBaseGoal()
             end_goal.target_pose.header.frame_id   = self.frame_id
             end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
             end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
             
-            self.is_primed = False
+            self.is_primed_end = False
             print("unprimed")
 
-            def callback_done(state, result):
+            def callback_done_end(state, result):
                 print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-                self.is_primed = True
+                self.is_primed_end = True
                 print("Is primed to move on to next megapoint")
 
-            self.client.send_goal(end_goal, done_cb=callback_done)
+            self.client.send_goal(end_goal, done_cb=callback_done_end)
 
-            while not rospy.is_shutdown() and not self.is_primed:
+            while not rospy.is_shutdown() and not self.is_primed_end:
                 time.sleep(self.duration)
-                print("Okay, we got there")
+                # print("Okay, we got there")
+
+            print("Now we can move on")
 
 
         return 'success'
@@ -401,7 +403,6 @@ class GetRoute(State):
 
             first_there = False
             for route_key in route_sequence:
-                print(route_key, route_dict.keys())
                 waypoints_info  = route_dict[route_key]
                 start           = start_dict[route_key]
                 goal            = goal_dict[route_key]
