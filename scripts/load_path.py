@@ -49,6 +49,7 @@ def main():
 
     while not rospy.is_shutdown():
         waypoint_pub.publish(waypoints_info)
+        print(waypoints_info)
         rate.sleep()
 
 
