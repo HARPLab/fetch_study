@@ -181,6 +181,7 @@ class FollowRoute(State):
             megapoint, megaroute_name = megatarget
             goal                = goal_dict[megaroute_name]
             gx, gy              = goal[0], goal[1]
+            sx, sy              = start[0], start[1]
             path_to_broadcast   = route_dict[megaroute_name]
             # TODO verify this is good for first and last paths
 
@@ -192,11 +193,17 @@ class FollowRoute(State):
             # self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
 
-            # Otherwise publish next waypoint as goal
-            # goal = MoveBaseGoal()
-            # goal.target_pose.header.frame_id = self.frame_id
-            # goal.target_pose.pose.position = waypoint.pose.pose.position
-            # goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
+
+            start_goal = MoveBaseGoal()
+            start.target_pose.header.frame_id = self.frame_id
+            start.target_pose.pose.position = waypoint.pose.pose.position
+            start.target_pose.pose.orientation = waypoint.pose.pose.orientation
+            # rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
+            #               (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
+            # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
+            self.client.send_goal(start_goal)
+            
+
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
 
