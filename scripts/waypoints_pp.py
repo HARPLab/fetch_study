@@ -128,6 +128,9 @@ def import_waypoints(path_name, waypoints_path):
 class FollowRoute(State):
     def __init__(self):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
+
+        self.waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
+
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
         self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
@@ -142,8 +145,6 @@ class FollowRoute(State):
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
         self.distance_tolerance = rospy.get_param('waypoint_distance_tolerance', 0.0)
-
-        self.waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -200,6 +201,7 @@ class FollowRoute(State):
                 else: #### NEW MORE ELABORATE METHOD
                     if counter % 10 == 0:
                         print("publishing path")
+
                     self.waypoint_pub.publish(path_to_broadcast)
 
 
@@ -287,7 +289,7 @@ class GetRoute(State):
         global megapoints
         megapoints = []  # the waypoint queue
         # publish empty waypoint queue as pose array so that you can see them the change in rviz, etc.
-        self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
+        self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(megapoints))
 
     def execute(self, userdata):
         global megapoints, route_dict, route_sequence

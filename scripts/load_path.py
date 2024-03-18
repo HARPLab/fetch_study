@@ -14,6 +14,7 @@ from std_msgs.msg import Empty, String
 
 AT_GOAL_DISTANCE = .05
 
+
 class PathManager():
     waypoints_dict = {}
     path_ready = False
