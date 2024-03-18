@@ -176,7 +176,6 @@ class FollowRoute(State):
         # prev_waypoint = waypoints[0]
 
         for megatarget, aux_data in zip(megapoints, auxilary_data):
-            print("OVERALL TARGET UPDATE!")
             tic = time.perf_counter()
 
             megapoint, megaroute_name = megatarget
@@ -191,6 +190,12 @@ class FollowRoute(State):
             if not megapoints:
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
+
+            print("OVERALL TARGET UPDATE!")
+            print("Start")
+            print(start)
+            print("Goal")
+            print(goal)
 
             # self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
@@ -380,9 +385,9 @@ class GetRoute(State):
                 start           = start_dict[route_key]
                 goal            = goal_dict[route_key]
 
-                if first_there == False:
-                    megapoints.append((start, route_key))
-                    first_there = True
+                # if first_there == False:
+                #     megapoints.append((start, route_key))
+                #     first_there = True
 
                 megapoints.append((goal, route_key))
                 auxilary_data.append([route_key, waypoints_info, start, goal])
