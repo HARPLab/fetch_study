@@ -190,8 +190,11 @@ class FollowRoute(State):
             
             if False or "OLD SCHOOL JUST GOAL MODE":
                 # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
-                self.client.send_goal(goal)
+                # self.client.send_goal(goal)
+                pass
             else: #### NEW MORE ELABORATE METHOD
+                print("publishing this path")
+                print(path_to_broadcast)
                 self.waypoint_pub.publish(path_to_broadcast)
 
 
