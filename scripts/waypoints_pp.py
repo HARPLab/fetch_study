@@ -25,7 +25,7 @@ import dynamic_reconfigure.client
 import numpy as np
 from nav_msgs.msg import Path
 
-smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
+# smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
 
 # Waypoints container
 waypoints       = []
