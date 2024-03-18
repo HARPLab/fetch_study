@@ -228,8 +228,15 @@ class FollowRoute(State):
 
             distance = 10
             counter = 0
-            while (distance > self.distance_tolerance) and not rospy.is_shutdown():
+
+            self.has_reached = False
+            while not has_reached and not rospy.is_shutdown():
                 counter += 1
+
+                if (distance <= self.distance_tolerance):
+                    self.has_reached = True 
+                    break
+
                 if False and "OLD SCHOOL JUST GOAL MODE":
                     # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
                     # self.client.send_goal(goal)
@@ -267,11 +274,11 @@ class FollowRoute(State):
 
                 time.sleep(self.duration)
 
-            # HALT THE ROBOT
-            cmd = Twist()
-            cmd.linear.x = 0.0
-            cmd.angular.z = 0.0
-            self.cmd_vel_publisher.publish(cmd)
+            # # HALT THE ROBOT
+            # cmd = Twist()
+            # cmd.linear.x = 0.0
+            # cmd.angular.z = 0.0
+            # self.cmd_vel_publisher.publish(cmd)
 
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
@@ -281,41 +288,40 @@ class FollowRoute(State):
             self.is_primed = False
 
 
-            # Generate the waypoints_info
-            waypoints_info = Path()
-            waypoints_info.header.frame_id = 'map'
-            waypoints_info.header.stamp = rospy.Time.now()
+            # # Generate the waypoints_info
+            # waypoints_info = Path()
+            # waypoints_info.header.frame_id = 'map'
+            # waypoints_info.header.stamp = rospy.Time.now()
 
-            pose = PoseStamped()
-            pose.header.frame_id    = 'map'
-            pose.pose.position      = Point(end[0], end[1], end[2])
-            pose.pose.orientation   = Quaternion(end[3], end[4], end[5], end[6])
+            # pose = PoseStamped()
+            # pose.header.frame_id    = 'map'
+            # pose.pose.position      = Point(end[0], end[1], end[2])
+            # pose.pose.orientation   = Quaternion(end[3], end[4], end[5], end[6])
             
-            waypoints_info.poses.append(pose)
+            # waypoints_info.poses.append(pose)
+            # self.waypoint_pub.publish(waypoints_info)
 
-            self.waypoint_pub.publish(waypoints_info)
 
-
-            end_goal = MoveBaseGoal()
-            end_goal.target_pose.header.frame_id   = self.frame_id
-            end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
-            end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
+            # end_goal = MoveBaseGoal()
+            # end_goal.target_pose.header.frame_id   = self.frame_id
+            # end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
+            # end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
             
-            self.is_primed_end = False
-            print("unprimed")
+            # self.is_primed_end = False
+            # print("unprimed")
 
-            def callback_done_end(state, result):
-                print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-                self.is_primed_end = True
-                print("Is primed to move on to next megapoint")
+            # def callback_done_end(state, result):
+            #     print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
+            #     self.is_primed_end = True
+            #     print("Is primed to move on to next megapoint")
 
-            self.client.send_goal(end_goal, done_cb=callback_done_end)
+            # self.client.send_goal(end_goal, done_cb=callback_done_end)
 
-            while not rospy.is_shutdown() and not self.is_primed_end:
-                time.sleep(self.duration)
-                # print("Okay, we got there")
+            # while not rospy.is_shutdown() and not self.is_primed_end:
+            #     time.sleep(self.duration)
+            #     # print("Okay, we got there")
 
-            print("Now we can move on")
+            # print("Now we can move on")
 
 
         return 'success'
