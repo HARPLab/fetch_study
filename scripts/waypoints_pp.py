@@ -191,7 +191,7 @@ class FollowRoute(State):
 
             distance = 10
             counter = 0
-            while (distance > self.distance_tolerance):
+            while (distance > self.distance_tolerance) and not rospy.is_shutdown():
                 counter += 1
                 if False and "OLD SCHOOL JUST GOAL MODE":
                     # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
@@ -203,6 +203,7 @@ class FollowRoute(State):
                         print("publishing path")
 
                     self.waypoint_pub.publish(path_to_broadcast)
+                    print(path_to_broadcast)
 
 
                 now = rospy.Time.now()
