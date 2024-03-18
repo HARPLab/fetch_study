@@ -25,6 +25,7 @@ import dynamic_reconfigure.client
 import numpy as np
 from nav_msgs.msg import Path
 
+smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
 
 # Waypoints container
 waypoints       = []
@@ -69,7 +70,7 @@ def get_exp_sequence(exp_option):
     if exp_option == 0:
         return ['ba', 'ab']
     else:
-        return ['ab', 'ba']
+        return ['ab', 'ba', 'ac', 'cb']
 
 def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
@@ -160,8 +161,13 @@ class FollowRoute(State):
         # Execute waypoints each in sequence
         # prev_waypoint = waypoints[0]
 
-        for megapoint, aux_data in zip(megapoints, auxilary_data):
+        for megatarget, aux_data in zip(megapoints, auxilary_data):
             tic = time.perf_counter()
+
+            megapoint, megaroute_name = megatarget
+            px, py              = goal_dict[megaroute_name]
+            path_to_broadcast   = route_dict[megaroute_name]
+            # TODO verify this is good for first and last paths
 
             # Break if preempted
             if not megapoints:
@@ -177,7 +183,7 @@ class FollowRoute(State):
             # goal.target_pose.pose.position = waypoint.pose.pose.position
             # goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
-                          (megapoint.pose.pose.position.x, megapoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
+                          (px, py, -1))
             
             if False or "OLD SCHOOL JUST GOAL MODE":
                 # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
@@ -331,11 +337,11 @@ class GetRoute(State):
                 goal            = goal_dict[route_key]
 
                 if first_there == False:
-                    megapoints.append(start)
+                    megapoints.append((start, route_key))
                     first_there = True
 
-                megapoints.append(goal)
-                auxilary_data.append([route_key, start, goal])
+                megapoints.append((goal, route_key))
+                auxilary_data.append([route_key, waypoints_info, start, goal])
 
 
 
