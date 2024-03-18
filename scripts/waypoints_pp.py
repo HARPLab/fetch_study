@@ -202,17 +202,18 @@ class FollowRoute(State):
                     pass
                 else: #### NEW MORE ELABORATE METHOD
                     if counter % 10 == 0:
-                        print("publishing path")
+                        # print("publishing path")
+                        pass
 
                     self.waypoint_pub.publish(path_to_broadcast)
 
                 now = rospy.Time.now()
-                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
-                trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
+                self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
+                trans, rot = self.listener.lookupTransform('map', 'base_link', now)
                 distance = math.sqrt(
                     pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
 
-                if counter % 10 == 0:
+                if counter % 100 == 0:
                     print("Robot "  + str(distance) + " from goal.")
 
                 toc = time.perf_counter()
