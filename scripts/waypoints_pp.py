@@ -203,7 +203,9 @@ class FollowRoute(State):
                         print("publishing path")
 
                     self.waypoint_pub.publish(path_to_broadcast)
+                    print("~~~")
                     print(path_to_broadcast)
+                    exit()
 
 
                 now = rospy.Time.now()
