@@ -46,6 +46,7 @@ AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
 
 waypoint_pub        = None
+cmd_vel_publisher   = None
 
 # change Pose to the correct frame
 def changePose(waypoint, target_frame):
@@ -137,7 +138,7 @@ def import_waypoints(path_name, waypoints_path):
 
 
 class FollowRoute(State):
-    def __init__(self, waypub):
+    def __init__(self, waypub, cmd_vel_pub):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
@@ -265,6 +266,11 @@ class FollowRoute(State):
 
                 time.sleep(self.duration)
 
+            # HALT THE ROBOT
+            cmd = Twist()
+            cmd.linear.x = 0.0
+            cmd.angular.z = 0.0
+            self.cmd_vel_publisher.publish(cmd)
 
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
@@ -272,6 +278,7 @@ class FollowRoute(State):
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
             self.is_primed = False
+
 
             end_goal = MoveBaseGoal()
             end_goal.target_pose.header.frame_id   = self.frame_id
@@ -512,14 +519,15 @@ class RouteComplete(State):
 
 def main():
     rospy.init_node('follow_route')
-    waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
+    waypoint_pub            = rospy.Publisher('/waypoints', Path, queue_size=1)
+    cmd_vel_publisher       = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
     with sm:
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
-        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub),
+        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub. cmd_vel_publisher),
                          transitions={'success': 'PATH_COMPLETE'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('PATH_COMPLETE', RouteComplete(),
