@@ -188,15 +188,21 @@ class FollowRoute(State):
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
 
+            print(path_to_broadcast)
+            exit()
+
             distance = 10
+            counter = 0
             while (distance > self.distance_tolerance):
+                counter += 1
                 if False and "OLD SCHOOL JUST GOAL MODE":
                     # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
                     # self.client.send_goal(goal)
                     print("Wrong slot, not publishing")
                     pass
                 else: #### NEW MORE ELABORATE METHOD
-                    print("publishing path")
+                    if counter % 10 == 0:
+                        print("publishing path")
                     self.waypoint_pub.publish(path_to_broadcast)
 
 
@@ -206,7 +212,8 @@ class FollowRoute(State):
                 distance = math.sqrt(
                     pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
 
-                print("Robot "  + str(distance) + " from goal.")
+                if counter % 10 == 0:
+                    print("Robot "  + str(distance) + " from goal.")
 
                 toc = time.perf_counter()
                 step_time_elapsed = toc - tic
