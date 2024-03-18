@@ -221,7 +221,7 @@ class FollowRoute(State):
 
                     toc = time.perf_counter()
                     step_time_elapsed = toc - tic
-                    step_time_elapsed = str(time_elapsed)
+                    step_time_elapsed = str(step_time_elapsed)
 
                     report = [trans[0], trans[1], step_time_elapsed]
                     mission_report.append(report)
