@@ -208,8 +208,12 @@ class FollowRoute(State):
                     self.waypoint_pub.publish(path_to_broadcast)
 
                 now = rospy.Time.now()
-                self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
-                trans, rot = self.listener.lookupTransform('map', 'base_link', now)
+                # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
+                # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
+
+                t = self.listener.getLatestCommonTime("/base_link", "/map")
+                trans, rot = self.tf.lookupTransform("/base_link", "/map", t)
+
                 distance = math.sqrt(
                     pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
 
