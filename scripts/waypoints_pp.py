@@ -151,8 +151,8 @@ class FollowRoute(State):
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
 
-        self.waypoint_pub = waypub
-        self.cmd_vel_publisher = cmd_vel_pub
+        self.waypoint_pub       = waypub
+        self.cmd_vel_publisher  = cmd_vel_pub
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -223,7 +223,6 @@ class FollowRoute(State):
                 print("Is primed to move on")
 
             self.client.send_goal(start_goal, done_cb=callback_done)
-
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
 
@@ -280,6 +279,19 @@ class FollowRoute(State):
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
             self.is_primed = False
+
+
+            # Generate the waypoints_info
+            waypoints_info = Path()
+            waypoints_info.header.frame_id = 'map'
+            waypoints_info.header.stamp = rospy.Time.now()
+
+            pose = PoseStamped()
+            pose.header.frame_id    = 'map'
+            pose.pose.position      = Point(end[0], end[1], end[2])
+            pose.pose.orientation   = Quaternion(end[3], end[4], end[5], end[6])
+            
+            self.waypoint_pub.publish([pose])
 
 
             end_goal = MoveBaseGoal()
