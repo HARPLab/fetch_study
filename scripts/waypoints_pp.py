@@ -219,7 +219,11 @@ class FollowRoute(State):
                         pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
                     print("Robot "  + str(distance) + " from goal.")
 
-                    report = [trans[0], trans[1], time_elapsed]
+                    toc = time.perf_counter()
+                    step_time_elapsed = toc - tic
+                    step_time_elapsed = str(time_elapsed)
+
+                    report = [trans[0], trans[1], step_time_elapsed]
                     mission_report.append(report)
 
 
