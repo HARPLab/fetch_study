@@ -27,12 +27,15 @@ from nav_msgs.msg import Path
 
 
 # Waypoints container
-waypoints        = []
-auxilary_data    = []
-mission_report   = []
+waypoints       = []
+auxilary_data   = []
+mission_report  = []
 
-route_dict       = {}
-route_sequence   = []
+route_dict      = {}
+route_sequence  = []
+start_dict      = {}    
+goal_dict       = {}
+
 
 velocity_default = 1.0
 
@@ -73,15 +76,15 @@ def get_waypoints():
     output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
 
-    path_dict = {}
-
     for path_name in ['ab', 'ba']:
         waypoints_path = output_folder_default + path_name + ".csv"
     
-        key, waypoints_info      = load_waypoints(path_name, waypoints_path)
+        key, waypoints_info, start, goal      = load_waypoints(path_name, waypoints_path)
         
         # KEY = (name, first, last)
-        path_dict[key]  = waypoints_info
+        route_dict[key]     = waypoints_info
+        start_dict[key]     = start
+        goal_dict[key]      = goal
 
     return path_dict
 
@@ -115,9 +118,9 @@ def load_waypoints(path_name, waypoints_path):
     start   = tuple(waypoints[0])
     goal    = tuple(waypoints[-1])
 
-    key             = (path_name, start, goal)
+    key             = path_name
 
-    return key, waypoints_info
+    return key, waypoints_info, start, goal
 
 
 class FollowRoute(State):
@@ -323,6 +326,7 @@ class GetRoute(State):
 
             first_there = False
             for route_key in route_sequence:
+                print(route_key, route_dict.keys())
                 key, waypoints_info = route_dict[route_key]
                 (path_name, start, goal) = key
 
