@@ -49,7 +49,6 @@ def main():
 
     while not rospy.is_shutdown():
         waypoint_pub.publish(waypoints_info)
-        # print(waypoints_info)
         rate.sleep()
 
 
@@ -67,7 +66,6 @@ if __name__ == "__main__":
         waypoints_info = load_waypoints(waypoints_path)
 
         while not rospy.is_shutdown():
-            print(waypoints_info)
             waypoint_pub.publish(waypoints_info)
             rate.sleep()
     except rospy.ROSInterruptException:
