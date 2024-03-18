@@ -86,7 +86,7 @@ def get_waypoints():
     return path_dict
 
 
-def load_waypoints(self, path_name, waypoints_path):
+def load_waypoints(path_name, waypoints_path):
     # Read the waypoints_file
     waypoints = []
     waypoints_file = open(waypoints_path)
