@@ -188,9 +188,6 @@ class FollowRoute(State):
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
 
-            print(path_to_broadcast)
-            exit()
-
             distance = 10
             counter = 0
             while (distance > self.distance_tolerance):
@@ -221,7 +218,7 @@ class FollowRoute(State):
 
                 report = [trans[0], trans[1], step_time_elapsed]
                 mission_report.append(report)
-                
+
                 time.sleep(self.duration)
 
 
