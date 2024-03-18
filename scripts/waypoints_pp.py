@@ -221,6 +221,8 @@ class FollowRoute(State):
 
                 report = [trans[0], trans[1], step_time_elapsed]
                 mission_report.append(report)
+                
+                time.sleep(self.duration)
 
 
             mission_report.append("REACHED " + str(megapoint))
