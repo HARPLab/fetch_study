@@ -67,10 +67,9 @@ def changePose(waypoint, target_frame):
         exit()
 
 def get_exp_sequence(exp_option):
-    if exp_option == 0:
-        return ['ba', 'ab']
-    else:
-        return ['ab', 'ba', 'ac', 'cb']
+    print("~" + exp_option + "~")
+        
+    return ['ab', 'ba', 'ac', 'cb']
 
 def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
@@ -80,8 +79,10 @@ def initialize_waypoints():
     for path_name in ['ab', 'ba']:
         waypoints_path = output_folder_default + path_name + ".csv"
     
-        key, waypoints_info, start, goal      = import_waypoints(path_name, waypoints_path)
+        waypoints_info, start, goal      = import_waypoints(path_name, waypoints_path)
         
+        key = path_name
+
         # KEY = (name, first, last)
         route_dict[key]     = waypoints_info
         start_dict[key]     = start
@@ -120,7 +121,7 @@ def import_waypoints(path_name, waypoints_path):
 
     key             = path_name
 
-    return key, waypoints_info, start, goal
+    return waypoints_info, start, goal
 
 
 class FollowRoute(State):
