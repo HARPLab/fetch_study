@@ -37,6 +37,7 @@ route_sequence  = []
 start_dict      = {}    
 goal_dict       = {}
 
+path_names_list = ['ab', 'ba', 'ac', 'cb']
 
 velocity_default = 1.0
 
@@ -76,7 +77,7 @@ def initialize_waypoints():
     output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
 
-    for path_name in ['ab', 'ba']:
+    for path_name in path_names_list:
         waypoints_path = output_folder_default + path_name + ".csv"
     
         waypoints_info, start, goal      = import_waypoints(path_name, waypoints_path)
