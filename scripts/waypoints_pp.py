@@ -187,45 +187,33 @@ class FollowRoute(State):
             # goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
                           (gx, gy, -1))
-            
-            if False and "OLD SCHOOL JUST GOAL MODE":
-                # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
-                # self.client.send_goal(goal)
-                print("Wrong slot, not publishing")
-                pass
-            else: #### NEW MORE ELABORATE METHOD
-                print("publishing this path")
-                print(path_to_broadcast)
-                self.waypoint_pub.publish(path_to_broadcast)
+
+            distance = 10
+            while (distance > self.distance_tolerance):
+                if False and "OLD SCHOOL JUST GOAL MODE":
+                    # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
+                    # self.client.send_goal(goal)
+                    print("Wrong slot, not publishing")
+                    pass
+                else: #### NEW MORE ELABORATE METHOD
+                    print("publishing path")
+                    self.waypoint_pub.publish(path_to_broadcast)
 
 
-            # waypoint_gap_dist = self.distance_between_waypts(prev_megapoint, megapoint)
+                now = rospy.Time.now()
+                self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+                trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
+                distance = math.sqrt(
+                    pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
 
-            # if not self.distance_tolerance > 0.0:
-            #     # self.client.wait_for_result()
-            #     if self.duration > 0:
-            #         rospy.loginfo("Waiting for %f sec..." % self.duration)
-    
-            #     time.sleep(self.duration)
+                print("Robot "  + str(distance) + " from goal.")
 
-            # else:
-            if True:
-                # This is the loop which exist when the robot is near a certain GOAL point.
-                distance = 10
-                while (distance > self.distance_tolerance):
-                    now = rospy.Time.now()
-                    self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
-                    trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
-                    distance = math.sqrt(
-                        pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
-                    print("Robot "  + str(distance) + " from goal.")
+                toc = time.perf_counter()
+                step_time_elapsed = toc - tic
+                step_time_elapsed = str(step_time_elapsed)
 
-                    toc = time.perf_counter()
-                    step_time_elapsed = toc - tic
-                    step_time_elapsed = str(step_time_elapsed)
-
-                    report = [trans[0], trans[1], step_time_elapsed]
-                    mission_report.append(report)
+                report = [trans[0], trans[1], step_time_elapsed]
+                mission_report.append(report)
 
 
             mission_report.append("REACHED " + str(megapoint))
