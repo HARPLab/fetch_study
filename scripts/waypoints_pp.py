@@ -152,6 +152,7 @@ class FollowRoute(State):
         self.client.wait_for_server()
 
         self.waypoint_pub = waypub
+        self.cmd_vel_publisher = cmd_vel_pub
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
