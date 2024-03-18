@@ -128,7 +128,7 @@ def import_waypoints(path_name, waypoints_path):
 
 
 class FollowRoute(State):
-    def __init__(self):
+    def __init__(self, waypub):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
@@ -139,6 +139,8 @@ class FollowRoute(State):
         self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
+
+        self.waypoint_pub = waypub
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -202,10 +204,7 @@ class FollowRoute(State):
                     if counter % 10 == 0:
                         print("publishing path")
 
-                    try:
-                        waypoint_pub.publish(path_to_broadcast)
-                    except:
-                        self.waypoint_pub.publish(path_to_broadcast)
+                    self.waypoint_pub.publish(path_to_broadcast)
 
                 now = rospy.Time.now()
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
@@ -246,10 +245,12 @@ def convert_PoseWithCovArray_to_PoseArray(waypoints):
 
 
 class GetRoute(State):
-    def __init__(self):
+    def __init__(self, waypub):
         State.__init__(self, outcomes=['success', 'killed'], input_keys=['waypoints'], output_keys=['waypoints'])
         # Parameters
         self.goal_frame_id = rospy.get_param('~goal_frame_id', 'map')
+
+        self.waypoint_pub = waypub
 
         # Subscribe to pose message to get new waypoints
         # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
@@ -454,10 +455,10 @@ def main():
 
     sm = StateMachine(outcomes=['success'])
     with sm:
-        StateMachine.add('GET_PATH', GetRoute(),
+        StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
-        StateMachine.add('FOLLOW_PATH', FollowRoute(),
+        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub),
                          transitions={'success': 'PATH_COMPLETE'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('PATH_COMPLETE', RouteComplete(),
