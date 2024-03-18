@@ -186,6 +186,8 @@ class FollowRoute(State):
             path_to_broadcast   = route_dict[megaroute_name]
             # TODO verify this is good for first and last paths
 
+            end = goal
+
             # Break if preempted
             if not megapoints:
                 rospy.loginfo('The waypoint queue has been reset.')
@@ -272,12 +274,12 @@ class FollowRoute(State):
 
 
             end_goal = MoveBaseGoal()
-            end_goal.target_pose.header.frame_id = self.frame_id
-
-            end_goal.target_pose.pose.position     = Point(goal[0], goal[1], goal[2])
-            end_goal.target_pose.pose.orientation  = Quaternion(goal[3], goal[4], goal[5], goal[6])
+            end_goal.target_pose.header.frame_id   = self.frame_id
+            end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
+            end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
             
             self.is_primed = False
+            print("unprimed")
 
             def callback_done(state, result):
                 print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
@@ -288,6 +290,7 @@ class FollowRoute(State):
 
             while not rospy.is_shutdown() and not self.is_primed:
                 time.sleep(self.duration)
+                print("Okay, we got there")
 
 
         return 'success'
