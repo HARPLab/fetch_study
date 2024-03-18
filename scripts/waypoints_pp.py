@@ -11,6 +11,7 @@ import actionlib
 from smach import State, StateMachine
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray, PointStamped, PoseStamped, Point, Quaternion
+from geometry_msgs.msg import Twist
 from std_msgs.msg import Empty, String
 from tf import TransformListener
 import tf
