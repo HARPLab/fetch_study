@@ -70,9 +70,17 @@ def changePose(waypoint, target_frame):
         exit()
 
 def get_exp_sequence(exp_option):
-    print("~" + str(exp_option) + "~")
+    # exp_option = "data: "1""
         
-    return ['ab', 'ba', 'ac', 'cb']
+    exp_option.replace("data: ", "")
+    exp_option.strip('"')
+
+    print("EXP_OPTION:~" + str(exp_option) + "~")
+
+    if exp_option == 1:
+        return ['ab', 'ba', 'ac', 'cb']
+    else:
+        return ['ab', 'ba', 'ac', 'cb']
 
 def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
@@ -447,7 +455,7 @@ class RouteComplete(State):
                 if ',' in report:
                     file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + '\n')
                 else:
-                    file.write(report + "\n")
+                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + report + ", " + "\n")
             
             rospy.loginfo('Mission report filed to ' + output_file_path_report)
 
