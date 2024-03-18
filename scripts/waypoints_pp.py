@@ -112,7 +112,7 @@ def import_waypoints(path_name, waypoints_path):
         
         waypoints_info.poses.append(pose)
     
-    print('\nFetched ' + str(len(waypoints)) + ' waypoints from ' + str(waypoints_path))
+    print('\tFetched ' + str(len(waypoints)) + ' waypoints from ' + str(waypoints_path))
 
     # if waypoints == []:
     #     rospy.signal_shutdown('No waypoint to draw... Shutdown')
@@ -168,7 +168,7 @@ class FollowRoute(State):
 
             megapoint, megaroute_name = megatarget
             goal                = goal_dict[megaroute_name]
-            px, py              = goal[0], goal[1]
+            gx, gy              = goal[0], goal[1]
             path_to_broadcast   = route_dict[megaroute_name]
             # TODO verify this is good for first and last paths
 
@@ -186,7 +186,7 @@ class FollowRoute(State):
             # goal.target_pose.pose.position = waypoint.pose.pose.position
             # goal.target_pose.pose.orientation = waypoint.pose.pose.orientation
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
-                          (px, py, -1))
+                          (gx, gy, -1))
             
             if False or "OLD SCHOOL JUST GOAL MODE":
                 # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
@@ -216,8 +216,7 @@ class FollowRoute(State):
                     self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
                     trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                     distance = math.sqrt(
-                        pow(megapoint.pose.pose.position.x - trans[0], 2) + pow(megapoint.pose.pose.position.y - trans[1],
-                                                                               2))
+                        pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
                     print("Robot "  + str(distance) + " from goal.")
 
                     report = [trans[0], trans[1], time_elapsed]
