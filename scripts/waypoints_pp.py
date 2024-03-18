@@ -129,8 +129,6 @@ class FollowRoute(State):
     def __init__(self):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
-        self.waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
-
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
         self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
@@ -159,7 +157,7 @@ class FollowRoute(State):
         return dist
 
     def execute(self, userdata):
-        global megapoints, mission_report
+        global megapoints, mission_report, waypoint_pub
 
         # Execute waypoints each in sequence
         # prev_waypoint = waypoints[0]
@@ -202,7 +200,7 @@ class FollowRoute(State):
                     if counter % 10 == 0:
                         print("publishing path")
 
-                    self.waypoint_pub.publish(path_to_broadcast)
+                    waypoint_pub.publish(path_to_broadcast)
 
                 now = rospy.Time.now()
                 self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
@@ -251,8 +249,8 @@ class GetRoute(State):
         # Subscribe to pose message to get new waypoints
         # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
         # Create publisher to publish waypoints as pose array so that you can see them in rviz, etc.
-        self.posearray_topic = rospy.get_param('~posearray_topic', '/megapoints')
-        self.poseArray_publisher = rospy.Publisher(self.posearray_topic, PoseArray, queue_size=1)
+        # self.posearray_topic = rospy.get_param('~posearray_topic', '/megapoints')
+        # self.poseArray_publisher = rospy.Publisher(self.posearray_topic, PoseArray, queue_size=1)
 
         # Path for saving and retrieving the pose.csv file
         output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path')
@@ -288,7 +286,7 @@ class GetRoute(State):
         global megapoints
         megapoints = []  # the waypoint queue
         # publish empty waypoint queue as pose array so that you can see them the change in rviz, etc.
-        self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(megapoints))
+        # self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(megapoints))
 
     def execute(self, userdata):
         global megapoints, route_dict, route_sequence
@@ -447,6 +445,7 @@ class RouteComplete(State):
 
 def main():
     rospy.init_node('follow_route')
+    waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
     with sm:
