@@ -23,6 +23,7 @@ from datetime import timedelta, datetime
 from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
 import numpy as np
+from nav_msgs.msg import Path
 
 
 # Waypoints container
