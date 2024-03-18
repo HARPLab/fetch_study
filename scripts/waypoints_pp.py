@@ -205,10 +205,11 @@ class FollowRoute(State):
             # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
 
 
-            is_primed = False
+            self.is_primed = False
             def callback_done(state, result):
-                rospy.loginfo("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-                is_primed = True
+                print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
+                self.is_primed = True
+                print("Is primed to move on")
 
             self.client.send_goal(start_goal, done_cb=callback_done)
 
@@ -227,10 +228,11 @@ class FollowRoute(State):
                 else: #### NEW MORE ELABORATE METHOD
                     if counter % 10 == 0:
                         # print("publishing path")
+                        print("pass")
                         pass
 
 
-                if is_primed:
+                if self.is_primed:
                     self.waypoint_pub.publish(path_to_broadcast)
 
                     now = rospy.Time.now()
@@ -487,7 +489,7 @@ def main():
     sm = StateMachine(outcomes=['success'])
     with sm:
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
-                         transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
+                         transitions={'success': 'FOLLOW_PATH', 'killed': 'death'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub),
                          transitions={'success': 'PATH_COMPLETE'},
