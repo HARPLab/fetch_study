@@ -528,7 +528,7 @@ def main():
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
-        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub. cmd_vel_publisher),
+        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub, cmd_vel_publisher),
                          transitions={'success': 'PATH_COMPLETE'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('PATH_COMPLETE', RouteComplete(),
