@@ -67,7 +67,7 @@ def changePose(waypoint, target_frame):
         exit()
 
 def get_exp_sequence(exp_option):
-    print("~" + exp_option + "~")
+    print("~" + str(exp_option) + "~")
         
     return ['ab', 'ba', 'ac', 'cb']
 
