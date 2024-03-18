@@ -11,7 +11,7 @@
   <arg name="wheel_base" default="0.5" doc="wheelbase"/>
   <arg name="lookahead_distance" default="4.0" doc="lookahead distance"/>
   <arg name="w_max" default="1.0" doc="max rotational velocity"/>
-  <arg name="linear_velocity" default="0.6" doc="linear velocity max"/>
+  <arg name="linear_velocity" default="0.35" doc="linear velocity max"/>
   <arg name="position_tolerance" default="0.05" doc="position tolerance"/>
   <arg name="delta_vel" default="100.0" doc="steering angle velocity"/>
   <arg name="acc" default="100.0" doc="acceleration"/>
@@ -44,10 +44,10 @@
     <param name="goal_frame_id" value="map"/>
     <param name="addpose_topic" value="$(arg addpose_topic)"/>
     <param name="posearray_topic" value="$(arg posearray_topic)"/>
-  </node>
+  </node> -->
 
   <!---Waypoint logging code -->
-  <!---<node name="log_waypoints" pkg="fetch_study" type="waypoints_log.py" output="screen" clear_params="true">
+  <!---<node name="log_waypoints" pkg="fetch_study" type="waypoints_pp.py" output="screen" clear_params="true">
     <param name="goal_frame_id" value="map"/>
     <param name="addpose_topic" value="$(arg addpose_topic)"/>
     <param name="posearray_topic" value="$(arg posearray_topic)"/>
