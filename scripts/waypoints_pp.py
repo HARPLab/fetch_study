@@ -326,15 +326,16 @@ class GetRoute(State):
             first_there = False
             for route_key in route_sequence:
                 print(route_key, route_dict.keys())
-                key, waypoints_info = route_dict[route_key]
-                (path_name, start, goal) = key
+                waypoints_info  = route_dict[route_key]
+                start           = start_dict[route_key]
+                goal            = goal_dict[route_key]
 
                 if first_there == False:
                     megapoints.append(start)
                     first_there = True
 
                 megapoints.append(goal)
-                auxilary_data.append(route_key)
+                auxilary_data.append([route_key, start, goal])
 
 
 
