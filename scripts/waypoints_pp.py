@@ -497,7 +497,7 @@ class GetRoute(State):
         rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/String \"data: -1\"")
 
         # Wait for published waypoints or saved path  loaded
-        while not self.path_ready and not self.start_journey_bool:
+        while not self.path_ready and not self.start_journey_bool and not rospy.is_shutdown():
             try:
                 pass
             #     pose = rospy.wait_for_message(topic, PoseWithCovarianceStamped, timeout=1)
