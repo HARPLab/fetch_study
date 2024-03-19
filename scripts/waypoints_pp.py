@@ -158,7 +158,7 @@ class FollowRoute(State):
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
-        self.distance_tolerance = 0 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+        self.distance_tolerance = 0.1 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
