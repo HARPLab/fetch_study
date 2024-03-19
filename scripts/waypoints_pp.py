@@ -251,6 +251,9 @@ class FollowRoute(State):
                 if self.is_primed:
                     if not self.has_reached:
                         self.waypoint_pub.publish(path_to_broadcast)
+                    else:
+                        blank_path = Path()
+                        self.waypoint_pub.publish(blank_path)
 
                     now = rospy.Time.now()
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
