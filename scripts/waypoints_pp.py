@@ -262,7 +262,7 @@ class FollowRoute(State):
                     distance = math.sqrt(
                         pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
 
-                    if counter % 100 == 0:
+                    if counter % 1000 == 0:
                         print("Robot "  + str(distance) + " from goal.")
 
                     toc = time.perf_counter()
