@@ -158,7 +158,7 @@ class FollowRoute(State):
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
-        self.distance_tolerance = 0.05 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+        self.distance_tolerance = .25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -234,8 +234,7 @@ class FollowRoute(State):
                 counter += 1
 
                 if (distance <= self.distance_tolerance):
-                    self.has_reached = Truetim
-                    break
+                    self.has_reached = True 
 
                 if False and "OLD SCHOOL JUST GOAL MODE":
                     # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
@@ -250,11 +249,10 @@ class FollowRoute(State):
 
 
                 if self.is_primed:
-                    now = rospy.Time.now()
-                    if not has_reached:
+                    if not self.has_reached:
                         self.waypoint_pub.publish(path_to_broadcast)
-                        last_pub = now
 
+                    now = rospy.Time.now()
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
                     # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
 
@@ -543,7 +541,7 @@ class RouteComplete(State):
 
 def main():
     rospy.init_node('follow_route')
-    waypoint_pub            = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
+    waypoint_pub            = rospy.Publisher('/waypoints', Path, queue_size=1)
     cmd_vel_publisher       = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
