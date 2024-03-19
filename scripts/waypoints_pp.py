@@ -158,7 +158,7 @@ class FollowRoute(State):
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
-        self.distance_tolerance = 0.1 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+        self.distance_tolerance = 0.15 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -259,8 +259,8 @@ class FollowRoute(State):
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
                     # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
 
-                    t = self.listener.getLatestCommonTime("/odom", "/map")
-                    trans, rot = self.tf.lookupTransform("/odom", "/map", t)
+                    t = self.listener.getLatestCommonTime("/base_link", "/map")
+                    trans, rot = self.tf.lookupTransform("/base_link", "/map", t)
 
                     distance = math.sqrt(
                         pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
