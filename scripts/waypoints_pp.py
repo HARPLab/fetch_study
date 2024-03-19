@@ -541,7 +541,7 @@ class RouteComplete(State):
 
 def main():
     rospy.init_node('follow_route')
-    waypoint_pub            = rospy.Publisher('/waypoints', Path, queue_size=1)
+    waypoint_pub            = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
     cmd_vel_publisher       = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
