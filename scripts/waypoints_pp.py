@@ -158,7 +158,7 @@ class FollowRoute(State):
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
-        self.distance_tolerance = .25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+        self.distance_tolerance = 0.05 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -234,7 +234,7 @@ class FollowRoute(State):
                 counter += 1
 
                 if (distance <= self.distance_tolerance):
-                    self.has_reached = True 
+                    self.has_reached = True
                     break
 
                 if False and "OLD SCHOOL JUST GOAL MODE":
@@ -250,9 +250,11 @@ class FollowRoute(State):
 
 
                 if self.is_primed:
-                    self.waypoint_pub.publish(path_to_broadcast)
-
                     now = rospy.Time.now()
+                    if not has_reached:
+                        self.waypoint_pub.publish(path_to_broadcast)
+                        last_pub = now
+
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
                     # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
 

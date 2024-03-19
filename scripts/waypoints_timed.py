@@ -22,7 +22,7 @@ import os
 from datetime import timedelta, datetime
 from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
-import numpy as
+import numpy as np
 
 
 # Waypoints container
