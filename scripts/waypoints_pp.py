@@ -282,6 +282,7 @@ class FollowRoute(State):
             # cmd.linear.x = 0.0
             # cmd.angular.z = 0.0
             # self.cmd_vel_publisher.publish(cmd)
+            self.waypoint_pub.publish(blank_path)
 
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
@@ -290,7 +291,8 @@ class FollowRoute(State):
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
             self.is_primed = False
 
-            return 'success'
+
+        return 'success'
 
 
             # # Generate the waypoints_info
