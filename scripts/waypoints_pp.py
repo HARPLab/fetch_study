@@ -234,7 +234,7 @@ class FollowRoute(State):
                 counter += 1
 
                 if (distance <= self.distance_tolerance):
-                    self.has_reached = True
+                    self.has_reached = Truetim
                     break
 
                 if False and "OLD SCHOOL JUST GOAL MODE":
