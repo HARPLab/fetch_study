@@ -287,6 +287,8 @@ class FollowRoute(State):
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
             self.is_primed = False
 
+            return 'success'
+
 
             # # Generate the waypoints_info
             # waypoints_info = Path()
