@@ -238,7 +238,6 @@ class FollowRoute(State):
             rospy.loginfo('Executing move_base goal to START position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
 
 
-            distance = 10
             counter = 0
 
             self.has_reached_endgoal = False
@@ -283,7 +282,7 @@ class FollowRoute(State):
                         self.has_reached_endgoal = True
 
                     if counter % 300 == 0:
-                        print("Robot "  + str(distance) + " from goal.")
+                        print("Robot "  + str(distance_to_goal) + " from goal.")
 
                   
                     ### LOG PROGRESS ON PATH
