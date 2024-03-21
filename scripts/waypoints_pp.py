@@ -319,45 +319,6 @@ class FollowRoute(State):
         return 'success'
 
 
-            # # Generate the waypoints_info
-            # waypoints_info = Path()
-            # waypoints_info.header.frame_id = 'map'
-            # waypoints_info.header.stamp = rospy.Time.now()
-
-            # pose = PoseStamped()
-            # pose.header.frame_id    = 'map'
-            # pose.pose.position      = Point(end[0], end[1], end[2])
-            # pose.pose.orientation   = Quaternion(end[3], end[4], end[5], end[6])
-            
-            # waypoints_info.poses.append(pose)
-            # self.waypoint_pub.publish(waypoints_info)
-
-
-            # end_goal = MoveBaseGoal()
-            # end_goal.target_pose.header.frame_id   = self.frame_id
-            # end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
-            # end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
-            
-            # self.already_aligned_with_start_pose_end = False
-            # print("unprimed")
-
-            # def callback_done_end(state, result):
-            #     print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-            #     self.already_aligned_with_start_pose_end = True
-            #     print("Is primed to move on to next megapoint")
-
-            # self.client.send_goal(end_goal, done_cb=callback_done_end)
-
-            # while not rospy.is_shutdown() and not self.already_aligned_with_start_pose_end:
-            #     time.sleep(self.duration)
-            #     # print("Okay, we got there")
-
-            # print("Now we can move on")
-
-
-        return 'success'
-
-
 def convert_PoseWithCovArray_to_PoseArray(waypoints):
     """Used to publish waypoints as pose array so that you can see them in rviz, etc."""
     poses = PoseArray()
