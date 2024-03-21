@@ -246,9 +246,6 @@ class FollowRoute(State):
             while not self.has_reached_endgoal and not rospy.is_shutdown():
                 counter += 1
 
-                if (distance <= self.distance_tolerance):
-                    self.has_reached = True
-
                 if False and "OLD SCHOOL JUST GOAL MODE":
                     # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
                     # self.client.send_goal(goal)
@@ -282,7 +279,7 @@ class FollowRoute(State):
                         pow(end_goal.target_pose.pose.position.x - trans[0], 2) + pow(end_goal.target_pose.pose.position.y - trans[1],
                                                                                2))
 
-                    if distance_to_goal < distance_tolerance:
+                    if distance_to_goal <= self.distance_tolerance:
                         self.has_reached_endgoal = True
 
                     if counter % 300 == 0:
