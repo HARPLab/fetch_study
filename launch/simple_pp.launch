@@ -10,7 +10,7 @@
 
 <!-- Drive around -->
   <arg name="wheel_base" default="0.4" doc="wheelbase"/>
-  <arg name="lookahead_distance" default="4.0" doc="lookahead distance"/>
+  <arg name="lookahead_distance" default="1.0" doc="lookahead distance"/>
   <arg name="w_max" default="1.0" doc="max rotational velocity"/>
   <arg name="linear_velocity" default="0.25" doc="linear velocity max"/>
   <arg name="position_tolerance" default="0" doc="position tolerance"/>
