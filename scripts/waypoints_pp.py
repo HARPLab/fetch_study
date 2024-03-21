@@ -259,21 +259,18 @@ class FollowRoute(State):
 
 
                 if self.already_aligned_with_start_pose and not self.has_reached_endgoal:
-                    # if not self.has_broadcast_curve:
-                    #     # self.waypoint_pub.publish(path_to_broadcast)
-                    #     self.client.send_goal(end_goal, done_cb=end_callback_done)
-                    #     rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
+                    if not self.has_broadcast_curve:
+                        self.waypoint_pub.publish(path_to_broadcast)
+                        # self.client.send_goal(end_goal, done_cb=end_callback_done)
+                        rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
-                    #     self.has_broadcast_curve = True
-                    #     # else:
-                    #     #     blank_path = Path()
-                    #     #     # self.waypoint_pub.publish(blank_path)
+                        self.has_broadcast_curve = True
+                    # else:
+                    #     blank_path = Path()
+                    #     self.waypoint_pub.publish(blank_path)
 
-                    self.waypoint_pub.publish(path_to_broadcast)
 
                     now = rospy.Time.now()
-                    # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
-                    # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
 
                     self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(.6))
                     trans, rot = self.listener.lookupTransform('map', 'base_link', now)
