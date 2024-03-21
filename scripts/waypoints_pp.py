@@ -303,11 +303,13 @@ class FollowRoute(State):
             # cmd.angular.z = 0.0
             # self.cmd_vel_publisher.publish(cmd)
 
-            wait_time_at_goal = 3.0
             blank_path = Path()
+            waypoints_info.header.frame_id = 'map'
+            waypoints_info.header.stamp = rospy.Time.now()
             self.waypoint_pub.publish(blank_path)
-            time.sleep(wait_time_at_goal)
 
+            wait_time_at_goal = 3.0
+            time.sleep(wait_time_at_goal)
 
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
