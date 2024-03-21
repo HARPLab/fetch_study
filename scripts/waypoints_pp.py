@@ -297,15 +297,28 @@ class FollowRoute(State):
 
             print("Huzzah! Exiting this loop, because we reached the goal!")
 
+            mission_report.append("REACHED " + str(megapoint))
+            toc = time.perf_counter()
+            time_elapsed = toc - tic
+            time_elapsed = str(time_elapsed)
+            print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
+
             # # HALT THE ROBOT
             # cmd = Twist()
             # cmd.linear.x = 0.0
             # cmd.angular.z = 0.0
             # self.cmd_vel_publisher.publish(cmd)
 
+            ######## HALT THE ROBOT AT END OF PATH
             blank_path = Path()
             blank_path.header.frame_id = 'map'
             blank_path.header.stamp = rospy.Time.now()
+
+            end_pose = PoseStamped()
+            end_pose.header.frame_id    = 'map'
+            end_pose.pose.position      = end_goal.target_pose.pose.position #Point(waypoints[idx][0], waypoints[idx][1], waypoints[idx][2])
+            end_pose.pose.orientation   = end_goal.target_pose.pose.orientation #Quaternion(waypoints[idx][3], waypoints[idx][4], waypoints[idx][5], waypoints[idx][6])
+
             blank_path.poses.append(end_goal)
 
             self.waypoint_pub.publish(blank_path)
@@ -313,12 +326,10 @@ class FollowRoute(State):
             wait_time_at_goal = 3.0
             time.sleep(wait_time_at_goal)
 
-            mission_report.append("REACHED " + str(megapoint))
-            toc = time.perf_counter()
-            time_elapsed = toc - tic
-            time_elapsed = str(time_elapsed)
-            print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
-            # self.already_aligned_with_start_pose = False
+            # toc = time.perf_counter()
+            # time_elapsed = toc - tic
+            # time_elapsed = str(time_elapsed)
+            # # mission_report.append("REACHED " + str(megapoint))
 
 
         return 'success'
