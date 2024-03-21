@@ -231,6 +231,7 @@ class FollowRoute(State):
             def end_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
                 # self.already_aligned_with_start_pose = True
+                self.has_reached_endgoal = True
                 print("Done with this path")
 
             self.client.send_goal(start_goal, done_cb=start_callback_done)
