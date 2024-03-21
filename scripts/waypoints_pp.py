@@ -231,7 +231,7 @@ class FollowRoute(State):
             def end_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
                 # self.already_aligned_with_start_pose = True
-                self.has_reached_endgoal = True
+                # self.has_reached_endgoal = True
                 print("Done with this path")
 
             self.client.send_goal(start_goal, done_cb=start_callback_done)
@@ -261,15 +261,16 @@ class FollowRoute(State):
                         pass
 
 
-                if self.already_aligned_with_start_pose and not self.has_reached_endgoal and not self.has_broadcast_curve:
-                    # self.waypoint_pub.publish(path_to_broadcast)
-                    self.client.send_goal(end_goal, done_cb=end_callback_done)
-                    rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
+                if self.already_aligned_with_start_pose and not self.has_reached_endgoal:
+                    if not self.has_broadcast_curve:
+                        # self.waypoint_pub.publish(path_to_broadcast)
+                        self.client.send_goal(end_goal, done_cb=end_callback_done)
+                        rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
-                    self.has_broadcast_curve = True
-                    # else:
-                    #     blank_path = Path()
-                    #     # self.waypoint_pub.publish(blank_path)
+                        self.has_broadcast_curve = True
+                        # else:
+                        #     blank_path = Path()
+                        #     # self.waypoint_pub.publish(blank_path)
 
                     now = rospy.Time.now()
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
