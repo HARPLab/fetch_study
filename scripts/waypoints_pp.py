@@ -281,7 +281,7 @@ class FollowRoute(State):
                     if distance_to_goal <= self.distance_tolerance:
                         self.has_reached_endgoal = True
 
-                    if counter % 300 == 0:
+                    if counter % 200 == 0:
                         print("Robot "  + str(distance_to_goal) + " from goal.")
 
                   
