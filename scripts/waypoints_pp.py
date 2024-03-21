@@ -303,7 +303,7 @@ class FollowRoute(State):
             # self.cmd_vel_publisher.publish(cmd)
 
             wait_time_at_goal = 3.0
-
+            blank_path = Path()
             self.waypoint_pub.publish(blank_path)
             time.sleep(wait_time_at_goal)
 
