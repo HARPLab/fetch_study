@@ -231,6 +231,7 @@ class FollowRoute(State):
             counter = 0
 
             self.has_reached = False
+            self.has_broadcast_curve = False
             while not self.has_reached and not rospy.is_shutdown():
                 counter += 1
 
@@ -250,11 +251,12 @@ class FollowRoute(State):
 
 
                 if self.is_primed:
-                    if not self.has_reached:
+                    if not self.has_reached and not self.has_broadcast_curve:
                         self.waypoint_pub.publish(path_to_broadcast)
+                        self.has_broadcast_curve = True
                     else:
                         blank_path = Path()
-                        self.waypoint_pub.publish(blank_path)
+                        # self.waypoint_pub.publish(blank_path)
 
                     now = rospy.Time.now()
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
