@@ -233,7 +233,7 @@ class FollowRoute(State):
 
             self.client.send_goal(start_goal, done_cb=callback_done)
             rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
-                          (gx, gy, -1))
+                          (sx, sy, -1))
 
             distance = 10
             counter = 0
