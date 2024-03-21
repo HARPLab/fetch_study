@@ -222,14 +222,19 @@ class FollowRoute(State):
 
 
             self.is_primed = False
-            def callback_done(state, result):
-                print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
+            def start_callback_done(state, result):
+                # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
                 self.is_primed = True
-                print("Is primed to move on")
+                print("Is primed to move on from start")
 
-            self.client.send_goal(start_goal, done_cb=callback_done)
-            rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
-                          (sx, sy, -1))
+            def end_callback_done(state, result):
+                # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
+                # self.is_primed = True
+                print("Done with this path")
+
+            self.client.send_goal(start_goal, done_cb=start_callback_done)
+            rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
+
 
             distance = 10
             counter = 0
@@ -257,7 +262,7 @@ class FollowRoute(State):
                 if self.is_primed:
                     if not self.has_reached and not self.has_broadcast_curve:
                         # self.waypoint_pub.publish(path_to_broadcast)
-                        self.client.send_goal(end_goal, done_cb=callback_done)
+                        self.client.send_goal(end_goal, done_cb=end_callback_done)
                         rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
                         self.has_broadcast_curve = True
@@ -269,7 +274,7 @@ class FollowRoute(State):
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
                     # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
 
-                    self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+                    self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(.6))
                     trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                     distance = math.sqrt(
                         pow(end_goal.target_pose.pose.position.x - trans[0], 2) + pow(end_goal.target_pose.pose.position.y - trans[1],
