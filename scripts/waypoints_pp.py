@@ -38,7 +38,7 @@ route_sequence  = []
 start_dict      = {}    
 goal_dict       = {}
 
-path_names_list = ['ab', 'ba', 'ac', 'cb']
+path_names_list = ['de', 'ef', 'fd'] #['ab', 'ba', 'ac', 'cb']
 
 velocity_default = 1.0
 
@@ -79,11 +79,12 @@ def get_exp_sequence(exp_option):
     # exp_option.strip('"')
 
     print("EXP_OPTION:~" + str(exp_option) + "~")
+    return path_names_list
 
     if exp_option == 1:
         return ['ab', 'ba', 'ac', 'cb']
     else:
-        return ['ab', 'ba', 'ac', 'cb']
+        pass
 
 def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
@@ -234,7 +235,7 @@ class FollowRoute(State):
                 counter += 1
 
                 if (distance <= self.distance_tolerance):
-                    self.has_reached = True 
+                    self.has_reached = True
 
                 if False and "OLD SCHOOL JUST GOAL MODE":
                     # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
@@ -282,14 +283,14 @@ class FollowRoute(State):
             # cmd.linear.x = 0.0
             # cmd.angular.z = 0.0
             # self.cmd_vel_publisher.publish(cmd)
-            self.waypoint_pub.publish(blank_path)
+            # self.waypoint_pub.publish(blank_path)
 
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
             time_elapsed = toc - tic
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
-            self.is_primed = False
+            # self.is_primed = False
 
 
         return 'success'
