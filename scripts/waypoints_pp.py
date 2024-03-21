@@ -203,10 +203,11 @@ class FollowRoute(State):
             print("Goal")
             print(goal)
 
+            ## Option for speed control
             # self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
             # r.sleep()
 
-
+            ### Set up goal checkpoints
             start_goal = MoveBaseGoal()
             start_goal.target_pose.header.frame_id = self.frame_id
 
@@ -221,27 +222,27 @@ class FollowRoute(State):
             end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
 
 
-            self.is_primed = False
+            self.already_aligned_with_start_pose = False
             def start_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-                self.is_primed = True
+                self.already_aligned_with_start_pose = True
                 print("Is primed to move on from start")
 
             def end_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-                # self.is_primed = True
+                # self.already_aligned_with_start_pose = True
                 print("Done with this path")
 
             self.client.send_goal(start_goal, done_cb=start_callback_done)
-            rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
+            rospy.loginfo('Executing move_base goal to START position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
 
 
             distance = 10
             counter = 0
 
-            self.has_reached = False
+            self.has_reached_endgoal = False
             self.has_broadcast_curve = False
-            while not self.has_reached and not rospy.is_shutdown():
+            while not self.has_reached_endgoal and not rospy.is_shutdown():
                 counter += 1
 
                 if (distance <= self.distance_tolerance):
@@ -259,13 +260,12 @@ class FollowRoute(State):
                         pass
 
 
-                if self.is_primed:
-                    if not self.has_reached and not self.has_broadcast_curve:
-                        # self.waypoint_pub.publish(path_to_broadcast)
-                        self.client.send_goal(end_goal, done_cb=end_callback_done)
-                        rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
+                if self.already_aligned_with_start_pose and not self.has_reached_endgoal and not self.has_broadcast_curve:
+                    # self.waypoint_pub.publish(path_to_broadcast)
+                    self.client.send_goal(end_goal, done_cb=end_callback_done)
+                    rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
-                        self.has_broadcast_curve = True
+                    self.has_broadcast_curve = True
                     # else:
                     #     blank_path = Path()
                     #     # self.waypoint_pub.publish(blank_path)
@@ -283,6 +283,8 @@ class FollowRoute(State):
                     if counter % 1000 == 0:
                         print("Robot "  + str(distance) + " from goal.")
 
+                  
+                    ### LOG PROGRESS ON PATH
                     toc = time.perf_counter()
                     step_time_elapsed = toc - tic
                     step_time_elapsed = str(step_time_elapsed)
@@ -304,7 +306,7 @@ class FollowRoute(State):
             time_elapsed = toc - tic
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
-            # self.is_primed = False
+            # self.already_aligned_with_start_pose = False
 
 
         return 'success'
@@ -329,17 +331,17 @@ class FollowRoute(State):
             # end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
             # end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
             
-            # self.is_primed_end = False
+            # self.already_aligned_with_start_pose_end = False
             # print("unprimed")
 
             # def callback_done_end(state, result):
             #     print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
-            #     self.is_primed_end = True
+            #     self.already_aligned_with_start_pose_end = True
             #     print("Is primed to move on to next megapoint")
 
             # self.client.send_goal(end_goal, done_cb=callback_done_end)
 
-            # while not rospy.is_shutdown() and not self.is_primed_end:
+            # while not rospy.is_shutdown() and not self.already_aligned_with_start_pose_end:
             #     time.sleep(self.duration)
             #     # print("Okay, we got there")
 
