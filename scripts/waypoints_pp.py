@@ -314,12 +314,11 @@ class FollowRoute(State):
             blank_path.header.frame_id = 'map'
             blank_path.header.stamp = rospy.Time.now()
 
-            end_pose = PoseStamped()
-            end_pose.header.frame_id    = 'map'
-            end_pose.pose.position      = end_goal.target_pose.pose.position #Point(waypoints[idx][0], waypoints[idx][1], waypoints[idx][2])
-            end_pose.pose.orientation   = end_goal.target_pose.pose.orientation #Quaternion(waypoints[idx][3], waypoints[idx][4], waypoints[idx][5], waypoints[idx][6])
-
-            blank_path.poses.append(end_pose)
+            # end_pose = PoseStamped()
+            # end_pose.header.frame_id    = 'map'
+            # end_pose.pose.position      = end_goal.target_pose.pose.position #Point(waypoints[idx][0], waypoints[idx][1], waypoints[idx][2])
+            # end_pose.pose.orientation   = end_goal.target_pose.pose.orientation #Quaternion(waypoints[idx][3], waypoints[idx][4], waypoints[idx][5], waypoints[idx][6])
+            # blank_path.poses.append(end_pose)
 
             self.waypoint_pub.publish(blank_path)
 
