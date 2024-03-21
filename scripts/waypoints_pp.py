@@ -304,8 +304,8 @@ class FollowRoute(State):
             # self.cmd_vel_publisher.publish(cmd)
 
             blank_path = Path()
-            waypoints_info.header.frame_id = 'map'
-            waypoints_info.header.stamp = rospy.Time.now()
+            blank_path.header.frame_id = 'map'
+            blank_path.header.stamp = rospy.Time.now()
             self.waypoint_pub.publish(blank_path)
 
             wait_time_at_goal = 3.0
