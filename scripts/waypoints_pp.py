@@ -301,7 +301,12 @@ class FollowRoute(State):
             # cmd.linear.x = 0.0
             # cmd.angular.z = 0.0
             # self.cmd_vel_publisher.publish(cmd)
-            # self.waypoint_pub.publish(blank_path)
+
+            wait_time_at_goal = 3.0
+
+            self.waypoint_pub.publish(blank_path)
+            time.sleep(wait_time_at_goal)
+
 
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
