@@ -159,7 +159,7 @@ class FollowRoute(State):
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
-        self.distance_tolerance = 0.15 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+        self.distance_tolerance = 0.07 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -278,11 +278,14 @@ class FollowRoute(State):
 
                     self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(.6))
                     trans, rot = self.listener.lookupTransform('map', 'base_link', now)
-                    distance = math.sqrt(
+                    distance_to_goal = math.sqrt(
                         pow(end_goal.target_pose.pose.position.x - trans[0], 2) + pow(end_goal.target_pose.pose.position.y - trans[1],
                                                                                2))
 
-                    if counter % 1000 == 0:
+                    if distance_to_goal < distance_tolerance:
+                        self.has_reached_endgoal = True
+
+                    if counter % 300 == 0:
                         print("Robot "  + str(distance) + " from goal.")
 
                   
@@ -295,6 +298,8 @@ class FollowRoute(State):
                     mission_report.append(report)
 
                 time.sleep(self.duration)
+
+                print("Huzzah! Exiting this loop, because we reached the goal!")
 
             # # HALT THE ROBOT
             # cmd = Twist()
