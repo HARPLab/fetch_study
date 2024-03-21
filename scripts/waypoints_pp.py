@@ -548,6 +548,7 @@ class RouteComplete(State):
                     file.write(str(report) + "\n")
             
             rospy.loginfo('Mission report filed to ' + output_file_path_report)
+            exit()
 
         return 'success'
 
