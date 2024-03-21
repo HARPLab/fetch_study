@@ -220,10 +220,6 @@ class FollowRoute(State):
             end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
             end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
 
-            # rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
-            #               (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
-            # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
-
 
             self.is_primed = False
             def callback_done(state, result):
@@ -265,19 +261,19 @@ class FollowRoute(State):
                         rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
                         self.has_broadcast_curve = True
-                    else:
-                        blank_path = Path()
-                        # self.waypoint_pub.publish(blank_path)
+                    # else:
+                    #     blank_path = Path()
+                    #     # self.waypoint_pub.publish(blank_path)
 
                     now = rospy.Time.now()
                     # self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(4))
                     # trans, rot = self.listener.lookupTransform('map', 'base_link', now)
 
-                    t = self.listener.getLatestCommonTime("/base_link", "/map")
-                    trans, rot = self.tf.lookupTransform("/base_link", "/map", t)
-
+                    self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
+                    trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                     distance = math.sqrt(
-                        pow(gx - trans[0], 2) + pow(gy - trans[1], 2))
+                        pow(end_goal.pose.pose.position.x - trans[0], 2) + pow(end_goal.pose.pose.position.y - trans[1],
+                                                                               2))
 
                     if counter % 1000 == 0:
                         print("Robot "  + str(distance) + " from goal.")
