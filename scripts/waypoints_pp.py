@@ -138,7 +138,6 @@ def import_waypoints(path_name, waypoints_path):
 
     return waypoints_info, start, goal
 
-
 class FollowRoute(State):
     def __init__(self, waypub, cmd_vel_pub):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
