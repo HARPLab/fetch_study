@@ -252,7 +252,10 @@ class FollowRoute(State):
 
                 if self.is_primed:
                     if not self.has_reached and not self.has_broadcast_curve:
-                        self.waypoint_pub.publish(path_to_broadcast)
+                        # self.waypoint_pub.publish(path_to_broadcast)
+                        self.client.send_goal(end_goal, done_cb=callback_done)
+                        rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
+
                         self.has_broadcast_curve = True
                     else:
                         blank_path = Path()

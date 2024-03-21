@@ -36,6 +36,8 @@ velocity_default = 1.0
 AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
 
+path_names_list = ['de', 'ef', 'fd']
+
 # change Pose to the correct frame
 def changePose(waypoint, target_frame):
     if waypoint.header.frame_id == target_frame:
