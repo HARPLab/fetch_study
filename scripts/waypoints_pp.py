@@ -47,7 +47,6 @@ AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
 
 waypoint_pub        = None
-cmd_vel_publisher   = None
 
 FLAG_PP_MODE        = True
 
@@ -141,7 +140,7 @@ def import_waypoints(path_name, waypoints_path):
     return waypoints_info, start, goal
 
 class FollowRoute(State):
-    def __init__(self, waypub, cmd_vel_pub):
+    def __init__(self, waypub):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
@@ -154,7 +153,6 @@ class FollowRoute(State):
         self.client.wait_for_server()
 
         self.waypoint_pub       = waypub
-        self.cmd_vel_publisher  = cmd_vel_pub
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -303,23 +301,10 @@ class FollowRoute(State):
             time_elapsed = str(time_elapsed)
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
-            # # HALT THE ROBOT
-            # cmd = Twist()
-            # cmd.linear.x = 0.0
-            # cmd.angular.z = 0.0
-            # self.cmd_vel_publisher.publish(cmd)
-
             ######## HALT THE ROBOT AT END OF PATH
             blank_path = Path()
             blank_path.header.frame_id = 'map'
             blank_path.header.stamp = rospy.Time.now()
-
-            # end_pose = PoseStamped()
-            # end_pose.header.frame_id    = 'map'
-            # end_pose.pose.position      = end_goal.target_pose.pose.position #Point(waypoints[idx][0], waypoints[idx][1], waypoints[idx][2])
-            # end_pose.pose.orientation   = end_goal.target_pose.pose.orientation #Quaternion(waypoints[idx][3], waypoints[idx][4], waypoints[idx][5], waypoints[idx][6])
-            # blank_path.poses.append(end_pose)
-
             self.waypoint_pub.publish(blank_path)
 
             wait_time_at_goal = 3.0
@@ -589,14 +574,13 @@ class RouteComplete(State):
 def main():
     rospy.init_node('follow_route')
     waypoint_pub            = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
-    cmd_vel_publisher       = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
     with sm:
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
-        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub, cmd_vel_publisher),
+        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub),
                          transitions={'success': 'PATH_COMPLETE'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('PATH_COMPLETE', RouteComplete(),
