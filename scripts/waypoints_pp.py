@@ -272,7 +272,7 @@ class FollowRoute(State):
                     self.listener.waitForTransform(self.odom_frame_id, self.base_frame_id, now, rospy.Duration(4))
                     trans, rot = self.listener.lookupTransform(self.odom_frame_id, self.base_frame_id, now)
                     distance = math.sqrt(
-                        pow(end_goal.pose.pose.position.x - trans[0], 2) + pow(end_goal.pose.pose.position.y - trans[1],
+                        pow(end_goal.target_pose.pose.position.x - trans[0], 2) + pow(end_goal.target_pose.pose.position.y - trans[1],
                                                                                2))
 
                     if counter % 1000 == 0:
