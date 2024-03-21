@@ -212,6 +212,14 @@ class FollowRoute(State):
 
             start_goal.target_pose.pose.position     = Point(start[0], start[1], start[2])
             start_goal.target_pose.pose.orientation  = Quaternion(start[3], start[4], start[5], start[6])
+
+
+            end_goal = MoveBaseGoal()
+            end_goal.target_pose.header.frame_id = self.frame_id
+
+            end_goal.target_pose.pose.position     = Point(end[0], end[1], end[2])
+            end_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
+
             # rospy.loginfo('Executing move_base goal to position (x,y) with velocity: %s, %s, %s' %
             #               (waypoint.pose.pose.position.x, waypoint.pose.pose.position.y, aux_data[AUX_VELOCITY]))
             # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
