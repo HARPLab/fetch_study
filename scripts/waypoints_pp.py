@@ -306,6 +306,8 @@ class FollowRoute(State):
             blank_path = Path()
             blank_path.header.frame_id = 'map'
             blank_path.header.stamp = rospy.Time.now()
+            blank_path.poses.append(end_goal)
+
             self.waypoint_pub.publish(blank_path)
 
             wait_time_at_goal = 3.0
