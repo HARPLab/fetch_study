@@ -296,7 +296,7 @@ class FollowRoute(State):
 
                 time.sleep(self.duration)
 
-                print("Huzzah! Exiting this loop, because we reached the goal!")
+            print("Huzzah! Exiting this loop, because we reached the goal!")
 
             # # HALT THE ROBOT
             # cmd = Twist()
