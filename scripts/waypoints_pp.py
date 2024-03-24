@@ -38,7 +38,7 @@ route_sequence  = []
 start_dict      = {}    
 goal_dict       = {}
 
-path_names_list = ['de', 'ef', 'fd'] #['ab', 'ba', 'ac', 'cb']
+path_names_list = ['xy', 'yz', 'zx'] #['de', 'ef', 'fd'] #['ab', 'ba', 'ac', 'cb']
 
 velocity_default = 1.0
 
