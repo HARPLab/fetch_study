@@ -140,19 +140,20 @@ def import_waypoints(path_name, waypoints_path):
     return waypoints_info, start, goal
 
 class FollowRoute(State):
-    def __init__(self, waypub):
+    def __init__(self, waypub, waypretty):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
         self.odom_frame_id = rospy.get_param('~odom_frame_id', 'odom')
-        self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link')
+        self.base_frame_id = rospy.get_param('~base_frame_id', 'base_link') # Change to base 
         self.duration = rospy.get_param('~wait_duration', 0.0)
         # Get a move_base action client
         self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         rospy.loginfo('Connecting to move_base...')
         self.client.wait_for_server()
 
-        self.waypoint_pub       = waypub
+        self.waypoint_pub            = waypub
+        self.waypoint_pub_rviz       = waypretty
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -161,7 +162,7 @@ class FollowRoute(State):
         self.distance_tolerance = 0.1 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
-        # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
+        self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
         # # self.update_client.wait_for_server()
         # self.update_client = dynamic_reconfigure.client.Client("move_base/TrajectoryPlannerROS", timeout=4, config_callback=None)
         # print("Found it")
@@ -203,7 +204,7 @@ class FollowRoute(State):
             print(goal)
 
             ## Option for speed control
-            # self.update_client.update_configuration({"max_vel_x": aux_data[AUX_VELOCITY]})
+            self.update_client.update_configuration({"linear_velocity": .1})
             # r.sleep()
 
             ### Set up goal checkpoints
@@ -309,7 +310,7 @@ class FollowRoute(State):
             blank_path.header.stamp = rospy.Time.now()
             self.waypoint_pub.publish(blank_path)
 
-            wait_time_at_goal = 3.0
+            wait_time_at_goal = 0.0
             time.sleep(wait_time_at_goal)
 
             # toc = time.perf_counter()
@@ -537,13 +538,14 @@ class RouteComplete(State):
 def main():
     rospy.init_node('follow_route')
     waypoint_pub            = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
+    waypoint_pub_vis        = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
     with sm:
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
-        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub),
+        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub, waypoint_pub_vis),
                          transitions={'success': 'PATH_COMPLETE'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('PATH_COMPLETE', RouteComplete(),
