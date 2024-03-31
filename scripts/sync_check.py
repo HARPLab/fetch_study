@@ -48,40 +48,37 @@ AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
 
 
-
-def wait_for_start_journey():
-    """thread worker function"""
-    try:
-        data_from_start_journey = rospy.wait_for_message('start_journey', String)
-
-    except rospy.ROSInterruptException:
-        return 'killed'
-
-    rospy.loginfo('Received path READY start_journey')
-
-    wait_time_at_goal = 3.0
-    time.sleep(wait_time_at_goal)
-
-    base_time = 1.0
-
-    for i in range(10):
-        rospy.loginfo("Tick with value " + str(i))
-        variable_time = random.uniform(.7, 2.3)
-
-        time.sleep(variable_time)
-
-
-
-
-
-
 def main():
     rospy.init_node('sync_check')
     rospy.loginfo("The node has been created")
 
 
+    def wait_for_start_journey():
+        """thread worker function"""
+        try:
+            data_from_start_journey = rospy.wait_for_message('start_journey', String)
+
+        except rospy.ROSInterruptException:
+            return 'killed'
+
+        rospy.loginfo('Received path READY start_journey')
+
+        wait_time_at_goal = 3.0
+        time.sleep(wait_time_at_goal)
+
+        base_time = 1.0
+
+        for i in range(10):
+            rospy.loginfo("Tick with value " + str(i))
+            variable_time = random.uniform(.7, 2.3)
+
+            time.sleep(variable_time)
+
+
     start_journey_thread = threading.Thread(target=wait_for_start_journey)
     start_journey_thread.start()
+
+    print("Started listening thread")
 
     rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/String \"data: -1\"")
 
