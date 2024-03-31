@@ -74,10 +74,16 @@ def wait_for_start_journey():
 
 
 
+
 def main():
     rospy.init_node('sync_check')
     rospy.loginfo("The node has been created")
 
+
+    start_journey_thread = threading.Thread(target=wait_for_start_journey)
+    start_journey_thread.start()
+
+    rospy.loginfo("To start following saved waypoints: 'rostopic pub /start_journey std_msgs/String \"data: -1\"")
 
 
 
