@@ -1,0 +1,49 @@
+<launch>
+
+  <include file="$(find fetch_study)/launch/fetch_nav.launch" >
+  <!--   <include file="$(find fetch_study)/launch/simple_nav_timed.launch" > -->
+    <arg name="map_file" value="$(find fetch_study)/maps/3002_cleaned.yaml" />
+  </include>
+
+ <arg name="addpose_topic" default="/initialpose"/>
+ <arg name="posearray_topic" default="/waypoints"/>
+
+<!-- Drive around -->
+  <arg name="wheel_base" default="0.4" doc="wheelbase"/>
+  <arg name="lookahead_distance" default="1.0" doc="lookahead distance"/>
+  <arg name="w_max" default="1.0" doc="max rotational velocity"/>
+  <arg name="linear_velocity" default="0.25" doc="linear velocity max"/>
+  <arg name="position_tolerance" default="0" doc="position tolerance"/>
+  <arg name="delta_vel" default="100.0" doc="steering angle velocity"/>
+  <arg name="acc" default="100.0" doc="acceleration"/>
+  <arg name="jerk" default="100.0" doc="jerk"/>
+  <arg name="delta_max" default="1.57" doc="steering angle limit"/>
+  <arg name="map_frame_id" default="map" doc="map frame id"/>
+  <arg name="robot_frame_id" default="base_link" doc="robot frame id"/>
+  <arg name="lookahead_frame_id" default="lookahead" doc="lookahead frame id"/>
+  <arg name="acker_frame_id" default="rear_axle_midpoint" doc="ackermann frame id"/>
+    
+  <!---run pure_pursuit -->
+  <node pkg="pure_pursuit" type="pure_pursuit" name="pure_pursuit" output="screen" >
+    <param name="wheelbase" value="$(arg wheel_base)"/>
+    <param name="lookahead_distance" value="$(arg lookahead_distance)"/>
+    <param name="linear_velocity" value="$(arg linear_velocity)"/>
+    <param name="max_rotational_velocity" value="$(arg w_max)"/>
+    <param name="position_tolerance" value="$(arg position_tolerance)"/>
+    <param name="steering_angle_velocity" value="$(arg delta_vel)"/>
+    <param name="acceleration" value="$(arg acc)"/>
+    <param name="jerk" value="$(arg jerk)"/>
+    <param name="steering_angle_limit" value="$(arg delta_max)"/>
+    <param name="map_frame_id" value="$(arg map_frame_id)"/>
+    <param name="robot_frame_id" value="$(arg robot_frame_id)"/>
+    <param name="lookahead_frame_id" value="$(arg lookahead_frame_id)"/>
+    <param name="acker_frame_id" value="$(arg acker_frame_id)"/>
+  </node>
+
+  <node name="follow_waypoints" pkg="fetch_study" type="waypoints_pp.py" output="screen" clear_params="true">
+    <param name="goal_frame_id" value="map"/>
+    <param name="addpose_topic" value="$(arg addpose_topic)"/>
+    <param name="posearray_topic" value="$(arg posearray_topic)"/>
+  </node>
+
+</launch>
