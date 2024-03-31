@@ -70,7 +70,7 @@ def main():
 
         for i in range(10):
             rospy.loginfo("Tick with value " + str(i))
-            variable_time = random.uniform(.7, 2.3)
+            variable_time = random.uniform(2.3, 5.5)
 
             time.sleep(variable_time)
 
