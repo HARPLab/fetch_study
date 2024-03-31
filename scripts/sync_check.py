@@ -76,6 +76,7 @@ def wait_for_start_journey():
 
 def main():
     rospy.init_node('sync_check')
+    rospy.loginfo("The node has been created")
 
 
 
