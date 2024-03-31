@@ -75,7 +75,7 @@ def wait_for_start_journey():
 
 
 def main():
-    rospy.init_node('follow_route')
+    rospy.init_node('sync_check')
 
 
 
