@@ -83,9 +83,17 @@ def get_exp_sequence(exp_option):
     return path_names_list
 
     if exp_option == 1:
-        return ['ab', 'ba', 'ac', 'cb']
-    else:
-        pass
+        return ['CA-null', 'AC-null', 'CD-null', 'DF-null', 'FC-null', 'CF-null', 'FE-null', 'EC-null', 'CB-null', 'BE-null', 'ED-null', 'DA-null', 'AE-null', 'EB-null', 'BA-null', 'AD-null', 'DE-null', 'EA-null', 'AF-null', 'FB-null', 'BF-null', 'FD-null', 'DB-null', 'BC-null', 'CE-null', 'EF-null', 'FA-null', 'AB-null', 'BD-null', 'DC-null']
+    elif exp_option == 2:
+        return ['AE-null', 'EA-null', 'AC-null', 'CA-null', 'AB-null', 'BC-null', 'CF-null', 'FD-null', 'DA-null', 'AF-null', 'FB-null', 'BE-null', 'EB-null', 'BF-null', 'FC-null', 'CD-null', 'DB-null', 'BD-null', 'DE-null', 'EC-null', 'CB-null', 'BA-null', 'AD-null', 'DF-null', 'FA-null', 'AC-null', 'CE-null', 'EF-null', 'FE-null', 'ED-null', 'DC-null']
+    elif exp_option == 3:
+        return ['CF-null', 'FC-null', 'CA-null', 'AD-null', 'DF-null', 'FA-null', 'AB-null', 'BF-null', 'FB-null', 'BE-null', 'ED-null', 'DA-null', 'AC-null', 'CE-null', 'EA-null', 'AE-null', 'EC-null', 'CB-null', 'BD-null', 'DE-null', 'EB-null', 'BA-null', 'AF-null', 'FD-null', 'DB-null', 'BC-null', 'CD-null', 'DC-null', 'CF-null', 'FE-null', 'EF-null']
+    elif exp_option == 4:
+        return ['FC-null', 'CF-null', 'FA-null', 'AD-null', 'DF-null', 'FE-null', 'EF-null', 'FD-null', 'DA-null', 'AC-null', 'CA-null', 'AB-null', 'BE-null', 'ED-null', 'DC-null', 'CB-null', 'BA-null', 'AE-null', 'EC-null', 'CE-null', 'EA-null', 'AF-null', 'FB-null', 'BC-null', 'CD-null', 'DE-null', 'EB-null', 'BD-null', 'DB-null', 'BF-null']
+    elif exp_option == 5:
+        return ['DE-null', 'EB-null', 'BC-null', 'CD-null', 'DA-null', 'AE-null', 'EC-null', 'CA-null', 'AF-null', 'FC-null', 'CE-null', 'EF-null', 'FB-null', 'BA-null', 'AD-null', 'DB-null', 'BF-null', 'FE-null', 'ED-null', 'DF-null', 'FD-null', 'DC-null', 'CF-null', 'FA-null', 'AC-null', 'CB-null', 'BD-null', 'DE-null', 'EA-null', 'AB-null', 'BE-null']
+
+    return ['CF-null', 'FE-null', 'EF-null', 'FB-null', 'BF-null', 'FA-null', 'AC-null', 'CA-null', 'AD-null', 'DC-null', 'CE-null', 'EB-null', 'BE-null', 'EC-null', 'CB-null', 'BC-null', 'CD-null', 'DB-null', 'BA-null', 'AE-null', 'ED-null', 'DF-null', 'FD-null', 'DE-null', 'EA-null', 'AB-null', 'BD-null', 'DA-null', 'AF-null', 'FC-null']
 
 def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
