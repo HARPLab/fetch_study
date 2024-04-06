@@ -92,7 +92,15 @@ def get_exp_sequence(exp_option):
         return ['FC-null', 'CF-null', 'FA-null', 'AD-null', 'DF-null', 'FE-null', 'EF-null', 'FD-null', 'DA-null', 'AC-null', 'CA-null', 'AB-null', 'BE-null', 'ED-null', 'DC-null', 'CB-null', 'BA-null', 'AE-null', 'EC-null', 'CE-null', 'EA-null', 'AF-null', 'FB-null', 'BC-null', 'CD-null', 'DE-null', 'EB-null', 'BD-null', 'DB-null', 'BF-null']
     elif exp_option == 5:
         return ['DE-null', 'EB-null', 'BC-null', 'CD-null', 'DA-null', 'AE-null', 'EC-null', 'CA-null', 'AF-null', 'FC-null', 'CE-null', 'EF-null', 'FB-null', 'BA-null', 'AD-null', 'DB-null', 'BF-null', 'FE-null', 'ED-null', 'DF-null', 'FD-null', 'DC-null', 'CF-null', 'FA-null', 'AC-null', 'CB-null', 'BD-null', 'DE-null', 'EA-null', 'AB-null', 'BE-null']
-
+    elif exp_option == 6:
+        return ['AB-toptwo', 'BA-toptwo', 'AE-toptwo', 'EF-toptwo', 'FD-toptwo', 'DF-toptwo', 'FB-toptwo', 'BE-toptwo', 'ED-toptwo', 'DA-toptwo', 'AF-toptwo', 'FA-toptwo', 'AD-toptwo', 'DB-toptwo', 'BC-toptwo', 'CF-toptwo', 'FC-toptwo', 'CD-toptwo', 'DE-toptwo', 'EB-toptwo', 'BF-toptwo', 'FE-toptwo', 'EA-toptwo', 'AC-toptwo', 'CB-toptwo', 'BD-toptwo', 'DC-toptwo', 'CE-toptwo', 'EC-toptwo', 'CA-toptwo']
+    elif exp_option == 7:
+        return ['FE-toptwo', 'EA-toptwo', 'AB-toptwo', 'BA-toptwo', 'AD-toptwo', 'DE-toptwo', 'EF-toptwo', 'FA-toptwo', 'AC-toptwo', 'CE-toptwo', 'EC-toptwo', 'CD-toptwo', 'DB-toptwo', 'BC-toptwo', 'CA-toptwo', 'AF-toptwo', 'FB-toptwo', 'BD-toptwo', 'DC-toptwo', 'CF-toptwo', 'FC-toptwo', 'CB-toptwo', 'BF-toptwo', 'FD-toptwo', 'DF-toptwo', 'FB-toptwo', 'BE-toptwo', 'ED-toptwo', 'DA-toptwo', 'AE-toptwo', 'EB-toptwo']
+    elif exp_option == 8:
+        return ['BE-toptwo', 'EC-toptwo', 'CE-toptwo', 'EA-toptwo', 'AD-toptwo', 'DB-toptwo', 'BD-toptwo', 'DF-toptwo', 'FD-toptwo', 'DE-toptwo', 'ED-toptwo', 'DC-toptwo', 'CF-toptwo', 'FE-toptwo', 'EB-toptwo', 'BA-toptwo', 'AE-toptwo', 'EF-toptwo', 'FA-toptwo', 'AC-toptwo', 'CB-toptwo', 'BF-toptwo', 'FC-toptwo', 'CA-toptwo', 'AF-toptwo', 'FB-toptwo', 'BC-toptwo', 'CD-toptwo', 'DA-toptwo', 'AB-toptwo']
+    elif exp_option == 9:
+        return ['DC-toptwo', 'CE-toptwo', 'EF-toptwo', 'FD-toptwo', 'DF-toptwo', 'FE-toptwo', 'EC-toptwo', 'CB-toptwo', 'BA-toptwo', 'AB-toptwo', 'BC-toptwo', 'CD-toptwo', 'DE-toptwo', 'EB-toptwo', 'BD-toptwo', 'DB-toptwo', 'BE-toptwo', 'ED-toptwo', 'DA-toptwo', 'AF-toptwo', 'FC-toptwo', 'CF-toptwo', 'FA-toptwo', 'AE-toptwo', 'EA-toptwo', 'AD-toptwo', 'DF-toptwo', 'FB-toptwo', 'BF-toptwo', 'FA-toptwo', 'AC-toptwo', 'CA-toptwo']
+    
     return ['CF-null', 'FE-null', 'EF-null', 'FB-null', 'BF-null', 'FA-null', 'AC-null', 'CA-null', 'AD-null', 'DC-null', 'CE-null', 'EB-null', 'BE-null', 'EC-null', 'CB-null', 'BC-null', 'CD-null', 'DB-null', 'BA-null', 'AE-null', 'ED-null', 'DF-null', 'FD-null', 'DE-null', 'EA-null', 'AB-null', 'BD-null', 'DA-null', 'AF-null', 'FC-null']
 
 def initialize_waypoints():
