@@ -42,6 +42,8 @@ path_names_list = ['DB-null', 'BE-null', 'ED-null', 'DA-null', 'AF-null', 'FE-nu
 
 velocity_default = 1.0
 
+lidar_offset = .25
+
 # INDICES OF AUXILLARY DATA
 AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
@@ -175,7 +177,7 @@ class FollowRoute(State):
         rospy.loginfo('Starting a tf listener.')
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
-        self.distance_tolerance = 0.1 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+        self.distance_tolerance = 0.05 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -295,7 +297,7 @@ class FollowRoute(State):
                         pow(end_goal.target_pose.pose.position.x - trans[0], 2) + pow(end_goal.target_pose.pose.position.y - trans[1],
                                                                                2))
 
-                    if distance_to_goal <= self.distance_tolerance:
+                    if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
 
                     if counter % 200 == 0:
