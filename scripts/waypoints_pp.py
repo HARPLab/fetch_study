@@ -220,7 +220,7 @@ class FollowRoute(State):
             print(goal)
 
             ## Option for speed control
-            self.update_client.update_configuration({"linear_velocity": .1})
+            # self.update_client.update_configuration({"linear_velocity": .1})
             # r.sleep()
 
             ### Set up goal checkpoints
