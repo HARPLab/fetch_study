@@ -178,7 +178,7 @@ class FollowRoute(State):
         self.distance_tolerance = 0.1 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
 
         # print("Setting up dynamic speed server")
-        self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
+        # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
         # # self.update_client.wait_for_server()
         # self.update_client = dynamic_reconfigure.client.Client("move_base/TrajectoryPlannerROS", timeout=4, config_callback=None)
         # print("Found it")
