@@ -38,7 +38,7 @@ route_sequence  = []
 start_dict      = {}    
 goal_dict       = {}
 
-path_names_list = ['xy', 'yz', 'zx'] #['de', 'ef', 'fd'] #['ab', 'ba', 'ac', 'cb']
+path_names_list = ['DB-null', 'BE-null', 'ED-null', 'DA-null', 'AF-null', 'FE-null', 'EB-null', 'BF-null', 'FB-null', 'BA-null', 'AB-null', 'BD-null', 'DE-null', 'EC-null', 'CD-null', 'DF-null', 'FC-null', 'CF-null', 'FA-null', 'AC-null', 'CA-null', 'AE-null', 'EF-null', 'FD-null', 'DC-null', 'CB-null', 'BC-null', 'CE-null', 'EA-null', 'AD-null', 'FE-toptwo', 'EF-toptwo', 'FA-toptwo', 'AC-toptwo', 'CA-toptwo', 'AB-toptwo', 'BD-toptwo', 'DC-toptwo', 'CF-toptwo', 'FB-toptwo', 'BC-toptwo', 'CE-toptwo', 'EC-toptwo', 'CB-toptwo', 'BE-toptwo', 'EA-toptwo', 'AF-toptwo', 'FD-toptwo', 'DA-toptwo', 'AE-toptwo', 'EB-toptwo', 'BA-toptwo', 'AD-toptwo', 'DE-toptwo', 'ED-toptwo', 'DF-toptwo', 'FC-toptwo', 'CD-toptwo', 'DB-toptwo', 'BF-toptwo'] #['xy', 'yz', 'zx'] #['de', 'ef', 'fd'] #['ab', 'ba', 'ac', 'cb']
 
 velocity_default = 1.0
 
