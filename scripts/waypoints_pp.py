@@ -106,7 +106,9 @@ def get_exp_sequence(exp_option):
     elif exp_option == 11:
         return ['FE-bigger', 'EC-bigger', 'CB-bigger', 'BC-bigger', 'CE-bigger', 'EB-bigger', 'BE-bigger', 'EA-bigger', 'AE-bigger', 'ED-bigger', 'DC-bigger', 'CA-bigger', 'AC-bigger', 'CF-bigger', 'FA-bigger', 'AB-bigger', 'BA-bigger', 'AF-bigger', 'FC-bigger', 'CD-bigger', 'DA-bigger', 'AD-bigger', 'DF-bigger', 'FD-bigger', 'DB-bigger', 'BF-bigger', 'FB-bigger', 'BD-bigger', 'DE-bigger', 'EF-bigger']
 
-    return ['CF-null', 'FE-null', 'EF-null', 'FB-null', 'BF-null', 'FA-null', 'AC-null', 'CA-null', 'AD-null', 'DC-null', 'CE-null', 'EB-null', 'BE-null', 'EC-null', 'CB-null', 'BC-null', 'CD-null', 'DB-null', 'BA-null', 'AE-null', 'ED-null', 'DF-null', 'FD-null', 'DE-null', 'EA-null', 'AB-null', 'BD-null', 'DA-null', 'AF-null', 'FC-null']
+    return ['AB-toptwo', 'BA-toptwo', 'AE-toptwo', 'EF-toptwo', 'FD-toptwo', 'DF-toptwo', 'FB-toptwo', 'BE-toptwo', 'ED-toptwo', 'DA-toptwo', 'AF-toptwo', 'FA-toptwo', 'AD-toptwo', 'DB-toptwo', 'BC-toptwo', 'CF-toptwo', 'FC-toptwo', 'CD-toptwo', 'DE-toptwo', 'EB-toptwo', 'BF-toptwo', 'FE-toptwo', 'EA-toptwo', 'AC-toptwo', 'CB-toptwo', 'BD-toptwo', 'DC-toptwo', 'CE-toptwo', 'EC-toptwo', 'CA-toptwo']
+
+    # return ['CF-null', 'FE-null', 'EF-null', 'FB-null', 'BF-null', 'FA-null', 'AC-null', 'CA-null', 'AD-null', 'DC-null', 'CE-null', 'EB-null', 'BE-null', 'EC-null', 'CB-null', 'BC-null', 'CD-null', 'DB-null', 'BA-null', 'AE-null', 'ED-null', 'DF-null', 'FD-null', 'DE-null', 'EA-null', 'AB-null', 'BD-null', 'DA-null', 'AF-null', 'FC-null']
 
 def initialize_waypoints():
     print("Get waypoints ==> ie detailed trajectories")
