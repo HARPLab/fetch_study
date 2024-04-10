@@ -82,7 +82,7 @@ def get_exp_sequence(exp_option):
     # exp_option.strip('"')
 
     print("EXP_OPTION:~" + str(exp_option) + "~")
-    return path_names_list
+    # return path_names_list
 
     if exp_option == 1:
         return ['CA-null', 'AC-null', 'CD-null', 'DF-null', 'FC-null', 'CF-null', 'FE-null', 'EC-null', 'CB-null', 'BE-null', 'ED-null', 'DA-null', 'AE-null', 'EB-null', 'BA-null', 'AD-null', 'DE-null', 'EA-null', 'AF-null', 'FB-null', 'BF-null', 'FD-null', 'DB-null', 'BC-null', 'CE-null', 'EF-null', 'FA-null', 'AB-null', 'BD-null', 'DC-null']
