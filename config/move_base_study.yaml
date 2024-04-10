@@ -42,7 +42,7 @@ TebLocalPlannerROS:
  via_points_ordered: True #adhere to order of via points
 
  # GoalTolerance
- xy_goal_tolerance: 0.1
+ xy_goal_tolerance: 0.05
  yaw_goal_tolerance: 100.0 #EDITED: 0.05 very large, ignore heading outside of simple nav
  free_goal_vel: True # EDITED: Allow robot's speed at goal to be non-zero
     
