@@ -85,11 +85,11 @@ def get_exp_sequence(exp_option):
     # return path_names_list
 
     if exp_option == 1:
-        return ['CA-null', 'AC-null', 'CD-null', 'DF-null', 'FC-null', 'CF-null', 'FE-null', 'EC-null', 'CB-null', 'BE-null', 'ED-null', 'DA-null', 'AE-null', 'EB-null', 'BA-null', 'AD-null', 'DE-null', 'EA-null', 'AF-null', 'FB-null', 'BF-null', 'FD-null', 'DB-null', 'BC-null', 'CE-null', 'EF-null', 'FA-null', 'AB-null', 'BD-null', 'DC-null']
+        return ['CF-early', 'FE-early', 'EF-early', 'FD-early', 'DE-early', 'EA-early', 'AC-early-obs', 'CD-early-obs', 'DA-early', 'AE-early', 'EC-early', 'CE-early', 'ED-early', 'DA-early', 'AF-early', 'FB-early', 'BF-early', 'FA-early', 'AB-early', 'BC-early', 'CD-early', 'DF-early', 'FC-early', 'CA-early', 'AC-early', 'CB-early', 'BD-early', 'DB-early', 'BE-early', 'EB-early', 'BA-early', 'AD-early', 'DC-early']
     elif exp_option == 2:
-        return ['AE-null', 'EA-null', 'AC-null', 'CA-null', 'AB-null', 'BC-null', 'CF-null', 'FD-null', 'DA-null', 'AF-null', 'FB-null', 'BE-null', 'EB-null', 'BF-null', 'FC-null', 'CD-null', 'DB-null', 'BD-null', 'DE-null', 'EC-null', 'CB-null', 'BA-null', 'AD-null', 'DF-null', 'FA-null', 'AC-null', 'CE-null', 'EF-null', 'FE-null', 'ED-null', 'DC-null']
+        return ['BF-late', 'FE-late', 'EA-late', 'AC-late', 'CD-late', 'DF-late', 'FA-late', 'AD-late', 'DC-late', 'CA-late-obs', 'AF-late-obs', 'FC-late', 'CB-late', 'BD-late', 'DB-late', 'BC-late', 'CE-late', 'EB-late', 'BE-late', 'EF-late', 'FD-late', 'DA-late', 'AF-late', 'FB-late', 'BA-late', 'AE-late', 'EC-late', 'CA-late', 'AB-late', 'BD-late', 'DE-late', 'ED-late', 'DC-late', 'CF-late']
     elif exp_option == 3:
-        return ['CF-null', 'FC-null', 'CA-null', 'AD-null', 'DF-null', 'FA-null', 'AB-null', 'BF-null', 'FB-null', 'BE-null', 'ED-null', 'DA-null', 'AC-null', 'CE-null', 'EA-null', 'AE-null', 'EC-null', 'CB-null', 'BD-null', 'DE-null', 'EB-null', 'BA-null', 'AF-null', 'FD-null', 'DB-null', 'BC-null', 'CD-null', 'DC-null', 'CF-null', 'FE-null', 'EF-null']
+        return ['AC-even', 'CF-even', 'FC-even', 'CD-even', 'DE-even', 'EF-even', 'FB-even', 'BE-even', 'ED-even', 'DF-even', 'FA-even', 'AC-even-obs', 'CA-even-obs', 'AD-even', 'DB-even', 'BA-even', 'AE-even', 'EC-even', 'CB-even', 'BF-even', 'FA-even-obs', 'AC-even-obs', 'CF-even', 'FE-even', 'EA-even', 'AB-even', 'BC-even', 'CA-even', 'AF-even', 'FD-even', 'DA-even', 'AE-even', 'EB-even', 'BD-even', 'DC-even', 'CE-even']
     elif exp_option == 4:
         return ['FC-null', 'CF-null', 'FA-null', 'AD-null', 'DF-null', 'FE-null', 'EF-null', 'FD-null', 'DA-null', 'AC-null', 'CA-null', 'AB-null', 'BE-null', 'ED-null', 'DC-null', 'CB-null', 'BA-null', 'AE-null', 'EC-null', 'CE-null', 'EA-null', 'AF-null', 'FB-null', 'BC-null', 'CD-null', 'DE-null', 'EB-null', 'BD-null', 'DB-null', 'BF-null']
     elif exp_option == 5:
