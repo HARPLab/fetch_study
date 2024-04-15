@@ -1,0 +1,43 @@
+<launch>
+
+  <include file="$(find fetch_study)/launch/fetch_nav.launch" >
+  <!--   <include file="$(find fetch_study)/launch/simple_nav_timed.launch" > -->
+    <arg name="map_file" value="$(find fetch_study)/maps/3002_cleaned.yaml" />
+  </include>
+
+ <arg name="addpose_topic" default="/initialpose"/>
+ <arg name="posearray_topic" default="/waypoints"/>
+
+<!-- Interpolator -->
+    <node name="interpolator" pkg="tracking_pid" type="path_interpolator">
+        <param name="target_x_vel" value="0.7"/>
+        <param name="target_x_acc" value="100.0"/>
+    </node>
+
+    <!-- PID controller -->
+    <node name="controller" pkg="tracking_pid" type="controller" output="screen">
+      <remap from="move_base/cmd_vel" to="/move_base/cmd_vel"/>
+      <remap from="local_trajectory" to="trajectory"/>
+      <param name="controller_debug_enabled" value="True"/>
+      <param name="l" value="0.5"/>
+    </node>
+
+    <!-- Rviz -->
+    <node if="$(arg rviz)" name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find tracking_pid)/test/tracking_pid/controller.rviz" />
+
+    <!-- Simulator -->
+    <node pkg="mobile_robot_simulator" type="mobile_robot_simulator_node" name="fake_odometry" output="screen">
+      <param name="publish_map_transform" value="true"/>
+      <param name="publish_rate" value="10.0"/>
+      <param name="velocity_topic" value="/move_base/cmd_vel"/>
+      <param name="odometry_topic" value="/odom"/>
+    </node>
+
+
+  <node name="follow_waypoints" pkg="fetch_study" type="waypoints_pid.py" output="screen" clear_params="true">
+    <param name="goal_frame_id" value="map"/>
+    <param name="addpose_topic" value="$(arg addpose_topic)"/>
+    <param name="posearray_topic" value="$(arg posearray_topic)"/>
+  </node>
+
+</launch>
