@@ -566,7 +566,7 @@ class RouteComplete(State):
 def main():
     rospy.init_node('publish_path')
     # publish_path
-    waypoint_pub            = rospy.Publisher('/path', Path, queue_size=1)
+    waypoint_pub            = rospy.Publisher('path', Path, queue_size=1)
     waypoint_pub_vis        = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
