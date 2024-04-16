@@ -74,7 +74,7 @@
 
     <!-- PID controller -->
     <node name="controller" pkg="tracking_pid" type="controller" output="screen">
-      <remap from="move_base/cmd_vel" to="/move_base/cmd_vel"/>
+      <remap from="move_base/cmd_vel" to="/cmd_vel"/>
       <remap from="local_trajectory" to="trajectory"/>
       <param name="controller_debug_enabled" value="True"/>
       <param name="l" value="0.5"/>
