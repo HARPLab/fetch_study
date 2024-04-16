@@ -1,12 +1,13 @@
 <launch>
 
   <include file="$(find fetch_study)/launch/fetch_nav.launch" >
-  <!--   <include file="$(find fetch_study)/launch/simple_nav_timed.launch" > -->
     <arg name="map_file" value="$(find fetch_study)/maps/3002_cleaned.yaml" />
   </include>
 
  <arg name="addpose_topic" default="/initialpose"/>
  <arg name="posearray_topic" default="/waypoints"/>
+
+   <arg name="map" value="$(find fetch_study)/maps/3002_cleaned.yaml"/>
 
   <arg name="target_x_vel" default="0.5"/>
   <arg name="target_yaw_vel" default="0.4"/>
