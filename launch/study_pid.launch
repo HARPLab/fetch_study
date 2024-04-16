@@ -8,6 +8,7 @@
   <arg name="use_keepout" default="false" />
   <arg name="launch_map_server" default="true" />
   <arg name="use_map_topic"  default="false" />
+  <arg name="map_file" value="$(find fetch_study)/maps/3002_cleaned.yaml" />
 
   <!-- Navigation parameter files -->
   <arg name="move_base_include" default="$(find fetch_navigation)/launch/include/move_base.launch.xml" />
@@ -50,10 +51,6 @@
 
   <!-- tilt the head -->
   <node pkg="fetch_navigation" type="tilt_head.py" name="tilt_head_node" />
-
-
-  <!-- tilt the head -->
-  <arg name="map_file" value="$(find fetch_study)/maps/3002_cleaned.yaml" />
 
   <arg name="rviz" default="false"/>
 
