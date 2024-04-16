@@ -25,7 +25,6 @@ from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
 import numpy as np
 from nav_msgs.msg import Path
-from move_base_msgs import MoveBaseActionGoal
 
 
 # smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
