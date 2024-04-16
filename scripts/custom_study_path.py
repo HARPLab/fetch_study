@@ -267,10 +267,6 @@ class FollowRoute(State):
                         # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
                         self.has_broadcast_curve = True
-                    # else:
-                    #     blank_path = Path()
-                    #     self.waypoint_pub.publish(blank_path)
-
 
                     now = rospy.Time.now()
 
@@ -308,10 +304,10 @@ class FollowRoute(State):
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
             ######## HALT THE ROBOT AT END OF PATH
-            blank_path = Path()
-            blank_path.header.frame_id = 'map'
-            blank_path.header.stamp = rospy.Time.now()
-            self.waypoint_pub.publish(blank_path)
+            # blank_path = Path()
+            # blank_path.header.frame_id = 'map'
+            # blank_path.header.stamp = rospy.Time.now()
+            # self.waypoint_pub.publish(blank_path)
 
             wait_time_at_goal = 0.0
             time.sleep(wait_time_at_goal)
