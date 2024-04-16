@@ -294,7 +294,7 @@ class FollowRoute(State):
 
                     self.waypoint_pub.publish(path_to_broadcast)
                     self.waypoint_pub_rviz.publish(path_to_broadcast)
-                    self.client.send_goal(end_goal)
+                    # self.client.send_goal(end_goal)
 
                     # self.client.send_goal(end_goal, done_cb=end_callback_done)
                     # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
@@ -571,7 +571,7 @@ class RouteComplete(State):
 def main():
     rospy.init_node('publish_path')
     # publish_path
-    waypoint_pub            = rospy.Publisher('path', Path, queue_size=1)
+    waypoint_pub            = rospy.Publisher('local_trajectory', Path, queue_size=1)
     waypoint_pub_vis        = rospy.Publisher('/local_path', Path, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
