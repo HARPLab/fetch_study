@@ -307,7 +307,7 @@ class FollowRoute(State):
                         pow(end_goal.target_pose.pose.position.x - trans[0], 2) + pow(end_goal.target_pose.pose.position.y - trans[1],
                                                                                2))
 
-                    if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
+                    if (distance_to_goal) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
 
                     if counter % 500 == 0:
