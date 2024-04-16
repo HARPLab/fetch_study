@@ -15,8 +15,6 @@
   <arg name="target_yaw_vel" default="0.4"/>
   <arg name="robot_radius" default="0.3"/>
   <arg name="tool_radius" default="0.3"/> 
-  <arg name="robot_radius" default="0.3"/>
-  <arg name="tool_radius" default="0.3"/>
 
     <!-- Interpolator -->
     <node name="interpolator" pkg="tracking_pid" type="path_interpolator">
