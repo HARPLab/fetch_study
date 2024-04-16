@@ -27,16 +27,14 @@
       <param name="l" value="0.5"/>
     </node>
 
+    <!-- Move Base Flex -->
+    <node name="move_base_flex" pkg="mbf_costmap_nav" type="mbf_costmap_nav" output="screen" clear_params="true">
+        <rosparam file="$(find path_tracking_pid)/param/controllers.yaml" command="load" />
+        <rosparam file="$(find path_tracking_pid)/test/local_costmap_params.yaml" command="load" />
+    </node>
+
     <!-- Rviz -->
     <node if="$(arg rviz)" name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find tracking_pid)/test/tracking_pid/controller.rviz" />
-
-    <!-- Simulator -->
-    <node pkg="mobile_robot_simulator" type="mobile_robot_simulator_node" name="fake_odometry" output="screen">
-      <param name="publish_map_transform" value="true"/>
-      <param name="publish_rate" value="10.0"/>
-      <param name="velocity_topic" value="/move_base/cmd_vel"/>
-      <param name="odometry_topic" value="/odom"/>
-    </node>
 
 
   <node name="follow_waypoints" pkg="fetch_study" type="waypoints_pid.py" output="screen" clear_params="true">
