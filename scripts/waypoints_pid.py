@@ -26,7 +26,6 @@ import dynamic_reconfigure.client
 import numpy as np
 from nav_msgs.msg import Path
 
-
 # smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
 
 # Waypoints container
@@ -288,17 +287,13 @@ class FollowRoute(State):
 
                 if self.already_aligned_with_start_pose and not self.has_reached_endgoal:
                     if not self.has_broadcast_curve:
+                        self.waypoint_pub.publish(path_to_broadcast)
+
                         rospy.loginfo('Executing move_base goal to END position (x,y) of # waypoints: %s, %s, %s' % (gx, gy, len(path_to_broadcast.poses)))
+                        # self.client.send_goal(end_goal, done_cb=end_callback_done)
+                        # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
+
                         self.has_broadcast_curve = True
-
-
-                    self.waypoint_pub.publish(path_to_broadcast)
-                    self.waypoint_pub_rviz.publish(path_to_broadcast)
-                    # self.client.send_goal(end_goal)
-
-                    # self.client.send_goal(end_goal, done_cb=end_callback_done)
-                    # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
-
                     # else:
                     #     blank_path = Path()
                     #     self.waypoint_pub.publish(blank_path)
@@ -571,7 +566,7 @@ class RouteComplete(State):
 def main():
     rospy.init_node('publish_path')
     # publish_path
-    waypoint_pub            = rospy.Publisher('local_trajectory', Path, queue_size=1)
+    waypoint_pub            = rospy.Publisher('path', Path, queue_size=1)
     waypoint_pub_vis        = rospy.Publisher('/local_path', Path, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
