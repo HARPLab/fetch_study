@@ -94,7 +94,7 @@ def initialize_waypoints():
 
     for file_name in dir_list:
         waypoints_path = output_folder_default + file_name
-        path_name = file_name.removesuffix(".csv")
+        path_name = file_name.replace('.csv','')
     
         waypoints_info, start, goal      = import_waypoints(path_name, waypoints_path)
         
