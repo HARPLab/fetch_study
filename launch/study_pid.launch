@@ -65,7 +65,7 @@
   <arg name="tool_radius" default="0.3"/> 
 
     <!-- Interpolator -->
-    <node name="interpolator" pkg="tracking_pid" type="path_interpolator">
+    <node name="interpolator" pkg="tracking_pid" type="path_interpolator" output="screen">
         <param name="target_x_vel" value="0.35"/>
         <param name="target_x_acc" value="100.0"/>
     </node>
@@ -74,7 +74,7 @@
 
     <!-- PID controller -->
     <node name="controller" pkg="tracking_pid" type="controller" output="screen">
-      <remap from="move_base/cmd_vel" to="/cmd_vel"/>
+      <remap from="move_base/cmd_vel" to="cmd_vel"/>
       <remap from="local_trajectory" to="trajectory"/>
       <param name="controller_debug_enabled" value="True"/>
       <param name="l" value="0.5"/>
