@@ -25,6 +25,8 @@ from geometry_msgs.msg import PoseStamped
 import dynamic_reconfigure.client
 import numpy as np
 from nav_msgs.msg import Path
+from move_base_msgs import MoveBaseActionGoal
+
 
 # smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
 
@@ -293,6 +295,7 @@ class FollowRoute(State):
 
                     self.waypoint_pub.publish(path_to_broadcast)
                     self.waypoint_pub_rviz.publish(path_to_broadcast)
+                    self.client.send_goal(end_goal)
 
                     # self.client.send_goal(end_goal, done_cb=end_callback_done)
                     # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
