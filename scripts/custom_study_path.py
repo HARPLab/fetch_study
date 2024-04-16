@@ -89,8 +89,12 @@ def initialize_waypoints():
     output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'waypoints/')
     output_folder = rospy.get_param('~output_folder', output_folder_default)
 
-    for path_name in path_names_list:
-        waypoints_path = output_folder_default + path_name + ".csv"
+    dir_list = os.listdir(path)
+    dir_list = [f for f in dir_list if 'csv' in f]
+
+    for file_name in dir_list:
+        waypoints_path = output_folder_default + file_name
+        path_name = file_name.str(".csv")
     
         waypoints_info, start, goal      = import_waypoints(path_name, waypoints_path)
         
