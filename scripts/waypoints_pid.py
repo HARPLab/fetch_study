@@ -286,8 +286,9 @@ class FollowRoute(State):
 
 
                 if self.already_aligned_with_start_pose and not self.has_reached_endgoal:
-                    if not self.has_broadcast_curve:
+                    if not self.has_broadcast_curve or True:
                         self.waypoint_pub.publish(path_to_broadcast)
+                        self.waypoint_pub_rviz.publish(path_to_broadcast)
 
                         rospy.loginfo('Executing move_base goal to END position (x,y) of # waypoints: %s, %s, %s' % (gx, gy, len(path_to_broadcast.poses)))
                         # self.client.send_goal(end_goal, done_cb=end_callback_done)
@@ -567,7 +568,7 @@ def main():
     rospy.init_node('publish_path')
     # publish_path
     waypoint_pub            = rospy.Publisher('path', Path, queue_size=1)
-    waypoint_pub_vis        = rospy.Publisher('/waypoints_pp', Path, queue_size=1)
+    waypoint_pub_vis        = rospy.Publisher('/local_path', Path, queue_size=1)
 
     sm = StateMachine(outcomes=['success'])
     with sm:
