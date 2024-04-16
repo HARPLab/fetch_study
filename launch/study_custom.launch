@@ -1,0 +1,92 @@
+<launch>
+
+  <!-- Navigation requires at least one map.
+       In addition, it is sometimes desirable to have a "keepout" map
+       which is used for costmaps, but not localization -->
+  <arg name="map_keepout_file" default="$(find fetch_maps)/maps/3_1_16_keepout.yaml" />
+  <arg name="use_keepout" default="false" />
+  <arg name="launch_map_server" default="true" />
+  <arg name="use_map_topic"  default="false" />
+  <arg name="map_file" value="$(find fetch_study)/maps/fetchredemo.yaml" />
+
+  <!-- Navigation parameter files -->
+  <arg name="move_base_include" default="$(find fetch_navigation)/launch/include/move_base.launch.xml" />
+  <arg name="amcl_include" default="$(find fetch_navigation)/launch/include/amcl.launch.xml" />
+
+  <!-- set topics -->
+  <arg name="scan_topic" default="base_scan" />
+  <arg name="map_topic" default="map" />
+  <arg name="cmd_vel_topic" default="cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+
+  <group if="$(arg launch_map_server)">
+    <!-- serve up a map -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- serve up a map with keepout zones -->
+    <group if="$(arg use_keepout)" >
+    <node name="map_keepout_server" pkg="map_server" type="map_server" args="$(arg map_keepout_file)" >
+      <remap from="map" to="map_keepout" />
+      <remap from="static_map" to="static_map_keepout" />
+    </node>
+    </group>
+  </group>
+
+  <!-- localize the robot -->
+  <include file="$(arg amcl_include)" >
+    <arg name="scan_topic" value="$(arg scan_topic)" />
+    <arg name="map_topic" value="$(arg map_topic)" />
+    <arg name="use_map_topic" value="$(arg use_map_topic)" />
+  </include>
+
+  <!-- move the robot -->
+  <include file="$(arg move_base_include)" >
+    <arg name="name" value="fetch" />
+    <arg if="$(arg use_keepout)" name="map_topic" value="map_keepout" />
+    <arg unless="$(arg use_keepout)" name="map_topic" value="$(arg map_topic)" />
+    <arg name="cmd_vel_topic" value="$(arg cmd_vel_topic)" />
+    <arg name="odom_topic" value="$(arg odom_topic)" />
+  </include>
+
+  <!-- tilt the head -->
+  <node pkg="fetch_navigation" type="tilt_head.py" name="tilt_head_node" />
+
+  <arg name="rviz" default="false"/>
+
+  <arg name="addpose_topic" default="/initialpose"/>
+  <arg name="posearray_topic" default="/waypoints"/>
+
+  <arg name="map" value="$(find fetch_study)/maps/3002_cleaned.yaml"/>
+
+  <arg name="target_x_vel" default="1.0"/>
+  <arg name="target_yaw_vel" default="0.7"/>
+  <arg name="robot_radius" default="0.3"/>
+  <arg name="tool_radius" default="0.0"/> 
+
+    <!-- Interpolator -->
+    <node name="interpolator" pkg="tracking_pid" type="path_interpolator" output="screen">
+        <param name="target_x_vel" value="1.0"/>
+        <param name="target_x_acc" value="100.0"/>
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 map path_frame 100" name="path_frame_tfpub"/>
+
+    <!-- PID controller -->
+    <node name="controller" pkg="tracking_pid" type="controller" output="screen">
+      <remap from="move_base/cmd_vel" to="cmd_vel"/>
+      <remap from="local_trajectory" to="trajectory"/>
+      <param name="controller_debug_enabled" value="True"/>
+      <param name="l" value="0.2"/>
+      <param name="track_base_link" value="True"/>
+    </node>
+
+    <!-- Rviz -->
+    <node if="$(arg rviz)" name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find tracking_pid)/test/tracking_pid/controller.rviz" />
+
+  <node name="follow_waypoints" pkg="fetch_study" type="custom_study_path.py" output="screen" clear_params="true">
+    <param name="goal_frame_id" value="map"/>
+    <param name="addpose_topic" value="$(arg addpose_topic)"/>
+    <param name="posearray_topic" value="$(arg posearray_topic)"/>
+  </node>
+
+</launch>
