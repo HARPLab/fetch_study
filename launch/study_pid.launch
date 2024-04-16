@@ -66,7 +66,7 @@
 
     <!-- Interpolator -->
     <node name="interpolator" pkg="tracking_pid" type="path_interpolator" output="screen">
-        <param name="target_x_vel" value="0.35"/>
+        <param name="target_x_vel" value="0.5"/>
         <param name="target_x_acc" value="100.0"/>
     </node>
 
