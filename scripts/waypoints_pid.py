@@ -313,7 +313,7 @@ class FollowRoute(State):
                     if counter % 500 == 0:
                         print("Robot "  + str(distance_to_goal) + " from goal.")
 
-                    rospy.loginfo(str("base_link: ") + str(trans) + " " + str(rot), logger_name="location_logger")
+                    rospy.loginfo(str("base_link: ") + str(rospy.Time.now()) + ", " + str(trans) + ", " + str(rot), logger_name="location_logger")
 
                   
                     ### LOG PROGRESS ON PATH
