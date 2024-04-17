@@ -32,6 +32,7 @@ from nav_msgs.msg import Path
 waypoints       = []
 auxilary_data   = []
 mission_report  = []
+mission_report_short  = []
 
 route_dict      = {}
 route_sequence  = []
@@ -213,7 +214,7 @@ class FollowRoute(State):
         return dist
 
     def execute(self, userdata):
-        global megapoints, mission_report, waypoint_pub
+        global megapoints, mission_report, mission_report_short, waypoint_pub
 
         # Execute waypoints each in sequence
         # prev_waypoint = waypoints[0]
@@ -274,8 +275,11 @@ class FollowRoute(State):
                 print("Done with this path")
 
             self.client.send_goal(start_goal, done_cb=start_callback_done)
-            rospy.loginfo('Executing move_base goal to START position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
 
+            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PREP", str(rospy.Time.now()), 0]
+            mission_report_short.append(mini_report)
+            
+            rospy.loginfo('Executing move_base goal to START position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
 
             counter = 0
 
@@ -299,6 +303,10 @@ class FollowRoute(State):
                 if self.already_aligned_with_start_pose and not self.has_reached_endgoal:
                     if not self.has_broadcast_curve:
                         self.waypoint_pub.publish(path_to_broadcast)
+
+                        # Mark the path's start when we start broadcasting the direction
+                        mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "START", str(rospy.Time.now()), 0]
+                        mission_report_short.append(mini_report)
 
                         rospy.loginfo('Executing move_base goal to END position (x,y) of # waypoints: %s, %s, %s' % (gx, gy, len(path_to_broadcast.poses)))
                         # self.client.send_goal(end_goal, done_cb=end_callback_done)
@@ -343,6 +351,10 @@ class FollowRoute(State):
             toc = time.perf_counter()
             time_elapsed = toc - tic
             time_elapsed = str(time_elapsed)
+
+            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "END", str(rospy.Time.now()), time_elapsed]
+            mission_report_short.append(mini_report)
+            
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
             ######## HALT THE ROBOT AT END OF PATH
@@ -551,7 +563,7 @@ class RouteComplete(State):
         State.__init__(self, outcomes=['success'])
 
     def execute(self, userdata):
-        global mission_report
+        global mission_report, mission_report_short
 
         rospy.loginfo('###############################')
         rospy.loginfo('##### REACHED FINISH GATE #####')
@@ -561,6 +573,13 @@ class RouteComplete(State):
 
         output_folder_default = os.path.join(rospkg.RosPack().get_path('fetch_study'), 'saved_path/reports')
         output_folder = rospy.get_param('~output_folder', output_folder_default)
+
+        output_file_path_minireport = os.path.join(output_folder, now_id + "-mini_report.csv")
+        with open(output_file_path_minireport, 'w') as file:
+            file.write("point, status, time\n")
+            for report in mission_report_short:
+                    file.write(str(report) + "\n")
+
         output_file_path_report = os.path.join(output_folder, now_id + "-mission_report.csv")
         with open(output_file_path_report, 'w') as file:
             file.write("X, Y, time_to_reach\n")
