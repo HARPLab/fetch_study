@@ -85,7 +85,6 @@ def get_exp_sequence(exp_option):
     print("EXP_OPTION:~" + str(exp_option) + "~")
     # return path_names_list
 
-
     if exp_option == "1":
         return ['AC_OBS-late', 'CD_OBS-late', 'DF-early', 'FE-even', 'ED-null', 'DA-even', 'AF_OBS-early', 'FD_OBS-late', 'DA-even', 'AD-even', 'DC-null', 'CE-even', 'EA-null', 'AC-late', 'CB-even', 'BD-null', 'DF-even', 'FD_OBS-early', 'DA-late', 'AE-late', 'EC-null', 'CF-late', 'FE-late', 'EF-null', 'FA_OBS-early', 'AF_OBS-even', 'FA-null', 'AB-late', 'BA-null', 'AC-early', 'CA_OBS-early', 'AC-even', 'CF-early', 'FE-early', 'EC-null', 'CE-early', 'EA-null', 'AB-early', 'BA-null', 'AF_OBS-late', 'FC-early', 'CA_OBS-even', 'AC-even', 'CD_OBS-even', 'DF-late', 'FD_OBS-even']
     elif exp_option == "2":
