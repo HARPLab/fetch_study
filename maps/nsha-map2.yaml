@@ -1,4 +1,4 @@
-image: ./nsha-map.pgm
+image: nsha-map.pgm
 resolution: 0.050000
 origin: [-5.554795, -3.800075, 0.000000]
 negate: 0
