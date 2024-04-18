@@ -1,15 +1,13 @@
 <launch>
 
   <include file="$(find fetch_study)/launch/fetch_nav_ada.launch" >
-    <arg name="map_file" value="$(find fetch_study)/maps/fetchredemo.yaml" />
+    <arg name="map_file" value="$(find fetch_study)/maps/nsha.yaml" />
   </include>
 
   <arg name="rviz" default="false"/>
 
   <arg name="addpose_topic" default="/initialpose"/>
   <arg name="posearray_topic" default="/waypoints"/>
-
-  <arg name="map" value="$(find fetch_study)/maps/3002_cleaned.yaml"/>
 
   <arg name="target_x_vel" default="1.0"/>
   <arg name="target_yaw_vel" default="1.0"/>
