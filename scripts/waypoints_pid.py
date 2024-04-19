@@ -259,6 +259,39 @@ class FollowRoute(State):
             start_goal.target_pose.pose.position     = Point(start[0], start[1], start[2])
             start_goal.target_pose.pose.orientation  = Quaternion(start[3], start[4], start[5], start[6])
 
+            goal_a_ramp  = [1.0, -.7]
+            goal_b_ramp  = [3.0, -.7] 
+            goal_c_ramp  = [5.0, -.7]
+
+            goal_d_ramp  = [1.0, -3.3]
+            goal_e_ramp  = [3.0, -3.3]
+            goal_f_ramp  = [5.0, -3.3]
+
+            goal_a  = [1.0, -.7]
+            goal_b  = [3.0, -.7] 
+            goal_c  = [5.0, -.7]
+
+            goal_d  = [1.0, -3.3]
+            goal_e  = [3.0, -3.3]
+            goal_f  = [5.0, -3.3]
+
+            if end == goal_a_ramp:
+                end = goal_a
+
+            elif end == goal_b_ramp:
+                end = goal_b
+
+            elif end == goal_c_ramp:
+                end = goal_c
+
+            elif end == goal_d_ramp:
+                end = goal_d
+            
+            elif end == goal_e_ramp:
+                end = goal_e
+            
+            elif end == goal_f_ramp:
+                end = goal_f
 
             end_goal = MoveBaseGoal()
             end_goal.target_pose.header.frame_id = self.frame_id
