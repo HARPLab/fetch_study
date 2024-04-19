@@ -328,7 +328,7 @@ class FollowRoute(State):
                     if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
 
-                    # if counter % 500 == 0:
+                    if counter % 500 == 0:
                         print("Robot "  + str(distance_to_goal) + " from goal.")
 
                     # rospy.loginfo(str("base_link: ") + str(rospy.Time.now()) + ", " + str(trans) + ", " + str(rot), logger_name="location_logger")
