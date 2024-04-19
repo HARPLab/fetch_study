@@ -26,6 +26,8 @@ import dynamic_reconfigure.client
 import numpy as np
 from nav_msgs.msg import Path
 
+from sound_play.libsoundplay import SoundClient
+
 # smach.set_loggers(rospy.logdebug, rospy.logwarn, rospy.logdebug, rospy.logerr)
 
 # Waypoints container
@@ -179,7 +181,7 @@ def import_waypoints(path_name, waypoints_path):
     return waypoints_info, start, goal
 
 class FollowRoute(State):
-    def __init__(self, waypub, waypretty):
+    def __init__(self, waypub, waypretty, sound_client):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
         self.frame_id = rospy.get_param('~goal_frame_id', 'map')
@@ -193,6 +195,10 @@ class FollowRoute(State):
 
         self.waypoint_pub            = waypub
         self.waypoint_pub_rviz       = waypretty
+        self.sound_client            = sound_client 
+
+        self.sound_success      = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/mission-success-41211.mp3')
+        self.sound_start        = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/car-engine-starting-43705.mp3')
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -526,6 +532,7 @@ class GetRoute(State):
             #     self.poseArray_publisher.publish(convert_PoseWithCovArray_to_PoseArray(waypoints))
 
             self.start_journey_bool = True
+            self.sound_start.play()
 
         start_journey_thread = threading.Thread(target=wait_for_start_journey)
         start_journey_thread.start()
@@ -600,12 +607,14 @@ def main():
     waypoint_pub            = rospy.Publisher('/path_for_tracking_pid', Path, queue_size=1)
     waypoint_pub_vis        = rospy.Publisher('/local_path', Path, queue_size=1)
 
+    sound_client = SoundClient()
+
     sm = StateMachine(outcomes=['success'])
     with sm:
         StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
-        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub, waypoint_pub_vis),
+        StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub, waypoint_pub_vis, sound_client),
                          transitions={'success': 'PATH_COMPLETE'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('PATH_COMPLETE', RouteComplete(),
