@@ -11,7 +11,7 @@
   <arg name="map_file" default="$(find fetch_study)/maps/3002_cleaned.yaml" />
 
   <!-- Navigation parameter files -->
-  <arg name="move_base_include" default="$(find fetch_navigation)/launch/include/move_base_ada.launch.xml" />
+  <arg name="move_base_include" default="$(find fetch_study)/launch/include/move_base_ada.launch.xml" />
   <arg name="amcl_include" default="$(find fetch_navigation)/launch/include/amcl.launch.xml" />
 
   <!-- set topics -->
