@@ -364,10 +364,10 @@ class FollowRoute(State):
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
             ######## HALT THE ROBOT AT END OF PATH
-            blank_path = Path()
-            blank_path.header.frame_id = 'map'
-            blank_path.header.stamp = rospy.Time.now()
-            self.waypoint_pub.publish(blank_path)
+            # blank_path = Path()
+            # blank_path.header.frame_id = 'map'
+            # blank_path.header.stamp = rospy.Time.now()
+            # self.waypoint_pub.publish(blank_path)
 
             wait_time_at_goal = 0.0
             time.sleep(wait_time_at_goal)
