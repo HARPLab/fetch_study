@@ -275,7 +275,7 @@ class FollowRoute(State):
             goal_e  = [3.0, -3.3]
             goal_f  = [5.0, -3.3]
 
-            end_target = end_goal
+            end_target = end
 
             if end[0] == goal_a_ramp[0] and end[1] == goal_a_ramp[1]:
                 end_target  = goal_a
