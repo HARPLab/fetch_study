@@ -390,12 +390,17 @@ def convert_PoseWithCovArray_to_PoseArray(waypoints):
 
 
 class GetRoute(State):
-    def __init__(self, waypub):
+    def __init__(self, waypub, sound_client):
         State.__init__(self, outcomes=['success', 'killed'], input_keys=['waypoints'], output_keys=['waypoints'])
         # Parameters
         self.goal_frame_id = rospy.get_param('~goal_frame_id', 'map')
 
         self.waypoint_pub = waypub
+
+        self.sound_client            = sound_client 
+
+        self.sound_success      = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/mission-success-41211.mp3')
+        self.sound_start        = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/car-engine-starting-43705.mp3')
 
         # Subscribe to pose message to get new waypoints
         # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
@@ -612,7 +617,7 @@ def main():
 
     sm = StateMachine(outcomes=['success'])
     with sm:
-        StateMachine.add('GET_PATH', GetRoute(waypoint_pub),
+        StateMachine.add('GET_PATH', GetRoute(waypoint_pub, sound_client),
                          transitions={'success': 'FOLLOW_PATH', 'killed': 'success'},
                          remapping={'waypoints': 'waypoints'})
         StateMachine.add('FOLLOW_PATH', FollowRoute(waypoint_pub, waypoint_pub_vis, sound_client),
