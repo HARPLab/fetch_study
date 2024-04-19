@@ -19,7 +19,6 @@
     <rosparam file="$(find fetch_study)/config/costmap_global.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find fetch_study)/config/fetch/costmap_global.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find fetch_study)/config/move_base_ada.yaml" command="load" />
-    <rosparam file="$(find fetch_study)/config/fetch/move_base_ada.yaml" command="load" />
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
     <remap from="map" to="$(arg map_topic)" />
