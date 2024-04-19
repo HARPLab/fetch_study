@@ -197,8 +197,8 @@ class FollowRoute(State):
         self.waypoint_pub_rviz       = waypretty
         self.sound_client            = sound_client 
 
-        self.sound_success      = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/mission-success-41211.mp3')
-        self.sound_start        = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/car-engine-starting-43705.mp3')
+        self.sound_success      = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/mission-success-41211.wav')
+        self.sound_start        = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/car-engine-starting-43705.wav')
 
         rospy.loginfo('Connected to move_base.')
         rospy.loginfo('Starting a tf listener.')
@@ -399,8 +399,8 @@ class GetRoute(State):
 
         self.sound_client            = sound_client 
 
-        self.sound_success      = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/mission-success-41211.mp3')
-        self.sound_start        = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/car-engine-starting-43705.mp3')
+        self.sound_success      = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/mission-success-41211.wav')
+        self.sound_start        = sound_client.waveSound('/home/tbd-fetch/fetch_ws/src/fetch_study/sounds/car-engine-starting-43705.wav')
 
         # Subscribe to pose message to get new waypoints
         # self.addpose_topic = rospy.get_param('~addpose_topic', '/initialpose') // removed since not adding waypoints
