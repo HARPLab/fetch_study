@@ -40,7 +40,7 @@
     <arg name="use_map_topic" value="$(arg use_map_topic)" />
   </include>
 
-  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py"/>
+  <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py" output="screen"/>
   
   <!-- move the robot -->
   <include file="$(arg move_base_include)" >
