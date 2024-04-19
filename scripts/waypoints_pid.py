@@ -333,6 +333,7 @@ class FollowRoute(State):
 
                     if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
+                        self.sound_success.play()
 
                     if counter % 500 == 0:
                         print("Robot "  + str(distance_to_goal) + " from goal.")
