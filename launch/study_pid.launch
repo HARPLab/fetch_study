@@ -32,7 +32,7 @@
       <remap from="local_trajectory" to="trajectory"/>
       <param name="controller_debug_enabled" value="True"/>
       <param name="l" value="0.5"/>
-      <param name="track_base_link" value="True"/>
+      <param name="track_base_link" value="False"/>
     </node>
 
     <!-- Rviz -->
