@@ -298,7 +298,8 @@ class FollowRoute(State):
 
             rospy.loginfo("Real end target")
             rospy.loginfo(end_target)
-            rospy.loginfo(end[0], end[1])
+            rospy.loginfo(end[0])
+            rospy.loginfo(end[1])
 
             end_goal = MoveBaseGoal()
             end_goal.target_pose.header.frame_id = self.frame_id
