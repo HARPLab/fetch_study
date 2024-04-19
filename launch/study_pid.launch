@@ -12,7 +12,7 @@
   <arg name="map" value="$(find fetch_study)/maps/3002_cleaned.yaml"/>
 
   <arg name="target_x_vel" default="1.0"/>
-  <arg name="target_yaw_vel" default="0.7"/>
+  <arg name="target_yaw_vel" default="1.0"/>
   <arg name="robot_radius" default="0.3"/>
   <arg name="tool_radius" default="0.0"/> 
 
@@ -20,6 +20,7 @@
     <node name="interpolator" pkg="tracking_pid" type="path_interpolator" output="screen">
         <param name="target_x_vel" value="1.0"/>
         <param name="target_x_acc" value="100.0"/>
+        <param name="target_yaw_acc" value="100.0"/>
     </node>
 
     <node pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 map path_frame 100" name="path_frame_tfpub"/>
