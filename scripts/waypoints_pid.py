@@ -275,23 +275,26 @@ class FollowRoute(State):
             goal_e  = [3.0, -3.3]
             goal_f  = [5.0, -3.3]
 
-            if end == goal_a_ramp:
+            end_target = end_goal
+
+            if end[0] == goal_a_ramp[0] and end[1] == goal_a_ramp[1]:
                 end_target  = goal_a
 
-            elif end == goal_b_ramp:
+            elif end[0] == goal_b_ramp[0] and end[1] == goal_b_ramp[1]:
                 end_target  = goal_b
 
-            elif end == goal_c_ramp:
+            elif end[0] == goal_c_ramp[0] and end[1] == goal_c_ramp[1]:
                 end_target  = goal_c
 
-            elif end == goal_d_ramp:
+            elif end[0] == goal_d_ramp[0] and end[1] == goal_d_ramp[1]:
                 end_target  = goal_d
             
-            elif end == goal_e_ramp:
+            elif end[0] == goal_e_ramp[0] and end[1] == goal_e_ramp[1]:
                 end_target  = goal_e
             
-            elif end == goal_f_ramp:
+            elif end[0] == goal_f_ramp[0] and end[1] == goal_f_ramp[1]:
                 end_target  = goal_f
+
 
             rospy.loginfo("Real end target")
             rospy.loginfo(end_target)
