@@ -370,6 +370,7 @@ class FollowRoute(State):
                     if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
                         self.sound_success.play()
+                        rospy.loginfo("ATTEMPT TO PLAY SOUND SUCCESS")
 
                     if counter % 500 == 0 and distance_to_goal < .6:
                         print("Robot "  + str(distance_to_goal) + " from goal.")
@@ -575,6 +576,7 @@ class GetRoute(State):
 
             self.start_journey_bool = True
             self.sound_start.play()
+            rospy.loginfo("ATTEMPT TO PLAY SOUND")
 
         start_journey_thread = threading.Thread(target=wait_for_start_journey)
         start_journey_thread.start()
