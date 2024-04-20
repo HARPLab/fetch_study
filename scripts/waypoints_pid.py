@@ -259,47 +259,42 @@ class FollowRoute(State):
             start_goal.target_pose.pose.position     = Point(start[0], start[1], start[2])
             start_goal.target_pose.pose.orientation  = Quaternion(start[3], start[4], start[5], start[6])
 
-            goal_a_ramp  = [1.0, -.7]
-            goal_b_ramp  = [3.0, -.7] 
-            goal_c_ramp  = [5.0, -.7]
+            # goal_a_ramp  = [1.0, -.7]
+            # goal_b_ramp  = [3.0, -.7] 
+            # goal_c_ramp  = [5.0, -.7]
 
-            goal_d_ramp  = [1.0, -3.3]
-            goal_e_ramp  = [3.0, -3.3]
-            goal_f_ramp  = [5.0, -3.3]
+            # goal_d_ramp  = [1.0, -3.3]
+            # goal_e_ramp  = [3.0, -3.3]
+            # goal_f_ramp  = [5.0, -3.3]
 
-            goal_a  = [1.0, -.7]
-            goal_b  = [3.0, -.7] 
-            goal_c  = [5.0, -.7]
+            # goal_a  = [1.0, -.7]
+            # goal_b  = [3.0, -.7] 
+            # goal_c  = [5.0, -.7]
 
-            goal_d  = [1.0, -3.3]
-            goal_e  = [3.0, -3.3]
-            goal_f  = [5.0, -3.3]
+            # goal_d  = [1.0, -3.3]
+            # goal_e  = [3.0, -3.3]
+            # goal_f  = [5.0, -3.3]
 
-            end_target = end
+            # if end == goal_a_ramp:
+            #     end_target  = goal_a
 
-            if end[0] == goal_a_ramp[0] and end[1] == goal_a_ramp[1]:
-                end_target  = goal_a
+            # elif end == goal_b_ramp:
+            #     end_target  = goal_b
 
-            elif end[0] == goal_b_ramp[0] and end[1] == goal_b_ramp[1]:
-                end_target  = goal_b
+            # elif end == goal_c_ramp:
+            #     end_target  = goal_c
 
-            elif end[0] == goal_c_ramp[0] and end[1] == goal_c_ramp[1]:
-                end_target  = goal_c
-
-            elif end[0] == goal_d_ramp[0] and end[1] == goal_d_ramp[1]:
-                end_target  = goal_d
+            # elif end == goal_d_ramp:
+            #     end_target  = goal_d
             
-            elif end[0] == goal_e_ramp[0] and end[1] == goal_e_ramp[1]:
-                end_target  = goal_e
+            # elif end == goal_e_ramp:
+            #     end_target  = goal_e
             
-            elif end[0] == goal_f_ramp[0] and end[1] == goal_f_ramp[1]:
-                end_target  = goal_f
+            # elif end == goal_f_ramp:
+            #     end_target  = goal_f
 
-
-            rospy.loginfo("Real end target")
-            rospy.loginfo(end_target)
-            rospy.loginfo(end[0])
-            rospy.loginfo(end[1])
+            # rospy.loginfo("Real end target")
+            # rospy.loginfo(end_target)
 
             end_goal = MoveBaseGoal()
             end_goal.target_pose.header.frame_id = self.frame_id
