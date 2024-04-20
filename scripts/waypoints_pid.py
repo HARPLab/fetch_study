@@ -229,13 +229,13 @@ class FollowRoute(State):
         goal_e_ramp  = [3.0, -3.3]
         goal_f_ramp  = [5.0, -3.3]
 
-        goal_a  = [1.0, -.7]
-        goal_b  = [3.0, -.7] 
-        goal_c  = [5.0, -.7]
+        goal_a  = [1.0, -1.0]
+        goal_b  = [3.0, -1.0] 
+        goal_c  = [5.0, -1.0]
 
-        goal_d  = [1.0, -3.3]
-        goal_e  = [3.0, -3.3]
-        goal_f  = [5.0, -3.3]
+        goal_d  = [1.0, -3.0]
+        goal_e  = [3.0, -3.0]
+        goal_f  = [5.0, -3.0]
 
 
         # Execute waypoints each in sequence
