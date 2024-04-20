@@ -31,7 +31,7 @@
       <remap from="move_base/cmd_vel" to="cmd_vel"/>
       <remap from="local_trajectory" to="trajectory"/>
       <param name="controller_debug_enabled" value="True"/>
-      <param name="l" value="0.2"/>
+      <param name="l" value="0.05"/>
       <param name="track_base_link" value="True"/>
     </node>
 
