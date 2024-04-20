@@ -259,7 +259,7 @@ class FollowRoute(State):
                 rospy.loginfo('The waypoint queue has been reset.')
                 break
 
-            print("OVERALL TARGET UPDATE!")
+            print("OVERALL TARGET UPDATE! " + str(aux_data[AUX_WAYPOINT_INDEX]))
             print("Start")
             print(start)
             print("Goal")
