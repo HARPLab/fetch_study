@@ -415,6 +415,7 @@ class FollowRoute(State):
             mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed]
             mission_report_short.append(mini_report)
 
+            self.ready_for_next_chunk = False
 
             ######## HALT THE ROBOT AT END OF PATH
             # blank_path = Path()
