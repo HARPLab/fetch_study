@@ -221,6 +221,23 @@ class FollowRoute(State):
     def execute(self, userdata):
         global megapoints, mission_report, mission_report_short, waypoint_pub
 
+        goal_a_ramp  = [1.0, -.7]
+        goal_b_ramp  = [3.0, -.7] 
+        goal_c_ramp  = [5.0, -.7]
+
+        goal_d_ramp  = [1.0, -3.3]
+        goal_e_ramp  = [3.0, -3.3]
+        goal_f_ramp  = [5.0, -3.3]
+
+        goal_a  = [1.0, -.7]
+        goal_b  = [3.0, -.7] 
+        goal_c  = [5.0, -.7]
+
+        goal_d  = [1.0, -3.3]
+        goal_e  = [3.0, -3.3]
+        goal_f  = [5.0, -3.3]
+
+
         # Execute waypoints each in sequence
         # prev_waypoint = waypoints[0]
 
@@ -259,42 +276,27 @@ class FollowRoute(State):
             start_goal.target_pose.pose.position     = Point(start[0], start[1], start[2])
             start_goal.target_pose.pose.orientation  = Quaternion(start[3], start[4], start[5], start[6])
 
-            # goal_a_ramp  = [1.0, -.7]
-            # goal_b_ramp  = [3.0, -.7] 
-            # goal_c_ramp  = [5.0, -.7]
+            end_target = end
+            if [end[0], end[1]] == goal_a_ramp:
+                end_target  = goal_a
 
-            # goal_d_ramp  = [1.0, -3.3]
-            # goal_e_ramp  = [3.0, -3.3]
-            # goal_f_ramp  = [5.0, -3.3]
+            elif [end[0], end[1]] == goal_b_ramp:
+                end_target  = goal_b
 
-            # goal_a  = [1.0, -.7]
-            # goal_b  = [3.0, -.7] 
-            # goal_c  = [5.0, -.7]
+            elif [end[0], end[1]] == goal_c_ramp:
+                end_target  = goal_c
 
-            # goal_d  = [1.0, -3.3]
-            # goal_e  = [3.0, -3.3]
-            # goal_f  = [5.0, -3.3]
-
-            # if end == goal_a_ramp:
-            #     end_target  = goal_a
-
-            # elif end == goal_b_ramp:
-            #     end_target  = goal_b
-
-            # elif end == goal_c_ramp:
-            #     end_target  = goal_c
-
-            # elif end == goal_d_ramp:
-            #     end_target  = goal_d
+            elif [end[0], end[1]] == goal_d_ramp:
+                end_target  = goal_d
             
-            # elif end == goal_e_ramp:
-            #     end_target  = goal_e
+            elif [end[0], end[1]] == goal_e_ramp:
+                end_target  = goal_e
             
-            # elif end == goal_f_ramp:
-            #     end_target  = goal_f
+            elif [end[0], end[1]] == goal_f_ramp:
+                end_target  = goal_f
 
-            # rospy.loginfo("Real end target")
-            # rospy.loginfo(end_target)
+            rospy.loginfo("Real end target")
+            rospy.loginfo(end_target)
 
             end_goal = MoveBaseGoal()
             end_goal.target_pose.header.frame_id = self.frame_id
@@ -314,6 +316,7 @@ class FollowRoute(State):
                 # self.already_aligned_with_start_pose = True
                 # self.has_reached_endgoal = True
                 print("Done with this path")
+                self.ready_for_next_chunk = True
 
             self.client.send_goal(start_goal, done_cb=start_callback_done)
 
@@ -389,7 +392,6 @@ class FollowRoute(State):
                 time.sleep(self.duration)
 
             print("Huzzah! Exiting this loop, because we reached the goal!")
-
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
             time_elapsed = toc - tic
@@ -399,6 +401,20 @@ class FollowRoute(State):
             mission_report_short.append(mini_report)
             
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
+
+
+            self.ready_for_next_chunk = False
+            self.client.send_goal(end_goal, done_cb=end_callback_done)
+
+
+            while not rospy.is_shutdown() and not self.ready_for_next_chunk:
+                time.sleep(200)
+
+
+            ### Once parked
+            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed]
+            mission_report_short.append(mini_report)
+
 
             ######## HALT THE ROBOT AT END OF PATH
             # blank_path = Path()
