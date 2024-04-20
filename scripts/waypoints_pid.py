@@ -403,12 +403,12 @@ class FollowRoute(State):
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
 
-            self.ready_for_next_chunk = False
-            self.client.send_goal(end_goal, done_cb=end_callback_done)
+            # self.ready_for_next_chunk = False
+            # self.client.send_goal(end_goal, done_cb=end_callback_done)
 
 
-            while not rospy.is_shutdown() and not self.ready_for_next_chunk:
-                time.sleep(200)
+            # while not rospy.is_shutdown() and not self.ready_for_next_chunk:
+            #     time.sleep(200)
 
 
             ### Once parked
