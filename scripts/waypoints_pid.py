@@ -235,13 +235,13 @@ class FollowRoute(State):
     def execute(self, userdata):
         global megapoints, mission_report, mission_report_short, waypoint_pub
 
-        goal_a_ramp  = [1.0, -.7]
-        goal_b_ramp  = [3.0, -.7] 
-        goal_c_ramp  = [5.0, -.7]
+        goal_a_ramp  = [1.0, -.6]
+        goal_b_ramp  = [3.0, -.6] 
+        goal_c_ramp  = [5.0, -.6]
 
-        goal_d_ramp  = [1.0, -3.3]
-        goal_e_ramp  = [3.0, -3.3]
-        goal_f_ramp  = [5.0, -3.3]
+        goal_d_ramp  = [1.0, -3.4]
+        goal_e_ramp  = [3.0, -3.4]
+        goal_f_ramp  = [5.0, -3.4]
 
         goal_a  = [1.0, -1.0]
         goal_b  = [3.0, -1.0] 
@@ -290,24 +290,31 @@ class FollowRoute(State):
             start_goal.target_pose.pose.position     = Point(start[0], start[1], start[2])
             start_goal.target_pose.pose.orientation  = Quaternion(start[3], start[4], start[5], start[6])
 
-            end_target = end
+            end_target  = end
+            end_ramp    = end
             if [end[0], end[1]] == goal_a_ramp:
                 end_target  = goal_a
+                end_ramp    = goal_a_ramp[-1]
 
             elif [end[0], end[1]] == goal_b_ramp:
                 end_target  = goal_b
+                end_ramp    = goal_b_ramp[-1]
 
             elif [end[0], end[1]] == goal_c_ramp:
                 end_target  = goal_c
+                end_ramp    = goal_c_ramp[-1]
 
             elif [end[0], end[1]] == goal_d_ramp:
                 end_target  = goal_d
+                end_ramp    = goal_d_ramp[-1]
             
             elif [end[0], end[1]] == goal_e_ramp:
                 end_target  = goal_e
+                end_ramp    = goal_e_ramp[-1]
             
             elif [end[0], end[1]] == goal_f_ramp:
                 end_target  = goal_f
+                end_ramp    = goal_f_ramp[-1]
 
             rospy.loginfo("Real end target")
             rospy.loginfo(end_target)
@@ -365,7 +372,8 @@ class FollowRoute(State):
                         # Mark the path's start when we start broadcasting the direction
                         mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "START", str(rospy.Time.now()), 0]
                         mission_report_short.append(mini_report)
-
+                        print("~~START~~")
+                        
                         rospy.loginfo('Executing move_base goal to END position (x,y) of # waypoints: %s, %s, %s' % (gx, gy, len(path_to_broadcast.poses)))
                         # self.client.send_goal(end_goal, done_cb=end_callback_done)
                         # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
@@ -413,6 +421,7 @@ class FollowRoute(State):
 
             mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "END", str(rospy.Time.now()), time_elapsed]
             mission_report_short.append(mini_report)
+            print("~~END~~")
             
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
@@ -424,10 +433,33 @@ class FollowRoute(State):
             # while not rospy.is_shutdown() and not self.ready_for_next_chunk:
             #     time.sleep(200)
 
+            def parking_callback_done(state, result):
+                # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
+                # self.already_aligned_with_start_pose = True
+                # self.has_reached_endgoal = True
+                # print("Done with this path")
 
-            ### Once parked
-            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed]
-            mission_report_short.append(mini_report)
+                ### Once parked
+                mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed]
+                mission_report_short.append(mini_report)
+                self.is_parked = True
+                print("~~PARKED~~")
+
+                
+            self.is_parked = False
+            end_ramp_goal = MoveBaseGoal()
+            end_ramp_goal.target_pose.header.frame_id = self.frame_id
+
+            end_ramp_goal.target_pose.pose.position     = Point(end_ramp[0], end_ramp[1], end_ramp[2])
+            end_ramp_goal.target_pose.pose.orientation  = Quaternion(end_ramp[3], end_ramp[4], end_ramp[5], end_ramp[6])
+
+            self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
+
+            while not self.is_parked and not rospy.is_shutdown():
+
+                time.sleep(self.duration)
+
+
             # print()
 
             ######## HALT THE ROBOT AT END OF PATH
@@ -658,6 +690,9 @@ class RouteComplete(State):
         with open(output_file_path_minireport, 'w') as file:
             file.write("point, status, time\n")
             for report in mission_report_short:
+                try:
+                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + '\n')
+                except:
                     file.write(str(report) + "\n")
 
         output_file_path_report = os.path.join(output_folder, now_id + "-mission_report.csv")
