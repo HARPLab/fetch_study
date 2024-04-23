@@ -256,13 +256,13 @@ class FollowRoute(State):
         goal_e_ramp  = [3.0, -3.3]
         goal_f_ramp  = [5.0, -3.3]
 
-        goal_a  = [1.0, -1.0]
-        goal_b  = [3.0, -1.0] 
-        goal_c  = [5.0, -1.0]
+        goal_a  = [1.0, -.9]
+        goal_b  = [3.0, -.9] 
+        goal_c  = [5.0, -.9]
 
-        goal_d  = [1.0, -3.0]
-        goal_e  = [3.0, -3.0]
-        goal_f  = [5.0, -3.0]
+        goal_d  = [1.0, -3.1]
+        goal_e  = [3.0, -3.1]
+        goal_f  = [5.0, -3.1]
 
 
         # Execute waypoints each in sequence
@@ -461,18 +461,18 @@ class FollowRoute(State):
                 print("~~PARKED~~")
 
                 
-            self.is_parked = False
-            end_ramp_goal = MoveBaseGoal()
-            end_ramp_goal.target_pose.header.frame_id = self.frame_id
+            # self.is_parked = False
+            # end_ramp_goal = MoveBaseGoal()
+            # end_ramp_goal.target_pose.header.frame_id = self.frame_id
 
-            end_ramp_goal.target_pose.pose.position     = Point(end_ramp[0], end_ramp[1], end[2])
-            end_ramp_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
+            # end_ramp_goal.target_pose.pose.position     = Point(end_ramp[0], end_ramp[1], end[2])
+            # end_ramp_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
 
-            self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
+            # self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
 
-            while not self.is_parked and not rospy.is_shutdown():
+            # while not self.is_parked and not rospy.is_shutdown():
 
-                time.sleep(self.duration)
+            #     time.sleep(self.duration)
 
 
             # print()
