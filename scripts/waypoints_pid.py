@@ -248,13 +248,13 @@ class FollowRoute(State):
     def execute(self, userdata):
         global megapoints, mission_report, mission_report_short, waypoint_pub
 
-        goal_a_ramp  = [1.0, -.6]
-        goal_b_ramp  = [3.0, -.6] 
-        goal_c_ramp  = [5.0, -.6]
+        goal_a_ramp  = [1.0, -.7]
+        goal_b_ramp  = [3.0, -.7] 
+        goal_c_ramp  = [5.0, -.7]
 
-        goal_d_ramp  = [1.0, -3.4]
-        goal_e_ramp  = [3.0, -3.4]
-        goal_f_ramp  = [5.0, -3.4]
+        goal_d_ramp  = [1.0, -3.3]
+        goal_e_ramp  = [3.0, -3.3]
+        goal_f_ramp  = [5.0, -3.3]
 
         goal_a  = [1.0, -1.0]
         goal_b  = [3.0, -1.0] 
