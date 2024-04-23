@@ -43,7 +43,7 @@ TrajectoryPlannerROS:
   heading_lookahead: 0.325
   heading_scoring_timestep: 0.8
   heading_scoring: true
-  dwa: false
+  dwa: true
   # other
   oscillation_reset_dist: 0.05
   # debug
