@@ -21,7 +21,7 @@
         <param name="target_x_vel" value="1.0"/>
         <param name="target_x_acc" value="100.0"/>
         <param name="target_yaw_acc" value="100.0"/>
-        <param name="target_yaw_vel" value="1.0"/>
+        <param name="target_yaw_vel" value="1.25"/>
     </node>
 
     <node pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 map path_frame 100" name="path_frame_tfpub"/>
