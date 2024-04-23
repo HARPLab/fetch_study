@@ -309,27 +309,27 @@ class FollowRoute(State):
             end_ramp    = end
             if [end[0], end[1]] == goal_a_ramp:
                 end_target  = goal_a
-                end_ramp    = goal_a_ramp[-1]
+                end_ramp    = goal_a_ramp
 
             elif [end[0], end[1]] == goal_b_ramp:
                 end_target  = goal_b
-                end_ramp    = goal_b_ramp[-1]
+                end_ramp    = goal_b_ramp
 
             elif [end[0], end[1]] == goal_c_ramp:
                 end_target  = goal_c
-                end_ramp    = goal_c_ramp[-1]
+                end_ramp    = goal_c_ramp
 
             elif [end[0], end[1]] == goal_d_ramp:
                 end_target  = goal_d
-                end_ramp    = goal_d_ramp[-1]
+                end_ramp    = goal_d_ramp
             
             elif [end[0], end[1]] == goal_e_ramp:
                 end_target  = goal_e
-                end_ramp    = goal_e_ramp[-1]
+                end_ramp    = goal_e_ramp
             
             elif [end[0], end[1]] == goal_f_ramp:
                 end_target  = goal_f
-                end_ramp    = goal_f_ramp[-1]
+                end_ramp    = goal_f_ramp
 
             rospy.loginfo("Real end target")
             rospy.loginfo(end_target)
@@ -465,8 +465,8 @@ class FollowRoute(State):
             end_ramp_goal = MoveBaseGoal()
             end_ramp_goal.target_pose.header.frame_id = self.frame_id
 
-            end_ramp_goal.target_pose.pose.position     = Point(end_ramp[0], end_ramp[1], end_ramp[2])
-            end_ramp_goal.target_pose.pose.orientation  = Quaternion(end_ramp[3], end_ramp[4], end_ramp[5], end_ramp[6])
+            end_ramp_goal.target_pose.pose.position     = Point(end_ramp[0], end_ramp[1], end[2])
+            end_ramp_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
 
             self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
 
