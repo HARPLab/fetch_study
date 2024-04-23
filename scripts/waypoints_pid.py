@@ -255,7 +255,9 @@ class FollowRoute(State):
         # Execute waypoints each in sequence
         # prev_waypoint = waypoints[0]
 
+        mega_target_counter = 0
         for megatarget, aux_data in zip(megapoints, auxilary_data):
+            mega_target_counter += 1
             tic = time.perf_counter()
 
             megapoint, megaroute_name = megatarget
@@ -341,7 +343,7 @@ class FollowRoute(State):
 
             self.client.send_goal(start_goal, done_cb=start_callback_done)
 
-            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PREP", str(rospy.Time.now()), 0]
+            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PREP", str(rospy.Time.now()), 0, mega_target_counter]
             mission_report_short.append(mini_report)
             
             rospy.loginfo('Executing move_base goal to START position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
@@ -370,7 +372,7 @@ class FollowRoute(State):
                         self.waypoint_pub.publish(path_to_broadcast)
 
                         # Mark the path's start when we start broadcasting the direction
-                        mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "START", str(rospy.Time.now()), 0]
+                        mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "START", str(rospy.Time.now()), 0, mega_target_counter]
                         mission_report_short.append(mini_report)
                         print("~~START~~")
                         
@@ -419,7 +421,7 @@ class FollowRoute(State):
             time_elapsed = toc - tic
             time_elapsed = str(time_elapsed)
 
-            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "END", str(rospy.Time.now()), time_elapsed]
+            mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "END", str(rospy.Time.now()), time_elapsed, mega_target_counter]
             mission_report_short.append(mini_report)
             print("~~END~~")
             
@@ -440,7 +442,7 @@ class FollowRoute(State):
                 # print("Done with this path")
 
                 ### Once parked
-                mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed]
+                mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed, mega_target_counter]
                 mission_report_short.append(mini_report)
                 self.is_parked = True
                 print("~~PARKED~~")
@@ -691,7 +693,7 @@ class RouteComplete(State):
             file.write("point, status, time\n")
             for report in mission_report_short:
                 try:
-                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + '\n')
+                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + ',' + str(report[4]) + '\n')
                 except:
                     file.write(str(report) + "\n")
 
