@@ -698,7 +698,7 @@ class RouteComplete(State):
 
         output_file_path_minireport = os.path.join(output_folder, now_id + "-mini_report.csv")
         with open(output_file_path_minireport, 'w') as file:
-            file.write("point, status, time\n")
+            file.write("point, status, time, time_elapsed, iteration_number\n")
             for report in mission_report_short:
                 try:
                     file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + ',' + str(report[4]) + '\n')
@@ -707,7 +707,7 @@ class RouteComplete(State):
 
         output_file_path_report = os.path.join(output_folder, now_id + "-mission_report.csv")
         with open(output_file_path_report, 'w') as file:
-            file.write("X, Y, time_to_reach\n")
+            file.write("X, Y, time_to_reach, time\n")
             for report in mission_report:
                 if ',' in report:
                     file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + '\n')
