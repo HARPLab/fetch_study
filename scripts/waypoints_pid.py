@@ -709,7 +709,7 @@ class RouteComplete(State):
         with open(output_file_path_report, 'w') as file:
             file.write("X, Y, time_to_reach, time\n")
             for report in mission_report:
-                if ',' in report:
+                if ',' in report and len(report) == 4:
                     file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + '\n')
                 else:
                     file.write(str(report) + "\n")
