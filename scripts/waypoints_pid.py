@@ -452,7 +452,7 @@ class FollowRoute(State):
             end_ramp_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
 
             rospy.loginfo('Executing move_base goal to PARKED position (x,y) with velocity: %s, %s, %s' % (str(end_ramp[0]), str(end_ramp[1]), str(end[2])))
-            rospy.loginfo('at angle: %s, %s, %s' % str(end[3]), str(end[4]), str(end[5]), str(end[6]))
+            rospy.loginfo('at angle: %s, %s, %s, %s' % str(end[3]), str(end[4]), str(end[5]), str(end[6]))
 
             self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
 
