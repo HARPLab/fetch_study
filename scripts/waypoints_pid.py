@@ -345,20 +345,25 @@ class FollowRoute(State):
             def start_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
                 self.already_aligned_with_start_pose = True
-                print("Is primed to move on from start")
+                # print("Is primed to move on from start")
+
+                mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "START", str(rospy.Time.now()), 0, mega_target_counter]
+                mission_report_short.append(mini_report)
+                print("~~START~~")
 
             def end_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
                 # self.already_aligned_with_start_pose = True
                 # self.has_reached_endgoal = True
                 print("Done with this path")
+                # NOT ACTUALLY IN USE
                 self.ready_for_next_chunk = True
 
-            self.client.send_goal(start_goal, done_cb=start_callback_done)
-
+            ##### Prep BEFORE we start the path
             mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PREP", str(rospy.Time.now()), 0, mega_target_counter]
             mission_report_short.append(mini_report)
-            
+
+            self.client.send_goal(start_goal, done_cb=start_callback_done)
             rospy.loginfo('Executing move_base goal to START position (x,y) with velocity: %s, %s, %s' % (sx, sy, -1))
 
             counter = 0
@@ -368,39 +373,22 @@ class FollowRoute(State):
             while not self.has_reached_endgoal and not rospy.is_shutdown():
                 counter += 1
 
-                if False and "OLD SCHOOL JUST GOAL MODE":
-                    # rospy.loginfo("To cancel the goal: 'rostopic pub -1 /move_base/cancel actionlib_msgs/GoalID -- {}'")
-                    # self.client.send_goal(goal)
-                    print("Wrong slot, not publishing")
-                    pass
-                else: #### NEW MORE ELABORATE METHOD
-                    if counter % 10 == 0:
-                        # print("publishing path")
-                        # print("pass")
-                        pass
-
-
                 if self.already_aligned_with_start_pose and not self.has_reached_endgoal:
                     if not self.has_broadcast_curve:
                         self.waypoint_pub.publish(path_to_broadcast)
 
                         # Mark the path's start when we start broadcasting the direction
-                        mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "START", str(rospy.Time.now()), 0, mega_target_counter]
-                        mission_report_short.append(mini_report)
-                        print("~~START~~")
                         
                         rospy.loginfo('Executing move_base goal to END position (x,y) of # waypoints: %s, %s, %s' % (gx, gy, len(path_to_broadcast.poses)))
+
+                        ### If we were to do it this way
                         # self.client.send_goal(end_goal, done_cb=end_callback_done)
                         # rospy.loginfo('Executing move_base goal to END position (x,y) with velocity: %s, %s, %s' % (gx, gy, -1))
 
                         self.has_broadcast_curve = True
-                    # else:
-                    #     blank_path = Path()
-                    #     self.waypoint_pub.publish(blank_path)
 
 
                     now = rospy.Time.now()
-
                     self.listener.waitForTransform('map', 'base_link', now, rospy.Duration(.6))
                     trans, rot = self.listener.lookupTransform('map', 'base_link', now)
                     distance_to_goal = math.sqrt(
@@ -410,7 +398,9 @@ class FollowRoute(State):
                     if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
                         self.sound_success.play()
-                        rospy.loginfo("ATTEMPT TO PLAY SOUND SUCCESS")
+                        rospy.loginfo("ATTEMPT TO PLAY SOUND")
+                    else:
+                        time.sleep(self.duration)
 
                     if counter % 500 == 0 and distance_to_goal < .6:
                         print("Robot "  + str(distance_to_goal) + " from goal.")
@@ -426,7 +416,7 @@ class FollowRoute(State):
                     report = [trans[0], trans[1], step_time_elapsed, str(rospy.Time.now())]
                     mission_report.append(report)
 
-                time.sleep(self.duration)
+                # time.sleep(self.duration)
 
             print("Huzzah! Exiting this loop, because we reached the goal!")
             mission_report.append("REACHED " + str(megapoint))
@@ -440,13 +430,6 @@ class FollowRoute(State):
             
             print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
 
-
-            # self.ready_for_next_chunk = False
-            # self.client.send_goal(end_goal, done_cb=end_callback_done)
-
-
-            # while not rospy.is_shutdown() and not self.ready_for_next_chunk:
-            #     time.sleep(200)
 
             def parking_callback_done(state, result):
                 # print("Action server is done. State: %s, result: %s" % (str(state), str(result)))
@@ -468,11 +451,13 @@ class FollowRoute(State):
             end_ramp_goal.target_pose.pose.position     = Point(end_ramp[0], end_ramp[1], end[2])
             end_ramp_goal.target_pose.pose.orientation  = Quaternion(end[3], end[4], end[5], end[6])
 
+            rospy.loginfo('Executing move_base goal to PARKED position (x,y) with velocity: %s, %s, %s' % (str(end_ramp[0]), str(end_ramp[1]), str(end[2])))
+            rospy.loginfo('at angle: %s, %s, %s' % str(end[3]), str(end[4]), str(end[5]), str(end[6]))
+
             self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
 
             while not self.is_parked and not rospy.is_shutdown():
-
-                time.sleep(self.duration)
+                time.sleep(100)
 
 
             # print()
