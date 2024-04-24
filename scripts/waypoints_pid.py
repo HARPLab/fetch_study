@@ -256,13 +256,13 @@ class FollowRoute(State):
         goal_e_ramp  = [3.0, -3.3]
         goal_f_ramp  = [5.0, -3.3]
 
-        goal_a_ramp_lite  = [1.0, -.8]
-        goal_b_ramp_lite  = [3.0, -.8]
-        goal_c_ramp_lite  = [5.0, -.8]
+        goal_a_ramp_lite  = [1.0, -.7]
+        goal_b_ramp_lite  = [3.0, -.7]
+        goal_c_ramp_lite  = [5.0, -.7]
 
-        goal_d_ramp_lite  = [1.0, -3.2]
-        goal_e_ramp_lite  = [3.0, -3.2]
-        goal_f_ramp_lite  = [5.0, -3.2]
+        goal_d_ramp_lite  = [1.0, -3.3]
+        goal_e_ramp_lite  = [3.0, -3.3]
+        goal_f_ramp_lite  = [5.0, -3.3]
 
 
         goal_a  = [1.0, -1.0]
