@@ -256,6 +256,15 @@ class FollowRoute(State):
         goal_e_ramp  = [3.0, -3.3]
         goal_f_ramp  = [5.0, -3.3]
 
+        goal_a_ramp_lite  = [1.0, -.8]
+        goal_b_ramp_lite  = [3.0, -.8]
+        goal_c_ramp_lite  = [5.0, -.8]
+
+        goal_d_ramp_lite  = [1.0, -3.2]
+        goal_e_ramp_lite  = [3.0, -3.2]
+        goal_f_ramp_lite  = [5.0, -3.2]
+
+
         goal_a  = [1.0, -1.0]
         goal_b  = [3.0, -1.0] 
         goal_c  = [5.0, -1.0]
@@ -309,27 +318,27 @@ class FollowRoute(State):
             end_ramp    = end
             if [end[0], end[1]] == goal_a_ramp:
                 end_target  = goal_a
-                end_ramp    = goal_a_ramp
+                end_ramp    = goal_a_ramp_lite
 
             elif [end[0], end[1]] == goal_b_ramp:
                 end_target  = goal_b
-                end_ramp    = goal_b_ramp
+                end_ramp    = goal_b_ramp_lite
 
             elif [end[0], end[1]] == goal_c_ramp:
                 end_target  = goal_c
-                end_ramp    = goal_c_ramp
+                end_ramp    = goal_c_ramp_lite
 
             elif [end[0], end[1]] == goal_d_ramp:
                 end_target  = goal_d
-                end_ramp    = goal_d_ramp
+                end_ramp    = goal_d_ramp_lite
             
             elif [end[0], end[1]] == goal_e_ramp:
                 end_target  = goal_e
-                end_ramp    = goal_e_ramp
+                end_ramp    = goal_e_ramp_lite
             
             elif [end[0], end[1]] == goal_f_ramp:
                 end_target  = goal_f
-                end_ramp    = goal_f_ramp
+                end_ramp    = goal_f_ramp_lite
 
             rospy.loginfo("Real end target")
             rospy.loginfo(end_target)
