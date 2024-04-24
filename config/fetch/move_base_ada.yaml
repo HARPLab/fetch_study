@@ -12,7 +12,7 @@ TrajectoryPlannerROS:
   min_in_place_vel_theta: 0.3
   holonomic_robot: false
 
-oscillation_timeout: 2.0
+# oscillation_timeout: 2.0
 
 # Recovery behaviors
 recovery_behavior_enabled: false
