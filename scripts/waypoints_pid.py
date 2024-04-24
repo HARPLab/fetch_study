@@ -470,7 +470,7 @@ class FollowRoute(State):
                 pass
 
 
-            print("Next loop?")
+            # print("Next loop?")
 
             ######## HALT THE ROBOT AT END OF PATH
             # blank_path = Path()
@@ -478,7 +478,7 @@ class FollowRoute(State):
             # blank_path.header.stamp = rospy.Time.now()
             # self.waypoint_pub.publish(blank_path)
 
-            wait_time_at_goal = 0.5
+            wait_time_at_goal = 0.25
             time.sleep(wait_time_at_goal)
 
             # toc = time.perf_counter()
