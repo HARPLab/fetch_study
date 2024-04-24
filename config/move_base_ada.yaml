@@ -5,7 +5,7 @@ base_local_planner: "base_local_planner/TrajectoryPlannerROS"
 # Recovery behaviors are defined in robot folders
 
 # Oscillation
-oscillation_timeout: 10.0
+oscillation_timeout: 3.0
 oscillation_distance: 0.5
 
 # Global planner
@@ -41,7 +41,7 @@ TrajectoryPlannerROS:
   path_distance_bias: 0.5
   goal_distance_bias: 0.75
   occdist_scale: 0.00625
-  heading_lookahead: 0.05
+  heading_lookahead: 0.1
   heading_scoring_timestep: 0.8
   heading_scoring: true
   dwa: false
