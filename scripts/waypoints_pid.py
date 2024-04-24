@@ -457,10 +457,11 @@ class FollowRoute(State):
             self.client.send_goal(end_ramp_goal, done_cb=parking_callback_done)
 
             while not self.is_parked and not rospy.is_shutdown():
-                time.sleep(100)
+                
+                pass
 
 
-            # print()
+            print("Next loop?")
 
             ######## HALT THE ROBOT AT END OF PATH
             # blank_path = Path()
