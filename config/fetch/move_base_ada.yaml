@@ -15,12 +15,12 @@ TrajectoryPlannerROS:
 # oscillation_timeout: 2.0
 
 # Recovery behaviors
-recovery_behavior_enabled: false
+recovery_behavior_enabled: true
 recovery_behaviors:
   - name: "conservative_reset"
     type: "clear_costmap_recovery/ClearCostmapRecovery"
-  - name: "rotate_recovery"
-    type: "rotate_recovery/RotateRecovery"
+  # - name: "rotate_recovery"
+  #   type: "rotate_recovery/RotateRecovery"
   - name: "aggressive_reset"
     type: "clear_costmap_recovery/ClearCostmapRecovery"
 conservative_reset:
