@@ -386,6 +386,11 @@ class FollowRoute(State):
                     if not self.has_broadcast_curve:
                         self.waypoint_pub.publish(path_to_broadcast)
 
+                        toc = time.perf_counter()
+                        time_elapsed = toc - tic
+                        mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "LAUNCH", str(rospy.Time.now()), time_elapsed, mega_target_counter]
+                        mission_report_short.append(mini_report)
+
                         # Mark the path's start when we start broadcasting the direction
                         
                         rospy.loginfo('Executing move_base goal to END position (x,y) of # waypoints: %s, %s, %s' % (gx, gy, len(path_to_broadcast.poses)))
@@ -431,7 +436,6 @@ class FollowRoute(State):
             mission_report.append("REACHED " + str(megapoint))
             toc = time.perf_counter()
             time_elapsed = toc - tic
-            time_elapsed = str(time_elapsed)
 
             mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "END", str(rospy.Time.now()), time_elapsed, mega_target_counter]
             mission_report_short.append(mini_report)
@@ -447,6 +451,9 @@ class FollowRoute(State):
                 # print("Done with this path")
 
                 ### Once parked
+                toc = time.perf_counter()
+                time_elapsed = toc - tic
+                
                 mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed, mega_target_counter]
                 mission_report_short.append(mini_report)
                 self.is_parked = True
