@@ -208,6 +208,24 @@ def import_waypoints(path_name, waypoints_path):
     return waypoints_info, start, goal
 
 class FollowRoute(State):
+    def callback(msg):
+        # rospy.loginfo("Received at goal message!")
+        # rospy.loginfo("Timestamp: " + str(msg.header.stamp))
+        # rospy.loginfo("frame_id: " + str(msg.header.frame_id))
+        
+        # Copying for simplicity
+        position    = msg.pose.position
+        quat        = msg.pose.orientation
+        # rospy.loginfo("Point Position: [ %f, %f, %f ]"%(position.x, position.y, position.z))
+        # rospy.loginfo("Quat Orientation: [ %f, %f, %f, %f]"%(quat.x, quat.y, quat.z, quat.w))
+
+        # Also print Roll, Pitch, Yaw
+        # euler = tf.transformations.euler_from_quaternion([quat.x, quat.y, quat.z, quat.w])
+        # rospy.loginfo("Euler Angles: %s"%str(euler))  
+
+        mini_report = ["IDK", "GOAL_MSG", str(rospy.Time.now()), -1, -1, (position, quat)]
+        mission_report_short.append(mini_report)
+
     def __init__(self, waypub, waypretty, sound_client):
         State.__init__(self, outcomes=['success'], input_keys=['waypoints'])
 
@@ -232,6 +250,8 @@ class FollowRoute(State):
         self.tf = TransformListener()
         self.listener = tf.TransformListener()
         self.distance_tolerance = 0.0 #.25 #rospy.get_param('waypoint_distance_tolerance', 0.0)
+
+        rospy.Subscriber("/move_base_simple/goal", PoseStamped, goal_callback)
 
         # print("Setting up dynamic speed server")
         # self.update_client = dynamic_reconfigure.client.Client('pure_pursuit')
@@ -453,7 +473,7 @@ class FollowRoute(State):
                 ### Once parked
                 toc = time.perf_counter()
                 time_elapsed = toc - tic
-                
+
                 mini_report = [str(aux_data[AUX_WAYPOINT_INDEX]), "PARKED", str(rospy.Time.now()), time_elapsed, mega_target_counter]
                 mission_report_short.append(mini_report)
                 self.is_parked = True
@@ -705,10 +725,13 @@ class RouteComplete(State):
 
         output_file_path_minireport = os.path.join(output_folder, now_id + "-mini_report.csv")
         with open(output_file_path_minireport, 'w') as file:
-            file.write("point, status, time, time_elapsed, iteration_number\n")
+            file.write("point, status, time, time_elapsed, iteration_number, aux\n")
             for report in mission_report_short:
                 try:
-                    file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + ',' + str(report[4]) + '\n')
+                    if len(report) == 5:
+                        file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + ',' + str(report[4]) + '\n')
+                    elif len(report) == 6:
+                        file.write(str(report[0]) + ',' + str(report[1]) + ',' + str(report[2]) + ',' + str(report[3]) + ',' + str(report[4]) + ',' + str(report[5]) + '\n')
                 except:
                     file.write(str(report) + "\n")
 
