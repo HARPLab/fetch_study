@@ -461,7 +461,7 @@ class FollowRoute(State):
             mission_report_short.append(mini_report)
             print("~~END~~")
             
-            print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + time_elapsed + " seconds")
+            print(f"Leg " + str(aux_data[AUX_WAYPOINT_INDEX]) + " took " + str(time_elapsed) + " seconds")
 
 
             def parking_callback_done(state, result):
