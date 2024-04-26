@@ -140,7 +140,7 @@ def get_exp_sequence(exp_option):
 
 
     elif exp_option == "test":
-        return ["AF-null", "FE-null", "EA-null", "AC-null", "CB-null", "BD-null", "DE-null", "EA-null"]
+        return ["AF-even", "FE-early", "EA-late", "AC-even", "CB-early", "BD-even", "DE-even", "EA-even"]
 
     return ["AB-null", "BC-null"]
 
