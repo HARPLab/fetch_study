@@ -26,7 +26,7 @@ controller_patience: 15.0
 TrajectoryPlannerROS:
   # base vel/accel profile is in robot folders
   # tolerances (defaults)
-  yaw_goal_tolerance: 0.1
+  yaw_goal_tolerance: 0.25
   xy_goal_tolerance: 0.1
   latch_xy_goal_tolerance: true
   # forward simulation
