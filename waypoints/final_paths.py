@@ -116,23 +116,23 @@ def draw_paths_by_segment(inspection_save_path, early_dict, late_dict, even_dict
 
 
 def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, obstacle_dict):
-	fig, axes = plt.subplot_mosaic("ABCD;EFGH;IJKL", figsize=(8, 6), gridspec_kw={'width_ratios':[1, 1, 1, 1], 'height_ratios':[1, 1, 1]})
+	fig, axes = plt.subplot_mosaic("ABCD;IJKL", figsize=(8, 6), gridspec_kw={'width_ratios':[1, 1, 1, 1], 'height_ratios':[1, 1]})
 
 	ax_mappings = {}
 	ax_early 	= axes['A']
-	ax_even 	= axes['E']
+	# ax_even 	= axes['E']
 	ax_late 	= axes['I']
 
 	ax_early2 	= axes['B']
-	ax_even2 	= axes['F']
+	# ax_even2 	= axes['F']
 	ax_late2 	= axes['J']
 
 	ax_early3 	= axes['C']
-	ax_even3 	= axes['G']
+	# ax_even3 	= axes['G']
 	ax_late3 	= axes['K']
 
 	ax_early4 	= axes['D']
-	ax_even4 	= axes['H']
+	# ax_even4 	= axes['H']
 	ax_late4 	= axes['L']
 
 	buffer = 1
@@ -140,9 +140,9 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 	ax_early.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
 	ax_early.set_aspect('equal')
 
-	ax_even.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
-	ax_even.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
-	ax_even.set_aspect('equal')
+	# ax_even.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
+	# ax_even.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
+	# ax_even.set_aspect('equal')
 
 	ax_late.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
 	ax_late.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
@@ -152,9 +152,9 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 	ax_early2.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
 	ax_early2.set_aspect('equal')
 
-	ax_even2.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
-	ax_even2.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
-	ax_even2.set_aspect('equal')
+	# ax_even2.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
+	# ax_even2.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
+	# ax_even2.set_aspect('equal')
 
 	ax_late2.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
 	ax_late2.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
@@ -164,9 +164,9 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 	ax_early3.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
 	ax_early3.set_aspect('equal')
 
-	ax_even3.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
-	ax_even3.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
-	ax_even3.set_aspect('equal')
+	# ax_even3.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
+	# ax_even3.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
+	# ax_even3.set_aspect('equal')
 
 	ax_late3.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
 	ax_late3.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
@@ -176,9 +176,9 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 	ax_early4.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
 	ax_early4.set_aspect('equal')
 
-	ax_even4.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
-	ax_even4.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
-	ax_even4.set_aspect('equal')
+	# ax_even4.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
+	# ax_even4.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
+	# ax_even4.set_aspect('equal')
 
 	ax_late4.set_xlim([goal_a[0] - buffer, goal_c[0] + buffer])
 	ax_late4.set_ylim([goal_d[1] - buffer, goal_a[1] + buffer])
@@ -186,11 +186,11 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 
 	### -AB -AC -AD -AE -AF -BA -BC -BD -BE -BF -CA -CB -CD -CE -CF -DA DB DC -DE -DF -EA -EB -EC -ED -EF -FA -FB -FC -FD -FE
 
-	title1 = "Inwards / Up"
-	group1 = ['AB', 'CB', 'DA', 'FC', 'EA', 'EC', 'FE', 'DE', ]
+	title1 = "Outwards / Down"
+	group1 = ['BA', 'BC', 'BD', 'BF', 'EF', 'ED', "AD", 'CF']
 
-	title2 = "Outwards / Down"
-	group2 = ['BA', 'BC', 'BD', 'BF', 'EF', 'ED', "AD", 'CF']
+	title2 = "Inwards / Up"
+	group2 = ['AB', 'CB', 'DA', 'FC', 'EA', 'EC', 'FE', 'DE', 'BE']
 
 	title3 = "Long / Diagonal"
 	group3 = ['AF', 'AC'] # FA, DC CD CA DF FD
@@ -205,19 +205,19 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 	# 'BE', EB
 
 	ax_early.set_title("Early\n " + title1, fontweight="bold")
-	ax_even.set_title("Even\n " + title1, fontweight="bold")
+	# ax_even.set_title("Even\n " + title1, fontweight="bold")
 	ax_late.set_title("Late\n " + title1, fontweight="bold")
 
 	ax_early2.set_title("Early\n " + title2, fontweight="bold")
-	ax_even2.set_title("Even\n " + title2, fontweight="bold")
+	# ax_even2.set_title("Even\n " + title2, fontweight="bold")
 	ax_late2.set_title("Late\n " + title2, fontweight="bold")
 
 	ax_early3.set_title("Early\n " + title3, fontweight="bold")
-	ax_even3.set_title("Even\n " + title3, fontweight="bold")
+	# ax_even3.set_title("Even\n " + title3, fontweight="bold")
 	ax_late3.set_title("Late\n " + title3, fontweight="bold")
 
 	ax_early4.set_title("Early\n " + title4, fontweight="bold")
-	ax_even4.set_title("Even\n " + title4, fontweight="bold")
+	# ax_even4.set_title("Even\n " + title4, fontweight="bold")
 	ax_late4.set_title("Late\n " + title4, fontweight="bold")
 
 	for j in range(len(goal_list)):
@@ -230,8 +230,8 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 		circle2 = plt.Circle(goal, .1, color=color)
 		ax_late.add_patch(circle2)
 		
-		circle3 = plt.Circle(goal, .1, color=color)
-		ax_even.add_patch(circle3)
+		# circle3 = plt.Circle(goal, .1, color=color)
+		# ax_even.add_patch(circle3)
 
 		circle4 = plt.Circle(goal, .1, color=color)
 		ax_early2.add_patch(circle4)
@@ -239,8 +239,8 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 		circle5 = plt.Circle(goal, .1, color=color)
 		ax_late2.add_patch(circle5)
 		
-		circle6 = plt.Circle(goal, .1, color=color)
-		ax_even2.add_patch(circle6)
+		# circle6 = plt.Circle(goal, .1, color=color)
+		# ax_even2.add_patch(circle6)
 
 		circle7 = plt.Circle(goal, .1, color=color)
 		ax_early3.add_patch(circle7)
@@ -248,8 +248,8 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 		circle8 = plt.Circle(goal, .1, color=color)
 		ax_late3.add_patch(circle8)
 		
-		circle9 = plt.Circle(goal, .1, color=color)
-		ax_even3.add_patch(circle9)
+		# circle9 = plt.Circle(goal, .1, color=color)
+		# ax_even3.add_patch(circle9)
 
 		circle10 = plt.Circle(goal, .1, color=color)
 		ax_early4.add_patch(circle10)
@@ -257,69 +257,69 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 		circle11 = plt.Circle(goal, .1, color=color)
 		ax_late4.add_patch(circle11)
 		
-		circle12 = plt.Circle(goal, .1, color=color)
-		ax_even4.add_patch(circle12)
+		# circle12 = plt.Circle(goal, .1, color=color)
+		# ax_even4.add_patch(circle12)
 
 
 	for key in early_dict.keys():
 		path_early 	= early_dict[key]
 		path_late 	= late_dict[key]
-		path_even 	= even_dict[key]
+		# path_even 	= even_dict[key]
 
 		early_x, early_y 	= get_xy_from_path(path_early)
 		late_x, late_y 		= get_xy_from_path(path_late)
-		even_x, even_y 		= get_xy_from_path(path_even)
+		# even_x, even_y 		= get_xy_from_path(path_even)
 
 
 		if key in group1:
 			ax_early.plot(early_x, 	early_y, 	label = "early", color='red')
 			ax_late.plot(late_x, 	late_y, 	label = "late", color='green')
-			ax_even.plot(even_x, 	even_y, 	label = "even", color='blue')
+			# ax_even.plot(even_x, 	even_y, 	label = "even", color='blue')
 
 		elif key in group2:
 			ax_early2.plot(early_x, 	early_y, 	label = "early", color='red')
 			ax_late2.plot(late_x, 	late_y, 	label = "late", color='green')
-			ax_even2.plot(even_x, 	even_y, 	label = "even", color='blue')
+			# ax_even2.plot(even_x, 	even_y, 	label = "even", color='blue')
 
 		elif key in group3:
 			ax_early3.plot(early_x, 	early_y, 	label = "early", color='red')
 			ax_late3.plot(late_x, 	late_y, 	label = "late", color='green')
-			ax_even3.plot(even_x, 	even_y, 	label = "even", color='blue')
+			# ax_even3.plot(even_x, 	even_y, 	label = "even", color='blue')
 
 		elif key in group4:
 			ax_early4.plot(early_x, 	early_y, 	label = "early", color='red')
 			ax_late4.plot(late_x, 	late_y, 	label = "late", color='green')
-			ax_even4.plot(even_x, 	even_y, 	label = "even", color='blue')
+			# ax_even4.plot(even_x, 	even_y, 	label = "even", color='blue')
 		 
 		# plt.title('Path options for ' + key)
 			 
 	##### Add the obstacle paths
 	AC_early 	= obstacle_dict['AC_OBS-early']
 	AC_late 	= obstacle_dict['AC_OBS-late']
-	AC_even 	= obstacle_dict['AC_OBS-even']
+	# AC_even 	= obstacle_dict['AC_OBS-even']
 
 	AF_early 	= obstacle_dict['AF_OBS-early']
 	AF_late 	= obstacle_dict['AF_OBS-late']
-	AF_even 	= obstacle_dict['AF_OBS-even']
+	# AF_even 	= obstacle_dict['AF_OBS-even']
 
 
 	AC_early_x, AC_early_y 		= get_xy_from_path(AC_early)
 	AC_late_x, AC_late_y 		= get_xy_from_path(AC_late)
-	AC_even_x, AC_even_y 		= get_xy_from_path(AC_even)
+	# AC_even_x, AC_even_y 		= get_xy_from_path(AC_even)
 
 	AF_early_x, AF_early_y 		= get_xy_from_path(AF_early)
 	AF_late_x, AF_late_y 		= get_xy_from_path(AF_late)
-	AF_even_x, AF_even_y 		= get_xy_from_path(AF_even)
+	# AF_even_x, AF_even_y 		= get_xy_from_path(AF_even)
 
 
 	ax_early4.plot(AC_early_x, 	AC_early_y, 	label = "early", color='red')
 	ax_late4.plot(AC_late_x, 	AC_late_y, 	label = "late", color='green')
-	ax_even4.plot(AC_even_x, 	AC_even_y, 	label = "even", color='blue')
+	# ax_even4.plot(AC_even_x, 	AC_even_y, 	label = "even", color='blue')
 
 
 	ax_early4.plot(AF_early_x, 	AF_early_y, 	label = "early", color='red')
 	ax_late4.plot(AF_late_x, 	AF_late_y, 	label = "late", color='green')
-	ax_even4.plot(AF_even_x, 	AF_even_y, 	label = "even", color='blue')
+	# ax_even4.plot(AF_even_x, 	AF_even_y, 	label = "even", color='blue')
 
 
 	# show a legend on the plot
@@ -327,7 +327,7 @@ def draw_paths_by_dict(inspection_save_path, early_dict, late_dict, even_dict, o
 	 
 	# function to show the plot
 	plt.tight_layout()
-	plt.savefig(inspection_save_path + "overview" + '.png')
+	plt.savefig(inspection_save_path + "overview-duo" + '.png')
 	plt.clf()
 	plt.close()
 
@@ -374,12 +374,12 @@ def get_path_length(path):
 	return total_length
 
 
-ramp_a = [goal_a, [goal_a[0], goal_a[1] + .05], [goal_a[0], goal_a[1] + .1], [goal_a[0], goal_a[1] + .15], [goal_a[0], goal_a[1] + .2], [goal_a[0], goal_a[1] + .25], [goal_a[0], goal_a[1] + .3]]
-ramp_b = [goal_b, [goal_b[0], goal_b[1] + .05], [goal_b[0], goal_b[1] + .1], [goal_b[0], goal_b[1] + .15], [goal_b[0], goal_b[1] + .2], [goal_b[0], goal_b[1] + .25], [goal_b[0], goal_b[1] + .3]]
-ramp_c = [goal_c, [goal_c[0], goal_c[1] + .05], [goal_c[0], goal_c[1] + .1], [goal_c[0], goal_c[1] + .15], [goal_c[0], goal_c[1] + .2], [goal_c[0], goal_c[1] + .25], [goal_c[0], goal_c[1] + .3]]
-ramp_d = [goal_d, [goal_d[0], goal_d[1] - .05], [goal_d[0], goal_d[1] - .1], [goal_d[0], goal_d[1] - .15], [goal_d[0], goal_d[1] - .2], [goal_d[0], goal_d[1] - .25], [goal_d[0], goal_d[1] - .3]]
-ramp_e = [goal_e, [goal_e[0], goal_e[1] - .05], [goal_e[0], goal_e[1] - .1], [goal_e[0], goal_e[1] - .15], [goal_e[0], goal_e[1] - .2], [goal_e[0], goal_e[1] - .25], [goal_e[0], goal_e[1] - .3]]
-ramp_f = [goal_f, [goal_f[0], goal_f[1] - .05], [goal_f[0], goal_f[1] - .1], [goal_f[0], goal_f[1] - .15], [goal_f[0], goal_f[1] - .2], [goal_f[0], goal_f[1] - .25], [goal_f[0], goal_f[1] - .3]]
+ramp_a = [goal_a, [goal_a[0], goal_a[1] + .05], [goal_a[0], goal_a[1] + .1], [goal_a[0], goal_a[1] + .15], [goal_a[0], goal_a[1] + .2], [goal_a[0], goal_a[1] + .25], [goal_a[0], goal_a[1] + .3], [goal_a[0], goal_a[1] + .35]]
+ramp_b = [goal_b, [goal_b[0], goal_b[1] + .05], [goal_b[0], goal_b[1] + .1], [goal_b[0], goal_b[1] + .15], [goal_b[0], goal_b[1] + .2], [goal_b[0], goal_b[1] + .25], [goal_b[0], goal_b[1] + .3], [goal_b[0], goal_b[1] + .35]]
+ramp_c = [goal_c, [goal_c[0], goal_c[1] + .05], [goal_c[0], goal_c[1] + .1], [goal_c[0], goal_c[1] + .15], [goal_c[0], goal_c[1] + .2], [goal_c[0], goal_c[1] + .25], [goal_c[0], goal_c[1] + .3], [goal_c[0], goal_c[1] + .35]]
+ramp_d = [goal_d, [goal_d[0], goal_d[1] - .05], [goal_d[0], goal_d[1] - .1], [goal_d[0], goal_d[1] - .15], [goal_d[0], goal_d[1] - .2], [goal_d[0], goal_d[1] - .25], [goal_d[0], goal_d[1] - .3], [goal_d[0], goal_d[1] + .35]]
+ramp_e = [goal_e, [goal_e[0], goal_e[1] - .05], [goal_e[0], goal_e[1] - .1], [goal_e[0], goal_e[1] - .15], [goal_e[0], goal_e[1] - .2], [goal_e[0], goal_e[1] - .25], [goal_e[0], goal_e[1] - .3], [goal_e[0], goal_e[1] + .35]]
+ramp_f = [goal_f, [goal_f[0], goal_f[1] - .05], [goal_f[0], goal_f[1] - .1], [goal_f[0], goal_f[1] - .15], [goal_f[0], goal_f[1] - .2], [goal_f[0], goal_f[1] - .25], [goal_f[0], goal_f[1] - .3], [goal_f[0], goal_f[1] + .35]]
 
 ramps = {}
 ramps['A'] = ramp_a
@@ -409,7 +409,7 @@ def add_offramps(path_dict):
 def get_early_paths():
 	tag = 'early'
 
-	path_ab = [[1.0, -1.0], [1.2157981501788406, -0.7364330789826877], [1.3595953742620424, -0.5739207795855773], [1.4832938770005235, -0.4804293287702528], [1.601545122201211, -0.4341387186192011], [1.7183294798350701, -0.4235731544424806], [1.8345232639426894, -0.44124590405154923], [1.9499205805930482, -0.47980861480643366], [2.0641812454009942, -0.5316837367415336], [2.177245203939481, -0.5909510507823038], [2.289258179517329, -0.6540192115143878], [2.4004200525386947, -0.7189652195550478], [2.510926664090664, -0.7847902100426305], [2.620972747716356, -0.8509754873790597], [2.7307437562664454, -0.9172772649832129], [2.8403634684096044, -0.9836110102656009], [2.9499111395058097, -1.0499469181597305]]
+	path_ab = []
 	path_ac = []
 	path_ad = []
 	path_ae = []
@@ -419,6 +419,7 @@ def get_early_paths():
 	path_ba = []
 	path_bc = None
 	path_bd = []
+	# vanilla straight
 	path_be = []
 	path_bf = None
 
@@ -441,14 +442,15 @@ def get_early_paths():
 	return path_dict
 
 def get_late_paths():
-	path_ab = [[1.0, -1.0], [1.3919653434792278, -0.8852624995682871], [1.7320960642208354, -0.8033404130221824], [2.0077440231221892, -0.7520562815093148], [2.213180454545308, -0.7286380026018674], [2.353836796723684, -0.728412079871704], [2.4471739951988294, -0.7443342082892752], [2.5140012361510635, -0.7691841362877394], [2.568749382365829, -0.7981198725642678], [2.618586171582091, -0.8287363193369607], [2.666524198640034, -0.8600117000709065], [2.713742793297339, -0.8915403775087561], [2.760690918074344, -0.9231656392035343], [2.8075376729528325, -0.9548275971868492], [2.8543464851027807, -0.9865034713430612], [2.9011411045813356, -1.0181846164364527], [2.9479304173693914, -1.049867756080844]]
+	### AC, AF, BA
+	path_ab = [[1.0, -1.0], [1.1153792294427083, -0.9293443139553972], [1.2307584583873976, -0.8586886285019474], [1.3461376837343686, -0.7880329473884906], [1.4615168833941519, -0.7173772978163444], [1.5768959018821265, -0.6467218751387109], [1.6922736569378927, -0.5760680692174466], [1.8076426950169884, -0.505425681658259], [1.9229522009908657, -0.4348632699573675], [2.0378580456434756, -0.36485645311916276], [2.150560695377492, -0.2985073162677172], [2.2519183674976087, -0.2515057941381739], [2.3600851564401544, -0.24514253556897228], [2.4814311310727364, -0.30981102933346566], [2.6189397455009313, -0.457317369395737], [2.7745079053969546, -0.6982449522965906], [2.9498711772904005, -1.0497335500544858]]
 	path_ac = []
-	path_ad = [[1.0, -1.0], [0.8433314270235727, -1.4580271147539405], [0.7212474655392235, -1.8640172814515115], [0.6332850077202208, -2.2040386707272606], [0.5788106279283856, -2.468401853174192], [0.5559829970844665, -2.6545389166020925], [0.5601929459198467, -2.771026267876216], [0.5835282429006917, -2.8379457661046295], [0.6175309246224671, -2.877661178679883], [0.6564405144136647, -2.9051995213882726], [0.6973755345599633, -2.9278672204501013], [0.7391067951075024, -2.948681201547835], [0.7811448549900938, -2.9688034323196004], [0.8233001507977822, -2.9886694405892875], [0.8655000777942095, -3.00844080777655], [0.9077169615381198, -3.028177253271674], [0.9499402790952567, -3.047900817913967]]
+	path_ad = []
 	path_ae = []
 	path_af = []
 
 	# # generate_vanilla_straight_line_paths_for_testing(goal_b, [goal_a, goal_c, goal_d, goal_e, goal_f])
-	path_ba = []
+	path_ba = [[3.0, -1.0], [2.8364208307227274, -0.9345191428941941], [2.672841662861837, -0.869038286285611], [2.509262504831636, -0.8035574337988557], [2.3456834144482963, -0.73807661026271], [2.1821045689477496, -0.6725960602361303], [2.018527161967997, -0.607117235008717], [1.8549581809766647, -0.5416489835731659], [1.6914380349746163, -0.4762444363457697], [1.5281930411777254, -0.4112211873996149], [1.3664578530056062, -0.3484444183034789], [1.212228372179288, -0.29779035634269785], [1.0820407081140464, -0.28960969419654686], [0.9869948461258395, -0.3489690134851458], [0.9291747105213538, -0.4846268743278268], [0.9131538295005319, -0.7090528633102517], [0.9515231460558758, -1.0497284318177054]]
 	path_bc = None
 	path_bd = []
 	path_be = []
@@ -477,12 +479,12 @@ def get_even_paths():
 	path_ac = []
 	path_ad = []
 	path_ae = []
-	path_af = []
+	path_af = [[1.0, -1.0], [1.3424665205052217, -1.1729380436777974], [1.6856958379050573, -1.3474408563423177], [2.0300690587826558, -1.5218922226162352], [2.376430376668772, -1.6932248311672542], [2.726136520608077, -1.8589518088304957], [3.074705216214979, -2.018511510695233], [3.4159364733861106, -2.175059178170865], [3.7416327963297786, -2.3311581245506803], [4.043782484922042, -2.484802698786644], [4.313706791111144, -2.629783291310937], [4.547528599525742, -2.756602101531095], [4.737230959753892, -2.8560817704382147], [4.879595694220178, -2.9195550181949756], [4.977087682426167, -2.9506168852223675], [5.027911469721752, -2.9603257116299906], [5.058162232644051, -2.954542414491891], [5.062979474451586, -2.942492698548063], [5.0556800529774435, -2.937102618392465], [5.0485561732991, -2.9382161601924897], [5.044707696200571, -2.9437840081332745], [5.043856955581356, -2.9515392339640343], [5.044385956758445, -2.9593670071721947], [5.045306417736702, -2.96535314046912], [5.04582491307714, -2.9694961779417155], [5.040894720833196, -2.97633216351253], [5.016792559734171, -2.9970620299159667], [4.95038385973813, -3.0500562454780624]]
 
 	path_ba = []
 	path_bc = None
-	path_bd = []
-	path_be = []
+	path_bd = [[3.0, -1.0], [2.7619670849655757, -1.2354409593747613], [2.5210261211298373, -1.4738132881788357], [2.277120854844705, -1.7153012087370545], [2.0296855500331885, -1.9605428334731103], [1.7786645771521226, -2.209672645965988], [1.525200069789613, -2.461660133491823], [1.2722770985447651, -2.7136791281326436], [1.025495184902955, -2.9603394736687028], [0.8958724295062441, -3.081119621565016], [0.7484579891935477, -3.2263087671608996], [0.6007463176139589, -3.38205683566044], [0.4843145798035267, -3.5099518228672997], [0.5647124769623562, -3.485299485660163], [0.8359010759048411, -3.246269266887262], [0.8942059900910572, -3.1587401285133017], [0.9016900571863252, -3.1307140336512433], [0.8918209170815005, -3.1391857205884], [0.9002473599152035, -3.1571326323794118], [0.9393057912850656, -3.157165142279358], [0.9753647192112094, -3.1357599270669603], [1.0017051379434314, -3.0889970854256883], [0.9518468646235719, -3.0482668222206555]] #[[3.0, -1.0], [2.762335880583852, -1.0684281835340494], [2.5317647521638205, -1.1392595810301362], [2.31319929226412, -1.2157173544712458], [2.106314235759377, -1.3030637817017308], [1.9069667094028266, -1.4049138024100514], [1.7105105638087053, -1.5225976766028864], [1.5138458189589787, -1.655098999071831], [1.3196903920981462, -1.798232837838307], [1.1395575016091957, -1.9460471964039723], [0.9799822823457682, -2.095408562406664], [0.8423162246679676, -2.246507422764613], [0.7292189341146573, -2.39958931950553], [0.6429717548924603, -2.552006238781445], [0.5853404643856774, -2.6969418108297067], [0.556471213908107, -2.825103887670488], [0.5525922415529037, -2.930472672860651], [0.5763475632794854, -3.012564681558092], [0.6354981794910378, -3.072400367645027], [0.7341885672461552, -3.110014147998507], [0.8603042404033348, -3.116307336263654], [0.9684043702026185, -3.149096757702435], [0.9518542177874139, -3.0482564022990624]]
+	path_be = [[3.0, -1.0], [2.9927583147282353, -1.377169674737288], [2.985657597812997, -1.7368202855447368], [2.978828583636931, -2.0742861518695372], [2.972390805139958, -2.3851892693379515], [2.9664516267550542, -2.6654961291502155], [2.9611053013219117, -2.911570064448472], [2.956432071712116, -3.1202184446445633], [2.9524973349512487, -3.288734105489018], [2.9493508835600686, -3.414930477403469], [2.9470262356558217, -3.4971699563152523], [2.9455400620559344, -3.534385148863842], [2.944891715212104, -3.526092716256074], [2.94506286127672, -3.472399637030872], [2.946017212969752, -3.374001807308005], [2.947700357176527, -3.2321749964626525], [2.950039667367791, -3.0487582752977787]] #[[3.0, -1.0], [2.99949667013493, -1.2491691582040125], [2.9989708769759744, -1.4983002500411642], [2.998422761441024, -1.7472953594176783], [2.9978892867714735, -1.9958350777892173], [2.997327034338054, -2.243017509700832], [2.9969312148319105, -2.4870159844659545], [2.9975728103403707, -2.7189405215331885], [2.9990338427710608, -2.91125743981528], [2.999733096154522, -2.9984973370325174], [3.000273457271447, -2.9992779462485095], [3.00011348616264, -3.0000239664955917], [2.999840719265643, -3.0001826737004498], [3.0001345412614837, -2.9999555058359455], [2.9991264142740444, -3.006309357121931], [2.9994679572117744, -3.0061271749523124], [2.9501186776945807, -3.045730349338628], [3.0, -3.0]]
 	path_bf = None
 
 	path_dict = {}
@@ -506,44 +508,44 @@ def get_even_paths():
 def get_obstacle_paths():
 	path_ac_early 	= [[1.0, -1.0], [1.0576139983695487, -0.6787087155380742], [1.121395731328799, -0.4501874092957242], [1.1926379656878632, -0.31426761863592734], [1.271224855617254, -0.27929591389755637], [1.3586334128937598, -0.21461323431753476], [1.4555028904139282, -0.2723734946099323], [1.5678322709685621, -0.3139814147343131], [1.7030663655453382, -0.44682477411256655], [1.8781327411412148, -0.6879320535452045], [2.149356385257432, -1.0261915203275538], [2.6249921849988374, -1.3995763591013937], [3.2635708362420757, -1.5022833481348965], [3.682012365102991, -1.4597916022676576], [3.892682137468808, -1.4097300287500336], [4.01388576032389, -1.3732741957574004], [4.095555061312932, -1.346747542868881], [4.159975613812198, -1.3250733362098854], [4.217121157741472, -1.30546594574257], [4.271271613885617, -1.2867090468198512], [4.324205683329496, -1.2682973684388454], [4.376647722525377, -1.250025097967837], [4.42889038853974, -1.2318092523335449], [4.481051905972994, -1.2136164896481108], [4.533180288252855, -1.1954333550680831], [4.5852952011916965, -1.1772543338810169], [4.637404741222668, -1.1590770983077205], [4.689512207378117, -1.1409006334352971], [4.741618902202493, -1.122724492756094], [4.793725319276334, -1.1045484842324544], [4.845831638968452, -1.0863725281984586], [4.89793792536343, -1.068196592719774], [4.950044200763932, -1.0500206653387512]]
 	path_ac_late 	= []
-	path_ac_even 	= []
+	# path_ac_even 	= []
 
-	path_af_early 	= []
+	path_af_early 	= [[1.0, -1.0], [1.1289989551532633, -1.0789910820553308], [1.2598852476617508, -1.1637746626107182], [1.3924402043360675, -1.2536548308372035], [1.5263993034477734, -1.3475768185551016], [1.661426437663688, -1.4440207603774926], [1.7970689951463892, -1.540902444515892], [1.9326879758613624, -1.635532286142856], [2.0674010842923605, -1.7247529100830445], [2.211119642643209, -1.8068015021945927], [2.361008341660447, -1.8822848506936167], [2.513786375148033, -1.9532476432455013], [2.6671369792566257, -2.0221177168767985], [2.8201829716228697, -2.090425478394405], [2.972828028351959, -2.158742656006296], [3.1251831262515406, -2.2271715309607827], [3.2773621363106704, -2.295678032598627], [3.429444343717742, -2.364219377875445], [3.581477825278265, -2.432771787935006], [3.733488645965968, -2.50132623686277], [3.8854895340655977, -2.569880388031892], [4.037486223262068, -2.638434010019115], [4.189481396416992, -2.706987276317515], [4.34147594034211, -2.7755403456757604], [4.493470217620229, -2.8440933212172252], [4.645464379134971, -2.9126462563217155], [4.79745848908949, -2.9811991761934817], [4.949452575517707, -3.0497520929267012]]
 	path_af_late 	= []
-	path_af_even 	= []
+	# path_af_even 	= []
 
 	# AC_OBS-even
 	obstacle_paths = {}
 	obstacle_paths['AC_OBS-early'] 	= path_ac_early
-	obstacle_paths['AC_OBS-even']	= path_ac_even
+	# obstacle_paths['AC_OBS-even']	= path_ac_even
 	obstacle_paths['AC_OBS-late']	= path_ac_late
 	obstacle_paths['AF_OBS-early'] 	= path_af_early
-	obstacle_paths['AF_OBS-even'] 	= path_af_even
+	# obstacle_paths['AF_OBS-even'] 	= path_af_even
 	obstacle_paths['AF_OBS-late'] 	= path_af_late
 
 
 	obstacle_paths['FD_OBS-early'] 	= horizontal_flip(vertical_flip(path_ac_early))
-	obstacle_paths['FD_OBS-even']	= horizontal_flip(vertical_flip(path_ac_even))
+	# obstacle_paths['FD_OBS-even']	= horizontal_flip(vertical_flip(path_ac_even))
 	obstacle_paths['FD_OBS-late']	= horizontal_flip(vertical_flip(path_ac_late))
 
 	obstacle_paths['DF_OBS-early'] 	= vertical_flip(path_ac_early)
-	obstacle_paths['DF_OBS-even'] 	= vertical_flip(path_ac_even)
+	# obstacle_paths['DF_OBS-even'] 	= vertical_flip(path_ac_even)
 	obstacle_paths['DF_OBS-late'] 	= vertical_flip(path_ac_late)
 
 	obstacle_paths['CA_OBS-early'] 	= horizontal_flip(path_ac_early)
-	obstacle_paths['CA_OBS-even']	= horizontal_flip(path_ac_even)
+	# obstacle_paths['CA_OBS-even']	= horizontal_flip(path_ac_even)
 	obstacle_paths['CA_OBS-late']	= horizontal_flip(path_ac_late)
 
 	obstacle_paths['CD_OBS-early'] 	= horizontal_flip(path_af_early)
-	obstacle_paths['CD_OBS-even'] 	= horizontal_flip(path_af_even)
+	# obstacle_paths['CD_OBS-even'] 	= horizontal_flip(path_af_even)
 	obstacle_paths['CD_OBS-late'] 	= horizontal_flip(path_af_late)
 
 	obstacle_paths['FA_OBS-early'] 	= horizontal_flip(vertical_flip(path_af_early))
-	obstacle_paths['FA_OBS-even']	= horizontal_flip(vertical_flip(path_af_even))
+	# obstacle_paths['FA_OBS-even']	= horizontal_flip(vertical_flip(path_af_even))
 	obstacle_paths['FA_OBS-late']	= horizontal_flip(vertical_flip(path_af_late))
 	
 	obstacle_paths['DC_OBS-early'] 	= vertical_flip(path_af_early)
-	obstacle_paths['DC_OBS-even'] 	= vertical_flip(path_af_even)
+	# obstacle_paths['DC_OBS-even'] 	= vertical_flip(path_af_even)
 	obstacle_paths['DC_OBS-late'] 	= vertical_flip(path_af_late)
 
 	obstacle_paths = add_offramps(obstacle_paths)
@@ -930,7 +932,6 @@ def export_path_dict(export_name, path_dict):
 
 path_dict = setup_path_dict("null")
 export_path_dict('null', path_dict)
-
 
 
 # generate_vanilla_straight_line_paths_for_testing(goal_a, [goal_b, goal_c, goal_d, goal_e, goal_f])
