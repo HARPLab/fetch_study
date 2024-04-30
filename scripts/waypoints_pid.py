@@ -230,7 +230,7 @@ def import_waypoints(path_name, waypoints_path):
     waypoints_info.header.frame_id = 'map'
     waypoints_info.header.stamp = rospy.Time.now()
 
-    for idx in range(len(waypoints)-1):
+    for idx in range(len(waypoints)):
         pose = PoseStamped()
         pose.header.frame_id = 'map'
         pose.pose.position = Point(waypoints[idx][0], waypoints[idx][1], waypoints[idx][2])
@@ -312,7 +312,7 @@ class FollowRoute(State):
         global megapoints, mission_report, mission_report_short, waypoint_pub
 
         goal_a_ramp  = [1.0, -.65]
-        goal_b_ramp  = [3.0, -.65] 
+        goal_b_ramp  = [3.0, -.65]
         goal_c_ramp  = [5.0, -.65]
 
         goal_d_ramp  = [1.0, -3.35]
