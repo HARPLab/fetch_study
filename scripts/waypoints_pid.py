@@ -45,8 +45,6 @@ path_names_list = ['CF-early', 'FE-early', 'EF-early', 'FD-early', 'DE-early', '
 
 velocity_default = 1.0
 
-lidar_offset = .25
-
 # INDICES OF AUXILLARY DATA
 AUX_WAYPOINT_INDEX  = 0
 AUX_VELOCITY        = 1
@@ -472,6 +470,7 @@ class FollowRoute(State):
                         pow(end_target[0] - trans[0], 2) + pow(end_target[1] - trans[1],
                                                                                2))
 
+                    lidar_offset = .3
                     if (distance_to_goal - lidar_offset) <= self.distance_tolerance:
                         self.has_reached_endgoal = True
                         self.sound_success.play()
