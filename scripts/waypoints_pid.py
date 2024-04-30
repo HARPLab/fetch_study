@@ -311,13 +311,13 @@ class FollowRoute(State):
     def execute(self, userdata):
         global megapoints, mission_report, mission_report_short, waypoint_pub
 
-        goal_a_ramp  = [1.0, -.7]
-        goal_b_ramp  = [3.0, -.7] 
-        goal_c_ramp  = [5.0, -.7]
+        goal_a_ramp  = [1.0, -.65]
+        goal_b_ramp  = [3.0, -.65] 
+        goal_c_ramp  = [5.0, -.65]
 
-        goal_d_ramp  = [1.0, -3.3]
-        goal_e_ramp  = [3.0, -3.3]
-        goal_f_ramp  = [5.0, -3.3]
+        goal_d_ramp  = [1.0, -3.35]
+        goal_e_ramp  = [3.0, -3.35]
+        goal_f_ramp  = [5.0, -3.35]
 
         goal_a_ramp_lite  = [1.0, -.7]
         goal_b_ramp_lite  = [3.0, -.7]
@@ -381,27 +381,27 @@ class FollowRoute(State):
             end_ramp    = end
             if [end[0], end[1]] == goal_a_ramp:
                 end_target  = goal_a
-                end_ramp    = goal_a_ramp_lite
+                end_ramp    = goal_a_ramp
 
             elif [end[0], end[1]] == goal_b_ramp:
                 end_target  = goal_b
-                end_ramp    = goal_b_ramp_lite
+                end_ramp    = goal_b_ramp
 
             elif [end[0], end[1]] == goal_c_ramp:
                 end_target  = goal_c
-                end_ramp    = goal_c_ramp_lite
+                end_ramp    = goal_c_ramp
 
             elif [end[0], end[1]] == goal_d_ramp:
                 end_target  = goal_d
-                end_ramp    = goal_d_ramp_lite
+                end_ramp    = goal_d_ramp
             
             elif [end[0], end[1]] == goal_e_ramp:
                 end_target  = goal_e
-                end_ramp    = goal_e_ramp_lite
+                end_ramp    = goal_e_ramp
             
             elif [end[0], end[1]] == goal_f_ramp:
                 end_target  = goal_f
-                end_ramp    = goal_f_ramp_lite
+                end_ramp    = goal_f_ramp
 
             rospy.loginfo("Real end target")
             rospy.loginfo(end_target)
