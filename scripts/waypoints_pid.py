@@ -136,52 +136,105 @@ def get_exp_sequence(exp_option):
     # elif exp_option == "24":
     #     return ['DF-even', 'FA_OBS-late', 'AD-late', 'DB-early', 'BC-late', 'CA-even', 'AC_OBS-late', 'CE-late', 'EF-late', 'FA-even', 'AF_OBS-late', 'FC-late', 'CB-early', 'BE-even', 'EC-late', 'CD-even', 'DC-late', 'CB-early', 'BD-early', 'DE-late', 'EF-late', 'FD_OBS-late', 'DB-even', 'BA-early', 'AE-early', 'EF-early', 'FD-late', 'DE-early', 'EA-early', 'AF-early', 'FD_OBS-early', 'DA-early', 'AC-late', 'CF-early', 'FA_OBS-early', 'AC_OBS-early', 'CD-late', 'DC_OBS-early', 'CB-even', 'BE-late', 'EB-late', 'BD-even', 'DC_OBS-even', 'CD_OBS-even', 'DA-even', 'AC_OBS-even', 'CB-late', 'BC-even', 'CF-even', 'FD_OBS-even', 'DC-even', 'CE-even', 'ED-even', 'DB-late', 'BF-late', 'FE-even', 'EB-early', 'BF-late', 'FA-early', 'AC-early', 'CE-even', 'EC-even', 'CD-early', 'DF-early']
 
-    if exp_option == 'a1':
-        return ['AE-early', 'EC-early', 'CD_OBS-late', 'DC-early', 'CA-late', 'AC_OBS-early', 'CD-early', 'DA-early', 'AB-early', 'BE-late', 'EF-late', 'FD_OBS-early', 'DB-early', 'BF-late', 'FD-early', 'DC_OBS-early', 'CF-late', 'FE-late', 'EB-late', 'BA-late', 'AF_OBS-late', 'FA_OBS-early', 'AC_OBS-late', 'CF-early', 'FA-late', 'AC-early', 'CE-late', 'EA-late', 'AF-late', 'FE-early', 'EF-early', 'FD_OBS-late', 'DA-late', 'AB-late', 'BC-early', 'CD-late', 'DB-late', 'BD-early', 'DF-late', 'FE-early', 'EB-early']
-    elif exp_option == 'a2':
-        return ['AE-late', 'EC-late', 'CD_OBS-early', 'DC-late', 'CA-early', 'AC_OBS-late', 'CD-late', 'DA-late', 'AB-late', 'BE-early', 'EF-early', 'FD_OBS-late', 'DB-late', 'BF-early', 'FD-late', 'DC_OBS-late', 'CF-early', 'FE-early', 'EB-early', 'BA-early', 'AF_OBS-early', 'FA_OBS-late', 'AC_OBS-early', 'CF-late', 'FA-early', 'AC-late', 'CE-early', 'EA-early', 'AF-early', 'FE-late', 'EF-late', 'FD_OBS-early', 'DA-early', 'AB-early', 'BC-late', 'CD-early', 'DB-early', 'BD-late', 'DF-early', 'FE-late', 'EB-late']
+    # if exp_option == 'a1':
+    #     return ['AE-early', 'EC-early', 'CD_OBS-late', 'DC-early', 'CA-late', 'AC_OBS-early', 'CD-early', 'DA-early', 'AB-early', 'BE-late', 'EF-late', 'FD_OBS-early', 'DB-early', 'BF-late', 'FD-early', 'DC_OBS-early', 'CF-late', 'FE-late', 'EB-late', 'BA-late', 'AF_OBS-late', 'FA_OBS-early', 'AC_OBS-late', 'CF-early', 'FA-late', 'AC-early', 'CE-late', 'EA-late', 'AF-late', 'FE-early', 'EF-early', 'FD_OBS-late', 'DA-late', 'AB-late', 'BC-early', 'CD-late', 'DB-late', 'BD-early', 'DF-late', 'FE-early', 'EB-early']
+    # elif exp_option == 'a2':
+    #     return ['AE-late', 'EC-late', 'CD_OBS-early', 'DC-late', 'CA-early', 'AC_OBS-late', 'CD-late', 'DA-late', 'AB-late', 'BE-early', 'EF-early', 'FD_OBS-late', 'DB-late', 'BF-early', 'FD-late', 'DC_OBS-late', 'CF-early', 'FE-early', 'EB-early', 'BA-early', 'AF_OBS-early', 'FA_OBS-late', 'AC_OBS-early', 'CF-late', 'FA-early', 'AC-late', 'CE-early', 'EA-early', 'AF-early', 'FE-late', 'EF-late', 'FD_OBS-early', 'DA-early', 'AB-early', 'BC-late', 'CD-early', 'DB-early', 'BD-late', 'DF-early', 'FE-late', 'EB-late']
     
-    elif exp_option == 'b1':
-        return ['AE-early', 'EB-late', 'BC-late', 'CD_OBS-early', 'DF_OBS-late', 'FC-early', 'CF-late', 'FD-late', 'DB-late', 'BF-late', 'FE-early', 'ED-early', 'DC_OBS-late', 'CA-early', 'AB-late', 'BA-late', 'AC_OBS-late', 'CD-early', 'DC-early', 'CE-early', 'EC-early', 'CF-early', 'FE-late', 'EA-late', 'AE-late', 'EB-early', 'BA-early', 'AF-late', 'FA-late', 'AC-late', 'CA_OBS-early', 'AB-early', 'BF-early', 'FD_OBS-early', 'DA-late', 'AF_OBS-early', 'FA_OBS-late', 'AE-late', 'ED-late', 'DB-early', 'BF-early', 'FD-early']
+    # elif exp_option == 'b1':
+    #     return ['AE-early', 'EB-late', 'BC-late', 'CD_OBS-early', 'DF_OBS-late', 'FC-early', 'CF-late', 'FD-late', 'DB-late', 'BF-late', 'FE-early', 'ED-early', 'DC_OBS-late', 'CA-early', 'AB-late', 'BA-late', 'AC_OBS-late', 'CD-early', 'DC-early', 'CE-early', 'EC-early', 'CF-early', 'FE-late', 'EA-late', 'AE-late', 'EB-early', 'BA-early', 'AF-late', 'FA-late', 'AC-late', 'CA_OBS-early', 'AB-early', 'BF-early', 'FD_OBS-early', 'DA-late', 'AF_OBS-early', 'FA_OBS-late', 'AE-late', 'ED-late', 'DB-early', 'BF-early', 'FD-early']
 
-    elif exp_option == 'b2':
-        return ['AE-late', 'EB-early', 'BC-early', 'CD_OBS-late', 'DF_OBS-early', 'FC-late', 'CF-early', 'FD-early', 'DB-early', 'BF-early', 'FE-late', 'ED-late', 'DC_OBS-early', 'CA-late', 'AB-early', 'BA-early', 'AC_OBS-early', 'CD-late', 'DC-late', 'CE-late', 'EC-late', 'CF-late', 'FE-early', 'EA-early', 'AE-early', 'EB-late', 'BA-late', 'AF-early', 'FA-early', 'AC-early', 'CA_OBS-late', 'AB-late', 'BF-late', 'FD_OBS-late', 'DA-early', 'AF_OBS-late', 'FA_OBS-early', 'AE-early', 'ED-early', 'DB-late', 'BF-late', 'FD-late']
+    # elif exp_option == 'b2':
+    #     return ['AE-late', 'EB-early', 'BC-early', 'CD_OBS-late', 'DF_OBS-early', 'FC-late', 'CF-early', 'FD-early', 'DB-early', 'BF-early', 'FE-late', 'ED-late', 'DC_OBS-early', 'CA-late', 'AB-early', 'BA-early', 'AC_OBS-early', 'CD-late', 'DC-late', 'CE-late', 'EC-late', 'CF-late', 'FE-early', 'EA-early', 'AE-early', 'EB-late', 'BA-late', 'AF-early', 'FA-early', 'AC-early', 'CA_OBS-late', 'AB-late', 'BF-late', 'FD_OBS-late', 'DA-early', 'AF_OBS-late', 'FA_OBS-early', 'AE-early', 'ED-early', 'DB-late', 'BF-late', 'FD-late']
     
-    elif exp_option == 'c1':
-        return ['DC-late', 'CE-late', 'ED-late', 'DB-late', 'BA-late', 'AC-late', 'CB-early', 'BD-early', 'DC_OBS-late', 'CD-early', 'DF-late', 'FD_OBS-early', 'DA-late', 'AD-late', 'DE-late', 'EC-late', 'CD_OBS-late', 'DA-late', 'AC_OBS-early', 'CB-early', 'BE-early', 'ED-early', 'DF-early', 'FB-early', 'BE-late', 'EA-early', 'AF_OBS-early', 'FC-early', 'CE-early', 'EC-early', 'CD_OBS-early', 'DF_OBS-late', 'FE-early', 'EB-late', 'BA-early', 'AF-early', 'FA-late', 'AC_OBS-late', 'CA-early', 'AD-early', 'DA-early', 'AB-late', 'BF-late']
+    # elif exp_option == 'c1':
+    #     return ['DC-late', 'CE-late', 'ED-late', 'DB-late', 'BA-late', 'AC-late', 'CB-early', 'BD-early', 'DC_OBS-late', 'CD-early', 'DF-late', 'FD_OBS-early', 'DA-late', 'AD-late', 'DE-late', 'EC-late', 'CD_OBS-late', 'DA-late', 'AC_OBS-early', 'CB-early', 'BE-early', 'ED-early', 'DF-early', 'FB-early', 'BE-late', 'EA-early', 'AF_OBS-early', 'FC-early', 'CE-early', 'EC-early', 'CD_OBS-early', 'DF_OBS-late', 'FE-early', 'EB-late', 'BA-early', 'AF-early', 'FA-late', 'AC_OBS-late', 'CA-early', 'AD-early', 'DA-early', 'AB-late', 'BF-late']
 
-    elif exp_option == 'c2':
-        return ['DC-early', 'CE-early', 'ED-early', 'DB-early', 'BA-early', 'AC-early', 'CB-late', 'BD-late', 'DC_OBS-early', 'CD-late', 'DF-early', 'FD_OBS-late', 'DA-early', 'AD-early', 'DE-early', 'EC-early', 'CD_OBS-early', 'DA-early', 'AC_OBS-late', 'CB-late', 'BE-late', 'ED-late', 'DF-late', 'FB-late', 'BE-early', 'EA-late', 'AF_OBS-late', 'FC-late', 'CE-late', 'EC-late', 'CD_OBS-late', 'DF_OBS-early', 'FE-late', 'EB-early', 'BA-late', 'AF-late', 'FA-early', 'AC_OBS-early', 'CA-late', 'AD-late', 'DA-late', 'AB-early', 'BF-early']
+    # elif exp_option == 'c2':
+    #     return ['DC-early', 'CE-early', 'ED-early', 'DB-early', 'BA-early', 'AC-early', 'CB-late', 'BD-late', 'DC_OBS-early', 'CD-late', 'DF-early', 'FD_OBS-late', 'DA-early', 'AD-early', 'DE-early', 'EC-early', 'CD_OBS-early', 'DA-early', 'AC_OBS-late', 'CB-late', 'BE-late', 'ED-late', 'DF-late', 'FB-late', 'BE-early', 'EA-late', 'AF_OBS-late', 'FC-late', 'CE-late', 'EC-late', 'CD_OBS-late', 'DF_OBS-early', 'FE-late', 'EB-early', 'BA-late', 'AF-late', 'FA-early', 'AC_OBS-early', 'CA-late', 'AD-late', 'DA-late', 'AB-early', 'BF-early']
 
-    elif exp_option == 'd1':
-        return ['DA-early', 'AC_OBS-late', 'CD_OBS-late', 'DE-early', 'ED-late', 'DF_OBS-late', 'FA-late', 'AD-late', 'DC-late', 'CA-early', 'AB-early', 'BA-late', 'AE-late', 'EA-early', 'AF_OBS-late', 'FD-early', 'DB-late', 'BE-early', 'EB-early', 'BD-early', 'DC_OBS-early', 'CF-early', 'FA_OBS-early', 'AC_OBS-early', 'CB-late', 'BA-early', 'AE-early', 'EA-late', 'AC-late', 'CD-early', 'DB-early', 'BD-late', 'DC-early', 'CD-early', 'DA-late', 'AD-early', 'DF-late', 'FE-late', 'ED-early', 'DF_OBS-early', 'FE-late', 'EB-late']
+    # elif exp_option == 'd1':
+    #     return ['DA-early', 'AC_OBS-late', 'CD_OBS-late', 'DE-early', 'ED-late', 'DF_OBS-late', 'FA-late', 'AD-late', 'DC-late', 'CA-early', 'AB-early', 'BA-late', 'AE-late', 'EA-early', 'AF_OBS-late', 'FD-early', 'DB-late', 'BE-early', 'EB-early', 'BD-early', 'DC_OBS-early', 'CF-early', 'FA_OBS-early', 'AC_OBS-early', 'CB-late', 'BA-early', 'AE-early', 'EA-late', 'AC-late', 'CD-early', 'DB-early', 'BD-late', 'DC-early', 'CD-early', 'DA-late', 'AD-early', 'DF-late', 'FE-late', 'ED-early', 'DF_OBS-early', 'FE-late', 'EB-late']
 
-    elif exp_option == 'd2':
-        return ['DA-late', 'AC_OBS-early', 'CD_OBS-early', 'DE-late', 'ED-early', 'DF_OBS-early', 'FA-early', 'AD-early', 'DC-early', 'CA-late', 'AB-late', 'BA-early', 'AE-early', 'EA-late', 'AF_OBS-early', 'FD-late', 'DB-early', 'BE-late', 'EB-late', 'BD-late', 'DC_OBS-late', 'CF-late', 'FA_OBS-late', 'AC_OBS-late', 'CB-early', 'BA-late', 'AE-late', 'EA-early', 'AC-early', 'CD-late', 'DB-late', 'BD-early', 'DC-late', 'CD-late', 'DA-early', 'AD-late', 'DF-early', 'FE-early', 'ED-late', 'DF_OBS-late', 'FE-early', 'EB-early']
+    # elif exp_option == 'd2':
+    #     return ['DA-late', 'AC_OBS-early', 'CD_OBS-early', 'DE-late', 'ED-early', 'DF_OBS-early', 'FA-early', 'AD-early', 'DC-early', 'CA-late', 'AB-late', 'BA-early', 'AE-early', 'EA-late', 'AF_OBS-early', 'FD-late', 'DB-early', 'BE-late', 'EB-late', 'BD-late', 'DC_OBS-late', 'CF-late', 'FA_OBS-late', 'AC_OBS-late', 'CB-early', 'BA-late', 'AE-late', 'EA-early', 'AC-early', 'CD-late', 'DB-late', 'BD-early', 'DC-late', 'CD-late', 'DA-early', 'AD-late', 'DF-early', 'FE-early', 'ED-late', 'DF_OBS-late', 'FE-early', 'EB-early']
 
-    elif exp_option == 'e1':
-        return ['DA-late', 'AE-early', 'EA-late', 'AB-early', 'BD-late', 'DF-early', 'FA-late', 'AF-early', 'FE-early', 'EB-early', 'BA-late', 'AC_OBS-early', 'CF-late', 'FD_OBS-late', 'DB-early', 'BD-late', 'DC_OBS-early', 'CA-early', 'AF-early', 'FA_OBS-early', 'AE-early', 'EF-early', 'FA-early', 'AC_OBS-late', 'CE-late', 'EC-early', 'CF-early', 'FD-late', 'DE-late', 'ED-late', 'DA-early', 'AB-late', 'BE-late', 'EC-early', 'CA-late', 'AF_OBS-late', 'FA_OBS-late', 'AF-late', 'FB-late', 'BC-early', 'CB-late', 'BF-early', 'FD_OBS-early']
+    # elif exp_option == 'e1':
+    #     return ['DA-late', 'AE-early', 'EA-late', 'AB-early', 'BD-late', 'DF-early', 'FA-late', 'AF-early', 'FE-early', 'EB-early', 'BA-late', 'AC_OBS-early', 'CF-late', 'FD_OBS-late', 'DB-early', 'BD-late', 'DC_OBS-early', 'CA-early', 'AF-early', 'FA_OBS-early', 'AE-early', 'EF-early', 'FA-early', 'AC_OBS-late', 'CE-late', 'EC-early', 'CF-early', 'FD-late', 'DE-late', 'ED-late', 'DA-early', 'AB-late', 'BE-late', 'EC-early', 'CA-late', 'AF_OBS-late', 'FA_OBS-late', 'AF-late', 'FB-late', 'BC-early', 'CB-late', 'BF-early', 'FD_OBS-early']
 
-    elif exp_option == 'e2':
-        return ['DA-early', 'AE-late', 'EA-early', 'AB-late', 'BD-early', 'DF-late', 'FA-early', 'AF-late', 'FE-late', 'EB-late', 'BA-early', 'AC_OBS-late', 'CF-early', 'FD_OBS-early', 'DB-late', 'BD-early', 'DC_OBS-late', 'CA-late', 'AF-late', 'FA_OBS-late', 'AE-late', 'EF-late', 'FA-late', 'AC_OBS-early', 'CE-early', 'EC-late', 'CF-late', 'FD-early', 'DE-early', 'ED-early', 'DA-late', 'AB-early', 'BE-early', 'EC-late', 'CA-early', 'AF_OBS-early', 'FA_OBS-early', 'AF-early', 'FB-early', 'BC-late', 'CB-early', 'BF-late', 'FD_OBS-late']
+    # elif exp_option == 'e2':
+    #     return ['DA-early', 'AE-late', 'EA-early', 'AB-late', 'BD-early', 'DF-late', 'FA-early', 'AF-late', 'FE-late', 'EB-late', 'BA-early', 'AC_OBS-late', 'CF-early', 'FD_OBS-early', 'DB-late', 'BD-early', 'DC_OBS-late', 'CA-late', 'AF-late', 'FA_OBS-late', 'AE-late', 'EF-late', 'FA-late', 'AC_OBS-early', 'CE-early', 'EC-late', 'CF-late', 'FD-early', 'DE-early', 'ED-early', 'DA-late', 'AB-early', 'BE-early', 'EC-late', 'CA-early', 'AF_OBS-early', 'FA_OBS-early', 'AF-early', 'FB-early', 'BC-late', 'CB-early', 'BF-late', 'FD_OBS-late']
 
-    elif exp_option == 'f1':
-        return ['BE-early', 'ED-early', 'DA-late', 'AF-early', 'FD-early', 'DB-early', 'BD-early', 'DE-early', 'EC-late', 'CA-early', 'AC_OBS-early', 'CF-early', 'FA_OBS-early', 'AF_OBS-late', 'FA-early', 'AB-late', 'BC-early', 'CE-late', 'ED-early', 'DF_OBS-late', 'FE-late', 'EF-late', 'FA-late', 'AF_OBS-early', 'FC-early', 'CA_OBS-late', 'AF-late', 'FA_OBS-late', 'AE-early', 'EA-early', 'AD-late', 'DB-late', 'BC-late', 'CB-early', 'BF-late', 'FD-late', 'DF_OBS-early', 'FA-late', 'AC-late', 'CE-early', 'EB-late']
+    # elif exp_option == 'f1':
+    #     return ['BE-early', 'ED-early', 'DA-late', 'AF-early', 'FD-early', 'DB-early', 'BD-early', 'DE-early', 'EC-late', 'CA-early', 'AC_OBS-early', 'CF-early', 'FA_OBS-early', 'AF_OBS-late', 'FA-early', 'AB-late', 'BC-early', 'CE-late', 'ED-early', 'DF_OBS-late', 'FE-late', 'EF-late', 'FA-late', 'AF_OBS-early', 'FC-early', 'CA_OBS-late', 'AF-late', 'FA_OBS-late', 'AE-early', 'EA-early', 'AD-late', 'DB-late', 'BC-late', 'CB-early', 'BF-late', 'FD-late', 'DF_OBS-early', 'FA-late', 'AC-late', 'CE-early', 'EB-late']
 
-    elif exp_option == 'f2':
-        return ['BE-late', 'ED-late', 'DA-early', 'AF-late', 'FD-late', 'DB-late', 'BD-late', 'DE-late', 'EC-early', 'CA-late', 'AC_OBS-late', 'CF-late', 'FA_OBS-late', 'AF_OBS-early', 'FA-late', 'AB-early', 'BC-late', 'CE-early', 'ED-late', 'DF_OBS-early', 'FE-early', 'EF-early', 'FA-early', 'AF_OBS-late', 'FC-late', 'CA_OBS-early', 'AF-early', 'FA_OBS-early', 'AE-late', 'EA-late', 'AD-early', 'DB-early', 'BC-early', 'CB-late', 'BF-early', 'FD-early', 'DF_OBS-late', 'FA-early', 'AC-early', 'CE-late', 'EB-early']
+    # elif exp_option == 'f2':
+    #     return ['BE-late', 'ED-late', 'DA-early', 'AF-late', 'FD-late', 'DB-late', 'BD-late', 'DE-late', 'EC-early', 'CA-late', 'AC_OBS-late', 'CF-late', 'FA_OBS-late', 'AF_OBS-early', 'FA-late', 'AB-early', 'BC-late', 'CE-early', 'ED-late', 'DF_OBS-early', 'FE-early', 'EF-early', 'FA-early', 'AF_OBS-late', 'FC-late', 'CA_OBS-early', 'AF-early', 'FA_OBS-early', 'AE-late', 'EA-late', 'AD-early', 'DB-early', 'BC-early', 'CB-late', 'BF-early', 'FD-early', 'DF_OBS-late', 'FA-early', 'AC-early', 'CE-late', 'EB-early']
 
-    elif exp_option == 'g1':
-        return ['BD-early', 'DA-early', 'AB-late', 'BC-early', 'CF-early', 'FA-early', 'AF-early', 'FE-early', 'EA-late', 'AF_OBS-early', 'FD-early', 'DB-early', 'BE-early', 'EF-late', 'FA_OBS-early', 'AC_OBS-late', 'CA-late', 'AE-early', 'ED-late', 'DF_OBS-late', 'FD_OBS-early', 'DC-late', 'CB-early', 'BE-late', 'EC-early', 'CD-late', 'DC_OBS-late', 'CD_OBS-late', 'DA-late', 'AE-late', 'EF-early', 'FD-late', 'DB-late', 'BC-late', 'CA-early', 'AC_OBS-early', 'CF-late', 'FE-late', 'EB-late', 'BD-late']
+    # elif exp_option == 'g1':
+    #     return ['BD-early', 'DA-early', 'AB-late', 'BC-early', 'CF-early', 'FA-early', 'AF-early', 'FE-early', 'EA-late', 'AF_OBS-early', 'FD-early', 'DB-early', 'BE-early', 'EF-late', 'FA_OBS-early', 'AC_OBS-late', 'CA-late', 'AE-early', 'ED-late', 'DF_OBS-late', 'FD_OBS-early', 'DC-late', 'CB-early', 'BE-late', 'EC-early', 'CD-late', 'DC_OBS-late', 'CD_OBS-late', 'DA-late', 'AE-late', 'EF-early', 'FD-late', 'DB-late', 'BC-late', 'CA-early', 'AC_OBS-early', 'CF-late', 'FE-late', 'EB-late', 'BD-late']
 
-    elif exp_option == 'g2':
-        return ['BD-late', 'DA-late', 'AB-early', 'BC-late', 'CF-late', 'FA-late', 'AF-late', 'FE-late', 'EA-early', 'AF_OBS-late', 'FD-late', 'DB-late', 'BE-late', 'EF-early', 'FA_OBS-late', 'AC_OBS-early', 'CA-early', 'AE-late', 'ED-early', 'DF_OBS-early', 'FD_OBS-late', 'DC-early', 'CB-late', 'BE-early', 'EC-late', 'CD-early', 'DC_OBS-early', 'CD_OBS-early', 'DA-early', 'AE-early', 'EF-late', 'FD-early', 'DB-early', 'BC-early', 'CA-late', 'AC_OBS-late', 'CF-early', 'FE-early', 'EB-early', 'BD-early']
+    # elif exp_option == 'g2':
+    #     return ['BD-late', 'DA-late', 'AB-early', 'BC-late', 'CF-late', 'FA-late', 'AF-late', 'FE-late', 'EA-early', 'AF_OBS-late', 'FD-late', 'DB-late', 'BE-late', 'EF-early', 'FA_OBS-late', 'AC_OBS-early', 'CA-early', 'AE-late', 'ED-early', 'DF_OBS-early', 'FD_OBS-late', 'DC-early', 'CB-late', 'BE-early', 'EC-late', 'CD-early', 'DC_OBS-early', 'CD_OBS-early', 'DA-early', 'AE-early', 'EF-late', 'FD-early', 'DB-early', 'BC-early', 'CA-late', 'AC_OBS-late', 'CF-early', 'FE-early', 'EB-early', 'BD-early']
 
     # elif exp_option == "test":
     #     return ["AF-even", "FE-early", "EA-late", "AC-even", "CB-early", "BD-even", "DE-even", "EA-even"]
 
-    elif exp_option == "test":
+
+    ### POST MAY 1
+    a1 = ['FB-late', 'BA-early', 'AD-late', 'DC-late', 'CD-early', 'DA-late', 'AB-early', 'BF-late', 'FA_OBS-late', 'AC_OBS-early', 'CE-early', 'EB-early', 'BD-late', 'DE-early', 'ED-late', 'DC_OBS-late', 'CA-early', 'AD-late', 'DF_OBS-late', 'FD-early', 'DE-early', 'EA-late']
+    a2 = ['DF-early', 'FA-early', 'AF_OBS-late', 'FC-late', 'CE-early', 'EB-early', 'BC-early', 'CF-late', 'FD_OBS-late', 'DE-early', 'EA-late', 'AF-late', 'FB-late', 'BF-late', 'FA_OBS-late', 'AC_OBS-early', 'CA-early', 'AB-early', 'BE-early', 'ED-late']
+
+    b1 = ['CA-early', 'AD-late', 'DA-late', 'AE-early', 'EB-early', 'BD-early', 'DF_OBS-late', 'FA_OBS-late', 'AF_OBS-late', 'FB-late', 'BC-late', 'CB-late', 'BF-early', 'FD-late', 'DE-early', 'EC-early', 'CA_OBS-late', 'AF-early', 'FA-late', 'AE-early', 'EF-late']
+    b2 = ['DF-late', 'FB-late', 'BA-late', 'AF-early', 'FA_OBS-late', 'AD-late', 'DC_OBS-late', 'CA-early', 'AE-early', 'ED-late', 'DA-late', 'AB-late', 'BE-early', 'EC-early', 'CA_OBS-late', 'AF-early', 'FD_OBS-late', 'DE-early', 'EC-early', 'CD-late', 'DB-late', 'BD-early']
+
+    c1 = ['AF-late', 'FA_OBS-early', 'AC-late', 'CD-late', 'DB-early', 'BE-late', 'EF-early', 'FE-late', 'EA-early', 'AE-late', 'EB-late', 'BA-early', 'AD-early', 'DA-early', 'AF_OBS-early', 'FD-late', 'DF_OBS-early', 'FB-early', 'BF-late', 'FA-late', 'AC_OBS-early', 'CB-early']
+    c2 = ['FC-early', 'CD-late', 'DF_OBS-early', 'FD-late', 'DB-early', 'BD-late', 'DC-late', 'CB-early', 'BE-late', 'EF-early', 'FA_OBS-early', 'AC-late', 'CE-late', 'EC-early', 'CF-early', 'FE-late', 'EC-early', 'CA_OBS-early', 'AF_OBS-early', 'FB-early', 'BC-early']
+
+    d1 = ['AE-early', 'ED-late', 'DA-early', 'AC-late', 'CD_OBS-late', 'DF_OBS-late', 'FD-late', 'DE-late', 'EC-late', 'CB-early', 'BE-early', 'ED-late', 'DC_OBS-early', 'CD-early', 'DC-early', 'CA_OBS-late', 'AD-early', 'DB-early', 'BC-early', 'CB-early', 'BD-early']
+    d2 = ['BF-early', 'FB-early', 'BC-early', 'CF-early', 'FE-late', 'EB-early', 'BA-early', 'AF-early', 'FA-early', 'AC_OBS-late', 'CD_OBS-late', 'DF-late', 'FC-early', 'CB-early', 'BE-early', 'ED-late', 'DC_OBS-early', 'CA-late', 'AE-early', 'EA-late', 'AD-early', 'DF_OBS-late']
+
+    e1 = ['DE-late', 'EB-late', 'BF-early', 'FB-late', 'BC-early', 'CE-late', 'EA-late', 'AD-late', 'DF_OBS-early', 'FC-late', 'CD-late', 'DC_OBS-early', 'CA_OBS-early', 'AC-early', 'CB-late', 'BC-early', 'CD_OBS-early', 'DF-early', 'FE-late', 'EF-early', 'FA-late', 'AF-late']
+    e2 = ['AB-late', 'BA-early', 'AC-early', 'CE-late', 'EA-late', 'AC_OBS-early', 'CD_OBS-early', 'DF_OBS-early', 'FD-early', 'DE-late', 'EF-early', 'FB-late', 'BF-early', 'FC-late', 'CF-late', 'FA-late', 'AF_OBS-early', 'FE-late', 'EB-late', 'BA-early', 'AF-late']
+
+    f1 = ['AE-late', 'EF-late', 'FA_OBS-early', 'AD-late', 'DC_OBS-late', 'CA-early', 'AC_OBS-late', 'CD-late', 'DC-late', 'CB-early', 'BE-late', 'EA-early', 'AB-early', 'BC-late', 'CF-late', 'FD-early', 'DA-early', 'AD-late', 'DE-late', 'EB-late', 'BF-late', 'FB-early', 'BD-late', 'DF_OBS-early']
+    f2 = ['FE-late', 'EC-early', 'CA-early', 'AE-late', 'ED-late', 'DF_OBS-early', 'FA_OBS-early', 'AF-late', 'FA-late', 'AF_OBS-late', 'FD-early', 'DB-early', 'BF-late', 'FC-early', 'CA_OBS-late', 'AD-late', 'DE-late', 'EB-late', 'BA-late', 'AB-early']
+
+
+    if exp_option == "a1":
+        return a1
+    elif exp_option == "a2":
+        return a2
+    elif exp_option == "b1":
+        return b1
+    elif exp_option == "b2":
+        return b2
+    elif exp_option == "c1":
+        return c1
+    elif exp_option == "c2":
+        return c2
+    elif exp_option == "d1":
+        return d1
+    elif exp_option == "d2":
+        return d2
+    elif exp_option == "e1":
+        return e1
+    elif exp_option == "e2":
+        return e2
+    elif exp_option == "f1":
+        return f1
+    elif exp_option == "f2":
+        return f2
+
+    elif exp_option == "test1":
         return ["AF-null", "FE-null", "EA-null", "AC-null", "CB-null", "BD-null", "DE-null", "EA-null"]
+
+    elif exp_option == "test2":
+        return ["BA-null", "AC-null", "CF-null", "FB-null", "BE-null", "ED-null", "DF-null"]
+
+    elif exp_option == "test3":
+        return ["CA-null", "AE-null", "EF-null", "FA-null", "AD-null", "DB-null", "BC-null"]
+
 
     return ["AB-null", "BC-null"]
 
