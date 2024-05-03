@@ -1,6 +1,6 @@
 robot_base_frame: base_link
 
-transform_tolerance: 0.7
+transform_tolerance: 0.8
 
 robot_radius: 0.30
 inflater:
