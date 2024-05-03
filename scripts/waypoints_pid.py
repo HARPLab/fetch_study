@@ -587,7 +587,7 @@ class FollowRoute(State):
                     step_time_elapsed = toc - tic
                     step_time_elapsed = str(step_time_elapsed)
 
-                    report = [trans[0], trans[1], step_time_elapsed, str(rospy.Time.now()), trans]
+                    report = [trans[0], trans[1], step_time_elapsed, str(rospy.Time.now()), rot]
                     mission_report.append(report)
 
                 # time.sleep(self.duration)
