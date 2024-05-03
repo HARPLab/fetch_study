@@ -253,7 +253,7 @@ def get_exp_sequence(exp_option):
 
     elif exp_option == "p4a":
         return p4a
-    elif exp_option == "p4a":
+    elif exp_option == "p4b":
         return p4b
     elif exp_option == "p5a":
         return p5a
