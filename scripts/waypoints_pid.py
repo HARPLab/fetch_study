@@ -200,38 +200,41 @@ def get_exp_sequence(exp_option):
     # f1 = ['AE-late', 'EF-late', 'FA_OBS-early', 'AD-late', 'DC_OBS-late', 'CA-early', 'AC_OBS-late', 'CD-late', 'DC-late', 'CB-early', 'BE-late', 'EA-early', 'AB-early', 'BC-late', 'CF-late', 'FD-early', 'DA-early', 'AD-late', 'DE-late', 'EB-late', 'BF-late', 'FB-early', 'BD-late', 'DF_OBS-early']
     # f2 = ['FE-late', 'EC-early', 'CA-early', 'AE-late', 'ED-late', 'DF_OBS-early', 'FA_OBS-early', 'AF-late', 'FA-late', 'AF_OBS-late', 'FD-early', 'DB-early', 'BF-late', 'FC-early', 'CA_OBS-late', 'AD-late', 'DE-late', 'EB-late', 'BA-late', 'AB-early']
 
-    p0a = ['CF-null', 'FB-late', 'BA-early', 'AD-early', 'DF-early', 'FA-early', 'AE-late', 'EC-early', 'CA-late', 'AF_OBS-late', 'FA_OBS-early', 'AB-early', 'BD-late', 'DA-early', 'AC_OBS-late', 'CD-early', 'DC-early', 'CB-early', 'BE-early', 'ED-early', 'DF_OBS-late', 'FE-late']
+    p0a = ['CB-null', 'BA-early', 'AB-late', 'BE-late', 'ED-late', 'DC-early', 'CD-early', 'DA-early', 'AD-early', 'DF-early', 'FB-late', 'BD-early', 'DF_OBS-early', 'FE-late', 'EC-late', 'CA_OBS-early', 'AC-early', 'CE-late']
 
-    p0b = ['CF-null', 'FB-early', 'BA-late', 'AD-late', 'DF-late', 'FA-late', 'AE-early', 'EC-late', 'CA-early', 'AF_OBS-early', 'FA_OBS-late', 'AB-late', 'BD-early', 'DA-late', 'AC_OBS-early', 'CD-late', 'DC-late', 'CB-late', 'BE-late', 'ED-late', 'DF_OBS-early', 'FE-early']
+    p0b = ['CB-null', 'BA-late', 'AB-early', 'BE-early', 'ED-early', 'DC-late', 'CD-late', 'DA-late', 'AD-late', 'DF-late', 'FB-early', 'BD-late', 'DF_OBS-late', 'FE-early', 'EC-early', 'CA_OBS-late', 'AC-late', 'CE-early']
 
-    p1a = ['CA-null', 'AB-early', 'BC-early', 'CD-early', 'DA-early', 'AF-early', 'FA_OBS-early', 'AF_OBS-late', 'FD-early', 'DE-late', 'EF-early', 'FD_OBS-late', 'DB-late', 'BE-early', 'EC-early', 'CF-early', 'FA-early', 'AC-late', 'CE-late', 'EC-early', 'CA_OBS-late', 'AB-early', 'BF-late']
+    p1a = ['AD-null', 'DB-late', 'BE-late', 'EF-late', 'FD-early', 'DE-late', 'EA-late', 'AD-early', 'DA-early', 'AC_OBS-early', 'CD-early', 'DF_OBS-early', 'FC-early', 'CA-early', 'AE-late', 'EC-late', 'CB-late', 'BC-early', 'CB-late', 'BD-early', 'DC-early']
 
-    p1b = ['CA-null', 'AB-late', 'BC-late', 'CD-late', 'DA-late', 'AF-late', 'FA_OBS-late', 'AF_OBS-early', 'FD-late', 'DE-early', 'EF-late', 'FD_OBS-early', 'DB-early', 'BE-late', 'EC-late', 'CF-late', 'FA-late', 'AC-early', 'CE-early', 'EC-late', 'CA_OBS-early', 'AB-late', 'BF-early']
+    p1b = ['AD-null', 'DB-early', 'BE-early', 'EF-early', 'FD-late', 'DE-early', 'EA-early', 'AD-late', 'DA-late', 'AC_OBS-late', 'CD-late', 'DF_OBS-late', 'FC-late', 'CA-late', 'AE-early', 'EC-early', 'CB-early', 'BC-late', 'CB-early', 'BD-late', 'DC-late']
 
-    p2a = ['FC-null', 'CB-early', 'BD-late', 'DE-late', 'ED-early', 'DB-late', 'BE-early', 'EA-early', 'AC_OBS-late', 'CD-early', 'DA-early', 'AD-early', 'DF_OBS-late', 'FA_OBS-early', 'AC-late', 'CE-late', 'EA-early', 'AF_OBS-late', 'FD-early', 'DC-early', 'CB-early', 'BA-early']
+    p2a = ['FB-null', 'BC-early', 'CD-early', 'DF-early', 'FD_OBS-early', 'DA-early', 'AD-early', 'DE-late', 'ED-late', 'DC-early', 'CA_OBS-early', 'AB-late', 'BD-early', 'DB-late', 'BE-late', 'EC-late', 'CE-late', 'EC-late', 'CA-early']
 
-    p2b = ['FC-null', 'CB-late', 'BD-early', 'DE-early', 'ED-late', 'DB-early', 'BE-late', 'EA-late', 'AC_OBS-early', 'CD-late', 'DA-late', 'AD-late', 'DF_OBS-early', 'FA_OBS-late', 'AC-early', 'CE-early', 'EA-late', 'AF_OBS-early', 'FD-late', 'DC-late', 'CB-late', 'BA-late']
+    p2b = ['FB-null', 'BC-late', 'CD-late', 'DF-late', 'FD_OBS-late', 'DA-late', 'AD-late', 'DE-early', 'ED-early', 'DC-late', 'CA_OBS-late', 'AB-early', 'BD-late', 'DB-early', 'BE-early', 'EC-early', 'CE-early', 'EC-early', 'CA-late']
 
-    p3a = ['DB-null', 'BD-late', 'DA-early', 'AF_OBS-late', 'FA_OBS-early', 'AB-early', 'BC-early', 'CE-late', 'ED-early', 'DB-late', 'BE-early', 'EC-early', 'CD-early', 'DC-early', 'CA_OBS-late', 'AC-late', 'CF-early', 'FD-early', 'DE-late', 'ED-early', 'DF_OBS-late']
+    p3a = ['BA-null', 'AF-early', 'FD-early', 'DB-late', 'BA-early', 'AD-early', 'DA-early', 'AB-late', 'BF-early', 'FD_OBS-early', 'DE-late', 'EB-late', 'BE-late', 'EC-late', 'CE-late', 'ED-late', 'DA-early', 'AC-early', 'CD-early', 'DA-early', 'AC_OBS-early']
 
-    p3b = ['DB-null', 'BD-early', 'DA-late', 'AF_OBS-early', 'FA_OBS-late', 'AB-late', 'BC-late', 'CE-early', 'ED-late', 'DB-early', 'BE-late', 'EC-late', 'CD-late', 'DC-late', 'CA_OBS-early', 'AC-early', 'CF-late', 'FD-late', 'DE-early', 'ED-late', 'DF_OBS-early']
+    p3b = ['BA-null', 'AF-late', 'FD-late', 'DB-early', 'BA-late', 'AD-late', 'DA-late', 'AB-early', 'BF-late', 'FD_OBS-late', 'DE-early', 'EB-early', 'BE-early', 'EC-early', 'CE-early', 'ED-early', 'DA-late', 'AC-late', 'CD-late', 'DA-late', 'AC_OBS-late']
 
 
-    p4a = ['AC-null', 'FC-early', 'CA-late', 'AB-early', 'BD-early', 'DF_OBS-early', 'FD-early', 'DE-late', 'EC-early', 'CF-early', 'FA-early', 'AC_OBS-early', 'CE-late', 'EB-early', 'BA-late', 'AF-late', 'FB-early', 'BC-late', 'CD_OBS-early', 'DC_OBS-late', 'CE-late', 'ED-late']
 
-    p4b = ['AC-null', 'FC-late', 'CA-early', 'AB-late', 'BD-late', 'DF_OBS-late', 'FD-late', 'DE-early', 'EC-late', 'CF-late', 'FA-late', 'AC_OBS-late', 'CE-early', 'EB-late', 'BA-early', 'AF-early', 'FB-late', 'BC-early', 'CD_OBS-late', 'DC_OBS-early', 'CE-early', 'ED-early']
+    p4a = ['AD-null', 'DF_OBS-early', 'FC-late', 'CF-early', 'FA-early', 'AC-late', 'CB-early', 'BF-late', 'FE-late', 'EC-early', 'CA_OBS-late', 'AF-early', 'FB-early', 'BA-late', 'AE-late', 'ED-late', 'DF-late', 'FB-early', 'BE-late']
 
-    p5a = ['CF-null', 'FE-late', 'EB-early', 'BA-late', 'AF_OBS-late', 'FA_OBS-early', 'AF-late', 'FD_OBS-early', 'DA-early', 'AE-late', 'EA-early', 'AB-early', 'BF-early', 'FB-early', 'BE-early', 'EF-late', 'FA-early', 'AD-early', 'DF-early', 'FA-early', 'AC-late', 'CA_OBS-early']
+    p4b = ['AD-null', 'DF_OBS-late', 'FC-early', 'CF-late', 'FA-late', 'AC-early', 'CB-late', 'BF-early', 'FE-early', 'EC-late', 'CA_OBS-early', 'AF-late', 'FB-late', 'BA-early', 'AE-early', 'ED-early', 'DF-early', 'FB-late', 'BE-early']
 
-    p5b = ['CF-null', 'FE-early', 'EB-late', 'BA-early', 'AF_OBS-early', 'FA_OBS-late', 'AF-early', 'FD_OBS-late', 'DA-late', 'AE-early', 'EA-late', 'AB-late', 'BF-late', 'FB-late', 'BE-late', 'EF-early', 'FA-late', 'AD-late', 'DF-late', 'FA-late', 'AC-early', 'CA_OBS-late']
+    p5a = ['EF-null', 'FC-late', 'CE-late', 'EC-early', 'CB-early', 'BC-late', 'CA-late', 'AD-early', 'DF_OBS-early', 'FE-late', 'EF-late', 'FD-late', 'DC-early', 'CA_OBS-late', 'AB-early', 'BF-late', 'FA-early', 'AE-late', 'EB-late', 'BD-late', 'DB-early']
 
-    p6a = ['CA-null', 'AB-early', 'BE-early', 'EF-late', 'FE-late', 'EA-early', 'AC-late', 'CD_OBS-early', 'DA-early', 'AF-late', 'FD_OBS-early', 'DB-early', 'BC-late', 'CD-early', 'DC_OBS-late', 'CE-late', 'ED-late', 'DF-early', 'FA-early', 'AD-early', 'DB-early', 'BD-early', 'DA-early', 'AC_OBS-early']
+    p5b = ['EF-null', 'FC-early', 'CE-early', 'EC-late', 'CB-late', 'BC-early', 'CA-early', 'AD-late', 'DF_OBS-late', 'FE-early', 'EF-early', 'FD-early', 'DC-late', 'CA_OBS-early', 'AB-late', 'BF-early', 'FA-late', 'AE-early', 'EB-early', 'BD-early', 'DB-late']
 
-    p6b = ['CA-null', 'AB-late', 'BE-late', 'EF-early', 'FE-early', 'EA-late', 'AC-early', 'CD_OBS-late', 'DA-late', 'AF-early', 'FD_OBS-late', 'DB-late', 'BC-early', 'CD-late', 'DC_OBS-early', 'CE-early', 'ED-early', 'DF-late', 'FA-late', 'AD-late', 'DB-late', 'BD-late', 'DA-late', 'AC_OBS-late']
+    p6a = ['FC-null', 'CB-early', 'BF-late', 'FD-late', 'DC-early', 'CA_OBS-late', 'AD-early', 'DB-early', 'BA-late', 'AC-late', 'CE-late', 'ED-late', 'DE-late', 'EA-early', 'AE-late', 'EB-late', 'BD-late', 'DA-late', 'AF-early', 'FA-early', 'AD-early', 'DF_OBS-early']
 
-    p7a = ['AD-null', 'FD-early', 'DC-late', 'CA_OBS-early', 'AB-early', 'BA-late', 'AC-late', 'CD_OBS-early', 'DA-early', 'AF_OBS-late', 'FA-early', 'AD-early', 'DE-late', 'EA-early', 'AE-late', 'ED-late', 'DF_OBS-early', 'FB-early', 'BD-early', 'DE-late', 'EB-early']
+    p6b = ['FC-null', 'CB-late', 'BF-early', 'FD-early', 'DC-late', 'CA_OBS-early', 'AD-late', 'DB-late', 'BA-early', 'AC-early', 'CE-early', 'ED-early', 'DE-early', 'EA-late', 'AE-early', 'EB-early', 'BD-early', 'DA-early', 'AF-late', 'FA-late', 'AD-late', 'DF_OBS-late']
 
-    p7b = ['AD-null', 'FD-late', 'DC-early', 'CA_OBS-late', 'AB-late', 'BA-early', 'AC-early', 'CD_OBS-late', 'DA-late', 'AF_OBS-early', 'FA-late', 'AD-late', 'DE-early', 'EA-late', 'AE-early', 'ED-early', 'DF_OBS-late', 'FB-late', 'BD-late', 'DE-early', 'EB-late']
+    p7a = ['BD-null', 'DF_OBS-early', 'FA-early', 'AC-late', 'CB-early', 'BC-late', 'CF-early', 'FD-late', 'DA-late', 'AC_OBS-late', 'CE-late', 'EA-early', 'AF-early', 'FB-early', 'BE-late', 'ED-late', 'DE-late', 'EB-late', 'BD-late']
+
+    p7b = ['BD-null', 'DF_OBS-late', 'FA-late', 'AC-early', 'CB-late', 'BC-early', 'CF-late', 'FD-early', 'DA-early', 'AC_OBS-early', 'CE-early', 'EA-late', 'AF-late', 'FB-late', 'BE-early', 'ED-early', 'DE-early', 'EB-early', 'BD-early']
+
+
 
 
     if exp_option == "p0a":
