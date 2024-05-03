@@ -22,7 +22,8 @@ NavfnROS:
 
 # Local planner
 controller_frequency: 25.0
-controller_patience: 15.0
+controller_patience: 0.0
+
 TrajectoryPlannerROS:
   # base vel/accel profile is in robot folders
   # tolerances (defaults)
