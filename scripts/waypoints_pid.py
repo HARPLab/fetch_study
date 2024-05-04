@@ -214,7 +214,7 @@ def get_exp_sequence(exp_option):
 
     p3a = ['BA-null', 'AF-early', 'FD-early', 'DB-late', 'BA-early', 'AD-early', 'DA-early', 'AB-late', 'BF-early', 'FD_OBS-early', 'DE-late', 'EB-late', 'BE-late', 'EC-late', 'CE-late', 'ED-late', 'DA-early', 'AC-early', 'CD-early', 'DA-early', 'AC_OBS-early']
 
-    p3b = ['BA-null', 'AF-late', 'FD-late', 'DB-early', 'BA-late', 'AD-late', 'DA-late', 'AB-early', 'BF-late', 'FD_OBS-late', 'DE-early', 'EB-early', 'BE-early', 'EC-early', 'CE-early', 'ED-early', 'DA-late', 'AC-late', 'CD-late', 'DA-late', 'AC_OBS-late']
+    p3b = ['BA-null', 'AF-late', 'FD-late', 'DB-early', 'BA-late', 'AD-late', 'DA-late', 'AB-early', 'BF-late', 'FD_OBS-late', 'DE-early', 'EB-early', 'BE-early', 'EC-early', 'CE-early', 'ED-early', 'DA-late', 'AC-late', 'CD-late', 'DA-late', 'AC_OBS-late', 'EC-late', 'CB-late', 'BC-early', 'CB-late', 'BD-early', 'DC-early']
 
 
 
