@@ -51,6 +51,9 @@
     <arg name="odom_topic" value="$(arg odom_topic)" />
   </include>
 
+  <!-- tilt the head -->
+  <node pkg="fetch_navigation" type="tilt_head.py" name="tilt_head_node" />
+
   <arg name="rviz" default="false"/>
 
   <arg name="addpose_topic" default="/initialpose"/>
