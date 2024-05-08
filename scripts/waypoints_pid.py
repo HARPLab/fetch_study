@@ -230,7 +230,7 @@ def get_exp_sequence(exp_option):
 
     p6b = ['FC-null', 'CB-late', 'BF-early', 'FD-early', 'DC-late', 'CA_OBS-early', 'AD-late', 'DB-late', 'BA-early', 'AC-early', 'CE-early', 'ED-early', 'DE-early', 'EA-late', 'AE-early', 'EB-early', 'BD-early', 'DA-early', 'AF-late', 'FA-late', 'AD-late', 'DF_OBS-late']
 
-    p7a = ['BD-null', 'DF_OBS-early', 'FA-early', 'AC-late', 'CB-early', 'BC-late', 'CF-early', 'FD-late', 'DA-late', 'AC_OBS-late', 'CE-late', 'EA-early', 'AF-early', 'FB-early', 'BE-late', 'ED-late', 'DE-late', 'EB-late', 'BD-late']
+    p7a = ['BD-null', 'DE-late', 'EB-late', 'BD-late', 'DF_OBS-early', 'FA-early', 'AC-late', 'CB-early', 'BC-late', 'CF-early', 'FD-late', 'DA-late', 'AC_OBS-late', 'CE-late', 'EA-early', 'AF-early', 'FB-early', 'BE-late', 'ED-late', 'DE-late', 'EB-late', 'BD-late']
 
     p7b = ['BD-null', 'DF_OBS-late', 'FA-late', 'AC-early', 'CB-late', 'BC-early', 'CF-late', 'FD-early', 'DA-early', 'AC_OBS-early', 'CE-early', 'EA-late', 'AF-late', 'FB-late', 'BE-early', 'ED-early', 'DE-early', 'EB-early', 'BD-early']
 
