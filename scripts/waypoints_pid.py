@@ -235,8 +235,6 @@ def get_exp_sequence(exp_option):
     p7b = ['BD-null', 'DE-early', 'EB-early', 'BD-early', 'DF_OBS-late', 'FA-late', 'AC-early', 'CB-late', 'BC-early', 'CF-late', 'FD-early', 'DA-early', 'AC_OBS-early', 'CE-early', 'EA-late', 'AF-late', 'FB-late', 'BE-early', 'ED-early', 'DE-early', 'EB-early', 'BD-early']
 
 
- # 'CB-late', 'BA-early', 'AD-late', 'DA-late', 'AC-early',
-
 
     if exp_option == "p0a":
         return p0a
