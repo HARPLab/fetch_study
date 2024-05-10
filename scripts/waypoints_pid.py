@@ -232,7 +232,8 @@ def get_exp_sequence(exp_option):
 
     p7a = ['BD-null', 'DE-late', 'EB-late', 'BD-late', 'DF_OBS-early', 'FA-early', 'AC-late', 'CB-early', 'BC-late', 'CF-early', 'FD-late', 'DA-late', 'AC_OBS-late', 'CE-late', 'EA-early', 'AF-early', 'FB-early', 'BE-late', 'ED-late', 'DE-late', 'EB-late', 'BD-late']
 
-    p7b = ['BF-null', 'AF-late', 'FB-late', 'BE-early', 'ED-early', 'DE-early', 'EB-early', 'BD-early', 'DE-early', 'EB-early', 'BD-early', 'DF_OBS-late', 'FA-late', 'AC-early', 'CB-late', 'BC-early', 'CF-late', 'FD-early', 'DA-early', 'AC_OBS-early', 'CE-early', 'EA-late', 'AF-late', 'FB-late', 'BE-early', 'ED-early', 'DE-early', 'EB-early', 'BD-early']
+    p7b = ['BD-null', 'DE-early', 'EB-early', 'BD-early', 'DF_OBS-late', 'FA-late', 'AC-early', 'CB-late', 'BC-early', 'CF-late', 'FD-early', 'DA-early', 'AC_OBS-early', 'CE-early', 'EA-late', 'AF-late', 'FB-late', 'BE-early', 'ED-early', 'DE-early', 'EB-early', 'BD-early']
+
 
  # 'CB-late', 'BA-early', 'AD-late', 'DA-late', 'AC-early',
 
@@ -878,6 +879,8 @@ class RouteComplete(State):
                 except:
                     file.write(str(report) + "\n")
 
+        
+        print("mission report as length " + str(len(mission_report)))
         output_file_path_report = os.path.join(output_folder, now_id + "-mission_report.csv")
         with open(output_file_path_report, 'w') as file:
             file.write("X, Y, time_to_reach, time\n")
