@@ -218,7 +218,7 @@ def get_exp_sequence(exp_option):
 
 
 
-    p4a = ['AD-null', 'DF_OBS-early', 'FC-late', 'CF-early', 'FA-early', 'AC-late', 'CB-early', 'BF-late', 'FE-late', 'EC-early', 'CA_OBS-late', 'AF-early', 'FB-early', 'BA-late', 'AE-late', 'ED-late', 'DF-late', 'FB-early', 'BE-late']
+    p4a = ['AD-null', 'DC-early', 'CA_OBS-late', 'AB-early', 'BF-late', 'FA-early', 'AE-late', 'EB-late', 'BD-late', 'DB-early']
 
     p4b = ['AD-null', 'DF_OBS-late', 'FC-early', 'CF-late', 'FA-late', 'AC-early', 'CB-late', 'BF-early', 'FE-early', 'EC-late', 'CA_OBS-early', 'AF-late', 'FB-late', 'BA-early', 'AE-early', 'ED-early', 'DF-early', 'FB-late', 'BE-early']
 
